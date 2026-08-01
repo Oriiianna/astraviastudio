@@ -1,0 +1,119 @@
+.process__bg {
+  background: radial-gradient(55% 65% at 50% 8%, rgba(73, 42, 122, 0.55) 0%, transparent 66%),
+    linear-gradient(180deg, rgba(9, 7, 42, 0.4) 0%, rgba(5, 4, 26, 0.34) 52%, rgba(10, 8, 48, 0.4) 100%);
+}
+
+.process .container {
+  position: relative;
+  z-index: 2;
+}
+
+.process__steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+  list-style: none;
+}
+
+/* Línea que conecta los pasos */
+.process__line {
+  position: absolute;
+  top: 29px;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(167, 139, 250, 0.45) 0 7px,
+    transparent 7px 15px
+  );
+}
+
+/* --- Paso --- */
+.step {
+  position: relative;
+  text-align: center;
+  padding-inline: 8px;
+}
+
+.step__icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #1b1449 0%, #0e0a30 100%);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  color: var(--violet-soft);
+  transition: transform 0.45s var(--ease), border-color 0.45s var(--ease),
+    box-shadow 0.45s var(--ease);
+}
+
+.step__icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.step__ring {
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px solid rgba(167, 139, 250, 0.18);
+  opacity: 0;
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+
+.step:hover .step__icon {
+  transform: translateY(-5px);
+  border-color: var(--violet-bright);
+  box-shadow: 0 0 26px -4px rgba(139, 92, 246, 0.8);
+}
+
+.step:hover .step__ring {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+.step__n {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--violet-bright);
+  margin-bottom: 10px;
+}
+
+.step h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.step p {
+  font-size: 0.83rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 24ch;
+  margin-inline: auto;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .process__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 44px 20px;
+  }
+  .process__line {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .process__steps {
+    grid-template-columns: 1fr;
+  }
+}

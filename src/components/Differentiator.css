@@ -1,0 +1,214 @@
+.diff {
+  position: relative;
+  padding: clamp(78px, 8vw, 118px) 0;
+  overflow: hidden;
+}
+
+.diff__bg {
+  background: radial-gradient(80% 75% at 4% 18%, rgba(98, 26, 226, 0.42) 0%, transparent 62%),
+    radial-gradient(65% 65% at 94% 90%, rgba(74, 159, 224, 0.2) 0%, transparent 66%),
+    linear-gradient(180deg, rgba(13, 10, 51, 0.46) 0%, rgba(17, 12, 59, 0.4) 45%, rgba(9, 7, 42, 0.48) 100%);
+}
+
+.diff__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+  align-items: center;
+  gap: clamp(40px, 5vw, 80px);
+}
+
+/* --- Copy --- */
+.diff__copy h2 {
+  font-size: clamp(1.9rem, 3.8vw, 2.65rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 22px;
+}
+
+.diff__copy > p {
+  max-width: 48ch;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.diff__list {
+  display: grid;
+  gap: 15px;
+  margin-top: 34px;
+}
+
+.diff__list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+
+.diff__list svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  color: var(--violet-soft);
+  filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.5));
+}
+
+/* --- Panel de métricas --- */
+.diff__panel {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(18px, 1.8vw, 26px);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, rgba(24, 19, 58, 0.92) 0%, rgba(9, 7, 32, 0.94) 100%);
+  border: 1px solid rgba(167, 139, 250, 0.18);
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.diff__panel-glow {
+  position: absolute;
+  inset: -30% -10% auto -10%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(159, 212, 247, 0.2) 0%, transparent 70%);
+  filter: blur(40px);
+  z-index: -1;
+}
+
+.diff__panel-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.diff__dots {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.diff__dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2c2246;
+}
+
+.diff__dots i:first-child {
+  background: #e879f9;
+}
+.diff__dots i:nth-child(2) {
+  background: #a78bfa;
+}
+.diff__dots i:last-child {
+  background: #38bdf8;
+}
+
+.diff__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.diff__metrics li {
+  display: grid;
+  gap: 7px;
+  padding: 18px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border);
+  transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.diff__metrics li:hover {
+  border-color: rgba(167, 139, 250, 0.4);
+  transform: translateY(-4px);
+}
+
+.diff__metric-icon {
+  color: var(--cyan);
+}
+
+.diff__metric-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.diff__metric-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.diff__metric-value small {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.diff__metric-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+/* Barritas decorativas */
+.diff__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 74px;
+  margin-top: 18px;
+  padding: 0 4px;
+}
+
+.diff__bars span {
+  flex: 1;
+  height: var(--h);
+  border-radius: 4px 4px 2px 2px;
+  background: linear-gradient(180deg, rgba(167, 139, 250, 0.85), rgba(56, 189, 248, 0.25));
+  transform-origin: bottom;
+  animation: barBreathe 3.2s var(--ease) infinite alternate;
+  animation-delay: calc(var(--i) * 140ms);
+}
+
+@keyframes barBreathe {
+  from {
+    transform: scaleY(0.72);
+    opacity: 0.6;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 940px) {
+  .diff__inner {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .diff__metrics {
+    grid-template-columns: 1fr;
+  }
+}

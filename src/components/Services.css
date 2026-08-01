@@ -1,0 +1,107 @@
+/* Sin fondo propio: lo pone .services__bg, que se funde en los bordes */
+.services__bg {
+  background: radial-gradient(65% 55% at 8% 22%, rgba(73, 42, 122, 0.55) 0%, transparent 62%),
+    radial-gradient(55% 50% at 94% 82%, rgba(74, 159, 224, 0.14) 0%, transparent 64%),
+    linear-gradient(180deg, rgba(7, 6, 33, 0.4) 0%, rgba(8, 6, 42, 0.32) 55%, rgba(5, 4, 26, 0.42) 100%);
+}
+
+.services .container {
+  position: relative;
+  z-index: 2;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 1.6vw, 26px);
+}
+
+/* --- Card --- */
+.service-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(26px, 2.4vw, 38px) clamp(22px, 2vw, 32px) clamp(30px, 2.6vw, 42px);
+  border-radius: var(--radius);
+  background: linear-gradient(165deg, rgba(28, 24, 62, 0.9) 0%, rgba(13, 11, 38, 0.95) 100%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.5s var(--ease), border-color 0.5s var(--ease),
+    box-shadow 0.5s var(--ease);
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 34px 66px -32px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+/* Número de orden, muy tenue, al fondo de la card */
+.service-card__index {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  z-index: -1;
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: color-mix(in srgb, var(--accent) 12%, transparent);
+  transition: color 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.service-card:hover .service-card__index {
+  color: color-mix(in srgb, var(--accent) 24%, transparent);
+  transform: translateY(-3px);
+}
+
+.service-card__icon {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: linear-gradient(150deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #1a1240));
+  color: #fff;
+  margin-bottom: 26px;
+  box-shadow: 0 12px 28px -10px color-mix(in srgb, var(--accent) 90%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  transition: transform 0.5s var(--ease);
+}
+
+.service-card__icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.service-card:hover .service-card__icon {
+  transform: scale(1.09) rotate(-8deg);
+}
+
+.service-card h3 {
+  font-size: clamp(1.02rem, 1.2vw, 1.18rem);
+  font-weight: 600;
+  margin-bottom: 13px;
+  letter-spacing: -0.02em;
+}
+
+.service-card p {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--text-muted);
+  max-width: 34ch;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1080px) {
+  .services__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 580px) {
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,605 @@
+/* ============================================================
+   ASTRAVIA — Sistema de diseño
+
+   La paleta está derivada del logo (scripts/brand-palette.mjs):
+   el logotipo entero vive entre H240 y H262, así que el sitio usa
+   una escala índigo→violeta monocroma, con el azul hielo del
+   remolino como único acento frío y un ámbar del render como
+   único acento cálido, usado una sola vez.
+
+   Cambiá estas variables y cambia el sitio entero.
+   ============================================================ */
+
+:root {
+  /* --- Fondos: escala índigo, del casi negro al panel --- */
+  --bg-void: #04030f;
+  --bg-deep: #070621;
+  --bg-panel: #0a0830;
+  --bg-card: #110f33;
+  --bg-card-soft: #171343;
+
+  /* --- Marca: violeta exacto del wordmark y sus derivados --- */
+  --violet: #621ae2;
+  --violet-bright: #7c3aed;
+  --violet-soft: #a78bfa;
+  --violet-pale: #c9bcfb;
+  --iris: #492a7a;
+  --periwinkle: #8b9cf7;
+
+  /* --- Acento frío: el remolino del isotipo --- */
+  --ice: #9fd4f7;
+  --ice-deep: #4a9fe0;
+
+  /* --- Acento cálido: los trails del render. Se usa una sola vez. --- */
+  --ember: #f2a65a;
+
+  /* Alias heredados, remapeados dentro del sistema */
+  --cyan: var(--ice);
+  --blue: var(--periwinkle);
+  --magenta: #c084fc;
+  --pink: #d8b4fe;
+  --green: var(--periwinkle);
+  --orange: var(--ember);
+  --amber: var(--ember);
+
+  /* --- Texto --- */
+  --text: #efecff;
+  --text-soft: #c2bce6;
+  --text-muted: #928bba;
+  --text-dim: #67608c;
+
+  /* --- Superficies --- */
+  --border: rgba(167, 139, 250, 0.1);
+  --border-strong: rgba(167, 139, 250, 0.22);
+  --glass: rgba(139, 156, 247, 0.04);
+
+  /* --- Gradientes --- */
+  --grad-brand: linear-gradient(100deg, #9fd4f7 0%, #8b9cf7 34%, #a78bfa 66%, #c084fc 100%);
+  --grad-violet: linear-gradient(135deg, #621ae2 0%, #7c3aed 100%);
+  --grad-cta: linear-gradient(115deg, #0b1636 0%, #17123f 42%, #341d63 100%);
+  --grad-hair: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.5), transparent);
+
+  /* --- Sombras --- */
+  --shadow-violet: 0 14px 40px -12px rgba(98, 26, 226, 0.7);
+  --shadow-card: 0 24px 60px -30px rgba(2, 1, 8, 0.95);
+
+  /* --- Layout: ancho completo con gutter fluido --- */
+  --gutter: clamp(20px, 4.5vw, 76px);
+  --container: 1600px;
+  --container-full: 1920px;
+  --nav-h: 80px;
+  --radius: 16px;
+  --radius-lg: 24px;
+
+  /* --- Curvas --- */
+  --ease: cubic-bezier(0.22, 0.7, 0.24, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   Reset
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 20px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Poppins', ui-sans-serif, sans-serif;
+  background: var(--bg-void);
+  color: var(--text);
+  position: relative;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   Fondo premium — sistema de capas fijas
+   Tres pseudo-elementos apilados reemplazan el canvas de frames:
+   ::before  → orbe central de nebulosa + gradiente base
+   ::after   → constelación de puntos + grano UV
+   El .bg-nebula-accent → orbe de acento frío (azul hielo)
+   ============================================================ */
+
+/* Capa 1: nebulosa violeta profunda + gradiente base */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    /* Orbe principal — nebulosa violeta, esquina superior izquierda */
+    radial-gradient(ellipse 72% 58% at 8% 2%,  rgba(98,  26, 226, 0.32) 0%, transparent 68%),
+    /* Orbe secundario — iris profundo, centro derecha */
+    radial-gradient(ellipse 55% 48% at 96% 38%, rgba(73,  42, 122, 0.26) 0%, transparent 64%),
+    /* Orbe terciario — violeta suave, inferior izquierda */
+    radial-gradient(ellipse 60% 44% at 14% 88%, rgba(124, 58, 237, 0.18) 0%, transparent 60%),
+    /* Niebla de acento frío — azul hielo, superior derecha */
+    radial-gradient(ellipse 48% 36% at 88% 6%,  rgba(74, 159, 224, 0.12) 0%, transparent 56%),
+    /* Pulso de acento cálido — ámbar muy sutil, borde inferior derecho */
+    radial-gradient(ellipse 38% 28% at 92% 96%, rgba(242, 166, 90, 0.06) 0%, transparent 52%),
+    /* Gradiente de profundidad base */
+    linear-gradient(
+      165deg,
+      #0a0830 0%,
+      #070621 28%,
+      #04030f 55%,
+      #060520 78%,
+      #04030f 100%
+    );
+}
+
+/* Capa 2: campo de estrellas estático + trama UV */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  /* Campo de estrellas multicapa: diferentes tamaños y colores de la paleta */
+  background-image:
+    /* Estrellas pequeñas blancas */
+    radial-gradient(1px   1px   at  7%  9%,  rgba(255,255,255,0.55) 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 23% 17%, rgba(255,255,255,0.40) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 41% 31%, rgba(255,255,255,0.50) 0%, transparent 100%),
+    radial-gradient(0.8px 0.8px at 57% 8%,  rgba(255,255,255,0.35) 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 74% 25%, rgba(255,255,255,0.45) 0%, transparent 100%),
+    radial-gradient(0.9px 0.9px at 88% 14%, rgba(255,255,255,0.38) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 95% 42%, rgba(255,255,255,0.42) 0%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 12% 54%, rgba(255,255,255,0.32) 0%, transparent 100%),
+    radial-gradient(0.8px 0.8px at 34% 67%, rgba(255,255,255,0.48) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 52% 58%, rgba(255,255,255,0.36) 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 68% 72%, rgba(255,255,255,0.44) 0%, transparent 100%),
+    radial-gradient(0.9px 0.9px at 81% 61%, rgba(255,255,255,0.30) 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at  5% 83%, rgba(255,255,255,0.38) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 19% 91%, rgba(255,255,255,0.42) 0%, transparent 100%),
+    radial-gradient(0.8px 0.8px at 46% 88%, rgba(255,255,255,0.35) 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 63% 95%, rgba(255,255,255,0.40) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 79% 87%, rgba(255,255,255,0.32) 0%, transparent 100%),
+    radial-gradient(0.9px 0.9px at 93% 79%, rgba(255,255,255,0.36) 0%, transparent 100%),
+    /* Estrellas con tinte violeta-lavanda */
+    radial-gradient(1.6px 1.6px at 18% 44%, rgba(167,139,250,0.60) 0%, transparent 100%),
+    radial-gradient(1.4px 1.4px at 61% 19%, rgba(167,139,250,0.50) 0%, transparent 100%),
+    radial-gradient(1.8px 1.8px at 84% 52%, rgba(192,132,252,0.48) 0%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 29% 76%, rgba(167,139,250,0.42) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 72% 83%, rgba(216,180,254,0.38) 0%, transparent 100%),
+    /* Estrellas con tinte azul hielo */
+    radial-gradient(1.4px 1.4px at 38% 11%, rgba(159,212,247,0.55) 0%, transparent 100%),
+    radial-gradient(1.6px 1.6px at 89% 33%, rgba(159,212,247,0.45) 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 55% 74%, rgba(74,159,224,0.40)  0%, transparent 100%),
+    /* Trama UV muy sutil (grano de textura) */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
+  background-size: auto, auto, auto, auto, auto, auto, auto, auto, auto, auto,
+                   auto, auto, auto, auto, auto, auto, auto, auto, auto, auto,
+                   auto, auto, auto, auto, auto, auto,
+                   200px 200px;
+  animation: starDrift 90s linear infinite alternate;
+}
+
+@keyframes starDrift {
+  from { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  to   { background-position: 1% 0.5%, -0.5% 1%, 0.8% -0.4%, -0.3% 0.7%, 0.6% 0.9%, -0.7% 0.3%, 0.4% -0.6%, -0.2% 0.8%, 0.9% 0.2%, -0.4% -0.5%, 0.3% 0.6%, -0.6% 0.4%, 0.7% -0.3%, -0.1% 0.9%, 0.5% 0.1%, -0.8% 0.5%, 0.2% -0.7%, -0.5% 0.3%, 0.8% 0.6%, -0.3% -0.2%, 0.4% 0.8%, -0.6% 0.1%, 0.9% -0.4%, -0.2% 0.7%, 0.5% 0.3%, -0.4% 0.9%, 0% 0%; }
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  font-weight: 700;
+}
+
+::selection {
+  background: var(--violet);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-void);
+}
+::-webkit-scrollbar-thumb {
+  background: #241a4d;
+  border-radius: 99px;
+  border: 2px solid var(--bg-void);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a2a72;
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Para las secciones que tienen que ocupar toda la pantalla.
+   Se topa en 1920px para que no se desarme en monitores ultrawide. */
+.container--full {
+  max-width: var(--container-full);
+}
+
+.section {
+  position: relative;
+  padding: clamp(80px, 9vw, 130px) 0;
+  overflow: hidden;
+}
+
+/* Capa de fondo de una sección.
+   La máscara la funde arriba y abajo contra el cielo del body, que es lo que
+   hace que el paso de una sección a otra sea gradual y no un corte. */
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 15%,
+    #000 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(180deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
+}
+
+/* Hairline luminosa entre secciones */
+.section--hair::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--grad-hair);
+  opacity: 0.55;
+}
+
+.grad-text {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-head {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto clamp(44px, 5vw, 70px);
+}
+
+.section-head h2 {
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.section-head p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+/* Etiqueta de sección (kicker) */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 18px;
+  padding: 6px 15px 6px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: rgba(139, 92, 246, 0.07);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--violet-pale);
+}
+
+.kicker::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ice);
+  box-shadow: 0 0 10px var(--ice);
+  animation: kickerPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes kickerPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* ============================================================
+   Botones
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  font-size: 0.93rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease),
+    background 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+.btn--rect {
+  border-radius: 12px;
+}
+
+.btn--primary {
+  background: var(--grad-violet);
+  color: #fff;
+  box-shadow: var(--shadow-violet);
+}
+
+/* Barrido de luz al pasar el mouse */
+.btn--primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    110deg,
+    transparent 22%,
+    rgba(255, 255, 255, 0.28) 48%,
+    transparent 72%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.75s var(--ease-out);
+}
+
+.btn--primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 48px -12px rgba(124, 58, 237, 0.9);
+}
+
+.btn--primary:hover::after {
+  transform: translateX(120%);
+}
+
+.btn--ghost {
+  background: rgba(167, 139, 250, 0.035);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+}
+
+.btn--ghost:hover {
+  transform: translateY(-3px);
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.55);
+}
+
+.btn:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--violet-soft);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   Efectos compartidos
+   ============================================================ */
+
+/* --- Spotlight que sigue al cursor.
+       App.jsx escribe --mx / --my sobre los [data-spotlight]. --- */
+[data-spotlight] {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  isolation: isolate;
+}
+
+[data-spotlight]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+  background: radial-gradient(
+    340px circle at var(--mx) var(--my),
+    color-mix(in srgb, var(--accent, var(--violet-bright)) 26%, transparent) 0%,
+    transparent 62%
+  );
+  pointer-events: none;
+}
+
+[data-spotlight]:hover::before {
+  opacity: 1;
+}
+
+/* --- Borde con degradado (se enciende al hover) --- */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--accent, var(--violet-bright)) 75%, transparent) 0%,
+    transparent 45%,
+    color-mix(in srgb, var(--ice) 35%, transparent) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+  pointer-events: none;
+}
+
+.gradient-border:hover::after {
+  opacity: 1;
+}
+
+/* --- Grano --- */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- Campo de estrellas --- */
+.stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.2px 1.2px at 27% 62%, rgba(159, 212, 247, 0.5), transparent),
+    radial-gradient(1.6px 1.6px at 44% 12%, rgba(255, 255, 255, 0.36), transparent),
+    radial-gradient(1.1px 1.1px at 58% 78%, rgba(192, 132, 252, 0.42), transparent),
+    radial-gradient(1.7px 1.7px at 71% 32%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1.2px 1.2px at 83% 68%, rgba(167, 139, 250, 0.45), transparent),
+    radial-gradient(1.4px 1.4px at 91% 22%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1.1px 1.1px at 8% 85%, rgba(255, 255, 255, 0.26), transparent);
+  animation: twinkle 7s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   Reveal on scroll (lo activa el observer de App.jsx)
+   ============================================================ */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+  transition-delay: var(--delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Variante para titulares: barrido lateral en vez de fundido.
+   Se hace con mask y NO con clip-path: clip-path recorta la caja a ancho
+   cero y el IntersectionObserver deja de ver el elemento, así que nunca
+   se dispararía el reveal. */
+[data-reveal='wipe'] {
+  transform: none;
+  -webkit-mask-image: linear-gradient(90deg, #000, #000);
+  mask-image: linear-gradient(90deg, #000, #000);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 0% 100%;
+  mask-size: 0% 100%;
+  transition: opacity 0.5s var(--ease-out), -webkit-mask-size 1.1s var(--ease-out),
+    mask-size 1.1s var(--ease-out);
+}
+
+[data-reveal='wipe'].is-visible {
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

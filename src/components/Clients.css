@@ -1,0 +1,269 @@
+.clients__bg {
+  background: radial-gradient(62% 55% at 88% 12%, rgba(73, 42, 122, 0.42) 0%, transparent 62%),
+    radial-gradient(50% 50% at 6% 88%, rgba(74, 159, 224, 0.12) 0%, transparent 64%),
+    linear-gradient(180deg, rgba(10, 8, 48, 0.4) 0%, rgba(5, 4, 26, 0.36) 42%, rgba(4, 3, 15, 0.44) 100%);
+}
+
+.clients .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* --- Encabezado asimétrico --- */
+.clients__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 54px;
+}
+
+.clients__head h2 {
+  font-size: clamp(2rem, 4.2vw, 2.85rem);
+  margin-bottom: 14px;
+}
+
+.clients__head p {
+  max-width: 46ch;
+  color: var(--text-muted);
+  font-size: 0.94rem;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* --- Grid de proyectos --- */
+.clients__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2vw, 32px);
+}
+
+.project {
+  transition: transform 0.5s var(--ease);
+}
+
+.project:hover {
+  transform: translateY(-8px);
+}
+
+.project__thumb {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: linear-gradient(150deg, #1a1442 0%, #0c0a2b 100%);
+  box-shadow: var(--shadow-card);
+  aspect-ratio: 4 / 3;
+  transition: border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+
+.project:hover .project__thumb {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  box-shadow: 0 34px 70px -34px color-mix(in srgb, var(--accent) 75%, transparent);
+}
+
+/* Overlay al hover */
+.project__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px;
+  background: linear-gradient(0deg, rgba(6, 4, 14, 0.94) 0%, rgba(6, 4, 14, 0.1) 62%);
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+}
+
+.project:hover .project__overlay {
+  opacity: 1;
+}
+
+.project__result {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.project__go {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+}
+
+.project__go svg {
+  width: 16px;
+  height: 16px;
+}
+
+.project__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.project__meta h3 {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.project__tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ============================================================
+   Mockup de dashboard (puro CSS)
+   ============================================================ */
+
+.mock {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 8px;
+  transform: scale(1.02);
+  transition: transform 0.7s var(--ease);
+}
+
+.project:hover .mock {
+  transform: scale(1.07);
+}
+
+.mock__bar {
+  display: flex;
+  gap: 5px;
+  padding-left: 2px;
+}
+
+.mock__bar span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.mock__body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 8px;
+  min-height: 0;
+}
+
+.mock__side {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 8px 5px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.mock__side i {
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.mock__side i:first-child {
+  background: var(--accent);
+  opacity: 0.85;
+}
+
+.mock__main {
+  display: grid;
+  grid-template-rows: 1.5fr 1fr 1.2fr;
+  gap: 8px;
+  min-height: 0;
+}
+
+.mock__hero {
+  border-radius: 8px;
+  background: linear-gradient(115deg, color-mix(in srgb, var(--accent) 75%, #120c22) 0%, #171130 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.mock__hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.22) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: mockShimmer 4.5s var(--ease) infinite;
+}
+
+@keyframes mockShimmer {
+  0%,
+  55% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.mock__row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 8px;
+}
+
+.mock__tile {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mock__tile--alt {
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 42%, transparent) 0%, rgba(255, 255, 255, 0.04) 62%);
+}
+
+.mock__chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.mock__chart span {
+  flex: 1;
+  border-radius: 3px 3px 1px 1px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 90%, transparent), transparent);
+}
+
+/* --- Responsive --- */
+@media (max-width: 940px) {
+  .clients__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .clients__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .clients__grid {
+    grid-template-columns: 1fr;
+  }
+  /* En touch no hay hover: mostramos el overlay siempre */
+  .project__overlay {
+    opacity: 1;
+  }
+}

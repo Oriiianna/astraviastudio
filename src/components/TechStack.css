@@ -1,0 +1,94 @@
+.tech {
+  position: relative;
+  padding: clamp(58px, 6vw, 84px) 0;
+}
+
+/* Hairline luminosa arriba y abajo */
+.tech::before,
+.tech::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--grad-hair);
+  opacity: 0.7;
+}
+
+.tech::before {
+  top: 0;
+}
+.tech::after {
+  bottom: 0;
+}
+
+.tech__label {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 46px;
+}
+
+.tech__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px 20px;
+}
+
+.tech__item {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  color: var(--text-dim);
+  transition: color 0.4s var(--ease), transform 0.4s var(--ease);
+  cursor: default;
+}
+
+.tech__item svg {
+  width: 54px;
+  height: 54px;
+  transition: filter 0.4s var(--ease);
+}
+
+.tech__item:hover {
+  color: var(--violet-soft);
+  transform: translateY(-6px);
+}
+
+.tech__item:hover svg {
+  filter: drop-shadow(0 0 14px rgba(167, 139, 250, 0.6));
+}
+
+.tech__name {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+
+.tech__item:hover .tech__name {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 860px) {
+  .tech__row {
+    justify-content: center;
+    gap: 34px;
+  }
+  .tech__item svg {
+    width: 44px;
+    height: 44px;
+  }
+  .tech__name {
+    opacity: 1;
+    transform: none;
+  }
+}

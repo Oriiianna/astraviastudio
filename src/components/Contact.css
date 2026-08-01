@@ -1,0 +1,194 @@
+.contact {
+  padding: clamp(70px, 8vw, 100px) 0 clamp(80px, 9vw, 120px);
+}
+
+.contact__bg {
+  background: radial-gradient(65% 58% at 10% 45%, rgba(73, 42, 122, 0.42) 0%, transparent 62%),
+    radial-gradient(55% 55% at 94% 18%, rgba(74, 159, 224, 0.14) 0%, transparent 64%),
+    linear-gradient(180deg, rgba(10, 8, 48, 0.42) 0%, rgba(5, 4, 26, 0.38) 45%, rgba(4, 3, 15, 0.5) 100%);
+}
+
+.contact__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(40px, 5vw, 90px);
+}
+
+/* --- Columna izquierda --- */
+.contact__copy h2 {
+  font-size: clamp(1.9rem, 3.8vw, 2.5rem);
+  line-height: 1.16;
+  margin-bottom: 20px;
+  max-width: 14ch;
+}
+
+.contact__copy > p {
+  max-width: 42ch;
+  color: var(--text-muted);
+  font-size: 0.94rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.contact__channel {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+  transition: transform 0.4s var(--ease);
+}
+
+.contact__channel:hover {
+  transform: translateX(4px);
+}
+
+.contact__channel-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: var(--cyan);
+}
+
+.contact__channel-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.contact__channel span:last-child {
+  display: grid;
+  gap: 2px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.contact__channel strong {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* --- Formulario --- */
+.contact__form {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 18px;
+  padding: clamp(22px, 2.4vw, 36px);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(165deg, rgba(26, 21, 62, 0.85) 0%, rgba(10, 8, 32, 0.92) 100%);
+  border: 1px solid var(--border);
+  box-shadow: 0 44px 90px -50px rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.contact__glow {
+  position: absolute;
+  inset: auto -15% -30% -15%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(98, 26, 226, 0.32) 0%, transparent 68%);
+  filter: blur(40px);
+  z-index: -1;
+}
+
+.contact__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 9px;
+}
+
+.field > span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 14px 17px;
+  border-radius: 10px;
+  background: rgba(5, 4, 20, 0.85);
+  border: 1px solid rgba(167, 139, 250, 0.1);
+  font-size: 0.88rem;
+  font-weight: 300;
+  transition: border-color 0.35s var(--ease), box-shadow 0.35s var(--ease),
+    background 0.35s var(--ease);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 128px;
+  line-height: 1.6;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #4e4869;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  background: rgba(10, 7, 22, 0.95);
+  border-color: rgba(139, 92, 246, 0.65);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.14);
+}
+
+.contact__submit {
+  margin-top: 4px;
+  padding: 14px 24px;
+  border-radius: 9px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--grad-violet);
+  box-shadow: var(--shadow-violet);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), filter 0.35s var(--ease);
+}
+
+.contact__submit:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 20px 44px -14px rgba(139, 92, 246, 0.9);
+}
+
+.contact__feedback {
+  min-height: 1.2em;
+  font-size: 0.8rem;
+  color: var(--green);
+  text-align: center;
+}
+
+/* --- Responsive --- */
+@media (max-width: 940px) {
+  .contact__inner {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+  .contact__copy h2 {
+    max-width: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .contact__row {
+    grid-template-columns: 1fr;
+  }
+  .contact__form {
+    padding: 22px;
+  }
+}
