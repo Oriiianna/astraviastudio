@@ -5,7 +5,6 @@
   "framework": "vite",
   "headers": [
     {
-      "comment": "Las secuencias de frames son ~14 MB. Sin caché larga, cada visita las vuelve a bajar y se come el ancho de banda del plan. Los nombres NO llevan hash, así que no se usa 'immutable': si regenerás los frames, a los 30 días como máximo se refrescan solos.",
       "source": "/(hero|astronauta|fondo)/(.*)",
       "headers": [
         {
@@ -24,7 +23,6 @@
       ]
     },
     {
-      "comment": "Vite ya le pone hash a estos nombres, así que acá sí conviene immutable.",
       "source": "/assets/(.*)",
       "headers": [
         {
@@ -36,9 +34,18 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
       ]
     }
   ]
