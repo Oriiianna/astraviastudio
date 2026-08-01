@@ -33,7 +33,7 @@ export default function Navbar() {
       <div className="container container--full nav__inner">
         <a className="nav__logo" href="#inicio" onClick={() => setOpen(false)}>
           <img
-            src="/brand/logo-astravia-light.png"
+            src="/brand/astravia-logo-oficial.svg"
             alt="Astravia"
             width="635"
             height="160"

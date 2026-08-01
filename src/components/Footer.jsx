@@ -34,7 +34,7 @@ export default function Footer() {
           <div className="footer__brand">
             <a className="footer__logo" href="#inicio">
               <img
-                src="/brand/logo-astravia-light.png"
+                src="/brand/astravia-logo-oficial.svg"
                 alt="Astravia"
                 width="635"
                 height="160"
