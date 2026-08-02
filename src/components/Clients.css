@@ -31,35 +31,91 @@
   line-height: 1.75;
 }
 
-/* --- Grid de proyectos --- */
-.clients__grid {
+/* --- Proyectos ---
+   Cada uno es una fila a dos columnas: captura + ficha. Con más de uno se
+   apilan y alternan el lado de la captura. */
+.clients__lista {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 2vw, 32px);
+  gap: clamp(48px, 6vw, 88px);
 }
 
 .project {
-  transition: transform 0.5s var(--ease);
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 56px);
 }
 
-.project:hover {
-  transform: translateY(-8px);
+.project:nth-child(even) .project__thumb {
+  order: 2;
 }
 
+/* --- Ventana del navegador con la captura --- */
 .project__thumb {
+  display: block;
   position: relative;
   overflow: hidden;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: linear-gradient(150deg, #1a1442 0%, #0c0a2b 100%);
   box-shadow: var(--shadow-card);
-  aspect-ratio: 4 / 3;
-  transition: border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
+  transition: border-color 0.5s var(--ease), box-shadow 0.5s var(--ease), transform 0.5s var(--ease);
 }
 
-.project:hover .project__thumb {
+.project__thumb:hover {
+  transform: translateY(-6px);
   border-color: color-mix(in srgb, var(--accent) 50%, transparent);
   box-shadow: 0 34px 70px -34px color-mix(in srgb, var(--accent) 75%, transparent);
+}
+
+/* Barra de ventana: los tres puntos y el dominio real */
+.project__chrome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.project__chrome i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.project__chrome em {
+  margin: 0 auto;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.66rem;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+}
+
+/* La captura es una tira de dos pantallas: acá se ve la primera y al hover
+   sube hasta la segunda, como si alguien scrolleara el sitio.
+   `container-type: size` es lo que habilita medir el alto en cqh. */
+.project__viewport {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  container-type: size;
+}
+
+.project__shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 7s var(--ease);
+}
+
+.project__thumb:hover .project__shot {
+  transform: translateY(calc(100cqh - 100%));
 }
 
 /* Overlay al hover */
@@ -75,9 +131,10 @@
   background: linear-gradient(0deg, rgba(6, 4, 14, 0.94) 0%, rgba(6, 4, 14, 0.1) 62%);
   opacity: 0;
   transition: opacity 0.45s var(--ease);
+  pointer-events: none;
 }
 
-.project:hover .project__overlay {
+.project__thumb:hover .project__overlay {
   opacity: 1;
 }
 
@@ -103,167 +160,83 @@
   height: 16px;
 }
 
-.project__meta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.project__meta h3 {
-  font-size: 0.98rem;
-  font-weight: 600;
-}
-
+/* --- Ficha --- */
 .project__tag {
+  display: inline-block;
+  margin-bottom: 14px;
   font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-dim);
 }
 
-/* ============================================================
-   Mockup de dashboard (puro CSS)
-   ============================================================ */
+.project__info h3 {
+  font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
 
-.mock {
-  position: absolute;
-  inset: 0;
+.project__info p {
+  max-width: 44ch;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.project__stack {
   display: flex;
-  flex-direction: column;
-  padding: 10px;
+  flex-wrap: wrap;
   gap: 8px;
-  transform: scale(1.02);
-  transition: transform 0.7s var(--ease);
+  margin: 22px 0 26px;
 }
 
-.project:hover .mock {
-  transform: scale(1.07);
-}
-
-.mock__bar {
-  display: flex;
-  gap: 5px;
-  padding-left: 2px;
-}
-
-.mock__bar span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.16);
-}
-
-.mock__body {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 34px 1fr;
-  gap: 8px;
-  min-height: 0;
-}
-
-.mock__side {
-  display: grid;
-  align-content: start;
-  gap: 6px;
-  padding: 8px 5px;
-  border-radius: 8px;
+.project__stack li {
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.035);
+  font-size: 0.72rem;
+  color: var(--text-muted);
 }
 
-.mock__side i {
-  height: 5px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.14);
+.project__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
 }
 
-.mock__side i:first-child {
-  background: var(--accent);
-  opacity: 0.85;
-}
-
-.mock__main {
-  display: grid;
-  grid-template-rows: 1.5fr 1fr 1.2fr;
-  gap: 8px;
-  min-height: 0;
-}
-
-.mock__hero {
-  border-radius: 8px;
-  background: linear-gradient(115deg, color-mix(in srgb, var(--accent) 75%, #120c22) 0%, #171130 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.mock__hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.22) 50%, transparent 70%);
-  transform: translateX(-100%);
-  animation: mockShimmer 4.5s var(--ease) infinite;
-}
-
-@keyframes mockShimmer {
-  0%,
-  55% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.mock__row {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 8px;
-}
-
-.mock__tile {
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.mock__tile--alt {
-  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 42%, transparent) 0%, rgba(255, 255, 255, 0.04) 62%);
-}
-
-.mock__chart {
-  display: flex;
-  align-items: flex-end;
-  gap: 5px;
-  padding: 8px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.035);
-}
-
-.mock__chart span {
-  flex: 1;
-  border-radius: 3px 3px 1px 1px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 90%, transparent), transparent);
+.project__cta svg {
+  width: 15px;
+  height: 15px;
 }
 
 /* --- Responsive --- */
 @media (max-width: 940px) {
-  .clients__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
   .clients__head {
     flex-direction: column;
     align-items: flex-start;
   }
+  .project {
+    grid-template-columns: 1fr;
+  }
+  /* Apilado, la captura siempre va arriba */
+  .project:nth-child(even) .project__thumb {
+    order: 0;
+  }
 }
 
 @media (max-width: 600px) {
-  .clients__grid {
-    grid-template-columns: 1fr;
-  }
   /* En touch no hay hover: mostramos el overlay siempre */
   .project__overlay {
     opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* El global ya deja las transiciones en 0.001ms, así que sin esto el recorrido
+     de la captura no se atenúa: pega un salto. Mejor que no se mueva. */
+  .project__thumb:hover .project__shot {
+    transform: none;
   }
 }

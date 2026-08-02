@@ -1,61 +1,23 @@
 import { IconArrowUpRight } from './icons.jsx'
 import './Clients.css'
 
-/* Mockups de proyecto renderizados en CSS/SVG.
-   Para usar capturas reales: poné el archivo en /public y
-   reemplazá <ProjectMock/> por <img src="/mi-captura.png" alt="..." /> */
-const PROJECTS = [
+/* Capturas reales de los sitios, generadas por scripts/capture-proyectos.mjs
+   y optimizadas por scripts/optimize-proyectos.mjs → public/proyectos/.
+   Son tiras verticales de dos pantallas: la tarjeta las recorre al hover. */
+const PROYECTOS = [
   {
-    title: 'Fintech Dashboard',
-    tag: 'UI/UX · Desarrollo',
-    result: 'Cashback up to 40%',
+    slug: 'altamira',
+    titulo: 'Altamira · Bienes Raíces',
+    etiqueta: 'Pieza propia',
+    url: 'https://astraviastudio-inmobiliaria.vercel.app/',
+    dominio: 'astraviastudio-inmobiliaria.vercel.app',
+    descripcion:
+      'Una inmobiliaria de autor, resuelta como SPA. Los filtros del catálogo viven en la URL, así que una búsqueda se comparte y sobrevive al refresh. Detrás de todo corre una secuencia de video atada al scroll, sin frenar la carga.',
+    stack: ['React', 'Tailwind', 'Framer Motion', 'React Router'],
     accent: '#7c3aed',
-  },
-  {
-    title: 'Estudio Jurídico',
-    tag: 'WordPress · SEO',
-    result: '+180% consultas orgánicas',
-    accent: '#8b9cf7',
-  },
-  {
-    title: 'E-commerce Deportivo',
-    tag: 'WooCommerce · CRO',
-    result: '2.4x tasa de conversión',
-    accent: '#7ec4ef',
+    alt: 'Home del sitio de Altamira Bienes Raíces: hero con buscador de propiedades y grilla de destacadas',
   },
 ]
-
-function ProjectMock({ accent }) {
-  return (
-    <div className="mock" style={{ '--accent': accent }} aria-hidden="true">
-      <div className="mock__bar">
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="mock__body">
-        <div className="mock__side">
-          <i />
-          <i />
-          <i />
-          <i />
-        </div>
-        <div className="mock__main">
-          <div className="mock__hero" />
-          <div className="mock__row">
-            <div className="mock__tile" />
-            <div className="mock__tile mock__tile--alt" />
-          </div>
-          <div className="mock__chart">
-            {[40, 68, 52, 84, 60, 92].map((h, i) => (
-              <span key={i} style={{ height: `${h}%` }} />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 export default function Clients() {
   return (
@@ -66,10 +28,10 @@ export default function Clients() {
         <header className="clients__head">
           <div data-reveal>
             <span className="kicker">Portfolio</span>
-            <h2>Clientes Recientes</h2>
+            <h2>Trabajo Reciente</h2>
             <p>
-              Proyectos reales. Resultados medibles. Explora cómo hemos ayudado a otras marcas a
-              destacar en su sector.
+              Piezas donde probamos ideas de interfaz y rendimiento a fondo. No son maquetas: están
+              publicadas y se pueden recorrer.
             </p>
           </div>
 
@@ -78,28 +40,69 @@ export default function Clients() {
           </a>
         </header>
 
-        <div className="clients__grid">
-          {PROJECTS.map((project, i) => (
+        <div className="clients__lista">
+          {PROYECTOS.map((proyecto) => (
             <article
               className="project"
-              key={project.title}
-              style={{ '--accent': project.accent, '--delay': `${i * 120}ms` }}
+              key={proyecto.slug}
+              style={{ '--accent': proyecto.accent }}
               data-reveal
               data-spotlight
             >
-              <div className="project__thumb">
-                <ProjectMock accent={project.accent} />
+              <a
+                className="project__thumb"
+                href={proyecto.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Abrir ${proyecto.titulo} en una pestaña nueva`}
+              >
+                <span className="project__chrome" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                  <em>{proyecto.dominio}</em>
+                </span>
+
+                <span className="project__viewport">
+                  <img
+                    className="project__shot"
+                    src={`/proyectos/${proyecto.slug}.webp`}
+                    srcSet={`/proyectos/${proyecto.slug}-sm.webp 720w, /proyectos/${proyecto.slug}.webp 1240w`}
+                    sizes="(max-width: 940px) 92vw, 56vw"
+                    alt={proyecto.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
+
                 <span className="project__overlay">
-                  <span className="project__result">{project.result}</span>
+                  <span className="project__result">Ver sitio en vivo</span>
                   <span className="project__go">
                     <IconArrowUpRight />
                   </span>
                 </span>
-              </div>
+              </a>
 
-              <div className="project__meta">
-                <h3>{project.title}</h3>
-                <span className="project__tag">{project.tag}</span>
+              <div className="project__info">
+                <span className="project__tag">{proyecto.etiqueta}</span>
+                <h3>{proyecto.titulo}</h3>
+                <p>{proyecto.descripcion}</p>
+
+                <ul className="project__stack">
+                  {proyecto.stack.map((tec) => (
+                    <li key={tec}>{tec}</li>
+                  ))}
+                </ul>
+
+                <a
+                  className="btn btn--primary project__cta"
+                  href={proyecto.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ver sitio en vivo
+                  <IconArrowUpRight />
+                </a>
               </div>
             </article>
           ))}

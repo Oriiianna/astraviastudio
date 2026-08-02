@@ -5,7 +5,7 @@ import './Navbar.css'
 const LINKS = [
   { label: 'Servicios', href: '#servicios' },
   { label: 'Proceso', href: '#proceso' },
-  { label: 'Clientes', href: '#clientes' },
+  { label: 'Trabajo', href: '#clientes' },
   { label: 'Contacto', href: '#contacto' },
 ]
 

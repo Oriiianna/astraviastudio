@@ -166,11 +166,33 @@
   box-shadow: 0 20px 44px -14px rgba(139, 92, 246, 0.9);
 }
 
+.contact__submit:disabled {
+  cursor: progress;
+  opacity: 0.65;
+  transform: none;
+  filter: none;
+}
+
+/* Fuera de pantalla y no del árbol de accesibilidad: los bots que rellenan
+   todo por DOM igual lo encuentran, que es justamente la idea. */
+.contact__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .contact__feedback {
   min-height: 1.2em;
   font-size: 0.8rem;
   color: var(--green);
   text-align: center;
+}
+
+.contact__feedback.is-error {
+  color: var(--ember);
 }
 
 /* --- Responsive --- */
