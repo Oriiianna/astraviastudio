@@ -19,8 +19,8 @@ const COLUMNS = [
 ]
 
 const CONTACT = [
-  { icon: IconMail, text: 'hola@astravia.digital', href: 'mailto:hola@astravia.digital' },
-  { icon: IconPhone, text: '+54 11 1234 5678', href: 'tel:+541112345678' },
+  { icon: IconMail, text: 'studioastravia@gmail.com', href: 'mailto:studioastravia@gmail.com' },
+  { icon: IconPhone, text: '+54 11 6871-7233', href: 'tel:+541168717233' },
   { icon: IconPin, text: 'Buenos Aires, Argentina', href: null },
 ]
 

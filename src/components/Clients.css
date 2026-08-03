@@ -44,6 +44,7 @@
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
   align-items: center;
   gap: clamp(28px, 4vw, 56px);
+  border-radius: var(--radius);
 }
 
 .project:nth-child(even) .project__thumb {

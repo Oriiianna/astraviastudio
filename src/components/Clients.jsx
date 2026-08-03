@@ -1,23 +1,34 @@
-import { IconArrowUpRight } from './icons.jsx'
-import './Clients.css'
+import { IconArrowUpRight } from "./icons.jsx";
+import "./Clients.css";
 
 /* Capturas reales de los sitios, generadas por scripts/capture-proyectos.mjs
-   y optimizadas por scripts/optimize-proyectos.mjs → public/proyectos/.
+  y optimizadas por scripts/optimize-proyectos.mjs → public/proyectos/.
    Son tiras verticales de dos pantallas: la tarjeta las recorre al hover. */
 const PROYECTOS = [
   {
-    slug: 'altamira',
-    titulo: 'Altamira · Bienes Raíces',
-    etiqueta: 'Pieza propia',
-    url: 'https://astraviastudio-inmobiliaria.vercel.app/',
-    dominio: 'astraviastudio-inmobiliaria.vercel.app',
+    slug: "altamira",
+    titulo: "Altamira · Bienes Raíces",
+    etiqueta: "Pieza propia",
+    url: "https://astraviastudio-inmobiliaria.vercel.app/",
+    dominio: "Altamira · Bienes Raíces",
     descripcion:
-      'Una inmobiliaria de autor, resuelta como SPA. Los filtros del catálogo viven en la URL, así que una búsqueda se comparte y sobrevive al refresh. Detrás de todo corre una secuencia de video atada al scroll, sin frenar la carga.',
-    stack: ['React', 'Tailwind', 'Framer Motion', 'React Router'],
-    accent: '#7c3aed',
-    alt: 'Home del sitio de Altamira Bienes Raíces: hero con buscador de propiedades y grilla de destacadas',
+      "Una inmobiliaria de autor, resuelta como SPA. Los filtros del catálogo viven en la URL, así que una búsqueda se comparte y sobrevive al refresh. Detrás de todo corre una secuencia de video atada al scroll, sin frenar la carga.",
+    stack: ["React", "Tailwind", "Framer Motion", "React Router"],
+    accent: "#7c3aed",
+    alt: "Home del sitio de Altamira Bienes Raíces: hero con buscador de propiedades y grilla de destacadas",
   },
-]
+  {slug: "oscuro-cafe",
+    titulo: "Oscuro Café - Cafetería de Especialidad",
+    etiqueta: "Pieza propia",
+    url: "https://astraviastudio-oscurocafe.vercel.app/",
+    dominio: "Oscuro Café - Cafetería de Especialidad",
+    descripcion:
+      "Una landing premium pra una cafetería de especialidad, diseñada para transmitir calidez y sotisticación. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada taza de café, mientras se destacan los productos y servicios ofrecidos.",
+    stack: ["React", "Tailwind", "Framer Motion", "React Router"],
+    accent: "#7c3aed",
+    alt: "Home del sitio de Oscuro Café: hero con imagen del café y grilla de productos destacados",
+  },
+];
 
 export default function Clients() {
   return (
@@ -28,14 +39,19 @@ export default function Clients() {
         <header className="clients__head">
           <div data-reveal>
             <span className="kicker">Portfolio</span>
-            <h2>Trabajo Reciente</h2>
+            <h2>Proyectos Destacados</h2>
             <p>
-              Piezas donde probamos ideas de interfaz y rendimiento a fondo. No son maquetas: están
-              publicadas y se pueden recorrer.
+              Piezas donde probamos ideas de interfaz y rendimiento a fondo. No
+              son maquetas: están publicadas y se pueden recorrer.
             </p>
           </div>
 
-          <a href="#proceso" className="btn btn--ghost" data-reveal style={{ '--delay': '120ms' }}>
+          <a
+            href="#proceso"
+            className="btn btn--ghost"
+            data-reveal
+            style={{ "--delay": "120ms" }}
+          >
             Ver cómo trabajamos
           </a>
         </header>
@@ -45,7 +61,7 @@ export default function Clients() {
             <article
               className="project"
               key={proyecto.slug}
-              style={{ '--accent': proyecto.accent }}
+              style={{ "--accent": proyecto.accent }}
               data-reveal
               data-spotlight
             >
@@ -109,5 +125,5 @@ export default function Clients() {
         </div>
       </div>
     </section>
-  )
+  );
 }
