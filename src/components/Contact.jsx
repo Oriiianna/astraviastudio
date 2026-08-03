@@ -5,8 +5,9 @@ import './Contact.css'
 const EMPTY = { nombre: '', telefono: '', email: '', mensaje: '', website: '' }
 
 const MENSAJE_OK = '¡Gracias! Te respondemos dentro de las próximas 24 horas.'
+// Español neutro, sin voseo: el sitio apunta a cualquier mercado hispanohablante.
 const MENSAJE_ERROR =
-  'No pudimos enviar el mensaje. Probá de nuevo o escribinos a hola@astravia.digital.'
+  'No pudimos enviar el mensaje. Inténtalo de nuevo o escríbenos a hola@astravia.digital.'
 
 export default function Contact() {
   const [form, setForm] = useState(EMPTY)

@@ -61,8 +61,8 @@ export default function Hero() {
             </h1>
 
             <p className="hero__lead" style={{ '--i': 4 }}>
-              En Astravia combinamos diseño, tecnología y estrategia para crear webs que comunican,
-              posicionan y generan resultados reales.
+              Somos un equipo de diseño y desarrollo. Hacemos sitios y aplicaciones web a medida:
+              rápidos, claros y pensados para que la visita termine en una consulta.
             </p>
 
             <div className="hero__actions" style={{ '--i': 5 }}>

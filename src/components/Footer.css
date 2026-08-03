@@ -104,22 +104,18 @@
   color: var(--text-dim);
 }
 
+/* Al quedar sólo dos elementos en la barra, el space-between manda esta línea
+   contra el borde derecho, justo debajo del botón flotante de volver arriba.
+   El margen la corre lo justo para que no se pisen. */
 .footer__made {
+  margin-right: 58px;
   color: var(--text-muted);
 }
 
-.footer__legal {
-  display: flex;
-  gap: 18px;
-}
-
-.footer__legal a {
-  color: var(--text-muted);
-  transition: color 0.3s var(--ease);
-}
-
-.footer__legal a:hover {
-  color: var(--violet-soft);
+@media (max-width: 640px) {
+  .footer__made {
+    margin-right: 0;
+  }
 }
 
 /* --- Responsive --- */

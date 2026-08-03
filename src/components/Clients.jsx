@@ -17,6 +17,20 @@ const PROYECTOS = [
     accent: '#7c3aed',
     alt: 'Home del sitio de Altamira Bienes Raíces: hero con buscador de propiedades y grilla de destacadas',
   },
+  {
+    slug: 'oscuro',
+    titulo: 'Oscuro · Café de Especialidad',
+    etiqueta: 'Pieza propia',
+    url: 'https://astraviastudio-oscurocafe.vercel.app/',
+    dominio: 'astraviastudio-oscurocafe.vercel.app',
+    descripcion:
+      'Una landing de lanzamiento donde el hero dura 4.500 px de scroll, con los granos animados en canvas y sin una sola librería externa. El mismo diseño existe además como tema de WordPress, editable desde el personalizador y sin plugins.',
+    stack: ['JavaScript', 'Canvas', 'Sin frameworks', 'WordPress'],
+    /* Acento frío a propósito: el sitio es marrón y ámbar, pero el ámbar de la
+       marca (--ember) se usa una sola vez en toda la página, en el CTA. */
+    accent: '#8b9cf7',
+    alt: 'Sitio de Oscuro Café de Especialidad: hero con la bolsa de café entre granos y la ficha de compra del blend',
+  },
 ]
 
 export default function Clients() {

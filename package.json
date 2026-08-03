@@ -11,7 +11,8 @@
     "assets:astronauta": "node scripts/optimize-astronaut.mjs",
     "assets:fondo": "node scripts/optimize-fondo.mjs",
     "assets:logo": "node scripts/optimize-logo.mjs",
-    "assets:proyectos": "node scripts/optimize-proyectos.mjs"
+    "assets:proyectos": "node scripts/optimize-proyectos.mjs",
+    "assets:og": "node scripts/optimize-og.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

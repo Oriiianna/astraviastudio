@@ -15,6 +15,7 @@ npm run assets:astronauta  # regenera los frames del astronauta del CTA
 npm run assets:fondo       # regenera los frames del fondo de galaxia
 npm run assets:logo        # regenera los archivos de logo
 npm run assets:proyectos   # regenera las capturas del portfolio
+npm run assets:og          # regenera la miniatura para redes
 ```
 
 Los textos están en **español neutro/internacional** (sin voseo), para que
@@ -111,6 +112,46 @@ cuatro capas al 70% dejan pasar apenas un 2% de la imagen y el fondo desaparece.
   y el IntersectionObserver deja de ver el elemento.
 - Barrido de luz en los botones primarios, marquee infinito, hairlines luminosas.
 
+## SEO y textos
+
+### Qué hay resuelto
+
+- `<title>` (52 caracteres) y `description` (150) dentro de los límites que
+  Google recorta.
+- Open Graph y Twitter Card, con miniatura propia de 1200x630 que genera
+  `scripts/optimize-og.mjs` a partir de un frame del hero y el logo claro.
+  Sin esto, el link compartido en WhatsApp o LinkedIn sale como texto pelado.
+- Datos estructurados `ProfessionalService` (JSON-LD) para el panel de Google.
+- `public/robots.txt`.
+- Un solo `<h1>`, jerarquía de encabezados sin saltos y todos los enlaces
+  internos apuntando a anclas que existen.
+
+### ⚠️ Pendiente: el dominio
+
+Faltan cinco cosas, todas por lo mismo: **no hay dominio definitivo**. Un
+canonical o un `og:image` apuntando al lugar equivocado es peor que no
+ponerlos, porque Google indexa la URL que le declares y las redes cachean la
+miniatura del primer intento. Cuando exista el dominio, tocar:
+
+1. El bloque comentado de `index.html` (canonical, `og:url`, `og:image`).
+2. La línea `Sitemap:` de `public/robots.txt`.
+3. La `url` y el `logo` del JSON-LD, al final del `<head>`.
+
+No hay más lugares: están los tres marcados con comentarios en el código.
+
+### Criterio de los textos
+
+Español **neutro/internacional, sin voseo** — los comentarios y este README sí
+usan voseo, pero nada de lo que ve el visitante.
+
+Ningún número que no podamos probar si nos lo piden. Se sacaron
+"+50 proyectos", "clientes satisfechos", "98/100 de PageSpeed promedio" y
+"99.9% de uptime garantizado" (esta última, además, es una promesa contractual
+sobre servidores que no administramos). Las tres métricas del panel de
+"Por qué Astravia" son ahora **compromisos** —PageSpeed objetivo, respuesta en
+24 h, un interlocutor— que dependen de cómo trabajamos. Son promesas: hay que
+cumplirlas.
+
 ## Portfolio: cómo se capturan los sitios
 
 La sección "Trabajo Reciente" muestra **capturas reales**, no mockups. Cada
@@ -198,7 +239,7 @@ si empieza a entrar basura, ese es el próximo paso.
 
 ## Pendientes conocidos
 
-- El portfolio tiene un solo proyecto. Salieron los dos mockups inventados que
-  lo acompañaban; en cuanto haya un segundo sitio real, la sección ya lo apila.
+- El portfolio tiene dos proyectos, los dos piezas propias. Falta el primero
+  hecho para un cliente real.
 - El tercer logo de la franja de tecnologías (WooCommerce) fue una suposición:
   en el PDF de referencia no se distinguía.

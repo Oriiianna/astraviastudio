@@ -40,6 +40,14 @@ const PROYECTOS = [
     // blanco. Dos pantallas alcanzan para el recorrido del hover.
     pantallas: [0, 1805],
   },
+  {
+    slug: 'oscuro',
+    url: 'https://astraviastudio-oscurocafe.vercel.app/',
+    // El hero mide 4.500 px (está atado al scroll), así que la segunda pantalla
+    // se toma recién en la sección de compra. Las intermedias —origen (5216) y
+    // producto (5943)— son más bajas que el viewport y dejan una banda vacía.
+    pantallas: [0, 8582],
+  },
 ]
 
 async function capturarPantalla(page, y) {

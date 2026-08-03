@@ -22,7 +22,7 @@ export default function TechStack() {
     <section className="tech grain">
       <div className="container container--full">
         <p className="tech__label" data-reveal>
-          Potenciado por tecnología real
+          El stack con el que trabajamos
         </p>
 
         <ul className="tech__row">

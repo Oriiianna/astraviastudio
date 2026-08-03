@@ -5,17 +5,22 @@ const POINTS = [
   'Cada pantalla pensada para que te escriban',
   'Rápida en el teléfono, que es donde te buscan',
   'Preparada para crecer sin rehacerla de cero',
+  'Si mañana necesita lógica propia, ya está listo el terreno',
 ]
 
+/* Compromisos, no historial. Antes decían "+50 proyectos entregados" y "99.9%
+   de uptime garantizado": números que no podemos probar y, el segundo, una
+   promesa contractual sobre servidores que ni siquiera administramos nosotros.
+   Estos tres sí dependen de cómo trabajamos, así que se pueden sostener. */
 const METRICS = [
-  { icon: IconGauge, value: '98', unit: '/100', label: 'PageSpeed promedio' },
-  { icon: IconLayers, value: '+50', unit: '', label: 'Proyectos entregados' },
-  { icon: IconShield, value: '99.9', unit: '%', label: 'Uptime garantizado' },
+  { icon: IconGauge, value: '90', unit: '+', label: 'PageSpeed objetivo en cada entrega' },
+  { icon: IconShield, value: '24', unit: 'h', label: 'Respuesta a tu consulta' },
+  { icon: IconLayers, value: '1', unit: '', label: 'Interlocutor, de principio a fin' },
 ]
 
 export default function Differentiator() {
   return (
-    <section className="diff grain">
+    <section className="diff grain" id="nosotros">
       <div className="diff__bg bg-layer" aria-hidden="true" />
 
       <div className="container container--full diff__inner">

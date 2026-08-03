@@ -1,9 +1,4 @@
-import {
-  IconArtboard,
-  IconBrowserCode,
-  IconSpeedometer,
-  IconShieldGear,
-} from './icons.jsx'
+import { IconArtboard, IconBrowserCode, IconLayers, IconSpeedometer } from './icons.jsx'
 import './Services.css'
 
 /* Los cuatro acentos son una progresión dentro de la escala de marca:
@@ -11,27 +6,27 @@ import './Services.css'
 const SERVICES = [
   {
     title: 'Diseño UI/UX',
-    text: 'Diseñamos experiencias que guían al usuario y aumentan la conversión.',
+    text: 'Ordenamos el mensaje y el recorrido para que se entienda en cinco segundos.',
     accent: '#7c3aed',
     Icon: IconArtboard,
   },
   {
-    title: 'Desarrollo Web',
-    text: 'Construimos con WordPress, Elementor, React, HTML, CSS, JS y más.',
+    title: 'Sitios web',
+    text: 'Institucionales, landings y tiendas. En WordPress o a código, según convenga.',
     accent: '#9b6cf5',
     Icon: IconBrowserCode,
   },
   {
-    title: 'Optimización',
-    text: 'Velocidad, rendimiento y SEO para que tu web no pierda clientes.',
+    title: 'Aplicaciones web',
+    text: 'Catálogos, buscadores y paneles con lógica propia, hechos en React.',
     accent: '#8b9cf7',
-    Icon: IconSpeedometer,
+    Icon: IconLayers,
   },
   {
-    title: 'Mantenimiento',
-    text: 'Nos encargamos de todo para que tú solo te enfoques en crecer.',
+    title: 'Rendimiento y SEO',
+    text: 'Carga rápida, SEO técnico y mantenimiento para que no pierdas terreno.',
     accent: '#7ec4ef',
-    Icon: IconShieldGear,
+    Icon: IconSpeedometer,
   },
 ]
 
@@ -43,8 +38,11 @@ export default function Services() {
       <div className="container container--full">
         <header className="section-head" data-reveal>
           <span className="kicker">Qué hacemos</span>
-          <h2>Nuestros Servicios</h2>
-          <p>Soluciones integrales diseñadas para posicionar tu marca y escalar tu negocio digital.</p>
+          <h2>Sitios y aplicaciones web, de punta a punta</h2>
+          <p>
+            Del primer boceto al sitio publicado y andando. Un solo equipo para diseño, código y
+            todo lo que viene después.
+          </p>
         </header>
 
         <div className="services__grid">

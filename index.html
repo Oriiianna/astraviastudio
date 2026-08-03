@@ -4,11 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#05040a" />
-    <title>Astravia — Diseño y desarrollo web estratégico</title>
+
+    <title>Astravia Studio — Sitios y aplicaciones web a medida</title>
     <meta
       name="description"
-      content="Agencia digital especializada en desarrollo web estratégico. Diseño, tecnología y estrategia para crear webs que comunican, posicionan y generan resultados reales."
+      content="Equipo de diseño y desarrollo web. Creamos sitios y aplicaciones a medida: rápidos, pensados para convertir visitas en consultas y listos para crecer."
     />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Redes sociales: es la tarjeta que se ve al pegar el link en WhatsApp,
+         LinkedIn o Slack. La imagen la genera scripts/optimize-og.mjs. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Astravia Studio" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content="Astravia Studio — Sitios y aplicaciones web a medida" />
+    <meta
+      property="og:description"
+      content="Equipo de diseño y desarrollo web. Creamos sitios y aplicaciones a medida: rápidos, pensados para convertir visitas en consultas y listos para crecer."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Astravia Studio — Sitios y aplicaciones web a medida" />
+    <meta
+      name="twitter:description"
+      content="Equipo de diseño y desarrollo web. Creamos sitios y aplicaciones a medida: rápidos, pensados para convertir visitas en consultas y listos para crecer."
+    />
+
+    <!-- ⚠️ PENDIENTE: falta el dominio definitivo.
+         Estas cuatro etiquetas necesitan URL absoluta, así que quedan
+         comentadas: un canonical o un og:image apuntando al dominio
+         equivocado es peor que no tenerlos (Google indexa la URL que le
+         declares, y las redes cachean la miniatura del primer intento).
+
+         Cuando exista el dominio: descomentá el bloque, reemplazá DOMINIO,
+         y sumá la línea `Sitemap:` en public/robots.txt y la `url` del
+         JSON-LD de más abajo. Son los cinco lugares, no hay más. -->
+    <!--
+    <link rel="canonical" href="https://DOMINIO/" />
+    <meta property="og:url" content="https://DOMINIO/" />
+    <meta property="og:image" content="https://DOMINIO/brand/og-astravia.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:image" content="https://DOMINIO/brand/og-astravia.jpg" />
+    -->
 
     <link rel="icon" type="image/png" href="/brand/favicon.png" />
     <link rel="apple-touch-icon" href="/brand/isotipo-astravia.png" />
@@ -19,6 +56,35 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Datos estructurados: es lo que lee Google para armar el panel lateral
+         y entender de qué se trata el negocio. Cuando haya dominio, agregar
+         "url" y "logo" con la URL absoluta. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Astravia Studio",
+        "description": "Equipo de diseño y desarrollo de sitios y aplicaciones web a medida.",
+        "email": "hola@astravia.digital",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Buenos Aires",
+          "addressCountry": "AR"
+        },
+        "areaServed": "Global",
+        "availableLanguage": "es",
+        "knowsAbout": [
+          "Diseño UI/UX",
+          "Desarrollo web",
+          "Aplicaciones web",
+          "React",
+          "WordPress",
+          "Optimización de rendimiento web",
+          "SEO técnico"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

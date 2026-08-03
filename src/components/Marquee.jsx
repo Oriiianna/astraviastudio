@@ -1,11 +1,14 @@
-import { IconSparkle, IconCheckSquare, IconFile, IconUsers } from './icons.jsx'
+import { IconSparkle, IconCheckSquare, IconSpeedometer, IconUsers } from './icons.jsx'
 import './Marquee.css'
 
+/* Cada ítem tiene que ser algo que podamos sostener si nos preguntan. Nada de
+   "+50 proyectos" ni "clientes satisfechos": son números que no podemos probar
+   y lo primero que hace un cliente serio es pedirlos. */
 const ITEMS = [
-  { icon: IconSparkle, label: 'Tecnologías modernas' },
-  { icon: IconCheckSquare, label: 'Resultados reales' },
-  { icon: IconFile, label: '+50 proyectos' },
-  { icon: IconUsers, label: 'Clientes satisfechos' },
+  { icon: IconSparkle, label: 'Sitios y aplicaciones web' },
+  { icon: IconUsers, label: 'Diseño y desarrollo en un mismo equipo' },
+  { icon: IconSpeedometer, label: 'Rendimiento y SEO desde el primer día' },
+  { icon: IconCheckSquare, label: 'Respuesta en 24 horas' },
 ]
 
 function Track({ ariaHidden }) {

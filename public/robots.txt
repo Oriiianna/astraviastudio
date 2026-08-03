@@ -1,0 +1,8 @@
+# Astravia Studio
+# Una landing de una sola página: no hay nada que esconderle a los buscadores.
+
+User-agent: *
+Allow: /
+
+# Cuando exista el dominio definitivo, descomentá y completá:
+# Sitemap: https://DOMINIO/sitemap.xml
