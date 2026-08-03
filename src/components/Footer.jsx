@@ -1,36 +1,26 @@
-import { IconMail, IconPin } from './icons.jsx'
+import { IconMail, IconPhone, IconPin } from './icons.jsx'
 import './Footer.css'
 
-/* Cada enlace lleva a una sección que existe. Antes los quince apuntaban a
-   #contacto, incluidos un "Blog" y tres páginas legales que no están escritas:
-   prometer una página y llevar a otra es la forma más barata de perder a
-   alguien que estaba mirando en serio. */
 const COLUMNS = [
   {
     title: 'Servicios',
     links: [
-      { label: 'Diseño UI/UX', href: '#servicios' },
-      { label: 'Sitios web', href: '#servicios' },
-      { label: 'Aplicaciones web', href: '#servicios' },
-      { label: 'Rendimiento y SEO', href: '#servicios' },
+      'Desarrollo WordPress',
+      'Diseño con Elementor',
+      'Diseño UI/UX',
+      'Optimización WPO',
+      'Mantenimiento Web',
     ],
   },
   {
-    title: 'Estudio',
-    links: [
-      { label: 'Por qué Astravia', href: '#nosotros' },
-      { label: 'Proceso', href: '#proceso' },
-      { label: 'Trabajo', href: '#clientes' },
-      { label: 'Contacto', href: '#contacto' },
-    ],
+    title: 'Agencia',
+    links: ['Sobre nosotros', 'Proceso', 'Clientes', 'Blog', 'Contacto'],
   },
 ]
 
-/* El teléfono que había (+54 11 1234 5678) era el placeholder de manual.
-   Queda afuera hasta que haya uno real: un número que no atiende cuesta más
-   que no mostrar ninguno. */
 const CONTACT = [
-  { icon: IconMail, text: 'hola@astravia.digital', href: 'mailto:hola@astravia.digital' },
+  { icon: IconMail, text: 'studioastravia@gmail.com', href: 'mailto:studioastravia@gmail.com' },
+  { icon: IconPhone, text: '+54 11 6871-7233', href: 'tel:+541168717233' },
   { icon: IconPin, text: 'Buenos Aires, Argentina', href: null },
 ]
 
@@ -52,8 +42,8 @@ export default function Footer() {
               />
             </a>
             <p>
-              Equipo de diseño y desarrollo. Hacemos sitios y aplicaciones web a medida, de la
-              primera idea al despegue.
+              Agencia digital especializada en desarrollo web estratégico. Transformamos visiones en
+              despegues digitales.
             </p>
           </div>
 
@@ -61,9 +51,9 @@ export default function Footer() {
             <nav className="footer__col" key={col.title} aria-label={col.title}>
               <h3>{col.title}</h3>
               <ul>
-                {col.links.map(({ label, href }) => (
-                  <li key={label}>
-                    <a href={href}>{label}</a>
+                {col.links.map((link) => (
+                  <li key={link}>
+                    <a href="#contacto">{link}</a>
                   </li>
                 ))}
               </ul>
@@ -88,6 +78,17 @@ export default function Footer() {
           <p className="footer__made">
             Hecho con <span aria-label="amor">💜</span> para el universo digital
           </p>
+          <ul className="footer__legal">
+            <li>
+              <a href="#contacto">Privacidad</a>
+            </li>
+            <li>
+              <a href="#contacto">Términos</a>
+            </li>
+            <li>
+              <a href="#contacto">Cookies</a>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

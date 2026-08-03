@@ -1,53 +1,54 @@
-import { useState } from 'react'
-import { IconMail } from './icons.jsx'
-import './Contact.css'
+import { useState } from "react";
+import { IconMail } from "./icons.jsx";
+import { IconPhone } from "./icons.jsx";
+import { IconPin } from "./icons.jsx";
+import "./Contact.css";
 
-const EMPTY = { nombre: '', telefono: '', email: '', mensaje: '', website: '' }
+const EMPTY = { nombre: "", telefono: "", email: "", mensaje: "", website: "" };
 
-const MENSAJE_OK = '¡Gracias! Te respondemos dentro de las próximas 24 horas.'
-// Español neutro, sin voseo: el sitio apunta a cualquier mercado hispanohablante.
+const MENSAJE_OK = "¡Gracias! Te respondemos dentro de las próximas 24 horas.";
 const MENSAJE_ERROR =
-  'No pudimos enviar el mensaje. Inténtalo de nuevo o escríbenos a hola@astravia.digital.'
+  "No pudimos enviar el mensaje. Probá de nuevo o escribinos a hola@astravia.digital.";
 
 export default function Contact() {
-  const [form, setForm] = useState(EMPTY)
+  const [form, setForm] = useState(EMPTY);
   // idle | sending | ok | error
-  const [status, setStatus] = useState('idle')
-  const [error, setError] = useState('')
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState("");
 
   const update = (field) => (e) => {
-    setForm((prev) => ({ ...prev, [field]: e.target.value }))
-    if (status !== 'sending') setStatus('idle')
-  }
+    setForm((prev) => ({ ...prev, [field]: e.target.value }));
+    if (status !== "sending") setStatus("idle");
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (status === 'sending') return
+    e.preventDefault();
+    if (status === "sending") return;
 
-    setStatus('sending')
-    setError('')
+    setStatus("sending");
+    setError("");
 
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
-      })
-      const data = await res.json().catch(() => ({}))
+      });
+      const data = await res.json().catch(() => ({}));
 
       if (!res.ok || !data.ok) {
-        setError(data.error || MENSAJE_ERROR)
-        setStatus('error')
-        return
+        setError(data.error || MENSAJE_ERROR);
+        setStatus("error");
+        return;
       }
 
-      setForm(EMPTY)
-      setStatus('ok')
+      setForm(EMPTY);
+      setStatus("ok");
     } catch {
-      setError(MENSAJE_ERROR)
-      setStatus('error')
+      setError(MENSAJE_ERROR);
+      setStatus("error");
     }
-  }
+  };
 
   return (
     <section className="contact section grain" id="contacto">
@@ -62,28 +63,64 @@ export default function Contact() {
             Hablemos de tu <span className="grad-text">próximo nivel</span>
           </h2>
 
-          <p data-reveal style={{ '--delay': '90ms' }}>
-            Cuéntanos sobre tu proyecto. Analizaremos tu situación actual y te propondremos una
-            solución a medida sin compromiso.
+          <p data-reveal style={{ "--delay": "90ms" }}>
+            Cuéntanos sobre tu proyecto. Analizaremos tu situación actual y te
+            propondremos una solución a medida sin compromiso.
           </p>
-
           <a
             className="contact__channel"
-            href="mailto:hola@astravia.digital"
+            href="mailto:studioastravia@gmail.com"
             data-reveal
-            style={{ '--delay': '180ms' }}
+            style={{ "--delay": "180ms" }}
           >
             <span className="contact__channel-icon">
               <IconMail />
             </span>
             <span>
               <strong>Email</strong>
-              hola@astravia.digital
+              studioastravia@gmail.com
+            </span>
+          </a>
+          <a
+            className="contact__channel"
+            href="https://wa.me/5491168717233?text=%C2%A1Hola!%20Me%20interesa%20conocer%20m%C3%A1s%20sobre%20los%20servicios%20de%20Astravia%20Studio%20y%20recibir%20asesoramiento%20para%20mi%20proyecto%20web."
+            target="_blank"
+            rel="noopener noreferrer"
+            data-reveal
+            style={{ "--delay": "180ms" }}
+          >
+            <span className="contact__channel-icon">
+              <IconPhone />
+            </span>
+            <span>
+              <strong>WhatsApp</strong>
+              +54 11 6871-7233
+            </span>
+          </a>
+          <a
+            className="contact__channel"
+            href="https://maps.google.com/?q=Astravia"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-reveal
+            style={{ "--delay": "180ms" }}
+          >
+            <span className="contact__channel-icon">
+              <IconPin />
+            </span>
+            <span>
+              <strong>Ubicación</strong>
+              Buenos Aires, Argentina
             </span>
           </a>
         </div>
 
-        <form className="contact__form" onSubmit={handleSubmit} data-reveal style={{ '--delay': '140ms' }}>
+        <form
+          className="contact__form"
+          onSubmit={handleSubmit}
+          data-reveal
+          style={{ "--delay": "140ms" }}
+        >
           <div className="contact__glow" aria-hidden="true" />
 
           <div className="contact__row">
@@ -94,7 +131,7 @@ export default function Contact() {
                 name="nombre"
                 placeholder="Nombre"
                 value={form.nombre}
-                onChange={update('nombre')}
+                onChange={update("nombre")}
                 required
               />
             </label>
@@ -106,7 +143,7 @@ export default function Contact() {
                 name="telefono"
                 placeholder="Teléfono"
                 value={form.telefono}
-                onChange={update('telefono')}
+                onChange={update("telefono")}
               />
             </label>
           </div>
@@ -118,7 +155,7 @@ export default function Contact() {
               name="email"
               placeholder="Email"
               value={form.email}
-              onChange={update('email')}
+              onChange={update("email")}
               required
             />
           </label>
@@ -130,7 +167,7 @@ export default function Contact() {
               rows="5"
               placeholder="Mensaje"
               value={form.mensaje}
-              onChange={update('mensaje')}
+              onChange={update("mensaje")}
               required
             />
           </label>
@@ -144,22 +181,26 @@ export default function Contact() {
             aria-hidden="true"
             className="contact__honeypot"
             value={form.website}
-            onChange={update('website')}
+            onChange={update("website")}
           />
 
-          <button type="submit" className="contact__submit" disabled={status === 'sending'}>
-            {status === 'sending' ? 'Enviando…' : 'Enviar Mensaje'}
+          <button
+            type="submit"
+            className="contact__submit"
+            disabled={status === "sending"}
+          >
+            {status === "sending" ? "Enviando…" : "Enviar Mensaje"}
           </button>
 
           <p
-            className={`contact__feedback${status === 'error' ? ' is-error' : ''}`}
+            className={`contact__feedback${status === "error" ? " is-error" : ""}`}
             role="status"
             aria-live="polite"
           >
-            {status === 'ok' ? MENSAJE_OK : status === 'error' ? error : ''}
+            {status === "ok" ? MENSAJE_OK : status === "error" ? error : ""}
           </p>
         </form>
       </div>
     </section>
-  )
+  );
 }
