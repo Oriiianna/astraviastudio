@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { IconArrowRight } from './icons.jsx'
 import useFrameSequence from '../hooks/useFrameSequence.js'
 import manifest from '../../public/astronauta/manifest.json'
@@ -7,6 +8,7 @@ import './CtaBanner.css'
 const frameUrl = (set, i) => `/astronauta/${set}/frame-${String(i + 1).padStart(3, '0')}.webp`
 
 export default function CtaBanner() {
+  const { t } = useTranslation()
   const sectionRef = useRef(null)
   const canvasRef = useRef(null)
 
@@ -33,7 +35,7 @@ export default function CtaBanner() {
           <div className="stars cta__stars" aria-hidden="true" />
 
           <h2 className="cta__title">
-            Tu web puede ser tu mejor <span className="cta__accent">vendedor.</span>
+            {t('cta.title')} <span className="cta__accent">{t('cta.accent')}</span>
           </h2>
 
           <div className="cta__body">
@@ -49,12 +51,9 @@ export default function CtaBanner() {
             </div>
 
             <div className="cta__copy">
-              <p>
-                Deja de perder clientes por una web lenta o confusa y empieza a convertir visitas en
-                oportunidades.
-              </p>
+              <p>{t('cta.body')}</p>
               <a href="#contacto" className="btn btn--primary cta__btn">
-                Empezar mi proyecto <IconArrowRight />
+                {t('cta.button')} <IconArrowRight />
               </a>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { IconBulb, IconPalette, IconCode, IconRocket } from './icons.jsx'
 import './Process.css'
 
@@ -5,53 +6,51 @@ const STEPS = [
   {
     n: '01',
     icon: IconBulb,
-    title: 'Estrategia',
-    text: 'Definimos objetivos, analizamos la competencia y trazamos el plan de acción.',
+    key: 'one',
   },
   {
     n: '02',
     icon: IconPalette,
-    title: 'Diseño',
-    text: 'Creamos prototipos visuales enfocados en la experiencia del usuario.',
+    key: 'two',
   },
   {
     n: '03',
     icon: IconCode,
-    title: 'Desarrollo',
-    text: 'Escribimos código limpio, rápido y optimizado para buscadores.',
+    key: 'three',
   },
   {
     n: '04',
     icon: IconRocket,
-    title: 'Lanzamiento',
-    text: 'Pruebas exhaustivas, publicación y monitoreo de resultados.',
+    key: 'four',
   },
 ]
 
 export default function Process() {
+  const { t } = useTranslation()
+
   return (
     <section className="process section grain" id="proceso">
       <div className="process__bg bg-layer" aria-hidden="true" />
 
       <div className="container container--full">
         <header className="section-head" data-reveal>
-          <span className="kicker">Cómo trabajamos</span>
-          <h2>Un proceso transparente</h2>
-          <p>Sin sorpresas. Cada fase está diseñada para mantener el proyecto en tiempo y forma.</p>
+          <span className="kicker">{t('process.kicker')}</span>
+          <h2>{t('process.title')}</h2>
+          <p>{t('process.description')}</p>
         </header>
 
         <ol className="process__steps">
           <span className="process__line" aria-hidden="true" />
 
-          {STEPS.map(({ n, icon: Icon, title, text }, i) => (
+          {STEPS.map(({ n, icon: Icon, key }, i) => (
             <li className="step" key={n} data-reveal style={{ '--delay': `${i * 130}ms` }}>
               <span className="step__icon">
                 <Icon />
                 <i className="step__ring" aria-hidden="true" />
               </span>
               <span className="step__n">{n}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
+              <h3>{t(`process.steps.${key}.title`)}</h3>
+              <p>{t(`process.steps.${key}.text`)}</p>
             </li>
           ))}
         </ol>

@@ -1,0 +1,176 @@
+{
+  "nav": {
+    "services": "Services",
+    "process": "Process",
+    "work": "Work",
+    "contact": "Contact",
+    "cta": "Let’s launch",
+    "languageLabel": "Switch language to Spanish"
+  },
+  "hero": {
+    "titleLine1": "Your clients look for you on Google",
+    "titleLine2": "before contacting you.",
+    "titleLine3": "Are you showing what",
+    "titleLine4": "they really need to see?",
+    "lead": "At Astravia we combine design, technology and strategy to create websites that communicate, position and generate real results.",
+    "primaryCta": "I want a website that sells",
+    "secondaryCta": "See how we work",
+    "hint": "Scroll"
+  },
+  "services": {
+    "kicker": "What we do",
+    "title": "Our services",
+    "description": "Integrated solutions designed to position your brand and scale your digital business.",
+    "items": {
+      "one": {
+        "title": "UI/UX Design",
+        "text": "We design experiences that guide the user and increase conversion."
+      },
+      "two": {
+        "title": "Web Development",
+        "text": "We build with WordPress, Elementor, React, HTML, CSS, JS and more."
+      },
+      "three": {
+        "title": "Optimization",
+        "text": "Speed, performance and SEO so your website does not lose customers."
+      },
+      "four": {
+        "title": "Maintenance",
+        "text": "We take care of everything so you can focus on growing."
+      }
+    }
+  },
+  "process": {
+    "kicker": "How we work",
+    "title": "A transparent process",
+    "description": "No surprises. Each phase is designed to keep the project on time and on budget.",
+    "steps": {
+      "one": {
+        "title": "Strategy",
+        "text": "We define goals, analyze the competition and outline the action plan."
+      },
+      "two": {
+        "title": "Design",
+        "text": "We create visual prototypes focused on the user experience."
+      },
+      "three": {
+        "title": "Development",
+        "text": "We write clean, fast code optimized for search engines."
+      },
+      "four": {
+        "title": "Launch",
+        "text": "Thorough testing, publication and monitoring of results."
+      }
+    }
+  },
+  "cta": {
+    "title": "Your website can be your best",
+    "accent": "salesperson.",
+    "body": "Stop losing customers due to a slow or confusing website and start turning visits into opportunities.",
+    "button": "Start my project"
+  },
+  "footer": {
+    "columns": {
+      "services": "Services",
+      "agency": "Agency"
+    },
+    "contact": "Contact",
+    "description": "Strategic digital agency specialized in web development. We turn visions into digital takeoffs.",
+    "links": {
+      "services": "WordPress Development",
+      "elementor": "Elementor Design",
+      "uiux": "UI/UX Design",
+      "wpo": "WPO Optimization",
+      "maintenance": "Web Maintenance",
+      "about": "About us",
+      "process": "Process",
+      "clients": "Clients",
+      "blog": "Blog",
+      "contact": "Contact",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "cookies": "Cookies"
+    },
+    "rights": "All rights reserved.",
+    "made": "Made with 💜 for the digital universe"
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Let’s talk about your",
+    "accent": "next level",
+    "description": "Tell us about your project. We will analyze your current situation and propose a tailored solution with no commitment.",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "location": "Location",
+    "name": "Name",
+    "phone": "Phone",
+    "message": "Message",
+    "placeholderName": "Name",
+    "placeholderPhone": "Phone",
+    "placeholderEmail": "Email",
+    "placeholderMessage": "Message",
+    "submit": "Send message",
+    "sending": "Sending…",
+    "success": "Thanks! We will reply within the next 24 hours.",
+    "error": "We could not send the message. Please try again or write to hola@astravia.digital."
+  },
+  "clients": {
+    "kicker": "Portfolio",
+    "title": "Featured Projects",
+    "description": "Pieces where we test UI and performance ideas in depth. They are not mockups: they are published and can be explored.",
+    "cta": "See how we work",
+    "viewSite": "View live site",
+    "openInNewTab": "Open {{title}} in a new tab",
+    "projects": {
+      "altamira": {
+        "title": "Altamira · Real Estate",
+        "tag": "Own piece",
+        "domain": "Altamira · Real Estate",
+        "description": "An auteur real estate site built as an SPA. Catalog filters live in the URL, so a search is shareable and survives refresh. Behind it all runs a video sequence tied to scroll without slowing loading.",
+        "alt": "Home of Altamira Real Estate site: hero with property search and featured grid"
+      },
+      "oscuroCafe": {
+        "title": "Oscuro Café - Specialty Coffee",
+        "tag": "Own piece",
+        "domain": "Oscuro Café - Specialty Coffee",
+        "description": "A premium landing page for a specialty coffee shop designed to convey warmth and sophistication. The experience combines fluid animations and a visual narrative that invites you to discover the story behind each cup of coffee, while highlighting products and services.",
+        "alt": "Home of Oscuro Café site: hero with coffee image and featured products grid"
+      }
+    }
+  },
+  "differentiator": {
+    "kicker": "Why Astravia",
+    "title": "A beautiful website is not enough.",
+    "titleAccent": "Yours has to",
+    "titleHighlight": "sell.",
+    "description": "With a template you'll have a site that looks good, and nothing more. We study who you sell to, organize the message so it is understood in five seconds and build each screen with one goal: so the visit ends in a consultation.",
+    "points": [
+      "Every screen designed so they write to you",
+      "Fast on mobile, where they look for you",
+      "Ready to grow without rebuilding from scratch"
+    ],
+    "panelLabel": "performance.astravia",
+    "metrics": {
+      "pagespeed": {
+        "label": "Average PageSpeed"
+      },
+      "projects": {
+        "label": "Projects delivered"
+      },
+      "uptime": {
+        "label": "Guaranteed uptime"
+      }
+    }
+  },
+  "marquee": {
+    "items": [
+      "Modern technologies",
+      "Real results",
+      "+50 projects",
+      "Satisfied clients"
+    ]
+  },
+  "techStack": {
+    "label": "Powered by real technology"
+  }
+}

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { IconArrowUpRight } from "./icons.jsx";
 import "./Clients.css";
 
@@ -7,30 +8,21 @@ import "./Clients.css";
 const PROYECTOS = [
   {
     slug: "altamira",
-    titulo: "Altamira · Bienes Raíces",
-    etiqueta: "Pieza propia",
     url: "https://astraviastudio-inmobiliaria.vercel.app/",
-    dominio: "Altamira · Bienes Raíces",
-    descripcion:
-      "Una inmobiliaria de autor, resuelta como SPA. Los filtros del catálogo viven en la URL, así que una búsqueda se comparte y sobrevive al refresh. Detrás de todo corre una secuencia de video atada al scroll, sin frenar la carga.",
     stack: ["React", "Tailwind", "Framer Motion", "React Router"],
     accent: "#7c3aed",
-    alt: "Home del sitio de Altamira Bienes Raíces: hero con buscador de propiedades y grilla de destacadas",
   },
-  {slug: "oscuro-cafe",
-    titulo: "Oscuro Café - Cafetería de Especialidad",
-    etiqueta: "Pieza propia",
+  {
+    slug: "oscuro-cafe",
     url: "https://astraviastudio-oscurocafe.vercel.app/",
-    dominio: "Oscuro Café - Cafetería de Especialidad",
-    descripcion:
-      "Una landing premium pra una cafetería de especialidad, diseñada para transmitir calidez y sotisticación. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada taza de café, mientras se destacan los productos y servicios ofrecidos.",
     stack: ["React", "Tailwind", "Framer Motion", "React Router"],
     accent: "#7c3aed",
-    alt: "Home del sitio de Oscuro Café: hero con imagen del café y grilla de productos destacados",
   },
 ];
 
 export default function Clients() {
+  const { t } = useTranslation();
+
   return (
     <section className="clients section grain" id="clientes">
       <div className="clients__bg bg-layer" aria-hidden="true" />
@@ -38,12 +30,9 @@ export default function Clients() {
       <div className="container container--full">
         <header className="clients__head">
           <div data-reveal>
-            <span className="kicker">Portfolio</span>
-            <h2>Proyectos Destacados</h2>
-            <p>
-              Piezas donde probamos ideas de interfaz y rendimiento a fondo. No
-              son maquetas: están publicadas y se pueden recorrer.
-            </p>
+            <span className="kicker">{t('clients.kicker')}</span>
+            <h2>{t('clients.title')}</h2>
+            <p>{t('clients.description')}</p>
           </div>
 
           <a
@@ -52,7 +41,7 @@ export default function Clients() {
             data-reveal
             style={{ "--delay": "120ms" }}
           >
-            Ver cómo trabajamos
+            {t('clients.cta')}
           </a>
         </header>
 
@@ -70,13 +59,13 @@ export default function Clients() {
                 href={proyecto.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Abrir ${proyecto.titulo} en una pestaña nueva`}
+                aria-label={t('clients.openInNewTab', { title: t(`clients.projects.${proyecto.slug === 'altamira' ? 'altamira' : 'oscuroCafe'}.title`) })}
               >
                 <span className="project__chrome" aria-hidden="true">
                   <i />
                   <i />
                   <i />
-                  <em>{proyecto.dominio}</em>
+                  <em>{t(`clients.projects.${proyecto.slug === 'altamira' ? 'altamira' : 'oscuroCafe'}.domain`)}</em>
                 </span>
 
                 <span className="project__viewport">
@@ -85,14 +74,14 @@ export default function Clients() {
                     src={`/proyectos/${proyecto.slug}.webp`}
                     srcSet={`/proyectos/${proyecto.slug}-sm.webp 720w, /proyectos/${proyecto.slug}.webp 1240w`}
                     sizes="(max-width: 940px) 92vw, 56vw"
-                    alt={proyecto.alt}
+                    alt={t(`clients.projects.${proyecto.slug === 'altamira' ? 'altamira' : 'oscuroCafe'}.alt`)}
                     loading="lazy"
                     decoding="async"
                   />
                 </span>
 
                 <span className="project__overlay">
-                  <span className="project__result">Ver sitio en vivo</span>
+                  <span className="project__result">{t('clients.viewSite')}</span>
                   <span className="project__go">
                     <IconArrowUpRight />
                   </span>
@@ -100,9 +89,9 @@ export default function Clients() {
               </a>
 
               <div className="project__info">
-                <span className="project__tag">{proyecto.etiqueta}</span>
-                <h3>{proyecto.titulo}</h3>
-                <p>{proyecto.descripcion}</p>
+                <span className="project__tag">{t(`clients.projects.${proyecto.slug === 'altamira' ? 'altamira' : 'oscuroCafe'}.tag`)}</span>
+                <h3>{t(`clients.projects.${proyecto.slug === 'altamira' ? 'altamira' : 'oscuroCafe'}.title`)}</h3>
+                <p>{t(`clients.projects.${proyecto.slug === 'altamira' ? 'altamira' : 'oscuroCafe'}.description`)}</p>
 
                 <ul className="project__stack">
                   {proyecto.stack.map((tec) => (
@@ -116,7 +105,7 @@ export default function Clients() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Ver sitio en vivo
+                  {t('clients.viewSite')}
                   <IconArrowUpRight />
                 </a>
               </div>

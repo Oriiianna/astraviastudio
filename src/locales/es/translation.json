@@ -1,0 +1,176 @@
+{
+  "nav": {
+    "services": "Servicios",
+    "process": "Proceso",
+    "work": "Trabajo",
+    "contact": "Contacto",
+    "cta": "Quiero despegar",
+    "languageLabel": "Cambiar idioma a inglés"
+  },
+  "hero": {
+    "titleLine1": "Tus clientes te buscan en Google",
+    "titleLine2": "antes de contactarte.",
+    "titleLine3": "¿Estás mostrando lo que",
+    "titleLine4": "realmente necesitan ver?",
+    "lead": "En Astravia combinamos diseño, tecnología y estrategia para crear webs que comunican, posicionan y generan resultados reales.",
+    "primaryCta": "Quiero una web que venda",
+    "secondaryCta": "Ver cómo trabajamos",
+    "hint": "Desliza"
+  },
+  "services": {
+    "kicker": "Qué hacemos",
+    "title": "Nuestros servicios",
+    "description": "Soluciones integrales diseñadas para posicionar tu marca y escalar tu negocio digital.",
+    "items": {
+      "one": {
+        "title": "Diseño UI/UX",
+        "text": "Diseñamos experiencias que guían al usuario y aumentan la conversión."
+      },
+      "two": {
+        "title": "Desarrollo Web",
+        "text": "Construimos con WordPress, Elementor, React, HTML, CSS, JS y más."
+      },
+      "three": {
+        "title": "Optimización",
+        "text": "Velocidad, rendimiento y SEO para que tu web no pierda clientes."
+      },
+      "four": {
+        "title": "Mantenimiento",
+        "text": "Nos encargamos de todo para que tú solo te enfoques en crecer."
+      }
+    }
+  },
+  "process": {
+    "kicker": "Cómo trabajamos",
+    "title": "Un proceso transparente",
+    "description": "Sin sorpresas. Cada fase está diseñada para mantener el proyecto en tiempo y forma.",
+    "steps": {
+      "one": {
+        "title": "Estrategia",
+        "text": "Definimos objetivos, analizamos la competencia y trazamos el plan de acción."
+      },
+      "two": {
+        "title": "Diseño",
+        "text": "Creamos prototipos visuales enfocados en la experiencia del usuario."
+      },
+      "three": {
+        "title": "Desarrollo",
+        "text": "Escribimos código limpio, rápido y optimizado para buscadores."
+      },
+      "four": {
+        "title": "Lanzamiento",
+        "text": "Pruebas exhaustivas, publicación y monitoreo de resultados."
+      }
+    }
+  },
+  "cta": {
+    "title": "Tu web puede ser tu mejor",
+    "accent": "vendedor.",
+    "body": "Deja de perder clientes por una web lenta o confusa y empieza a convertir visitas en oportunidades.",
+    "button": "Empezar mi proyecto"
+  },
+  "footer": {
+    "columns": {
+      "services": "Servicios",
+      "agency": "Agencia"
+    },
+    "contact": "Contacto",
+    "description": "Agencia digital especializada en desarrollo web estratégico. Transformamos visiones en despegues digitales.",
+    "links": {
+      "services": "Desarrollo WordPress",
+      "elementor": "Diseño con Elementor",
+      "uiux": "Diseño UI/UX",
+      "wpo": "Optimización WPO",
+      "maintenance": "Mantenimiento Web",
+      "about": "Sobre nosotros",
+      "process": "Proceso",
+      "clients": "Clientes",
+      "blog": "Blog",
+      "contact": "Contacto",
+      "privacy": "Privacidad",
+      "terms": "Términos",
+      "cookies": "Cookies"
+    },
+    "rights": "Todos los derechos reservados.",
+    "made": "Hecho con 💜 para el universo digital"
+  },
+  "contact": {
+    "kicker": "Contacto",
+    "title": "Hablemos de tu",
+    "accent": "próximo nivel",
+    "description": "Cuéntanos sobre tu proyecto. Analizaremos tu situación actual y te propondremos una solución a medida sin compromiso.",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "location": "Ubicación",
+    "name": "Nombre",
+    "phone": "Teléfono",
+    "message": "Mensaje",
+    "placeholderName": "Nombre",
+    "placeholderPhone": "Teléfono",
+    "placeholderEmail": "Email",
+    "placeholderMessage": "Mensaje",
+    "submit": "Enviar Mensaje",
+    "sending": "Enviando…",
+    "success": "¡Gracias! Te respondemos dentro de las próximas 24 horas.",
+    "error": "No pudimos enviar el mensaje. Probá de nuevo o escribinos a hola@astravia.digital."
+  },
+  "clients": {
+    "kicker": "Portfolio",
+    "title": "Proyectos Destacados",
+    "description": "Piezas donde probamos ideas de interfaz y rendimiento a fondo. No son maquetas: están publicadas y se pueden recorrer.",
+    "cta": "Ver cómo trabajamos",
+    "viewSite": "Ver sitio en vivo",
+    "openInNewTab": "Abrir {{title}} en una pestaña nueva",
+    "projects": {
+      "altamira": {
+        "title": "Altamira · Bienes Raíces",
+        "tag": "Pieza propia",
+        "domain": "Altamira · Bienes Raíces",
+        "description": "Una inmobiliaria de autor, resuelta como SPA. Los filtros del catálogo viven en la URL, así que una búsqueda se comparte y sobrevive al refresh. Detrás de todo corre una secuencia de video atada al scroll, sin frenar la carga.",
+        "alt": "Home del sitio de Altamira Bienes Raíces: hero con buscador de propiedades y grilla de destacadas"
+      },
+      "oscuroCafe": {
+        "title": "Oscuro Café - Cafetería de Especialidad",
+        "tag": "Pieza propia",
+        "domain": "Oscuro Café - Cafetería de Especialidad",
+        "description": "Una landing premium pra una cafetería de especialidad, diseñada para transmitir calidez y sotisticación. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada taza de café, mientras se destacan los productos y servicios ofrecidos.",
+        "alt": "Home del sitio de Oscuro Café: hero con imagen del café y grilla de productos destacados"
+      }
+    }
+  },
+  "differentiator": {
+    "kicker": "Por qué Astravia",
+    "title": "Una web linda no alcanza.",
+    "titleAccent": "La tuya tiene que",
+    "titleHighlight": "vender.",
+    "description": "Con una plantilla tendrás un sitio que se ve bien, y nada más. Nosotros estudiamos a quién le vendes, ordenamos el mensaje para que se entienda en cinco segundos y armamos cada pantalla con un objetivo: que la visita termine en una consulta.",
+    "points": [
+      "Cada pantalla pensada para que te escriban",
+      "Rápida en el teléfono, que es donde te buscan",
+      "Preparada para crecer sin rehacerla de cero"
+    ],
+    "panelLabel": "rendimiento.astravia",
+    "metrics": {
+      "pagespeed": {
+        "label": "PageSpeed promedio"
+      },
+      "projects": {
+        "label": "Proyectos entregados"
+      },
+      "uptime": {
+        "label": "Uptime garantizado"
+      }
+    }
+  },
+  "marquee": {
+    "items": [
+      "Tecnologías modernas",
+      "Resultados reales",
+      "+50 proyectos",
+      "Clientes satisfechos"
+    ]
+  },
+  "techStack": {
+    "label": "Potenciado por tecnología real"
+  }
+}

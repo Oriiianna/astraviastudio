@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { IconMail } from "./icons.jsx";
 import { IconPhone } from "./icons.jsx";
 import { IconPin } from "./icons.jsx";
@@ -6,11 +7,8 @@ import "./Contact.css";
 
 const EMPTY = { nombre: "", telefono: "", email: "", mensaje: "", website: "" };
 
-const MENSAJE_OK = "¡Gracias! Te respondemos dentro de las próximas 24 horas.";
-const MENSAJE_ERROR =
-  "No pudimos enviar el mensaje. Probá de nuevo o escribinos a hola@astravia.digital.";
-
 export default function Contact() {
+  const { t } = useTranslation();
   const [form, setForm] = useState(EMPTY);
   // idle | sending | ok | error
   const [status, setStatus] = useState("idle");
@@ -37,7 +35,7 @@ export default function Contact() {
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok || !data.ok) {
-        setError(data.error || MENSAJE_ERROR);
+        setError(data.error || t("contact.error"));
         setStatus("error");
         return;
       }
@@ -45,7 +43,7 @@ export default function Contact() {
       setForm(EMPTY);
       setStatus("ok");
     } catch {
-      setError(MENSAJE_ERROR);
+      setError(t("contact.error"));
       setStatus("error");
     }
   };
@@ -57,15 +55,14 @@ export default function Contact() {
       <div className="container container--full contact__inner">
         <div className="contact__copy">
           <span className="kicker" data-reveal>
-            Contacto
+            {t("contact.kicker")}
           </span>
           <h2 data-reveal>
-            Hablemos de tu <span className="grad-text">próximo nivel</span>
+            {t("contact.title")} <span className="grad-text">{t("contact.accent")}</span>
           </h2>
 
           <p data-reveal style={{ "--delay": "90ms" }}>
-            Cuéntanos sobre tu proyecto. Analizaremos tu situación actual y te
-            propondremos una solución a medida sin compromiso.
+            {t("contact.description")}
           </p>
           <a
             className="contact__channel"
@@ -77,7 +74,7 @@ export default function Contact() {
               <IconMail />
             </span>
             <span>
-              <strong>Email</strong>
+              <strong>{t("contact.email")}</strong>
               studioastravia@gmail.com
             </span>
           </a>
@@ -93,13 +90,13 @@ export default function Contact() {
               <IconPhone />
             </span>
             <span>
-              <strong>WhatsApp</strong>
+              <strong>{t("contact.whatsapp")}</strong>
               +54 11 6871-7233
             </span>
           </a>
           <a
             className="contact__channel"
-            href="https://maps.google.com/?q=Astravia"
+            href="https://maps.app.goo.gl/EgmxnWcfeM1ahkyv5"
             target="_blank"
             rel="noopener noreferrer"
             data-reveal
@@ -109,7 +106,7 @@ export default function Contact() {
               <IconPin />
             </span>
             <span>
-              <strong>Ubicación</strong>
+              <strong>{t("contact.location")}</strong>
               Buenos Aires, Argentina
             </span>
           </a>
@@ -125,11 +122,11 @@ export default function Contact() {
 
           <div className="contact__row">
             <label className="field">
-              <span>Nombre</span>
+              <span>{t("contact.name")}</span>
               <input
                 type="text"
                 name="nombre"
-                placeholder="Nombre"
+                placeholder={t("contact.placeholderName")}
                 value={form.nombre}
                 onChange={update("nombre")}
                 required
@@ -137,11 +134,11 @@ export default function Contact() {
             </label>
 
             <label className="field">
-              <span>Teléfono</span>
+              <span>{t("contact.phone")}</span>
               <input
                 type="tel"
                 name="telefono"
-                placeholder="Teléfono"
+                placeholder={t("contact.placeholderPhone")}
                 value={form.telefono}
                 onChange={update("telefono")}
               />
@@ -149,11 +146,11 @@ export default function Contact() {
           </div>
 
           <label className="field">
-            <span>Email</span>
+            <span>{t("contact.email")}</span>
             <input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder={t("contact.placeholderEmail")}
               value={form.email}
               onChange={update("email")}
               required
@@ -165,7 +162,7 @@ export default function Contact() {
             <textarea
               name="mensaje"
               rows="5"
-              placeholder="Mensaje"
+              placeholder={t("contact.placeholderMessage")}
               value={form.mensaje}
               onChange={update("mensaje")}
               required
@@ -189,7 +186,7 @@ export default function Contact() {
             className="contact__submit"
             disabled={status === "sending"}
           >
-            {status === "sending" ? "Enviando…" : "Enviar Mensaje"}
+            {status === "sending" ? t("contact.sending") : t("contact.submit")}
           </button>
 
           <p
@@ -197,7 +194,7 @@ export default function Contact() {
             role="status"
             aria-live="polite"
           >
-            {status === "ok" ? MENSAJE_OK : status === "error" ? error : ""}
+            {status === "ok" ? t("contact.success") : status === "error" ? error : ""}
           </p>
         </form>
       </div>

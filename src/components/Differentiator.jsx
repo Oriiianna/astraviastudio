@@ -1,24 +1,17 @@
+import { useTranslation } from 'react-i18next'
 import { IconCheckCircle, IconGauge, IconLayers, IconShield } from './icons.jsx'
 import './Differentiator.css'
 
-const POINTS = [
-  'Cada pantalla pensada para que te escriban',
-  'Rápida en el teléfono, que es donde te buscan',
-  'Preparada para crecer sin rehacerla de cero',
-  'Si mañana necesita lógica propia, ya está listo el terreno',
-]
-
-/* Compromisos, no historial. Antes decían "+50 proyectos entregados" y "99.9%
-   de uptime garantizado": números que no podemos probar y, el segundo, una
-   promesa contractual sobre servidores que ni siquiera administramos nosotros.
-   Estos tres sí dependen de cómo trabajamos, así que se pueden sostener. */
 const METRICS = [
-  { icon: IconGauge, value: '90', unit: '+', label: 'PageSpeed objetivo en cada entrega' },
-  { icon: IconShield, value: '24', unit: 'h', label: 'Respuesta a tu consulta' },
-  { icon: IconLayers, value: '1', unit: '', label: 'Interlocutor, de principio a fin' },
+  { icon: IconGauge, value: '98', unit: '/100', key: 'pagespeed' },
+  { icon: IconLayers, value: '+50', unit: '', key: 'projects' },
+  { icon: IconShield, value: '99.9', unit: '%', key: 'uptime' },
 ]
 
 export default function Differentiator() {
+  const { t } = useTranslation()
+  const POINTS = t('differentiator.points', { returnObjects: true })
+
   return (
     <section className="diff grain" id="nosotros">
       <div className="diff__bg bg-layer" aria-hidden="true" />
@@ -26,18 +19,16 @@ export default function Differentiator() {
       <div className="container container--full diff__inner">
         <div className="diff__copy">
           <span className="kicker" data-reveal>
-            Por qué Astravia
+            {t('differentiator.kicker')}
           </span>
           <h2 data-reveal="wipe">
-            Una web linda no alcanza.
+            {t('differentiator.title')}
             <br />
-            La tuya tiene que <span className="grad-text">vender.</span>
+            {t('differentiator.titleAccent')} <span className="grad-text">{t('differentiator.titleHighlight')}</span>
           </h2>
 
           <p data-reveal style={{ '--delay': '90ms' }}>
-            Con una plantilla tendrás un sitio que se ve bien, y nada más. Nosotros estudiamos a
-            quién le vendes, ordenamos el mensaje para que se entienda en cinco segundos y armamos
-            cada pantalla con un objetivo: que la visita termine en una consulta.
+            {t('differentiator.description')}
           </p>
 
           <ul className="diff__list">
@@ -60,12 +51,12 @@ export default function Differentiator() {
               <i />
               <i />
             </span>
-            <span>rendimiento.astravia</span>
+            <span>{t('differentiator.panelLabel')}</span>
           </div>
 
           <ul className="diff__metrics">
-            {METRICS.map(({ icon: Icon, value, unit, label }) => (
-              <li key={label}>
+            {METRICS.map(({ icon: Icon, value, unit, key }) => (
+              <li key={key}>
                 <span className="diff__metric-icon">
                   <Icon />
                 </span>
@@ -73,7 +64,7 @@ export default function Differentiator() {
                   {value}
                   <small>{unit}</small>
                 </span>
-                <span className="diff__metric-label">{label}</span>
+                <span className="diff__metric-label">{t(`differentiator.metrics.${key}.label`)}</span>
               </li>
             ))}
           </ul>

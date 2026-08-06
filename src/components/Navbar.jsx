@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { IconRocket, IconMenu, IconClose } from './icons.jsx'
 import './Navbar.css'
 
-const LINKS = [
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Proceso', href: '#proceso' },
-  { label: 'Trabajo', href: '#clientes' },
-  { label: 'Contacto', href: '#contacto' },
-]
-
 export default function Navbar() {
+  const { t, i18n } = useTranslation()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+
+  const LINKS = [
+    { label: t('nav.services'), href: '#servicios' },
+    { label: t('nav.process'), href: '#proceso' },
+    { label: t('nav.work'), href: '#clientes' },
+    { label: t('nav.contact'), href: '#contacto' },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -48,13 +50,31 @@ export default function Navbar() {
             </a>
           ))}
           <a href="#contacto" className="btn btn--primary nav__cta nav__cta--mobile" onClick={() => setOpen(false)}>
-            Quiero despegar <IconRocket className="nav__cta-icon" />
+            {t('nav.cta')} <IconRocket className="nav__cta-icon" />
           </a>
         </nav>
 
-        <a href="#contacto" className="btn btn--primary nav__cta">
-          Quiero despegar <IconRocket className="nav__cta-icon" />
-        </a>
+        <div className="nav__actions">
+          <div className="nav__langSwitch" role="group" aria-label={t('nav.languageLabel')}>
+            <button
+              type="button"
+              className={`nav__langOption ${i18n.language.startsWith('en') ? '' : 'is-active'}`}
+              onClick={() => i18n.changeLanguage('es')}
+            >
+              ES
+            </button>
+            <button
+              type="button"
+              className={`nav__langOption ${i18n.language.startsWith('en') ? 'is-active' : ''}`}
+              onClick={() => i18n.changeLanguage('en')}
+            >
+              EN
+            </button>
+          </div>
+          <a href="#contacto" className="btn btn--primary nav__cta">
+            {t('nav.cta')} <IconRocket className="nav__cta-icon" />
+          </a>
+        </div>
 
         <button
           className="nav__burger"

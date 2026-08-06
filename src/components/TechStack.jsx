@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import {
   LogoWordPress,
   LogoElementor,
@@ -18,11 +19,13 @@ const TECHS = [
 ]
 
 export default function TechStack() {
+  const { t } = useTranslation()
+
   return (
     <section className="tech grain">
       <div className="container container--full">
         <p className="tech__label" data-reveal>
-          El stack con el que trabajamos
+          {t('techStack.label')}
         </p>
 
         <ul className="tech__row">

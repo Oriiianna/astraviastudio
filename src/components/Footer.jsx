@@ -1,30 +1,41 @@
+import { useTranslation } from 'react-i18next'
 import { IconMail, IconPhone, IconPin } from './icons.jsx'
 import './Footer.css'
 
-const COLUMNS = [
-  {
-    title: 'Servicios',
-    links: [
-      'Desarrollo WordPress',
-      'Diseño con Elementor',
-      'Diseño UI/UX',
-      'Optimización WPO',
-      'Mantenimiento Web',
-    ],
-  },
-  {
-    title: 'Agencia',
-    links: ['Sobre nosotros', 'Proceso', 'Clientes', 'Blog', 'Contacto'],
-  },
-]
-
-const CONTACT = [
-  { icon: IconMail, text: 'studioastravia@gmail.com', href: 'mailto:studioastravia@gmail.com' },
-  { icon: IconPhone, text: '+54 11 6871-7233', href: 'tel:+541168717233' },
-  { icon: IconPin, text: 'Buenos Aires, Argentina', href: null },
-]
-
 export default function Footer() {
+  const { t, i18n } = useTranslation()
+  const lang = i18n.resolvedLanguage?.startsWith('en') ? 'en' : 'es'
+  const footerT = (key) => t(key, { lng: lang })
+
+  const COLUMNS = [
+    {
+      title: footerT('footer.columns.services'),
+      links: [
+        footerT('footer.links.services'),
+        footerT('footer.links.elementor'),
+        footerT('footer.links.uiux'),
+        footerT('footer.links.wpo'),
+        footerT('footer.links.maintenance'),
+      ],
+    },
+    {
+      title: footerT('footer.columns.agency'),
+      links: [
+        footerT('footer.links.about'),
+        footerT('footer.links.process'),
+        footerT('footer.links.clients'),
+        footerT('footer.links.blog'),
+        footerT('footer.links.contact'),
+      ],
+    },
+  ]
+
+  const CONTACT_INFO = [
+    { icon: IconMail, text: 'studioastravia@gmail.com', href: 'mailto:studioastravia@gmail.com' },
+    { icon: IconPhone, text: '+54 11 6871-7233', href: 'tel:+541168717233' },
+    { icon: IconPin, text: 'Buenos Aires, Argentina', href: 'https://maps.app.goo.gl/EgmxnWcfeM1ahkyv5', target: '_blank' },
+  ]
+
   return (
     <footer className="footer grain">
       <div className="footer__bg bg-layer" aria-hidden="true" />
@@ -41,10 +52,7 @@ export default function Footer() {
                 loading="lazy"
               />
             </a>
-            <p>
-              Agencia digital especializada en desarrollo web estratégico. Transformamos visiones en
-              despegues digitales.
-            </p>
+            <p>{footerT('footer.description')}</p>
           </div>
 
           {COLUMNS.map((col) => (
@@ -61,12 +69,18 @@ export default function Footer() {
           ))}
 
           <div className="footer__col">
-            <h3>Contacto</h3>
+            <h3>{footerT('footer.contact')}</h3>
             <ul className="footer__contact">
-              {CONTACT.map(({ icon: Icon, text, href }) => (
+              {CONTACT_INFO.map(({ icon: Icon, text, href, target }) => (
                 <li key={text}>
                   <Icon />
-                  {href ? <a href={href}>{text}</a> : <span>{text}</span>}
+                  {href ? (
+                    <a href={href} target={target} rel={target === '_blank' ? 'noopener noreferrer' : undefined}>
+                      {text}
+                    </a>
+                  ) : (
+                    <span>{text}</span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -74,19 +88,29 @@ export default function Footer() {
         </div>
 
         <div className="footer__bottom">
-          <p>© {new Date().getFullYear()} Astravia. Todos los derechos reservados.</p>
+          <p>
+            © {new Date().getFullYear()} Astravia. {footerT('footer.rights')}
+          </p>
           <p className="footer__made">
-            Hecho con <span aria-label="amor">💜</span> para el universo digital
+            {footerT('footer.made').includes('💜') ? (
+              <>
+                {footerT('footer.made').split('💜')[0]}
+                <span aria-label="amor">💜</span>
+                {footerT('footer.made').split('💜')[1]}
+              </>
+            ) : (
+              footerT('footer.made')
+            )}
           </p>
           <ul className="footer__legal">
             <li>
-              <a href="#contacto">Privacidad</a>
+              <a href="#contacto">{footerT('footer.links.privacy')}</a>
             </li>
             <li>
-              <a href="#contacto">Términos</a>
+              <a href="#contacto">{footerT('footer.links.terms')}</a>
             </li>
             <li>
-              <a href="#contacto">Cookies</a>
+              <a href="#contacto">{footerT('footer.links.cookies')}</a>
             </li>
           </ul>
         </div>

@@ -1,4 +1,5 @@
 import { useCallback, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { IconChevronUp } from './icons.jsx'
 import useFrameSequence from '../hooks/useFrameSequence.js'
 // El manifiesto lo genera scripts/optimize-hero.mjs. Se importa en build time
@@ -10,6 +11,7 @@ const frameUrl = (set, i) => `/hero/${set}/frame-${String(i + 1).padStart(3, '0'
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v))
 
 export default function Hero() {
+  const { t } = useTranslation()
   const sectionRef = useRef(null)
   const stageRef = useRef(null)
   const canvasRef = useRef(null)
@@ -47,37 +49,36 @@ export default function Hero() {
           <div className="hero__copy">
             <h1 className="hero__title">
               <span className="hero__line" style={{ '--i': 0 }}>
-                Tus clientes te buscan en Google
+                {t('hero.titleLine1')}
               </span>
               <span className="hero__line" style={{ '--i': 1 }}>
-                antes de contactarte.
+                {t('hero.titleLine2')}
               </span>
               <span className="hero__line grad-text" style={{ '--i': 2 }}>
-                ¿Estás mostrando lo que
+                {t('hero.titleLine3')}
               </span>
               <span className="hero__line grad-text" style={{ '--i': 3 }}>
-                realmente necesitan ver?
+                {t('hero.titleLine4')}
               </span>
             </h1>
 
             <p className="hero__lead" style={{ '--i': 4 }}>
-              Somos un equipo de diseño y desarrollo. Hacemos sitios y aplicaciones web a medida:
-              rápidos, claros y pensados para que la visita termine en una consulta.
+              {t('hero.lead')}
             </p>
 
             <div className="hero__actions" style={{ '--i': 5 }}>
               <a href="#contacto" className="btn btn--primary btn--rect">
-                Quiero una web que venda
+                {t('hero.primaryCta')}
               </a>
               <a href="#proceso" className="btn btn--ghost btn--rect">
-                Ver cómo trabajamos
+                {t('hero.secondaryCta')}
               </a>
             </div>
           </div>
         </div>
 
         <div className="hero__hint" aria-hidden="true">
-          <span>Desliza</span>
+          <span>{t('hero.hint')}</span>
           <IconChevronUp className="hero__hint-arrow" />
         </div>
 
