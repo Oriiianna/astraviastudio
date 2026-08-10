@@ -6,12 +6,7 @@
 
 /* Acá la máscara solo funde arriba: abajo es el final de la página */
 .footer__bg {
-  background:
-    radial-gradient(55% 75% at 8% 0%, rgba(98, 26, 226, 0.22) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(5, 4, 22, 0.82) 0%, rgba(4, 3, 16, 0.92) 50%, rgba(3, 2, 12, 0.97) 100%),
-    #050416;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 18%);
+  background: #050416;
 }
 
 .footer .container {
