@@ -1,0 +1,245 @@
+/* Sin fondo propio: lo pone .pricing__bg, que se funde en los bordes.
+   Hereda el degradado que tenía la sección anterior para que la transición
+   con TechStack (arriba) y Process (abajo) no cambie. */
+.pricing__bg {
+  background: radial-gradient(80% 75% at 4% 18%, rgba(98, 26, 226, 0.42) 0%, transparent 62%),
+    radial-gradient(65% 65% at 94% 90%, rgba(74, 159, 224, 0.2) 0%, transparent 66%),
+    linear-gradient(180deg, rgba(13, 10, 51, 0.46) 0%, rgba(17, 12, 59, 0.4) 45%, rgba(9, 7, 42, 0.48) 100%);
+}
+
+.pricing .container {
+  position: relative;
+  z-index: 2;
+}
+
+.pricing__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 1.8vw, 28px);
+  align-items: stretch;
+}
+
+/* --- Tarjeta de plan --- */
+.plan {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(28px, 2.4vw, 40px) clamp(22px, 2vw, 32px) clamp(28px, 2.4vw, 36px);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(165deg, rgba(28, 24, 62, 0.9) 0%, rgba(13, 11, 38, 0.95) 100%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.5s var(--ease), border-color 0.5s var(--ease),
+    box-shadow 0.5s var(--ease);
+}
+
+.plan:hover {
+  transform: translateY(-8px);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 34px 66px -32px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+/* La destacada deja el borde de gradiente siempre encendido.
+   Va con doble clase a propósito: así le gana en especificidad a
+   .gradient-border::after de global.css sin depender del orden en que
+   Vite inyecte las hojas de estilo. */
+.plan.plan--featured::after {
+  opacity: 1;
+}
+
+.plan--featured {
+  border-color: transparent;
+  box-shadow: 0 30px 70px -34px rgba(124, 58, 237, 0.75);
+}
+
+/* Absoluto y no en el flujo: así los tres nombres de plan quedan a la
+   misma altura aunque solo una tarjeta tenga badge. */
+.plan__badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--grad-violet);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: var(--shadow-violet);
+}
+
+.plan__name {
+  font-size: clamp(1.05rem, 1.2vw, 1.22rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+/* Reserva el ancho del badge para que no se le encime al nombre. */
+.plan--featured .plan__name {
+  padding-right: 104px;
+}
+
+/* --- Precio --- */
+.plan__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 9px;
+  margin: 18px 0 24px;
+}
+
+.plan__currency {
+  font-size: 0.86rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.plan__amount {
+  font-size: clamp(2.5rem, 3.2vw, 3.3rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.plan__amount sup {
+  font-size: 0.36em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.plan__note {
+  font-size: 0.74rem;
+  font-style: italic;
+  color: var(--text-dim);
+}
+
+/* --- Features ---
+   La hairline superior va como background y no como border para poder
+   usar el degradado --grad-hair que ya define el sistema. */
+.plan__features {
+  display: grid;
+  gap: 13px;
+  padding-top: 24px;
+  margin-bottom: 30px;
+  background-image: var(--grad-hair);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: top left;
+}
+
+.plan__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 0.84rem;
+  font-weight: 300;
+  line-height: 1.62;
+  color: var(--text-soft);
+}
+
+.plan__features svg {
+  width: 17px;
+  height: 17px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  color: var(--violet-soft);
+  filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.5));
+}
+
+/* El auto empuja el botón al fondo: las tres tarjetas terminan parejas
+   aunque una tenga 6 features y las otras 5. */
+.plan__cta {
+  margin-top: auto;
+  width: 100%;
+}
+
+/* --- Franja de respaldo --- */
+.pricing__proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 40px);
+  margin-top: clamp(40px, 4vw, 64px);
+  padding-top: clamp(26px, 2.6vw, 38px);
+  background-image: var(--grad-hair);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: top left;
+}
+
+.pricing__proof li {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  text-align: center;
+}
+
+.pricing__proof-icon {
+  color: var(--ice);
+}
+
+.pricing__proof-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.pricing__proof-value {
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.pricing__proof-value small {
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.pricing__proof-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+}
+
+/* --- Responsive --- */
+@media (max-width: 1100px) {
+  .pricing__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .pricing__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Apiladas ya no hay nada con qué alinear, así que el badge vuelve al
+     flujo y el nombre recupera su ancho completo. */
+  .plan__badge {
+    position: static;
+    align-self: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .plan--featured .plan__name {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .pricing__proof {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
