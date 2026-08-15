@@ -51,15 +51,15 @@ export default function Hero() {
               <span className="hero__line" style={{ '--i': 0 }}>
                 {t('hero.titleLine1')}
               </span>
-              <span className="hero__line" style={{ '--i': 1 }}>
+              {/* <span className="hero__line" style={{ '--i': 1 }}>
                 {t('hero.titleLine2')}
-              </span>
+              </span> */}
               <span className="hero__line grad-text" style={{ '--i': 2 }}>
                 {t('hero.titleLine3')}
               </span>
-              <span className="hero__line grad-text" style={{ '--i': 3 }}>
+              {/* <span className="hero__line grad-text" style={{ '--i': 3 }}>
                 {t('hero.titleLine4')}
-              </span>
+              </span> */}
             </h1>
 
             <p className="hero__lead" style={{ '--i': 4 }}>
