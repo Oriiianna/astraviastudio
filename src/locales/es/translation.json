@@ -8,9 +8,9 @@
     "languageLabel": "Cambiar idioma a inglés"
   },
   "hero": {
-    "titleLine1": "Tus clientes te buscan en Google",
+    "titleLine1": "Despega tu negocio al",
     "titleLine2": "antes de contactarte.",
-    "titleLine3": "¿Estás mostrando lo que",
+    "titleLine3": " universo digital",
     "titleLine4": "Esto es una prueba?",
     "lead": "En Astravia combinamos diseño, tecnología y estrategia para crear webs que comunican, posicionan y generan resultados reales.",
     "primaryCta": "Quiero una web que venda",
@@ -138,37 +138,71 @@
       }
     }
   },
-  "differentiator": {
-    "kicker": "Por qué Astravia",
-    "title": "Una web linda no alcanza.",
-    "titleAccent": "La tuya tiene que",
-    "titleHighlight": "vender.",
-    "description": "Con una plantilla tendrás un sitio que se ve bien, y nada más. Nosotros estudiamos a quién le vendes, ordenamos el mensaje para que se entienda en cinco segundos y armamos cada pantalla con un objetivo: que la visita termine en una consulta.",
-    "points": [
-      "Cada pantalla pensada para que te escriban",
-      "Rápida en el teléfono, que es donde te buscan",
-      "Preparada para crecer sin rehacerla de cero"
-    ],
-    "panelLabel": "rendimiento.astravia",
-    "metrics": {
-      "pagespeed": {
-        "label": "PageSpeed promedio"
+  "pricing": {
+    "kicker": "Planes y precios",
+    "title": "Un plan para cada",
+    "titleHighlight": "etapa de tu negocio.",
+    "description": "Tres formas de empezar, todas con pago único y sin abonos mensuales. Elegí la que va con tu proyecto hoy: podés escalar después sin rehacer nada.",
+    "featuredBadge": "Más elegido",
+    "cta": "Contratar",
+    "ctaAriaLabel": "Consultar por el plan {{plan}} por WhatsApp",
+    "whatsappMessage": "¡Hola! Me interesa el plan {{plan}} y quiero coordinar una consulta.",
+    "plans": {
+      "landing": {
+        "name": "Landing Page",
+        "price": {
+          "currency": "Pesos",
+          "amount": "330",
+          "amountSmall": "000",
+          "note": "pago único"
+        },
+        "features": [
+          "Diseño personalizado",
+          "Redacción de contenidos persuasivos con IA incluidos.",
+          "Una portada con toda la info (Inicio, Quiénes somos, Servicios, Contacto, etc.).",
+          "Formulario de contacto y botón de WhatsApp directo.",
+          "Soporte técnico y mantenimiento post-entrega."
+        ]
       },
-      "projects": {
-        "label": "Proyectos entregados"
+      "clasica": {
+        "name": "Clásica",
+        "price": {
+          "currency": "Pesos",
+          "amount": "400",
+          "amountSmall": "000",
+          "note": "pago único"
+        },
+        "features": [
+          "Diseño personalizado y auto administrable (WordPress).",
+          "Redacción de contenidos persuasivos con IA incluidos.",
+          "Hasta 5 secciones (Inicio, Quiénes somos, Servicios, Contacto, etc.).",
+          "Formulario de contacto y botón de WhatsApp directo.",
+          "Soporte técnico y mantenimiento post-entrega."
+        ]
       },
-      "uptime": {
-        "label": "Uptime garantizado"
+      "ecommerce": {
+        "name": "E-Commerce",
+        "price": {
+          "currency": "Pesos",
+          "amount": "450",
+          "amountSmall": "000",
+          "note": "pago único"
+        },
+        "features": [
+          "Todo lo del Plan Clásica.",
+          "Carrito de compras y pasarelas de pago (Mercado Pago, tarjetas, transferencias).",
+          "Configuración de envíos (Correo Argentino, Andreani, etc.).",
+          "Optimización masiva de descripciones de productos con IA para mejorar tu SEO en Google.",
+          "Retoque digital inteligente de iluminación para las fotos de tu catálogo (exclusivo para que tus productos luzcan impecables).",
+          "Te enseñamos a subir tus productos."
+        ]
       }
+    },
+    "proof": {
+      "pagespeed": { "value": "98", "unit": "/100", "label": "PageSpeed promedio" },
+      "projects": { "value": "+50", "unit": "", "label": "Proyectos entregados" },
+      "uptime": { "value": "99.9", "unit": "%", "label": "Uptime garantizado" }
     }
-  },
-  "marquee": {
-    "items": [
-      "Tecnologías modernas",
-      "Resultados reales",
-      "+50 proyectos",
-      "Clientes satisfechos"
-    ]
   },
   "techStack": {
     "label": "Potenciado por tecnología real"

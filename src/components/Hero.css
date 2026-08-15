@@ -74,15 +74,11 @@
 }
 
 .hero__title {
-  font-size: clamp(1.9rem, 3.2vw, 3.1rem);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.16;
-  text-shadow: 0 2px 24px rgba(3, 2, 8, 0.75);
-}
-
-.hero__line {
-  display: block;
+  text-shadow: none;
 }
 
 .hero__lead {

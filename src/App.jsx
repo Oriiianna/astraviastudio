@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
-import Marquee from './components/Marquee.jsx'
 import Services from './components/Services.jsx'
 import TechStack from './components/TechStack.jsx'
-import Differentiator from './components/Differentiator.jsx'
+import Pricing from './components/Pricing.jsx'
 import Process from './components/Process.jsx'
 import Clients from './components/Clients.jsx'
 import CtaBanner from './components/CtaBanner.jsx'
@@ -60,10 +59,9 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <Marquee />
         <Services />
         <TechStack />
-        <Differentiator />
+        <Pricing />
         <Process />
         <Clients />
         <CtaBanner />

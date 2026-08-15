@@ -8,9 +8,9 @@
     "languageLabel": "Switch language to Spanish"
   },
   "hero": {
-    "titleLine1": "Your clients look for you on Google",
+    "titleLine1": "Launch Your Business into",
     "titleLine2": "before contacting you.",
-    "titleLine3": "Are you showing what",
+    "titleLine3": "the Digital Universe",
     "titleLine4": "they really need to see?",
     "lead": "At Astravia we combine design, technology and strategy to create websites that communicate, position and generate real results.",
     "primaryCta": "I want a website that sells",
@@ -138,37 +138,71 @@
       }
     }
   },
-  "differentiator": {
-    "kicker": "Why Astravia",
-    "title": "A beautiful website is not enough.",
-    "titleAccent": "Yours has to",
-    "titleHighlight": "sell.",
-    "description": "With a template you'll have a site that looks good, and nothing more. We study who you sell to, organize the message so it is understood in five seconds and build each screen with one goal: so the visit ends in a consultation.",
-    "points": [
-      "Every screen designed so they write to you",
-      "Fast on mobile, where they look for you",
-      "Ready to grow without rebuilding from scratch"
-    ],
-    "panelLabel": "performance.astravia",
-    "metrics": {
-      "pagespeed": {
-        "label": "Average PageSpeed"
+  "pricing": {
+    "kicker": "Plans and pricing",
+    "title": "A plan for every",
+    "titleHighlight": "stage of your business.",
+    "description": "Three ways to start, all one-time payments with no monthly fees. Pick the one that fits your project today: you can scale later without rebuilding anything.",
+    "featuredBadge": "Most chosen",
+    "cta": "Get started",
+    "ctaAriaLabel": "Ask about the {{plan}} plan on WhatsApp",
+    "whatsappMessage": "Hi! I'm interested in the {{plan}} plan and I'd like to schedule a consultation.",
+    "plans": {
+      "landing": {
+        "name": "Landing Page",
+        "price": {
+          "currency": "ARS",
+          "amount": "330",
+          "amountSmall": "000",
+          "note": "one-time payment"
+        },
+        "features": [
+          "Custom design",
+          "Persuasive AI-assisted copywriting included.",
+          "A single page with all the info (Home, About us, Services, Contact, etc.).",
+          "Contact form and direct WhatsApp button.",
+          "Technical support and post-delivery maintenance."
+        ]
       },
-      "projects": {
-        "label": "Projects delivered"
+      "clasica": {
+        "name": "Classic",
+        "price": {
+          "currency": "ARS",
+          "amount": "400",
+          "amountSmall": "000",
+          "note": "one-time payment"
+        },
+        "features": [
+          "Custom, self-manageable design (WordPress).",
+          "Persuasive AI-assisted copywriting included.",
+          "Up to 5 sections (Home, About us, Services, Contact, etc.).",
+          "Contact form and direct WhatsApp button.",
+          "Technical support and post-delivery maintenance."
+        ]
       },
-      "uptime": {
-        "label": "Guaranteed uptime"
+      "ecommerce": {
+        "name": "E-Commerce",
+        "price": {
+          "currency": "ARS",
+          "amount": "450",
+          "amountSmall": "000",
+          "note": "one-time payment"
+        },
+        "features": [
+          "Everything in the Classic plan.",
+          "Shopping cart and payment gateways (Mercado Pago, cards, bank transfers).",
+          "Shipping setup (Correo Argentino, Andreani, etc.).",
+          "Bulk AI optimization of product descriptions to improve your SEO on Google.",
+          "Smart digital lighting retouch for your catalog photos, so your products look flawless.",
+          "We teach you how to upload your products."
+        ]
       }
+    },
+    "proof": {
+      "pagespeed": { "value": "98", "unit": "/100", "label": "Average PageSpeed" },
+      "projects": { "value": "+50", "unit": "", "label": "Projects delivered" },
+      "uptime": { "value": "99.9", "unit": "%", "label": "Guaranteed uptime" }
     }
-  },
-  "marquee": {
-    "items": [
-      "Modern technologies",
-      "Real results",
-      "+50 projects",
-      "Satisfied clients"
-    ]
   },
   "techStack": {
     "label": "Powered by real technology"
