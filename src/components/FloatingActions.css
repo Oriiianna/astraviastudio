@@ -1,0 +1,70 @@
+/* Contenedor principal fijo abajo a la derecha */
+.floating-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px; /* Separación vertical entre botones */
+  z-index: 9999;
+}
+
+/* Estilo unificado para ambos botones */
+.floating-btn {
+  position: static !important; /* Forzar el flujo normal de Flexbox */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px; /* Tamaño idéntico para ambos */
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    visibility 0.3s ease,
+    background-color 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Estado visible al hacer scroll */
+.floating-btn.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Tamaño de ícono idéntico para ambos */
+.floating-btn svg {
+  width: 38px !important;
+  height: 38px !important;
+}
+
+/* 1. Volver Arriba (Estética oscura neutra) */
+.back-to-top {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
+}
+
+.back-to-top:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 1);
+}
+
+/* 2. WhatsApp (Verde corporativo) */
+.whatsapp-btn {
+  background-color: #25d366;
+  color: #ffffff;
+}
+
+.whatsapp-btn:hover {
+  background-color: #20ba5a;
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
+}
