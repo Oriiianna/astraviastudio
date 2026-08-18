@@ -30,8 +30,6 @@ export default function Process() {
 
   return (
     <section className="process section grain" id="proceso">
-      <div className="process__bg bg-layer" aria-hidden="true" />
-
       <div className="container container--full">
         <header className="section-head" data-reveal>
           <span className="kicker">{t('process.kicker')}</span>

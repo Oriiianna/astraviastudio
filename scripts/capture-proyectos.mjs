@@ -48,6 +48,17 @@ const PROYECTOS = [
     // producto (5943)— son más bajas que el viewport y dejan una banda vacía.
     pantallas: [0, 8582],
   },
+  {
+    slug: 'nordica',
+    url: 'https://astraviastudio-nordica.vercel.app/',
+    // Hero + materialidad. La galería de proyectos (900) ocupa 4.957 px con las
+    // fotos atadas al scroll: en cualquier offset intermedio se captura una
+    // imagen a medio entrar y media pantalla vacía. Materialidad, en cambio,
+    // entra completa —titular más mosaico de cinco materias— y su fondo crema
+    // contrasta con el hero oscuro, que es lo que hace legible el recorrido
+    // del hover.
+    pantallas: [0, 10341],
+  },
 ]
 
 async function capturarPantalla(page, y) {

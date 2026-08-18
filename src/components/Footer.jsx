@@ -51,8 +51,6 @@ export default function Footer() {
 
   return (
     <footer className="footer grain">
-      <div className="footer__bg bg-layer" aria-hidden="true" />
-
       <div className="container container--full">
         <div className="footer__grid">
           <div className="footer__brand">

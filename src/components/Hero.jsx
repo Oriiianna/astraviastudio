@@ -44,6 +44,8 @@ export default function Hero() {
         {/* Oscurecido para que el texto se lea sobre el render */}
         <div className="hero__scrim" aria-hidden="true" />
         <div className="hero__vignette" aria-hidden="true" />
+        {/* Caída hacia Servicios: se abre con el scroll, ver Hero.css */}
+        <div className="hero__seam" aria-hidden="true" />
 
         <div className="container container--full hero__inner">
           <div className="hero__copy">

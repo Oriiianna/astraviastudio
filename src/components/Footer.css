@@ -5,10 +5,7 @@
 }
 
 /* Acá la máscara solo funde arriba: abajo es el final de la página */
-.footer__bg {
-  background: #050416;
-}
-
+/* Sin fondo propio: lo pinta el suelo liso de body::before */
 .footer .container {
   position: relative;
   z-index: 2;

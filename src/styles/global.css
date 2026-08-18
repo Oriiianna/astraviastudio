@@ -12,7 +12,7 @@
 
 :root {
   /* --- Fondos: escala índigo, del casi negro al panel --- */
-  --bg-void: #04030f;
+  --bg-void: #080012;
   --bg-deep: #070621;
   --bg-panel: #0a0830;
   --bg-card: #110f33;
@@ -54,16 +54,10 @@
   --glass: rgba(139, 156, 247, 0.04);
 
   /* --- Gradientes --- */
-  /* --grad-brand: linear-gradient(100deg, #9fd4f7 0%, #8b9cf7 34%, #a78bfa 66%, #c084fc 100%); */
-  --grad-brand: linear-gradient(90deg, #7145d6 0%, #00e5c8 100%);
+  --grad-brand: linear-gradient(100deg, #9fd4f7 0%, #8b9cf7 34%, #a78bfa 66%, #c084fc 100%);
   --grad-violet: linear-gradient(135deg, #621ae2 0%, #7c3aed 100%);
   --grad-cta: linear-gradient(115deg, #0b1636 0%, #17123f 42%, #341d63 100%);
-  --grad-hair: linear-gradient(
-    90deg,
-    transparent,
-    rgba(167, 139, 250, 0.5),
-    transparent
-  );
+  --grad-hair: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.5), transparent);
 
   /* --- Sombras --- */
   --shadow-violet: 0 14px 40px -12px rgba(98, 26, 226, 0.7);
@@ -104,7 +98,7 @@ html {
 }
 
 body {
-  font-family: "Poppins", ui-sans-serif, sans-serif;
+  font-family: 'Poppins', ui-sans-serif, sans-serif;
   background: var(--bg-void);
   color: var(--text);
   position: relative;
@@ -116,65 +110,24 @@ body {
 }
 
 /* ============================================================
-   Fondo premium — sistema de capas fijas
-   Tres pseudo-elementos apilados reemplazan el canvas de frames:
-   ::before  → orbe central de nebulosa + gradiente base
+   Fondo — dos capas fijas sobre un suelo plano
+   ::before  → suelo liso en --bg-void
    ::after   → constelación de puntos + grano UV
-   El .bg-nebula-accent → orbe de acento frío (azul hielo)
    ============================================================ */
 
-/* Capa 1: nebulosa violeta profunda + gradiente base */
+/* Capa 1: suelo liso */
 body::before {
-  content: "";
+  content: '';
   position: fixed;
   inset: 0;
   z-index: -3;
   pointer-events: none;
-  background:
-    /* Orbe principal — nebulosa violeta, esquina superior izquierda */
-    radial-gradient(
-      ellipse 72% 58% at 8% 2%,
-      rgba(98, 26, 226, 0.32) 0%,
-      transparent 68%
-    ),
-    /* Orbe secundario — iris profundo, centro derecha */
-    radial-gradient(
-        ellipse 55% 48% at 96% 38%,
-        rgba(73, 42, 122, 0.26) 0%,
-        transparent 64%
-      ),
-    /* Orbe terciario — violeta suave, inferior izquierda */
-    radial-gradient(
-        ellipse 60% 44% at 14% 88%,
-        rgba(124, 58, 237, 0.18) 0%,
-        transparent 60%
-      ),
-    /* Niebla de acento frío — azul hielo, superior derecha */
-    radial-gradient(
-        ellipse 48% 36% at 88% 6%,
-        rgba(74, 159, 224, 0.12) 0%,
-        transparent 56%
-      ),
-    /* Pulso de acento cálido — ámbar muy sutil, borde inferior derecho */
-    radial-gradient(
-        ellipse 38% 28% at 92% 96%,
-        rgba(242, 166, 90, 0.06) 0%,
-        transparent 52%
-      ),
-    /* Gradiente de profundidad base */
-    linear-gradient(
-        165deg,
-        #0a0830 0%,
-        #070621 28%,
-        #04030f 55%,
-        #060520 78%,
-        #04030f 100%
-      );
+  background: var(--bg-void);
 }
 
 /* Capa 2: campo de estrellas estático + trama UV */
 body::after {
-  content: "";
+  content: '';
   position: fixed;
   inset: 0;
   z-index: -2;
@@ -182,232 +135,46 @@ body::after {
   /* Campo de estrellas multicapa: diferentes tamaños y colores de la paleta */
   background-image:
     /* Estrellas pequeñas blancas */
-    radial-gradient(
-      1px 1px at 7% 9%,
-      rgba(255, 255, 255, 0.55) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1.2px 1.2px at 23% 17%,
-      rgba(255, 255, 255, 0.4) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1px 1px at 41% 31%,
-      rgba(255, 255, 255, 0.5) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      0.8px 0.8px at 57% 8%,
-      rgba(255, 255, 255, 0.35) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1.1px 1.1px at 74% 25%,
-      rgba(255, 255, 255, 0.45) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      0.9px 0.9px at 88% 14%,
-      rgba(255, 255, 255, 0.38) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1px 1px at 95% 42%,
-      rgba(255, 255, 255, 0.42) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1.3px 1.3px at 12% 54%,
-      rgba(255, 255, 255, 0.32) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      0.8px 0.8px at 34% 67%,
-      rgba(255, 255, 255, 0.48) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1px 1px at 52% 58%,
-      rgba(255, 255, 255, 0.36) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1.2px 1.2px at 68% 72%,
-      rgba(255, 255, 255, 0.44) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      0.9px 0.9px at 81% 61%,
-      rgba(255, 255, 255, 0.3) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1.1px 1.1px at 5% 83%,
-      rgba(255, 255, 255, 0.38) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1px 1px at 19% 91%,
-      rgba(255, 255, 255, 0.42) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      0.8px 0.8px at 46% 88%,
-      rgba(255, 255, 255, 0.35) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1.2px 1.2px at 63% 95%,
-      rgba(255, 255, 255, 0.4) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1px 1px at 79% 87%,
-      rgba(255, 255, 255, 0.32) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      0.9px 0.9px at 93% 79%,
-      rgba(255, 255, 255, 0.36) 0%,
-      transparent 100%
-    ),
+    radial-gradient(1px   1px   at  7%  9%,  rgba(255,255,255,0.55) 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 23% 17%, rgba(255,255,255,0.40) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 41% 31%, rgba(255,255,255,0.50) 0%, transparent 100%),
+    radial-gradient(0.8px 0.8px at 57% 8%,  rgba(255,255,255,0.35) 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 74% 25%, rgba(255,255,255,0.45) 0%, transparent 100%),
+    radial-gradient(0.9px 0.9px at 88% 14%, rgba(255,255,255,0.38) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 95% 42%, rgba(255,255,255,0.42) 0%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 12% 54%, rgba(255,255,255,0.32) 0%, transparent 100%),
+    radial-gradient(0.8px 0.8px at 34% 67%, rgba(255,255,255,0.48) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 52% 58%, rgba(255,255,255,0.36) 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 68% 72%, rgba(255,255,255,0.44) 0%, transparent 100%),
+    radial-gradient(0.9px 0.9px at 81% 61%, rgba(255,255,255,0.30) 0%, transparent 100%),
+    radial-gradient(1.1px 1.1px at  5% 83%, rgba(255,255,255,0.38) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 19% 91%, rgba(255,255,255,0.42) 0%, transparent 100%),
+    radial-gradient(0.8px 0.8px at 46% 88%, rgba(255,255,255,0.35) 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 63% 95%, rgba(255,255,255,0.40) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 79% 87%, rgba(255,255,255,0.32) 0%, transparent 100%),
+    radial-gradient(0.9px 0.9px at 93% 79%, rgba(255,255,255,0.36) 0%, transparent 100%),
     /* Estrellas con tinte violeta-lavanda */
-    radial-gradient(
-        1.6px 1.6px at 18% 44%,
-        rgba(167, 139, 250, 0.6) 0%,
-        transparent 100%
-      ),
-    radial-gradient(
-      1.4px 1.4px at 61% 19%,
-      rgba(167, 139, 250, 0.5) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1.8px 1.8px at 84% 52%,
-      rgba(192, 132, 252, 0.48) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1.3px 1.3px at 29% 76%,
-      rgba(167, 139, 250, 0.42) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1.5px 1.5px at 72% 83%,
-      rgba(216, 180, 254, 0.38) 0%,
-      transparent 100%
-    ),
+    radial-gradient(1.6px 1.6px at 18% 44%, rgba(167,139,250,0.60) 0%, transparent 100%),
+    radial-gradient(1.4px 1.4px at 61% 19%, rgba(167,139,250,0.50) 0%, transparent 100%),
+    radial-gradient(1.8px 1.8px at 84% 52%, rgba(192,132,252,0.48) 0%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 29% 76%, rgba(167,139,250,0.42) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 72% 83%, rgba(216,180,254,0.38) 0%, transparent 100%),
     /* Estrellas con tinte azul hielo */
-    radial-gradient(
-        1.4px 1.4px at 38% 11%,
-        rgba(159, 212, 247, 0.55) 0%,
-        transparent 100%
-      ),
-    radial-gradient(
-      1.6px 1.6px at 89% 33%,
-      rgba(159, 212, 247, 0.45) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      1.2px 1.2px at 55% 74%,
-      rgba(74, 159, 224, 0.4) 0%,
-      transparent 100%
-    ),
+    radial-gradient(1.4px 1.4px at 38% 11%, rgba(159,212,247,0.55) 0%, transparent 100%),
+    radial-gradient(1.6px 1.6px at 89% 33%, rgba(159,212,247,0.45) 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 55% 74%, rgba(74,159,224,0.40)  0%, transparent 100%),
     /* Trama UV muy sutil (grano de textura) */
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
-  background-size:
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    200px 200px;
+  background-size: auto, auto, auto, auto, auto, auto, auto, auto, auto, auto,
+                   auto, auto, auto, auto, auto, auto, auto, auto, auto, auto,
+                   auto, auto, auto, auto, auto, auto,
+                   200px 200px;
   animation: starDrift 90s linear infinite alternate;
 }
 
 @keyframes starDrift {
-  from {
-    background-position:
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%,
-      0% 0%;
-  }
-  to {
-    background-position:
-      1% 0.5%,
-      -0.5% 1%,
-      0.8% -0.4%,
-      -0.3% 0.7%,
-      0.6% 0.9%,
-      -0.7% 0.3%,
-      0.4% -0.6%,
-      -0.2% 0.8%,
-      0.9% 0.2%,
-      -0.4% -0.5%,
-      0.3% 0.6%,
-      -0.6% 0.4%,
-      0.7% -0.3%,
-      -0.1% 0.9%,
-      0.5% 0.1%,
-      -0.8% 0.5%,
-      0.2% -0.7%,
-      -0.5% 0.3%,
-      0.8% 0.6%,
-      -0.3% -0.2%,
-      0.4% 0.8%,
-      -0.6% 0.1%,
-      0.9% -0.4%,
-      -0.2% 0.7%,
-      0.5% 0.3%,
-      -0.4% 0.9%,
-      0% 0%;
-  }
+  from { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  to   { background-position: 1% 0.5%, -0.5% 1%, 0.8% -0.4%, -0.3% 0.7%, 0.6% 0.9%, -0.7% 0.3%, 0.4% -0.6%, -0.2% 0.8%, 0.9% 0.2%, -0.4% -0.5%, 0.3% 0.6%, -0.6% 0.4%, 0.7% -0.3%, -0.1% 0.9%, 0.5% 0.1%, -0.8% 0.5%, 0.2% -0.7%, -0.5% 0.3%, 0.8% 0.6%, -0.3% -0.2%, 0.4% 0.8%, -0.6% 0.1%, 0.9% -0.4%, -0.2% 0.7%, 0.5% 0.3%, -0.4% 0.9%, 0% 0%; }
 }
 
 img,
@@ -490,33 +257,17 @@ h4 {
   overflow: hidden;
 }
 
-/* Capa de fondo de una sección.
-   La máscara la funde arriba y abajo contra el cielo del body, que es lo que
-   hace que el paso de una sección a otra sea gradual y no un corte. */
-.bg-layer {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(
-    180deg,
-    transparent 0%,
-    #000 15%,
-    #000 85%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    180deg,
-    transparent 0%,
-    #000 15%,
-    #000 85%,
-    transparent 100%
-  );
+/* Primera sección después del hero.
+   El stage sticky se suelta justo en su borde superior, así que necesita más
+   aire antes del primer texto y que su fondo aparezca más despacio: entre el
+   último frame y el kicker hay un tramo de vacío que hace de respiración. */
+.section--after-hero {
+  padding-top: clamp(120px, 13vw, 190px);
 }
 
 /* Hairline luminosa entre secciones */
 .section--hair::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0 0 auto 0;
   height: 1px;
@@ -528,7 +279,6 @@ h4 {
   background: var(--grad-brand);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
   color: transparent;
 }
 
@@ -568,7 +318,7 @@ h4 {
 }
 
 .kicker::before {
-  content: "";
+  content: '';
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -607,11 +357,8 @@ h4 {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  transition:
-    transform 0.4s var(--ease),
-    box-shadow 0.4s var(--ease),
-    background 0.4s var(--ease),
-    border-color 0.4s var(--ease);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease),
+    background 0.4s var(--ease), border-color 0.4s var(--ease);
 }
 
 .btn--rect {
@@ -626,7 +373,7 @@ h4 {
 
 /* Barrido de luz al pasar el mouse */
 .btn--primary::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -683,7 +430,7 @@ textarea:focus-visible {
 }
 
 [data-spotlight]::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -708,7 +455,7 @@ textarea:focus-visible {
 }
 
 .gradient-border::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
@@ -719,9 +466,7 @@ textarea:focus-visible {
     transparent 45%,
     color-mix(in srgb, var(--ice) 35%, transparent) 100%
   );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
@@ -735,7 +480,7 @@ textarea:focus-visible {
 
 /* --- Grano --- */
 .grain::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -749,47 +494,14 @@ textarea:focus-visible {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image:
-    radial-gradient(
-      1.5px 1.5px at 12% 18%,
-      rgba(255, 255, 255, 0.5),
-      transparent
-    ),
-    radial-gradient(
-      1.2px 1.2px at 27% 62%,
-      rgba(159, 212, 247, 0.5),
-      transparent
-    ),
-    radial-gradient(
-      1.6px 1.6px at 44% 12%,
-      rgba(255, 255, 255, 0.36),
-      transparent
-    ),
-    radial-gradient(
-      1.1px 1.1px at 58% 78%,
-      rgba(192, 132, 252, 0.42),
-      transparent
-    ),
-    radial-gradient(
-      1.7px 1.7px at 71% 32%,
-      rgba(255, 255, 255, 0.45),
-      transparent
-    ),
-    radial-gradient(
-      1.2px 1.2px at 83% 68%,
-      rgba(167, 139, 250, 0.45),
-      transparent
-    ),
-    radial-gradient(
-      1.4px 1.4px at 91% 22%,
-      rgba(255, 255, 255, 0.3),
-      transparent
-    ),
-    radial-gradient(
-      1.1px 1.1px at 8% 85%,
-      rgba(255, 255, 255, 0.26),
-      transparent
-    );
+  background-image: radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.2px 1.2px at 27% 62%, rgba(159, 212, 247, 0.5), transparent),
+    radial-gradient(1.6px 1.6px at 44% 12%, rgba(255, 255, 255, 0.36), transparent),
+    radial-gradient(1.1px 1.1px at 58% 78%, rgba(192, 132, 252, 0.42), transparent),
+    radial-gradient(1.7px 1.7px at 71% 32%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1.2px 1.2px at 83% 68%, rgba(167, 139, 250, 0.45), transparent),
+    radial-gradient(1.4px 1.4px at 91% 22%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1.1px 1.1px at 8% 85%, rgba(255, 255, 255, 0.26), transparent);
   animation: twinkle 7s ease-in-out infinite alternate;
 }
 
@@ -809,9 +521,7 @@ textarea:focus-visible {
 [data-reveal] {
   opacity: 0;
   transform: translateY(26px);
-  transition:
-    opacity 0.8s var(--ease-out),
-    transform 0.8s var(--ease-out);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
   transition-delay: var(--delay, 0ms);
   will-change: opacity, transform;
 }
@@ -825,7 +535,7 @@ textarea:focus-visible {
    Se hace con mask y NO con clip-path: clip-path recorta la caja a ancho
    cero y el IntersectionObserver deja de ver el elemento, así que nunca
    se dispararía el reveal. */
-[data-reveal="wipe"] {
+[data-reveal='wipe'] {
   transform: none;
   -webkit-mask-image: linear-gradient(90deg, #000, #000);
   mask-image: linear-gradient(90deg, #000, #000);
@@ -833,13 +543,11 @@ textarea:focus-visible {
   mask-repeat: no-repeat;
   -webkit-mask-size: 0% 100%;
   mask-size: 0% 100%;
-  transition:
-    opacity 0.5s var(--ease-out),
-    -webkit-mask-size 1.1s var(--ease-out),
+  transition: opacity 0.5s var(--ease-out), -webkit-mask-size 1.1s var(--ease-out),
     mask-size 1.1s var(--ease-out);
 }
 
-[data-reveal="wipe"].is-visible {
+[data-reveal='wipe'].is-visible {
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }

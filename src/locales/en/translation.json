@@ -122,6 +122,13 @@
     "viewSite": "View live site",
     "openInNewTab": "Open {{title}} in a new tab",
     "projects": {
+      "nordica": {
+        "title": "Nórdica · Architecture Studio",
+        "tag": "Own piece",
+        "domain": "Nórdica · Architecture Studio",
+        "description": "An architecture studio told like a print editorial. The work gallery unfolds with the scroll: each project takes over the full screen and then hands it to the next. It closes with a materials showcase, and it all lives on a single page where typography carries the story.",
+        "alt": "Home of the Nórdica site: hero reading “Espacios que cambian la forma de habitar” and, below it, the materiality section with its mosaic of five materials"
+      },
       "altamira": {
         "title": "Altamira · Real Estate",
         "tag": "Own piece",

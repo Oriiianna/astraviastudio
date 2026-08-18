@@ -4,25 +4,21 @@
    ============================================================ */
 
 const base = {
-  xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
+  xmlns: 'http://www.w3.org/2000/svg',
+  viewBox: '0 0 24 24',
+  fill: 'none',
+  stroke: 'currentColor',
   strokeWidth: 1.7,
-  strokeLinecap: "round",
-  strokeLinejoin: "round",
-  "aria-hidden": true,
-};
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+  'aria-hidden': true,
+}
 
 export const IconStar = (p) => (
   <svg {...base} {...p}>
-    <path
-      d="M12 3.2l2.6 5.5 5.9.8-4.3 4.2 1 6-5.2-2.8-5.2 2.8 1-6L3.5 9.5l5.9-.8z"
-      fill="currentColor"
-      stroke="none"
-    />
+    <path d="M12 3.2l2.6 5.5 5.9.8-4.3 4.2 1 6-5.2-2.8-5.2 2.8 1-6L3.5 9.5l5.9-.8z" fill="currentColor" stroke="none" />
   </svg>
-);
+)
 
 /* ---- Iconos de servicios: uno por card, ligados a lo que dice el texto ---- */
 
@@ -35,7 +31,7 @@ export const IconArtboard = (p) => (
     <path d="M9.2 4.4v15.2" />
     <path d="M12.5 9l6 5-2.9.6-.8 2.8z" fill="currentColor" strokeWidth="1.3" />
   </svg>
-);
+)
 
 /** Desarrollo Web: ventana de navegador con etiquetas de código */
 export const IconBrowserCode = (p) => (
@@ -45,7 +41,7 @@ export const IconBrowserCode = (p) => (
     <path d="M9.7 16.6L6.8 13.4 9.7 10.2" />
     <path d="M14.3 10.2l2.9 3.2-2.9 3.2" />
   </svg>
-);
+)
 
 /** Optimización: velocímetro con la aguja arriba */
 export const IconSpeedometer = (p) => (
@@ -54,7 +50,7 @@ export const IconSpeedometer = (p) => (
     <path d="M12 17.8l4.7-5.5" />
     <circle cx="12" cy="17.8" r="1.5" fill="currentColor" stroke="none" />
   </svg>
-);
+)
 
 /** Mantenimiento: escudo con engranaje */
 export const IconShieldGear = (p) => (
@@ -63,7 +59,7 @@ export const IconShieldGear = (p) => (
     <circle cx="12" cy="11.5" r="2.5" />
     <path d="M12 7.5v1.5M12 14v1.5M8 11.5h1.5M14.5 11.5H16" />
   </svg>
-);
+)
 
 export const IconRocket = (p) => (
   <svg {...base} {...p}>
@@ -71,49 +67,21 @@ export const IconRocket = (p) => (
     <path d="M9.5 16.5l-2-2c.6-3 2-5.6 4.2-7.6C14.4 4.6 17.5 3.6 20.4 4c.4 2.9-.6 6-2.9 8.7-2 2.2-4.6 3.6-7.6 4.2z" />
     <circle cx="14.8" cy="9.2" r="1.5" />
   </svg>
-);
-
-export const IconSparkle = (p) => (
-  <svg {...base} {...p}>
-    <path d="M12 3v5M12 16v5M3 12h5M16 12h5M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3" />
-  </svg>
-);
-
-export const IconCheckSquare = (p) => (
-  <svg {...base} {...p}>
-    <rect x="3.5" y="3.5" width="17" height="17" rx="4" />
-    <path d="M8 12.2l2.7 2.6L16 9.4" />
-  </svg>
-);
-
-export const IconFile = (p) => (
-  <svg {...base} {...p}>
-    <path d="M13.5 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.5z" />
-    <path d="M13.5 3v5.5H19" />
-  </svg>
-);
-
-export const IconUsers = (p) => (
-  <svg {...base} {...p}>
-    <circle cx="9" cy="8" r="3.2" />
-    <path d="M3 20c0-3.2 2.7-5.2 6-5.2s6 2 6 5.2" />
-    <path d="M16 5.2A3.2 3.2 0 0 1 16 11.4M17.5 14.4c2.1.6 3.5 2.2 3.5 4.4" />
-  </svg>
-);
+)
 
 export const IconCheckCircle = (p) => (
   <svg {...base} {...p}>
     <circle cx="12" cy="12" r="9" />
     <path d="M8.2 12.3l2.6 2.5 5-5.2" />
   </svg>
-);
+)
 
 export const IconBulb = (p) => (
   <svg {...base} {...p}>
     <path d="M9.2 17.5h5.6M10 20.5h4" />
     <path d="M12 3a6 6 0 0 0-3.5 10.9c.5.4.8 1 .8 1.6h5.4c0-.6.3-1.2.8-1.6A6 6 0 0 0 12 3z" />
   </svg>
-);
+)
 
 export const IconPalette = (p) => (
   <svg {...base} {...p}>
@@ -122,7 +90,7 @@ export const IconPalette = (p) => (
     <circle cx="9.8" cy="8.6" r="1.1" fill="currentColor" stroke="none" />
     <circle cx="14.2" cy="8.2" r="1.1" fill="currentColor" stroke="none" />
   </svg>
-);
+)
 
 export const IconCode = (p) => (
   <svg {...base} {...p}>
@@ -130,7 +98,7 @@ export const IconCode = (p) => (
     <path d="M14.5 3.2v4.6H19" />
     <path d="M10.4 12.4L8.8 14l1.6 1.6M13.6 12.4L15.2 14l-1.6 1.6" />
   </svg>
-);
+)
 
 export const IconGauge = (p) => (
   <svg {...base} {...p}>
@@ -138,124 +106,95 @@ export const IconGauge = (p) => (
     <path d="M12 17l3.6-4.4" />
     <circle cx="12" cy="17" r="1.4" fill="currentColor" stroke="none" />
   </svg>
-);
+)
 
 export const IconShield = (p) => (
   <svg {...base} {...p}>
     <path d="M12 3l7 3v5.5c0 4.2-2.9 7.9-7 9.5-4.1-1.6-7-5.3-7-9.5V6z" />
     <path d="M9 12.2l2.2 2.2 4-4.3" />
   </svg>
-);
+)
 
 export const IconLayers = (p) => (
   <svg {...base} {...p}>
     <path d="M12 3.2l8.4 4.3L12 11.8 3.6 7.5z" />
     <path d="M3.6 12.2L12 16.5l8.4-4.3M3.6 16.6L12 20.9l8.4-4.3" />
   </svg>
-);
+)
 
 export const IconMail = (p) => (
   <svg {...base} {...p}>
     <rect x="2.8" y="5" width="18.4" height="14" rx="2.6" />
     <path d="M3.6 7.2l7.3 5.1a2 2 0 0 0 2.2 0l7.3-5.1" />
   </svg>
-);
+)
 
 export const IconPhone = (p) => (
   <svg {...base} {...p}>
     <path d="M7.5 3.5h-2A2.5 2.5 0 0 0 3 6.2c.4 8.1 6.7 14.4 14.8 14.8a2.5 2.5 0 0 0 2.7-2.5v-2a1.6 1.6 0 0 0-1.3-1.6l-2.6-.5a1.6 1.6 0 0 0-1.6.7l-.7 1.1a12.6 12.6 0 0 1-5.5-5.5l1.1-.7a1.6 1.6 0 0 0 .7-1.6l-.5-2.6a1.6 1.6 0 0 0-1.6-1.3z" />
   </svg>
-);
+)
 
 export const IconPin = (p) => (
   <svg {...base} {...p}>
     <path d="M12 21.2c4.2-4.3 6.3-7.7 6.3-10.3a6.3 6.3 0 0 0-12.6 0c0 2.6 2.1 6 6.3 10.3z" />
     <circle cx="12" cy="10.6" r="2.4" />
   </svg>
-);
+)
 
 export const IconArrowRight = (p) => (
   <svg {...base} {...p}>
     <path d="M4.5 12h15M13.5 6l6 6-6 6" />
   </svg>
-);
+)
 
 export const IconArrowUpRight = (p) => (
   <svg {...base} {...p}>
     <path d="M7 17L17 7M8.5 7H17v8.5" />
   </svg>
-);
+)
 
 export const IconChevronUp = (p) => (
   <svg {...base} {...p} strokeWidth="2.2">
     <path d="M6 14.5l6-6 6 6" />
   </svg>
-);
+)
 
 export const IconMenu = (p) => (
   <svg {...base} {...p} strokeWidth="2">
     <path d="M4 7h16M4 12h16M4 17h16" />
   </svg>
-);
+)
 
 export const IconClose = (p) => (
   <svg {...base} {...p} strokeWidth="2">
     <path d="M6 6l12 12M18 6L6 18" />
   </svg>
-);
+)
 
 /* --- Marca Astravia: planeta con anillo --- */
 export const IconPlanet = (p) => (
   <svg {...base} {...p} strokeWidth="1.6">
     <circle cx="12" cy="12" r="6" />
-    <circle
-      cx="12"
-      cy="12"
-      r="2.2"
-      fill="currentColor"
-      stroke="none"
-      opacity="0.85"
-    />
-    <ellipse
-      cx="12"
-      cy="12"
-      rx="10.5"
-      ry="4"
-      transform="rotate(-22 12 12)"
-      opacity="0.7"
-    />
+    <circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none" opacity="0.85" />
+    <ellipse cx="12" cy="12" rx="10.5" ry="4" transform="rotate(-22 12 12)" opacity="0.7" />
   </svg>
-);
+)
 
 /* ============================================================
    Logos de tecnologías (versiones simplificadas, monocromo)
    ============================================================ */
 
 const brand = {
-  xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 48 48",
-  "aria-hidden": true,
-};
+  xmlns: 'http://www.w3.org/2000/svg',
+  viewBox: '0 0 48 48',
+  'aria-hidden': true,
+}
 
 export const LogoWordPress = (p) => (
   <svg {...brand} {...p}>
-    <circle
-      cx="24"
-      cy="24"
-      r="20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.4"
-    />
-    <circle
-      cx="24"
-      cy="24"
-      r="16.2"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.1"
-      opacity="0.5"
-    />
+    <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" strokeWidth="2.4" />
+    <circle cx="24" cy="24" r="16.2" fill="none" stroke="currentColor" strokeWidth="1.1" opacity="0.5" />
     <text
       x="24"
       y="31.5"
@@ -268,24 +207,17 @@ export const LogoWordPress = (p) => (
       W
     </text>
   </svg>
-);
+)
 
 export const LogoElementor = (p) => (
   <svg {...brand} {...p}>
-    <circle
-      cx="24"
-      cy="24"
-      r="20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.4"
-    />
+    <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" strokeWidth="2.4" />
     <rect x="16" y="15" width="3.6" height="18" fill="currentColor" />
     <rect x="23.5" y="15" width="9" height="3.6" fill="currentColor" />
     <rect x="23.5" y="22.2" width="9" height="3.6" fill="currentColor" />
     <rect x="23.5" y="29.4" width="9" height="3.6" fill="currentColor" />
   </svg>
-);
+)
 
 export const LogoWooCommerce = (p) => (
   <svg {...brand} {...p}>
@@ -307,7 +239,7 @@ export const LogoWooCommerce = (p) => (
     <circle cx="31" cy="23" r="2" fill="currentColor" />
     <circle cx="37.5" cy="23" r="2" fill="currentColor" />
   </svg>
-);
+)
 
 export const LogoHtml5 = (p) => (
   <svg {...brand} {...p}>
@@ -330,7 +262,7 @@ export const LogoHtml5 = (p) => (
       5
     </text>
   </svg>
-);
+)
 
 export const LogoCss3 = (p) => (
   <svg {...brand} {...p}>
@@ -353,7 +285,7 @@ export const LogoCss3 = (p) => (
       3
     </text>
   </svg>
-);
+)
 
 export const LogoJavascript = (p) => (
   <svg {...brand} {...p}>
@@ -379,7 +311,7 @@ export const LogoJavascript = (p) => (
       JS
     </text>
   </svg>
-);
+)
 
 export const LogoReact = (p) => (
   <svg {...brand} {...p}>
@@ -390,7 +322,7 @@ export const LogoReact = (p) => (
       <ellipse cx="24" cy="24" rx="20" ry="7.6" transform="rotate(120 24 24)" />
     </g>
   </svg>
-);
+)
 
 export const LogoTailwind = (p) => (
   <svg {...brand} {...p}>
@@ -405,21 +337,10 @@ export const LogoTailwind = (p) => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
-export function IconWhatsApp(props) {
-  return (
-    <svg
-      stroke="currentColor"
-      fill="currentColor"
-      strokeWidth="0"
-      viewBox="0 0 448 512"
-      height="1em"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
-    </svg>
-  );
-}
+export const IconWhatsApp = (p) => (
+  <svg {...base} {...p} viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+)

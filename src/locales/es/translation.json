@@ -122,6 +122,13 @@
     "viewSite": "Ver sitio en vivo",
     "openInNewTab": "Abrir {{title}} en una pestaña nueva",
     "projects": {
+      "nordica": {
+        "title": "Nórdica · Estudio de Arquitectura",
+        "tag": "Pieza propia",
+        "domain": "Nórdica · Estudio de Arquitectura",
+        "description": "Un estudio de arquitectura contado como una editorial impresa. La galería de obras se recorre con el scroll: cada proyecto entra en pantalla completa y cede el lugar al siguiente. Cierra con un muestrario de materiales, y todo vive en una sola página donde la tipografía lleva el peso del relato.",
+        "alt": "Home del sitio de Nórdica: hero con la frase «Espacios que cambian la forma de habitar» y, debajo, la sección de materialidad con su mosaico de cinco materiales"
+      },
       "altamira": {
         "title": "Altamira · Bienes Raíces",
         "tag": "Pieza propia",

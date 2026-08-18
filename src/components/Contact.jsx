@@ -50,8 +50,6 @@ export default function Contact() {
 
   return (
     <section className="contact section grain" id="contacto">
-      <div className="contact__bg bg-layer" aria-hidden="true" />
-
       <div className="container container--full contact__inner">
         <div className="contact__copy">
           <span className="kicker" data-reveal>

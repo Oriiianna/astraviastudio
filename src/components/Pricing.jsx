@@ -23,8 +23,6 @@ export default function Pricing() {
 
   return (
     <section className="pricing section grain" id="planes">
-      <div className="pricing__bg bg-layer" aria-hidden="true" />
-
       <div className="container container--full">
         <header className="section-head" data-reveal>
           <span className="kicker">{t('pricing.kicker')}</span>

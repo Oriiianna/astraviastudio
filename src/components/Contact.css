@@ -2,25 +2,7 @@
   padding: clamp(70px, 8vw, 100px) 0 clamp(80px, 9vw, 120px);
 }
 
-.contact__bg {
-  background:
-    radial-gradient(
-      65% 58% at 10% 45%,
-      rgba(73, 42, 122, 0.42) 0%,
-      transparent 62%
-    ),
-    radial-gradient(
-      55% 55% at 94% 18%,
-      rgba(74, 159, 224, 0.14) 0%,
-      transparent 64%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(10, 8, 48, 0.42) 0%,
-      rgba(5, 4, 26, 0.38) 45%,
-      rgba(4, 3, 15, 0.5) 100%
-    );
-}
+/* Sin fondo propio: lo pinta el suelo liso de body::before */
 
 .contact__inner {
   position: relative;

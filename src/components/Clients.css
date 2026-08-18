@@ -1,9 +1,4 @@
-.clients__bg {
-  background: radial-gradient(62% 55% at 88% 12%, rgba(73, 42, 122, 0.42) 0%, transparent 62%),
-    radial-gradient(50% 50% at 6% 88%, rgba(74, 159, 224, 0.12) 0%, transparent 64%),
-    linear-gradient(180deg, rgba(10, 8, 48, 0.4) 0%, rgba(5, 4, 26, 0.36) 42%, rgba(4, 3, 15, 0.44) 100%);
-}
-
+/* Sin fondo propio: lo pinta el suelo liso de body::before */
 .clients .container {
   position: relative;
   z-index: 2;

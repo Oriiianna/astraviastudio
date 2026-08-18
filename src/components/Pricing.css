@@ -1,12 +1,4 @@
-/* Sin fondo propio: lo pone .pricing__bg, que se funde en los bordes.
-   Hereda el degradado que tenía la sección anterior para que la transición
-   con TechStack (arriba) y Process (abajo) no cambie. */
-.pricing__bg {
-  background: radial-gradient(80% 75% at 4% 18%, rgba(98, 26, 226, 0.42) 0%, transparent 62%),
-    radial-gradient(65% 65% at 94% 90%, rgba(74, 159, 224, 0.2) 0%, transparent 66%),
-    linear-gradient(180deg, rgba(13, 10, 51, 0.46) 0%, rgba(17, 12, 59, 0.4) 45%, rgba(9, 7, 42, 0.48) 100%);
-}
-
+/* Sin fondo propio: lo pinta el suelo liso de body::before */
 .pricing .container {
   position: relative;
   z-index: 2;
