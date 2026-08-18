@@ -122,6 +122,13 @@
     "viewSite": "View live site",
     "openInNewTab": "Open {{title}} in a new tab",
     "projects": {
+      "serena": {
+        "title": "Serena · Yoga Studio",
+        "tag": "Own piece",
+        "domain": "Serena · Yoga Studio",
+        "description": "A yoga studio where everything pushes toward booking. The weekly grid filters by day without reloading the page, and every class shows teacher, level and duration before the visitor decides. It ships light and dark modes, which is what a site people check at seven in the morning and again late at night needs.",
+        "alt": "Home of the Serena site: hero reading “Encuentra el equilibrio entre cuerpo y mente” and, below it, the weekly schedule grid filterable by day"
+      },
       "nordica": {
         "title": "Nórdica · Architecture Studio",
         "tag": "Own piece",

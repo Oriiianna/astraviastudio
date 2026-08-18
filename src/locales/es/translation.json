@@ -122,6 +122,13 @@
     "viewSite": "Ver sitio en vivo",
     "openInNewTab": "Abrir {{title}} en una pestaña nueva",
     "projects": {
+      "serena": {
+        "title": "Serena · Estudio de Yoga",
+        "tag": "Pieza propia",
+        "domain": "Serena · Estudio de Yoga",
+        "description": "Un estudio de yoga donde todo empuja hacia la reserva. La grilla semanal se filtra por día sin recargar la página, y cada clase muestra profesor, nivel y duración antes de que la persona decida. Tiene modo claro y oscuro, que es lo que pide un sitio que se consulta tanto a las siete de la mañana como de noche.",
+        "alt": "Home del sitio de Serena: hero con la frase «Encuentra el equilibrio entre cuerpo y mente» y, debajo, la grilla de horarios filtrable por día"
+      },
       "nordica": {
         "title": "Nórdica · Estudio de Arquitectura",
         "tag": "Pieza propia",

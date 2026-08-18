@@ -7,6 +7,13 @@ import "./Clients.css";
    Son tiras verticales de dos pantallas: la tarjeta las recorre al hover. */
 const PROYECTOS = [
   {
+    slug: "serena",
+    i18nKey: "serena",
+    url: "https://astraviastudio-serena.vercel.app/",
+    stack: ["React", "Tailwind", "Framer Motion"],
+    accent: "#7c3aed",
+  },
+  {
     slug: "nordica",
     // El slug nombra el archivo de la captura; la clave i18n es otra cosa.
     i18nKey: "nordica",
@@ -84,7 +91,7 @@ export default function Clients() {
                       className="project__shot"
                       src={`/proyectos/${proyecto.slug}.webp`}
                       srcSet={`/proyectos/${proyecto.slug}-sm.webp 720w, /proyectos/${proyecto.slug}.webp 1240w`}
-                      sizes="(max-width: 940px) 92vw, 56vw"
+                      sizes="(max-width: 940px) 92vw, 44vw"
                       alt={copy('alt')}
                       loading="lazy"
                       decoding="async"

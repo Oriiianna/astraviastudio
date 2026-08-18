@@ -41,7 +41,7 @@ const PROYECTOS = [
     pantallas: [0, 1805],
   },
   {
-    slug: 'oscuro',
+    slug: 'oscuro-cafe',
     url: 'https://astraviastudio-oscurocafe.vercel.app/',
     // El hero mide 4.500 px (está atado al scroll), así que la segunda pantalla
     // se toma recién en la sección de compra. Las intermedias —origen (5216) y
@@ -58,6 +58,15 @@ const PROYECTOS = [
     // contrasta con el hero oscuro, que es lo que hace legible el recorrido
     // del hover.
     pantallas: [0, 10341],
+  },
+  {
+    slug: 'serena',
+    url: 'https://astraviastudio-serena.vercel.app/',
+    // Hero + horarios. La grilla de horarios es la pantalla que mejor cuenta
+    // el sitio: tabla filtrable por día con nivel, duración y reserva. Además
+    // su crema contrasta con el verde oscuro del hero, que es lo que hace
+    // legible el recorrido del hover.
+    pantallas: [0, 4830],
   },
 ]
 
