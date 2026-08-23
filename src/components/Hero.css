@@ -32,6 +32,16 @@
   background: var(--bg-void);
 }
 
+/* Fondo fijo de móvil: ocupa el mismo lugar que el canvas. */
+.hero__still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
 /* Degradado lateral para que el texto tenga contraste sobre el render.
    Se afloja al final para que la última escena se vea limpia. */
 .hero__scrim {
@@ -226,12 +236,28 @@
 
 /* --- Responsive --- */
 @media (max-width: 860px) {
+  /* Sin secuencia no hay nada que scrubear: la seccion vuelve a medir una
+     pantalla y el stage sticky deja de tener sobrante que recorrer. */
   .hero {
-    --scrub: 150vh;
+    --scrub: 0px;
+    height: 100svh;
   }
 
+  /* --p se queda en 0 porque nadie lo escribe: el texto va fijo y opaco, y
+     la costura queda abierta, igual que en prefers-reduced-motion. */
   .hero__copy {
     max-width: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__seam {
+    transform: scaleY(0.8);
+    will-change: auto;
+  }
+
+  .hero__hint {
+    display: none;
   }
 
   .hero__title {
