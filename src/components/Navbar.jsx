@@ -1,18 +1,47 @@
 import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { IconRocket, IconMenu, IconClose } from './icons.jsx'
 import './Navbar.css'
 
 export default function Navbar() {
   const { t, i18n } = useTranslation()
+  const location = useLocation()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
+  const isHomePage = location.pathname === '/'
+
+  const handleNavigation = (e, hash) => {
+    if (isHomePage) {
+      e.preventDefault()
+      if (hash === '#inicio' || hash === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        const element = document.querySelector(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+    }
+    setOpen(false)
+  }
+
+  const handleLogoClick = (e) => {
+    if (isHomePage) {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+    setOpen(false)
+  }
+
+  const getHref = (hash) => isHomePage ? hash : `/${hash}`
+
   const LINKS = [
-    { label: t('nav.services'), href: '#servicios' },
-    { label: t('nav.process'), href: '#proceso' },
-    { label: t('nav.work'), href: '#clientes' },
-    { label: t('nav.contact'), href: '#contacto' },
+    { label: t('nav.services'), hash: '#servicios' },
+    { label: t('nav.process'), hash: '#proceso' },
+    { label: t('nav.work'), hash: '#clientes' },
+    { label: t('nav.contact'), hash: '#contacto' },
   ]
 
   useEffect(() => {
@@ -33,7 +62,7 @@ export default function Navbar() {
   return (
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="container container--full nav__inner">
-        <a className="nav__logo" href="#inicio" onClick={() => setOpen(false)}>
+        <Link className="nav__logo" to="/" onClick={handleLogoClick}>
           <img
             src="/brand/astravia-logo-oficial.svg"
             alt="Astravia"
@@ -41,15 +70,15 @@ export default function Navbar() {
             height="160"
             fetchpriority="high"
           />
-        </a>
+        </Link>
 
         <nav className={`nav__links ${open ? 'is-open' : ''}`} aria-label="Navegación principal">
           {LINKS.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+            <a key={link.hash} href={getHref(link.hash)} onClick={(e) => handleNavigation(e, link.hash)}>
               {link.label}
             </a>
           ))}
-          <a href="#contacto" className="btn btn--primary nav__cta nav__cta--mobile" onClick={() => setOpen(false)}>
+          <a href={getHref('#contacto')} className="btn btn--primary nav__cta nav__cta--mobile" onClick={(e) => handleNavigation(e, '#contacto')}>
             {t('nav.cta')} <IconRocket className="nav__cta-icon" />
           </a>
         </nav>
@@ -71,7 +100,7 @@ export default function Navbar() {
               EN
             </button>
           </div>
-          <a href="#contacto" className="btn btn--primary nav__cta">
+          <a href="#contacto" className="btn btn--primary nav__cta" onClick={(e) => handleNavigation(e, '#contacto')}>
             {t('nav.cta')} <IconRocket className="nav__cta-icon" />
           </a>
         </div>

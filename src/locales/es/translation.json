@@ -2,7 +2,7 @@
   "nav": {
     "services": "Servicios",
     "process": "Proceso",
-    "work": "Trabajo",
+    "work": "Proyectos",
     "contact": "Contacto",
     "cta": "Quiero despegar",
     "languageLabel": "Cambiar idioma a inglés"
@@ -119,9 +119,23 @@
     "title": "Proyectos Destacados",
     "description": "Piezas donde probamos ideas de interfaz y rendimiento a fondo. No son maquetas: están publicadas y se pueden recorrer.",
     "cta": "Ver cómo trabajamos",
-    "viewSite": "Ver sitio en vivo",
+    "viewSite": "Ver Proyecto",
     "openInNewTab": "Abrir {{title}} en una pestaña nueva",
     "projects": {
+      "serena": {
+        "title": "Serena · Estudio de Yoga",
+        "tag": "Pieza propia",
+        "domain": "Serena · Estudio de Yoga",
+        "description": "Un estudio de yoga donde todo empuja hacia la reserva. La grilla semanal se filtra por día sin recargar la página, y cada clase muestra profesor, nivel y duración antes de que la persona decida. Tiene modo claro y oscuro, que es lo que pide un sitio que se consulta tanto a las siete de la mañana como de noche.",
+        "alt": "Home del sitio de Serena: hero con la frase «Encuentra el equilibrio entre cuerpo y mente» y, debajo, la grilla de horarios filtrable por día"
+      },
+      "nordica": {
+        "title": "Nórdica · Estudio de Arquitectura",
+        "tag": "Pieza propia",
+        "domain": "Nórdica · Estudio de Arquitectura",
+        "description": "Un estudio de arquitectura contado como una editorial impresa. La galería de obras se recorre con el scroll: cada proyecto entra en pantalla completa y cede el lugar al siguiente. Cierra con un muestrario de materiales, y todo vive en una sola página donde la tipografía lleva el peso del relato.",
+        "alt": "Home del sitio de Nórdica: hero con la frase «Espacios que cambian la forma de habitar» y, debajo, la sección de materialidad con su mosaico de cinco materiales"
+      },
       "altamira": {
         "title": "Altamira · Bienes Raíces",
         "tag": "Pieza propia",
@@ -139,12 +153,12 @@
     }
   },
   "pricing": {
-    "kicker": "Planes y precios",
+    "kicker": "Planes",
     "title": "Un plan para cada",
     "titleHighlight": "etapa de tu negocio.",
     "description": "Tres formas de empezar, todas con pago único y sin abonos mensuales. Elegí la que va con tu proyecto hoy: podés escalar después sin rehacer nada.",
     "featuredBadge": "Más elegido",
-    "cta": "Contratar",
+    "cta": "Quiero este plan",
     "ctaAriaLabel": "Consultar por el plan {{plan}} por WhatsApp",
     "whatsappMessage": "¡Hola! Me interesa el plan {{plan}} y quiero coordinar una consulta.",
     "plans": {
@@ -157,11 +171,12 @@
           "note": "pago único"
         },
         "features": [
-          "Diseño personalizado",
-          "Redacción de contenidos persuasivos con IA incluidos.",
-          "Una portada con toda la info (Inicio, Quiénes somos, Servicios, Contacto, etc.).",
-          "Formulario de contacto y botón de WhatsApp directo.",
-          "Soporte técnico y mantenimiento post-entrega."
+          "Diseño adaptado a la identidad de tu negocio",
+          "Una página estructurada estratégicamente",
+          "Adaptación completa a celulares",
+          "WhatsApp y formularios de contacto",
+          "SEO inicial para buscadores",
+          "Animaciones y microinteracciones"
         ]
       },
       "clasica": {
@@ -173,11 +188,12 @@
           "note": "pago único"
         },
         "features": [
-          "Diseño personalizado y auto administrable (WordPress).",
-          "Redacción de contenidos persuasivos con IA incluidos.",
-          "Hasta 5 secciones (Inicio, Quiénes somos, Servicios, Contacto, etc.).",
-          "Formulario de contacto y botón de WhatsApp directo.",
-          "Soporte técnico y mantenimiento post-entrega."
+          "Hasta 5 páginas personalizadas",
+          "Diseño adaptado a la identidad de tu negocio",
+          "Secciones de servicios, equipo, proyectos y más",
+          "WhatsApp, formularios y redes sociales",
+          "SEO y optimización inicial",
+          "Animaciones que aportan vida a la experiencia"
         ]
       },
       "ecommerce": {
@@ -189,12 +205,16 @@
           "note": "pago único"
         },
         "features": [
-          "Todo lo del Plan Clásica.",
-          "Carrito de compras y pasarelas de pago (Mercado Pago, tarjetas, transferencias).",
-          "Configuración de envíos (Correo Argentino, Andreani, etc.).",
-          "Optimización masiva de descripciones de productos con IA para mejorar tu SEO en Google.",
-          "Retoque digital inteligente de iluminación para las fotos de tu catálogo (exclusivo para que tus productos luzcan impecables).",
-          "Te enseñamos a subir tus productos."
+          "Catálogo y páginas de producto",
+          "Categorías, filtros y variantes",
+          "Carrito y proceso de compra",
+          "Medios de pago compatibles",
+          "Gestión de productos y stock",
+          "Información y opciones de envío",
+          "Diseño personalizado y responsive",
+          "WhatsApp y formularios",
+          "SEO + Analytics",
+          "Carga inicial de productos"
         ]
       }
     },

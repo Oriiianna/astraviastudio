@@ -2,7 +2,7 @@
   "nav": {
     "services": "Services",
     "process": "Process",
-    "work": "Work",
+    "work": "Projects",
     "contact": "Contact",
     "cta": "Let’s launch",
     "languageLabel": "Switch language to Spanish"
@@ -119,9 +119,23 @@
     "title": "Featured Projects",
     "description": "Pieces where we test UI and performance ideas in depth. They are not mockups: they are published and can be explored.",
     "cta": "See how we work",
-    "viewSite": "View live site",
+    "viewSite": "View Project",
     "openInNewTab": "Open {{title}} in a new tab",
     "projects": {
+      "serena": {
+        "title": "Serena · Yoga Studio",
+        "tag": "Own piece",
+        "domain": "Serena · Yoga Studio",
+        "description": "A yoga studio where everything pushes toward booking. The weekly grid filters by day without reloading the page, and every class shows teacher, level and duration before the visitor decides. It ships light and dark modes, which is what a site people check at seven in the morning and again late at night needs.",
+        "alt": "Home of the Serena site: hero reading “Encuentra el equilibrio entre cuerpo y mente” and, below it, the weekly schedule grid filterable by day"
+      },
+      "nordica": {
+        "title": "Nórdica · Architecture Studio",
+        "tag": "Own piece",
+        "domain": "Nórdica · Architecture Studio",
+        "description": "An architecture studio told like a print editorial. The work gallery unfolds with the scroll: each project takes over the full screen and then hands it to the next. It closes with a materials showcase, and it all lives on a single page where typography carries the story.",
+        "alt": "Home of the Nórdica site: hero reading “Espacios que cambian la forma de habitar” and, below it, the materiality section with its mosaic of five materials"
+      },
       "altamira": {
         "title": "Altamira · Real Estate",
         "tag": "Own piece",
@@ -139,12 +153,12 @@
     }
   },
   "pricing": {
-    "kicker": "Plans and pricing",
+    "kicker": "Plans",
     "title": "A plan for every",
     "titleHighlight": "stage of your business.",
     "description": "Three ways to start, all one-time payments with no monthly fees. Pick the one that fits your project today: you can scale later without rebuilding anything.",
     "featuredBadge": "Most chosen",
-    "cta": "Get started",
+    "cta": "I want this plan",
     "ctaAriaLabel": "Ask about the {{plan}} plan on WhatsApp",
     "whatsappMessage": "Hi! I'm interested in the {{plan}} plan and I'd like to schedule a consultation.",
     "plans": {
@@ -157,11 +171,12 @@
           "note": "one-time payment"
         },
         "features": [
-          "Custom design",
-          "Persuasive AI-assisted copywriting included.",
-          "A single page with all the info (Home, About us, Services, Contact, etc.).",
-          "Contact form and direct WhatsApp button.",
-          "Technical support and post-delivery maintenance."
+          "A design tailored to your brand identity",
+          "Strategically structured page",
+          "Full mobile adaptation",
+          "WhatsApp and contact forms",
+          "Initial SEO for search engines",
+          "Animations and micro-interactions"
         ]
       },
       "clasica": {
@@ -173,11 +188,12 @@
           "note": "one-time payment"
         },
         "features": [
-          "Custom, self-manageable design (WordPress).",
-          "Persuasive AI-assisted copywriting included.",
-          "Up to 5 sections (Home, About us, Services, Contact, etc.).",
-          "Contact form and direct WhatsApp button.",
-          "Technical support and post-delivery maintenance."
+          "Up to 5 custom-designed pages",
+          "A design tailored to your brand identity",
+          "Custom sections for services, team, projects, and more",
+          "WhatsApp, contact forms, and social media integration",
+          "SEO and on-page optimization",
+          "Animations that bring the experience to life"
         ]
       },
       "ecommerce": {
@@ -189,12 +205,16 @@
           "note": "one-time payment"
         },
         "features": [
-          "Everything in the Classic plan.",
-          "Shopping cart and payment gateways (Mercado Pago, cards, bank transfers).",
-          "Shipping setup (Correo Argentino, Andreani, etc.).",
-          "Bulk AI optimization of product descriptions to improve your SEO on Google.",
-          "Smart digital lighting retouch for your catalog photos, so your products look flawless.",
-          "We teach you how to upload your products."
+          "Product catalog & product pages",
+          "Categories, filters & product variants",
+          "Shopping cart & checkout",
+          "Supported payment methods",
+          "Product & inventory management",
+          "Shipping information & options",
+          "Custom, responsive design",
+          "WhatsApp integration & contact forms",
+          "SEO optimization + Analytics",
+          "Initial product upload"
         ]
       }
     },

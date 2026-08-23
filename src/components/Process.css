@@ -1,8 +1,4 @@
-.process__bg {
-  background: radial-gradient(55% 65% at 50% 8%, rgba(73, 42, 122, 0.55) 0%, transparent 66%),
-    linear-gradient(180deg, rgba(9, 7, 42, 0.4) 0%, rgba(5, 4, 26, 0.34) 52%, rgba(10, 8, 48, 0.4) 100%);
-}
-
+/* Sin fondo propio: lo pinta el suelo liso de body::before */
 .process .container {
   position: relative;
   z-index: 2;

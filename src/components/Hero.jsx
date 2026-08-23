@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IconChevronUp } from './icons.jsx'
 import useFrameSequence from '../hooks/useFrameSequence.js'
@@ -10,11 +10,28 @@ import './Hero.css'
 const frameUrl = (set, i) => `/hero/${set}/frame-${String(i + 1).padStart(3, '0')}.webp`
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v))
 
+// Mismo corte que usa el CSS y que el set chico de la secuencia: por debajo
+// de este ancho el hero no scrubea, muestra una sola imagen fija.
+const MOVIL = '(max-width: 860px)'
+
 export default function Hero() {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
   const stageRef = useRef(null)
   const canvasRef = useRef(null)
+
+  // En movil la secuencia no se precarga: son 86 peticiones y 1,5 MB para un
+  // efecto que ahi no se usa. Se sirve una sola imagen en su lugar.
+  const [esMovil, setEsMovil] = useState(() =>
+    typeof window === 'undefined' ? false : window.matchMedia(MOVIL).matches
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia(MOVIL)
+    const alCambiar = (e) => setEsMovil(e.matches)
+    mq.addEventListener('change', alCambiar)
+    return () => mq.removeEventListener('change', alCambiar)
+  }, [])
 
   // El texto se va antes de que la escena se ponga densa: a mitad de camino
   // ya no compite con el render y se evita el estado "medio transparente".
@@ -34,16 +51,32 @@ export default function Hero() {
     fit: 'cover',
     mode: 'sticky',
     onProgress: handleProgress,
+    enabled: !esMovil,
   })
 
   return (
     <section className="hero" id="inicio" ref={sectionRef}>
       <div className="hero__stage" ref={stageRef}>
-        <canvas className="hero__canvas" ref={canvasRef} aria-hidden="true" />
+        {esMovil ? (
+          <img
+            className="hero__still"
+            src="/hero/mobile.jpg"
+            alt=""
+            aria-hidden="true"
+            fetchpriority="high"
+            decoding="async"
+            width="1920"
+            height="1080"
+          />
+        ) : (
+          <canvas className="hero__canvas" ref={canvasRef} aria-hidden="true" />
+        )}
 
         {/* Oscurecido para que el texto se lea sobre el render */}
         <div className="hero__scrim" aria-hidden="true" />
         <div className="hero__vignette" aria-hidden="true" />
+        {/* Caída hacia Servicios: se abre con el scroll, ver Hero.css */}
+        <div className="hero__seam" aria-hidden="true" />
 
         <div className="container container--full hero__inner">
           <div className="hero__copy">
@@ -83,11 +116,13 @@ export default function Hero() {
         </div>
 
         {/* Barra fina de precarga: desaparece cuando terminó */}
-        <div
-          className={`hero__loader ${loaded >= 1 ? 'is-done' : ''}`}
-          style={{ '--loaded': loaded }}
-          aria-hidden="true"
-        />
+        {!esMovil && (
+          <div
+            className={`hero__loader ${loaded >= 1 ? 'is-done' : ''}`}
+            style={{ '--loaded': loaded }}
+            aria-hidden="true"
+          />
+        )}
       </div>
     </section>
   )

@@ -29,8 +29,7 @@
 .backdrop__tint {
   position: absolute;
   inset: 0;
-  background: radial-gradient(85% 65% at 15% 8%, rgba(73, 42, 122, 0.42) 0%, transparent 64%),
-    linear-gradient(180deg, rgba(10, 8, 48, 0.34) 0%, rgba(8, 6, 38, 0.22) 45%, rgba(4, 3, 15, 0.44) 100%);
+  background: linear-gradient(180deg, rgba(8, 0, 18, 0.34) 0%, rgba(8, 0, 18, 0.22) 45%, rgba(8, 0, 18, 0.44) 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {

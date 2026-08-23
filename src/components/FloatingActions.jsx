@@ -3,7 +3,7 @@ import { IconChevronUp, IconWhatsApp } from "./icons.jsx";
 import "./FloatingActions.css";
 
 export default function FloatingActions() {
-  const [showWhatsApp, setShowWhatsApp] = useState(false);
+  const [showWhatsApp, setShowWhatsApp] = useState(true); // Visible desde el inicio
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   // Datos dinámicos limpios
@@ -19,7 +19,6 @@ export default function FloatingActions() {
       const windowHeight = window.innerHeight;
       const fullHeight = document.documentElement.scrollHeight;
 
-      setShowWhatsApp(scrollY > 300);
       setShowBackToTop(scrollY + windowHeight >= fullHeight - 400);
     };
 
@@ -44,7 +43,7 @@ export default function FloatingActions() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={`floating-btn whatsapp-btn ${showWhatsApp ? "is-visible" : ""}`}
+        className={`floating-btn whatsapp-btn whatsapp-pulse ${showWhatsApp ? "is-visible" : ""}`}
         aria-label="Contactar por WhatsApp"
         tabIndex={showWhatsApp ? 0 : -1}
       >

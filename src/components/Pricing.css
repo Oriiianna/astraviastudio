@@ -1,12 +1,4 @@
-/* Sin fondo propio: lo pone .pricing__bg, que se funde en los bordes.
-   Hereda el degradado que tenía la sección anterior para que la transición
-   con TechStack (arriba) y Process (abajo) no cambie. */
-.pricing__bg {
-  background: radial-gradient(80% 75% at 4% 18%, rgba(98, 26, 226, 0.42) 0%, transparent 62%),
-    radial-gradient(65% 65% at 94% 90%, rgba(74, 159, 224, 0.2) 0%, transparent 66%),
-    linear-gradient(180deg, rgba(13, 10, 51, 0.46) 0%, rgba(17, 12, 59, 0.4) 45%, rgba(9, 7, 42, 0.48) 100%);
-}
-
+/* Sin fondo propio: lo pinta el suelo liso de body::before */
 .pricing .container {
   position: relative;
   z-index: 2;
@@ -61,18 +53,18 @@
   right: 18px;
   padding: 5px 12px;
   border-radius: 999px;
-  background: var(--grad-violet);
-  color: #fff;
+  background: #00E5C8;
+  color: #0a0830;
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: nowrap;
-  box-shadow: var(--shadow-violet);
+  box-shadow: 0 0 14px rgba(0, 229, 200, 0.4);
 }
 
 .plan__name {
-  font-size: clamp(1.05rem, 1.2vw, 1.22rem);
+  font-size: clamp(1.4rem, 1.2vw, 1.22rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--text);
@@ -83,51 +75,14 @@
   padding-right: 104px;
 }
 
-/* --- Precio --- */
-.plan__price {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 9px;
-  margin: 18px 0 24px;
-}
-
-.plan__currency {
-  font-size: 0.86rem;
-  font-weight: 400;
-  color: var(--text-muted);
-}
-
-.plan__amount {
-  font-size: clamp(2.5rem, 3.2vw, 3.3rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  background: var(--grad-brand);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.plan__amount sup {
-  font-size: 0.36em;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.plan__note {
-  font-size: 0.74rem;
-  font-style: italic;
-  color: var(--text-dim);
-}
-
 /* --- Features ---
    La hairline superior va como background y no como border para poder
    usar el degradado --grad-hair que ya define el sistema. */
 .plan__features {
   display: grid;
   gap: 13px;
-  padding-top: 24px;
+  padding-top: 20px;
+  margin-top: 20px;
   margin-bottom: 30px;
   background-image: var(--grad-hair);
   background-repeat: no-repeat;
@@ -139,7 +94,7 @@
   display: flex;
   align-items: flex-start;
   gap: 11px;
-  font-size: 0.84rem;
+  font-size: 1rem;
   font-weight: 300;
   line-height: 1.62;
   color: var(--text-soft);
@@ -158,58 +113,9 @@
    aunque una tenga 6 features y las otras 5. */
 .plan__cta {
   margin-top: auto;
-  width: 100%;
-}
-
-/* --- Franja de respaldo --- */
-.pricing__proof {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(16px, 2vw, 40px);
-  margin-top: clamp(40px, 4vw, 64px);
-  padding-top: clamp(26px, 2.6vw, 38px);
-  background-image: var(--grad-hair);
-  background-repeat: no-repeat;
-  background-size: 100% 1px;
-  background-position: top left;
-}
-
-.pricing__proof li {
-  display: grid;
-  justify-items: center;
-  gap: 7px;
-  text-align: center;
-}
-
-.pricing__proof-icon {
-  color: var(--ice);
-}
-
-.pricing__proof-icon svg {
-  width: 20px;
-  height: 20px;
-}
-
-.pricing__proof-value {
-  font-size: 1.45rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  background: var(--grad-brand);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.pricing__proof-value small {
-  font-size: 0.72rem;
-  font-weight: 600;
-}
-
-.pricing__proof-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
-  color: var(--text-dim);
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
 }
 
 /* --- Responsive --- */

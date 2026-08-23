@@ -136,7 +136,7 @@ Misma posición, inmediatamente antes de `"differentiator": {`. Los precios qued
     "titleHighlight": "stage of your business.",
     "description": "Three ways to start, all one-time payments with no monthly fees. Pick the one that fits your project today: you can scale later without rebuilding anything.",
     "featuredBadge": "Most chosen",
-    "cta": "Get started",
+    "cta": "I want this plan",
     "ctaAriaLabel": "Ask about the {{plan}} plan on WhatsApp",
     "whatsappMessage": "Hi! I'm interested in the {{plan}} plan and I'd like to schedule a consultation.",
     "plans": {

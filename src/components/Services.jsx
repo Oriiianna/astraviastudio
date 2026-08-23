@@ -34,9 +34,7 @@ export default function Services() {
   const { t } = useTranslation()
 
   return (
-    <section className="services section grain" id="servicios">
-      <div className="services__bg bg-layer" aria-hidden="true" />
-
+    <section className="services section section--after-hero grain" id="servicios">
       <div className="container container--full">
         <header className="section-head" data-reveal>
           <span className="kicker">{t('services.kicker')}</span>

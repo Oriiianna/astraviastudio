@@ -50,8 +50,6 @@ export default function Contact() {
 
   return (
     <section className="contact section grain" id="contacto">
-      <div className="contact__bg bg-layer" aria-hidden="true" />
-
       <div className="container container--full contact__inner">
         <div className="contact__copy">
           <span className="kicker" data-reveal>
@@ -183,7 +181,7 @@ export default function Contact() {
 
           <button
             type="submit"
-            className="contact__submit"
+            className="btn btn--primary btn--rect"
             disabled={status === "sending"}
           >
             {status === "sending" ? t("contact.sending") : t("contact.submit")}

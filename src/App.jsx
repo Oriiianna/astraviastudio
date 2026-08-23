@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import Services from "./components/Services.jsx";
@@ -9,11 +10,31 @@ import Clients from "./components/Clients.jsx";
 import CtaBanner from "./components/CtaBanner.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
+import Privacy from "./pages/Privacy.jsx";
+import Terms from "./pages/Terms.jsx";
 // Sustituido por FloatingActions.jsx, que incluye el botón de BackToTop y el de WhatsApp
 // import BackToTop from "./components/BackToTop.jsx";
 import FloatingActions from "./components/FloatingActions.jsx";
 
-export default function App() {
+function ScrollToHash() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        // Pequeño delay para asegurar que el DOM esté listo
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [location]);
+
+  return null;
+}
+
+function AppContent() {
   // Observer único que revela los elementos [data-reveal] al entrar en viewport.
   useEffect(() => {
     const targets = document.querySelectorAll("[data-reveal]");
@@ -74,5 +95,18 @@ export default function App() {
       {/* <BackToTop /> */}
       <FloatingActions />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <ScrollToHash />
+      <Routes>
+        <Route path="/" element={<AppContent />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+      </Routes>
+    </Router>
   );
 }

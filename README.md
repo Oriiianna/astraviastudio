@@ -35,7 +35,7 @@ src/
     useFrameSequence.js  Motor de secuencias atadas al scroll (hero y CTA)
   styles/global.css      Sistema de diseño: tokens, layout, botones, efectos
   components/
-    Navbar / Hero / Marquee / Services / TechStack /
+    Navbar / Hero / Services / TechStack /
     Differentiator / Process / Clients / CtaBanner /
     Contact / Footer / BackToTop     → cada uno con su .css al lado
     icons.jsx            Iconos + logos de tecnologías
@@ -110,7 +110,11 @@ cuatro capas al 70% dejan pasar apenas un 2% de la imagen y el fondo desaparece.
 - Reveal al entrar en viewport (`data-reveal`), con variante de barrido (`data-reveal="wipe"`).
   El barrido usa `mask`, **no** `clip-path`: clip-path recorta la caja a ancho cero
   y el IntersectionObserver deja de ver el elemento.
-- Barrido de luz en los botones primarios, marquee infinito, hairlines luminosas.
+- Barrido de luz en los botones primarios, hairlines luminosas.
+- Costura hero → Servicios: el fundido inferior del hero (`.hero__vignette`, `--fade`)
+  crece con `--p`, así que llega a su máximo justo cuando el stage sticky se suelta.
+  Servicios lo acompaña con `.section--after-hero` (más aire arriba y `--bg-fade-top`
+  más largo). Si tocás el scrub del hero, revisá que las dos cosas sigan coincidiendo.
 
 ## SEO y textos
 

@@ -2,13 +2,10 @@
   position: relative;
   overflow: hidden;
   padding: clamp(58px, 6vw, 84px) 0 0;
+  background: #080012;
 }
 
 /* Acá la máscara solo funde arriba: abajo es el final de la página */
-.footer__bg {
-  background: #050416;
-}
-
 .footer .container {
   position: relative;
   z-index: 2;
@@ -55,14 +52,16 @@
 }
 
 .footer__col a,
-.footer__col span {
+.footer__col span,
+.footer__col a[class*="link"] {
   font-size: 0.83rem;
   font-weight: 300;
   color: var(--text-muted);
   transition: color 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
-.footer__col a:hover {
+.footer__col a:hover,
+.footer__col a[class*="link"]:hover {
   color: var(--violet-soft);
 }
 
@@ -99,18 +98,25 @@
   color: var(--text-dim);
 }
 
-/* Al quedar sólo dos elementos en la barra, el space-between manda esta línea
-   contra el borde derecho, justo debajo del botón flotante de volver arriba.
-   El margen la corre lo justo para que no se pisen. */
-.footer__made {
-  margin-right: 58px;
-  color: var(--text-muted);
+.footer__legal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-@media (max-width: 640px) {
-  .footer__made {
-    margin-right: 0;
-  }
+.footer__legal a {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  transition: color 0.3s var(--ease);
+}
+
+.footer__legal a:hover {
+  color: var(--violet-soft);
+}
+
+.footer__legal-separator {
+  color: var(--text-dim);
+  opacity: 0.5;
 }
 
 /* --- Responsive --- */

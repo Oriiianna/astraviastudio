@@ -29,7 +29,17 @@
   width: 100%;
   height: 100%;
   display: block;
-  background: #05040a;
+  background: var(--bg-void);
+}
+
+/* Fondo fijo de móvil: ocupa el mismo lugar que el canvas. */
+.hero__still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
 }
 
 /* Degradado lateral para que el texto tenga contraste sobre el render.
@@ -50,13 +60,40 @@
     linear-gradient(180deg, rgba(5, 4, 10, 0.7) 0%, transparent 26%);
 }
 
-/* Viñeta + fundido inferior hacia el marquee */
+/* Viñeta: cierra los bordes del render, no se mueve */
 .hero__vignette {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(120% 90% at 50% 45%, transparent 42%, rgba(4, 3, 15, 0.72) 100%),
-    linear-gradient(0deg, #04030f 0%, transparent 22%);
+  background: radial-gradient(120% 90% at 50% 45%, transparent 42%, rgba(8, 0, 18, 0.72) 100%);
+}
+
+/* Costura hacia la sección siguiente.
+   La caída va dibujada a su altura máxima y se escala desde abajo según --p:
+   mientras se lee el hero apenas se insinúa, y se abre entera justo cuando el
+   stage sticky se suelta y Servicios entra en cuadro, así el corte llega ya
+   disuelto. Dos motivos para escalar en vez de mover las paradas del
+   degradado: animar stops repinta la capa entera en cada frame de scroll, que
+   acá comparte cuadro con el canvas, y el sesgo cuadrático de --t mantiene la
+   caída fuera del render hasta el último tramo en vez de oscurecerlo a mitad
+   de la animación. Las paradas intermedias evitan el borde duro que deja un
+   degradado de dos paradas contra un fondo casi del mismo tono. */
+.hero__seam {
+  --t: calc(var(--p, 0) * (0.35 + 0.65 * var(--p, 0)));
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 42svh;
+  pointer-events: none;
+  transform-origin: bottom;
+  transform: scaleY(calc(0.42 + var(--t) * 0.58));
+  will-change: transform;
+  background: linear-gradient(
+    0deg,
+    #080012 0%,
+    rgba(8, 0, 18, 0.88) 30%,
+    rgba(8, 0, 18, 0.44) 62%,
+    rgba(8, 0, 18, 0) 100%
+  );
 }
 
 .hero__inner {
@@ -199,12 +236,28 @@
 
 /* --- Responsive --- */
 @media (max-width: 860px) {
+  /* Sin secuencia no hay nada que scrubear: la seccion vuelve a medir una
+     pantalla y el stage sticky deja de tener sobrante que recorrer. */
   .hero {
-    --scrub: 150vh;
+    --scrub: 0px;
+    height: 100svh;
   }
 
+  /* --p se queda en 0 porque nadie lo escribe: el texto va fijo y opaco, y
+     la costura queda abierta, igual que en prefers-reduced-motion. */
   .hero__copy {
     max-width: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__seam {
+    transform: scaleY(0.8);
+    will-change: auto;
+  }
+
+  .hero__hint {
+    display: none;
   }
 
   .hero__title {
@@ -235,6 +288,13 @@
   .hero__copy {
     opacity: 1;
     transform: none;
+  }
+
+  /* Sin scrub --p se queda en 0: la caída va fija y ya abierta, porque acá
+     Servicios entra apenas termina el primer viewport */
+  .hero__seam {
+    transform: scaleY(0.8);
+    will-change: auto;
   }
 
   .hero__hint {
