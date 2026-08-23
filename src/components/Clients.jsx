@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { IconArrowUpRight } from "./icons.jsx";
+import { IconArrowRight } from "./icons.jsx";
 import "./Clients.css";
 
 /* Capturas reales de los sitios, generadas por scripts/capture-proyectos.mjs
@@ -66,7 +66,7 @@ export default function Clients() {
 
             return (
               <article
-                className="project"
+                className="project project--card"
                 key={proyecto.slug}
                 style={{ "--accent": proyecto.accent }}
                 data-reveal
@@ -97,19 +97,15 @@ export default function Clients() {
                       decoding="async"
                     />
                   </span>
-
-                  <span className="project__overlay">
-                    <span className="project__result">{t('clients.viewSite')}</span>
-                    <span className="project__go">
-                      <IconArrowUpRight />
-                    </span>
-                  </span>
                 </a>
 
-                <div className="project__info">
-                  <span className="project__tag">{copy('tag')}</span>
-                  <h3>{copy('title')}</h3>
-                  <p>{copy('description')}</p>
+                <div className="project__content">
+                  <div className="project__header">
+                    <div className="project__header-left">
+                      <span className="project__tag">{copy('tag')}</span>
+                      <h3>{copy('title')}</h3>
+                    </div>
+                  </div>
 
                   <ul className="project__stack">
                     {proyecto.stack.map((tec) => (
@@ -117,14 +113,15 @@ export default function Clients() {
                     ))}
                   </ul>
 
+                  <p className="project__description">{copy('description')}</p>
+
                   <a
-                    className="btn btn--primary project__cta"
+                    className="btn btn--primary btn--rect project__cta"
                     href={proyecto.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {t('clients.viewSite')}
-                    <IconArrowUpRight />
+                    {t('clients.viewSite')} <IconArrowRight />
                   </a>
                 </div>
               </article>

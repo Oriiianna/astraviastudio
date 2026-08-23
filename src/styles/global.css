@@ -10,6 +10,18 @@
    Cambiá estas variables y cambia el sitio entero.
    ============================================================ */
 
+/* --- Páginas individuales (Privacy, Terms, etc.) --- */
+.page-container {
+  padding: clamp(80px, 10vw, 120px) 0;
+  min-height: calc(100vh - 400px);
+}
+
+.page-container h1 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
 :root {
   /* --- Fondos: escala índigo, del casi negro al panel --- */
   --bg-void: #080012;
@@ -54,7 +66,7 @@
   --glass: rgba(139, 156, 247, 0.04);
 
   /* --- Gradientes --- */
-  --grad-brand: linear-gradient(100deg, #9fd4f7 0%, #8b9cf7 34%, #a78bfa 66%, #c084fc 100%);
+  --grad-brand: linear-gradient(90deg, #7145d6 0%, #00e5c8 100%);
   --grad-violet: linear-gradient(135deg, #621ae2 0%, #7c3aed 100%);
   --grad-cta: linear-gradient(115deg, #0b1636 0%, #17123f 42%, #341d63 100%);
   --grad-hair: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.5), transparent);
@@ -315,6 +327,7 @@ h4 {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--violet-pale);
+  width: fit-content;
 }
 
 .kicker::before {
@@ -467,6 +480,7 @@ textarea:focus-visible {
     color-mix(in srgb, var(--ice) 35%, transparent) 100%
   );
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;

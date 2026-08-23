@@ -181,7 +181,7 @@ export default function Contact() {
 
           <button
             type="submit"
-            className="contact__submit"
+            className="btn btn--primary btn--rect"
             disabled={status === "sending"}
           >
             {status === "sending" ? t("contact.sending") : t("contact.submit")}

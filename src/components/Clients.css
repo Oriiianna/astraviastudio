@@ -27,39 +27,54 @@
 }
 
 /* --- Proyectos ---
-   Grilla de dos columnas: cada tarjeta es una unidad vertical —captura
-   arriba, ficha abajo— del mismo ancho que las demás. Antes era una fila
-   por proyecto con las columnas en 1.35fr / 1fr, así que la captura salía
-   más chica en las filas donde caía del lado angosto. */
+   Diseño de tarjetas con fondo para cada proyecto */
 .clients__lista {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(30px, 3.2vw, 52px);
+  gap: clamp(24px, 3vw, 40px);
 }
 
 .project {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(20px, 1.8vw, 28px);
-  border-radius: var(--radius);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0;
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), transform 0.4s var(--ease);
 }
 
-/* --- Ventana del navegador con la captura --- */
+/* Imagen arriba */
+.project__thumb {
+  grid-row: 1;
+}
+
+/* Contenido abajo */
+.project__content {
+  grid-row: 2;
+}
+
+.project:hover {
+  border-color: color-mix(in srgb, var(--violet-bright) 30%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--violet-bright) 15%, transparent),
+    0 20px 50px -20px color-mix(in srgb, var(--violet-bright) 20%, transparent);
+  transform: translateY(-4px);
+}
+
+/* --- Imagen del proyecto --- */
 .project__thumb {
   display: block;
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: linear-gradient(150deg, #1a1442 0%, #0c0a2b 100%);
-  box-shadow: var(--shadow-card);
-  transition: border-color 0.5s var(--ease), box-shadow 0.5s var(--ease), transform 0.5s var(--ease);
+  background: var(--bg-deep);
 }
 
 .project__thumb:hover {
-  transform: translateY(-6px);
-  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
-  box-shadow: 0 34px 70px -34px color-mix(in srgb, var(--accent) 75%, transparent);
+  transform: none;
+  border-color: var(--border);
+  box-shadow: none;
 }
 
 /* Barra de ventana: los tres puntos y el dominio real */
@@ -104,12 +119,14 @@
 .project__shot {
   display: block;
   width: 100%;
-  height: auto;
-  transition: transform 7s var(--ease);
+  height: 200%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .project__thumb:hover .project__shot {
-  transform: translateY(calc(100cqh - 100%));
+  transform: translateY(-50%);
 }
 
 /* Overlay al hover */
@@ -154,44 +171,87 @@
   height: 16px;
 }
 
-/* --- Ficha ---
-   Crece para ocupar el alto sobrante: con el CTA anclado abajo, las dos
-   tarjetas de una fila terminan parejas aunque las descripciones midan
-   distinto. */
-.project__info {
+/* --- Contenido de la tarjeta --- */
+.project__content {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  gap: 16px;
+  padding: clamp(20px, 2.5vw, 28px);
+}
+
+.project__header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .project__tag {
   display: inline-block;
-  margin-bottom: 14px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, #00e5c8 8%, transparent);
+  border: 1px solid color-mix(in srgb, #00e5c8 20%, transparent);
   font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: #00e5c8;
+  width: fit-content;
 }
 
-.project__info h3 {
-  font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+.project__header h3 {
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
   font-weight: 600;
-  margin-bottom: 14px;
+  color: var(--text);
+  line-height: 1.3;
+  margin: 0;
 }
 
-.project__info p {
-  max-width: 44ch;
+.project__cta {
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+/* Ajustes específicos para el botón en la tarjeta */
+.project__cta.btn {
+  padding: 14px 28px;
+  font-size: 0.9rem;
+  gap: 8px;
+  width: fit-content;
+}
+
+.project__cta.btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .project__cta.btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.project__description {
   color: var(--text-muted);
   font-size: 0.92rem;
   font-weight: 300;
   line-height: 1.75;
+  margin: 0;
+  flex: 1;
 }
 
 .project__stack {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 22px 0 26px;
 }
 
 .project__stack li {
@@ -201,19 +261,6 @@
   background: rgba(255, 255, 255, 0.035);
   font-size: 0.72rem;
   color: var(--text-muted);
-}
-
-.project__cta {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-  gap: 9px;
-  margin-top: auto;
-}
-
-.project__cta svg {
-  width: 15px;
-  height: 15px;
 }
 
 /* --- Responsive --- */

@@ -9,7 +9,7 @@
   z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
-  gap: clamp(40px, 5vw, 90px);
+  gap: clamp(20px, 2vw, 60px);
 }
 
 /* --- Columna izquierda --- */
@@ -38,7 +38,7 @@
 }
 
 .contact__copy > p {
-  max-width: 42ch;
+  max-width: 52ch;
   color: var(--text-muted);
   font-size: 0.94rem;
   font-weight: 300;
@@ -75,7 +75,7 @@
 
 .contact__channel span:last-child {
   display: grid;
-  gap: 2px;
+  gap: 4px;
   font-size: 0.85rem;
   color: var(--text-muted);
   font-weight: 300;
@@ -91,8 +91,9 @@
 .contact__form {
   position: relative;
   isolation: isolate;
-  display: grid;
-  gap: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   padding: clamp(22px, 2.4vw, 36px);
   border-radius: var(--radius-lg);
   background: linear-gradient(
@@ -152,7 +153,7 @@
 }
 
 .field textarea {
-  resize: vertical;
+  resize: none;
   min-height: 128px;
   line-height: 1.6;
 }
@@ -170,28 +171,12 @@
   box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.14);
 }
 
-.contact__submit {
+.contact__form .btn {
   margin-top: 4px;
-  padding: 14px 24px;
-  border-radius: 9px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: #fff;
-  background: var(--grad-violet);
-  box-shadow: var(--shadow-violet);
-  transition:
-    transform 0.35s var(--ease),
-    box-shadow 0.35s var(--ease),
-    filter 0.35s var(--ease);
+  align-self: flex-end;
 }
 
-.contact__submit:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.08);
-  box-shadow: 0 20px 44px -14px rgba(139, 92, 246, 0.9);
-}
-
-.contact__submit:disabled {
+.contact__form .btn:disabled {
   cursor: progress;
   opacity: 0.65;
   transform: none;

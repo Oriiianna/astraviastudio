@@ -1,11 +1,22 @@
 import { useTranslation } from "react-i18next";
+import { Link, useLocation } from "react-router-dom";
 import { IconMail, IconPhone, IconPin } from "./icons.jsx";
 import "./Footer.css";
 
 export default function Footer() {
   const { t, i18n } = useTranslation();
+  const location = useLocation();
   const lang = i18n.resolvedLanguage?.startsWith("en") ? "en" : "es";
   const footerT = (key) => t(key, { lng: lang });
+
+  const isHomePage = location.pathname === '/';
+
+  const handleLogoClick = (e) => {
+    if (isHomePage) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const COLUMNS = [
     {
@@ -54,7 +65,7 @@ export default function Footer() {
       <div className="container container--full">
         <div className="footer__grid">
           <div className="footer__brand">
-            <a className="footer__logo" href="#inicio">
+            <Link className="footer__logo" to="/" onClick={handleLogoClick}>
               <img
                 src="/brand/astravia-logo-oficial.svg"
                 alt="Astravia"
@@ -62,7 +73,7 @@ export default function Footer() {
                 height="160"
                 loading="lazy"
               />
-            </a>
+            </Link>
             <p>{footerT("footer.description")}</p>
           </div>
 
@@ -72,7 +83,7 @@ export default function Footer() {
               <ul>
                 {col.links.map((link) => (
                   <li key={link}>
-                    <a href="#contacto">{link}</a>
+                    <Link to="/#contacto">{link}</Link>
                   </li>
                 ))}
               </ul>
@@ -108,28 +119,11 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} Astravia. {footerT("footer.rights")}
           </p>
-          <p className="footer__made">
-            {footerT("footer.made").includes("💜") ? (
-              <>
-                {footerT("footer.made").split("💜")[0]}
-                <span aria-label="amor">💜</span>
-                {footerT("footer.made").split("💜")[1]}
-              </>
-            ) : (
-              footerT("footer.made")
-            )}
-          </p>
-          <ul className="footer__legal">
-            <li>
-              <a href="#contacto">{footerT("footer.links.privacy")}</a>
-            </li>
-            <li>
-              <a href="#contacto">{footerT("footer.links.terms")}</a>
-            </li>
-            <li>
-              <a href="#contacto">{footerT("footer.links.cookies")}</a>
-            </li>
-          </ul>
+          <div className="footer__legal">
+            <a href="/privacy">{footerT("footer.links.privacy")}</a>
+            <span className="footer__legal-separator">|</span>
+            <a href="/terms">{footerT("footer.links.terms")}</a>
+          </div>
         </div>
       </div>
     </footer>
