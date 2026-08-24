@@ -122,6 +122,13 @@
     "viewSite": "Ver Proyecto",
     "openInNewTab": "Abrir {{title}} en una pestaña nueva",
     "projects": {
+      "sendero": {
+        "title": "Sendero · Bicicletas de Travesía",
+        "tag": "Pieza propia",
+        "domain": "Sendero · Bicicletas de Travesía",
+        "description": "Un taller de cuadros a medida contado con voz de bitácora. Los tres modelos se comparan sin salir de la página, y el proceso se explica con un plano técnico acotado en vez de fotos de catálogo. Es el único de la serie sin Tailwind: la tipografía y el color viven en un sistema de tokens propio.",
+        "alt": "Home del sitio de Sendero: hero con la frase «Hasta donde se acaba el mapa» y, debajo, la sección del taller con el plano técnico del cuadro"
+      },
       "serena": {
         "title": "Serena · Estudio de Yoga",
         "tag": "Pieza propia",

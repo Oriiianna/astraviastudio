@@ -4,14 +4,27 @@
 }
 
 .cta {
+  --pad-x: clamp(28px, 5vw, 66px);
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: 58px clamp(28px, 5vw, 66px) 62px;
+  padding: clamp(44px, 4.4vw, 62px) var(--pad-x);
   border-radius: 26px;
   background: var(--grad-cta);
   border: 1px solid rgba(148, 163, 255, 0.16);
   box-shadow: 0 50px 90px -50px rgba(0, 0, 0, 0.95);
+}
+
+/* Hairline superior: el mismo recurso que separa las secciones, acá cierra
+   el borde del panel contra el fondo plano. ::before ya lo usa el spotlight. */
+.cta::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--grad-hair);
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .cta__glow {
@@ -30,11 +43,12 @@
 }
 
 .cta__title {
-  text-align: center;
-  font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+  font-size: clamp(1.5rem, 2.9vw, 2.25rem);
   font-weight: 700;
+  line-height: 1.16;
   letter-spacing: -0.03em;
-  margin-bottom: 42px;
+  margin-bottom: 20px;
+  max-width: 19ch;
 }
 
 /* Único acento cálido del sitio: contrasta contra todo el índigo
@@ -48,11 +62,14 @@
 
 .cta__body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(28px, 4vw, 60px);
+  gap: clamp(24px, 3vw, 48px);
 }
 
+/* Contenida, con el padding del panel intacto. Se probó sangrándola fuera del
+   borde, pero el recorte quedaba entre 18 y 50px según el ancho: muy poco
+   para leerse como decisión y suficiente para parecer un error. */
 .cta__art {
   position: relative;
   display: grid;
@@ -62,7 +79,7 @@
 /* Halo detrás del astronauta */
 .cta__art-glow {
   position: absolute;
-  width: 72%;
+  width: 78%;
   aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(167, 139, 250, 0.34) 0%, transparent 68%);
@@ -85,19 +102,15 @@
 /* Canvas de la secuencia atada al scroll */
 .cta__canvas {
   position: relative;
-  width: min(100%, 520px);
+  width: min(100%, 540px);
   height: auto;
   display: block;
   filter: drop-shadow(0 26px 42px rgba(3, 2, 12, 0.6));
 }
 
-.cta__copy {
-  text-align: center;
-}
-
 .cta__copy p {
-  max-width: 42ch;
-  margin: 0 auto 28px;
+  max-width: 46ch;
+  margin: 0 0 30px;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.7;
@@ -121,9 +134,15 @@
 @media (max-width: 860px) {
   .cta__body {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
+
   .cta__canvas {
     width: min(86%, 360px);
+  }
+
+  .cta__title,
+  .cta__copy p {
+    max-width: none;
   }
 }

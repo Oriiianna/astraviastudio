@@ -122,6 +122,13 @@
     "viewSite": "View Project",
     "openInNewTab": "Open {{title}} in a new tab",
     "projects": {
+      "sendero": {
+        "title": "Sendero · Touring Bicycles",
+        "tag": "Own piece",
+        "domain": "Sendero · Touring Bicycles",
+        "description": "A custom frame workshop told in the voice of a field journal. The three models compare without leaving the page, and the process is explained with a dimensioned technical drawing instead of catalog photos. It is the only piece in the set without Tailwind: type and color live in a token system of its own.",
+        "alt": "Home of the Sendero site: hero reading “Hasta donde se acaba el mapa” and, below it, the workshop section with the technical drawing of the frame"
+      },
       "serena": {
         "title": "Serena · Yoga Studio",
         "tag": "Own piece",

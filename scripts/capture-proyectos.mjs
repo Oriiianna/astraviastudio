@@ -60,6 +60,16 @@ const PROYECTOS = [
     pantallas: [0, 10341],
   },
   {
+    slug: 'sendero',
+    url: 'https://sendero-kappa.vercel.app/',
+    // Hero + el taller. La colección (4427) también entra completa, pero su
+    // mitad inferior es una foto oscura del cuadro recortada a media altura.
+    // El plano técnico, en cambio, es la pantalla más distintiva del sitio y
+    // la única con estructura de diagrama, así que contrasta contra el hero
+    // fotográfico en vez de repetirlo.
+    pantallas: [0, 6027],
+  },
+  {
     slug: 'serena',
     url: 'https://astraviastudio-serena.vercel.app/',
     // Hero + horarios. La grilla de horarios es la pantalla que mejor cuenta
@@ -72,6 +82,10 @@ const PROYECTOS = [
 
 async function capturarPantalla(page, y) {
   await page.evaluate((destino) => window.scrollTo(0, destino), y)
+  // Sendero dibuja un cursor propio y sin mover el mouse queda plantado en el
+  // centro exacto del viewport, es decir en el medio de la captura. Mandarlo a
+  // una esquina es inocuo para los sitios que no tienen cursor custom.
+  await page.mouse.move(ANCHO - 4, ALTO - 4)
   // Las secciones animan al entrar en viewport (framer-motion, `once: true`) y
   // los títulos lo hacen línea por línea con stagger. Sin esta espera se
   // capturan a medio escribir.
