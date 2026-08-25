@@ -43,6 +43,20 @@ const PROYECTOS = [
     stack: ["React", "Tailwind", "Framer Motion", "React Router"],
     accent: "#7c3aed",
   },
+  {
+    slug: "sendero-kappa",
+    i18nKey: "senderoKappa",
+    url: "https://sendero-kappa.vercel.app/",
+    stack: ["React", "Tailwind", "Framer Motion", "React Router"],
+    accent: "#7c3aed",
+  },
+  {
+    slug: "sonrisa-elite",
+    i18nKey: "sonrisaelite",
+    url: "https://astraviastudio-sonrisaelite.vercel.app/",
+    stack: ["React", "Tailwind", "Framer Motion", "React Router"],
+    accent: "#7c3aed",
+  }
 ];
 
 export default function Clients() {

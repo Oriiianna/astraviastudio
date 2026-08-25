@@ -151,11 +151,26 @@
         "alt": "Home del sitio de Altamira Bienes Raíces: hero con buscador de propiedades y grilla de destacadas"
       },
       "oscuroCafe": {
-        "title": "Oscuro Café - Cafetería de Especialidad",
+        "title": "Oscuro Café · Cafetería de Especialidad",
         "tag": "Pieza propia",
-        "domain": "Oscuro Café - Cafetería de Especialidad",
-        "description": "Una landing premium pra una cafetería de especialidad, diseñada para transmitir calidez y sotisticación. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada taza de café, mientras se destacan los productos y servicios ofrecidos.",
+        "domain": "Oscuro Café · Cafetería de Especialidad",
+        "description": "Una landing premium para una cafetería de especialidad, diseñada para transmitir calidez y sotisticación. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada taza de café, mientras se destacan los productos y servicios ofrecidos.",
         "alt": "Home del sitio de Oscuro Café: hero con imagen del café y grilla de productos destacados"
+      }
+      ,
+      "senderoKappa": {
+        "title": "Sendero Kappa · Equipamiento Outdoor",
+        "tag": "Pieza propia",
+        "domain": "Sendero Kappa · ",
+        "description": "Marca de equipamiento outdoor, diseñada para transmitir aventura y calidad. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada producto, mientras se destacan las características y servicios ofrecidos.",
+        "alt": "Home del sitio de Sendero Kappa: hero con imagen de equipamiento outdoor y grilla de productos destacados"
+      },
+      "sonrisaelite": {
+        "title": "Sonrisa Elite · Consultorio Odontológico",
+        "tag": "Own piece",
+        "domain": "Sonrisa Elite · Consultorio Odontológico",
+        "description": "Sitio web para una clínica dental moderna que ofrece odontología general, estética e implantes con tecnología avanzada y atención personalizada. Incluye catálogo de tratamientos, equipo médico, testimonios y resultados de antes y después.",
+        "alt": "Página principal de la clínica dental: sección hero con especialista atendiendo a un paciente, grilla de tratamientos odontológicos y testimonios de pacientes"
       }
     }
   },

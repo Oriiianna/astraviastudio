@@ -78,6 +78,15 @@ const PROYECTOS = [
     // legible el recorrido del hover.
     pantallas: [0, 4830],
   },
+  {
+    slug: 'sendero-kappa',
+    url: 'https://sendero-kappa.vercel.app/',
+    pantallas: [0, 4830],
+  },
+  {slug: 'sonrisaelite',
+    url: 'https://astraviastudio-sonrisaelite.vercel.app/',
+    pantallas: [0, 4830],
+  }
 ]
 
 async function capturarPantalla(page, y) {

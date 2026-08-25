@@ -151,11 +151,25 @@
         "alt": "Home of Altamira Real Estate site: hero with property search and featured grid"
       },
       "oscuroCafe": {
-        "title": "Oscuro Café - Specialty Coffee",
+        "title": "Oscuro Café · Specialty Coffee",
         "tag": "Own piece",
-        "domain": "Oscuro Café - Specialty Coffee",
+        "domain": "Oscuro Café · Specialty Coffee",
         "description": "A premium landing page for a specialty coffee shop designed to convey warmth and sophistication. The experience combines fluid animations and a visual narrative that invites you to discover the story behind each cup of coffee, while highlighting products and services.",
         "alt": "Home of Oscuro Café site: hero with coffee image and featured products grid"
+      },
+      "senderoKappa": {
+        "title": "Sendero Kappa · Outdoor Gear",
+        "tag": "Own piece",
+        "domain": "Sendero Kappa · Outdoor Gear",
+        "description": "A premium landing page for an outdoor gear brand designed to convey adventure and quality. The experience combines fluid animations and a visual narrative that invites you to discover the story behind each product, while highlighting features and services.",
+        "alt": "Home of Sendero Kappa site: hero with outdoor gear image and featured products grid"
+      },
+      "sonrisaelite": {
+        "title": "Sonrisa Élite · Modern Dental Clinic",
+        "tag": "Own piece",
+        "domain": "Sonrisa Elite · Modern Dental Clinic",
+        "description": "Website for a modern dental clinic offering general, cosmetic, and implant dentistry with advanced technology and personalized care. Features treatments, medical team profile, patient reviews, and before-and-after results.",
+        "alt": "Dental clinic home page: hero section showing a dentist with a patient, grid of dental treatments, and patient testimonials"
       }
     }
   },
