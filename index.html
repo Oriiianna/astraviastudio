@@ -35,23 +35,16 @@
       content="Equipo de diseño y desarrollo web. Creamos sitios y aplicaciones a medida: rápidos, pensados para convertir visitas en consultas y listos para crecer."
     />
 
-    <!-- ⚠️ PENDIENTE: falta el dominio definitivo.
-         Estas cuatro etiquetas necesitan URL absoluta, así que quedan
-         comentadas: un canonical o un og:image apuntando al dominio
-         equivocado es peor que no tenerlos (Google indexa la URL que le
-         declares, y las redes cachean la miniatura del primer intento).
-
-         Cuando exista el dominio: descomentá el bloque, reemplazá DOMINIO,
-         y sumá la línea `Sitemap:` en public/robots.txt y la `url` del
-         JSON-LD de más abajo. Son los cinco lugares, no hay más. -->
-    <!--
-    <link rel="canonical" href="https://DOMINIO/" />
-    <meta property="og:url" content="https://DOMINIO/" />
-    <meta property="og:image" content="https://DOMINIO/brand/og-astravia.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:image" content="https://DOMINIO/brand/og-astravia.jpg" />
-    -->
+    <!-- Open Graph: la tarjeta que se ve al pegar el link en WhatsApp,
+         LinkedIn o Slack. Requiere URL absoluta; la imagen la genera
+         scripts/optimize-og.mjs → public/brand/og-astravia.jpg. -->
+    <link rel="canonical" href="https://astraviastudio.com.ar/" />
+    <meta property="og:url" content="https://astraviastudio.com.ar/" />
+    <meta property="og:image" content="https://astraviastudio.com.ar/brand/og-portada.png" />
+    <meta property="og:image:width" content="5296" />
+    <meta property="og:image:height" content="4752" />
+    <meta property="og:image:alt" content="Astravia Studio — Sitios y aplicaciones web a medida" />
+    <meta name="twitter:image" content="https://astraviastudio.com.ar/brand/og-portada.png" />
 
     <link rel="icon" type="image/png" href="/brand/favicon.png" />
     <link rel="apple-touch-icon" href="/brand/isotipo-astravia.png" />
@@ -71,9 +64,9 @@
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         "name": "Astravia Studio",
-        "url": "https://www.astraviastudio.com.ar",
-        "logo": "https://www.astraviastudio.com.ar/brand/isotipo-astravia.png",
-        "image": "https://www.astraviastudio.com.ar/brand/og-astravia.jpg",
+        "url": "https://astraviastudio.com.ar",
+        "logo": "https://astraviastudio.com.ar/brand/isotipo-astravia.png",
+        "image": "https://astraviastudio.com.ar/brand/og-astravia.jpg",
         "description": "Equipo de diseño y desarrollo de sitios y aplicaciones web a medida.",
         "email": "astraviastudio@gmail.com",
         "address": {
