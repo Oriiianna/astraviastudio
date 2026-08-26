@@ -37,16 +37,21 @@ export default function Process() {
           <p>{t('process.description')}</p>
         </header>
 
-        <ol className="process__steps">
-          <span className="process__line" aria-hidden="true" />
+        <ol className="process__steps" data-reveal>
+          {/* El riel se dibuja de punta a punta cuando la seccion entra en cuadro. */}
+          <span className="process__rail" aria-hidden="true">
+            <i />
+          </span>
 
           {STEPS.map(({ n, icon: Icon, key }, i) => (
             <li className="step" key={n} data-reveal style={{ '--delay': `${i * 130}ms` }}>
-              <span className="step__icon">
+              {/* El orden lo lleva el <ol>: el numeral es decorativo. */}
+              <span className="step__cifra" aria-hidden="true">{n}</span>
+
+              <span className="step__nodo">
                 <Icon />
-                <i className="step__ring" aria-hidden="true" />
               </span>
-              <span className="step__n">{n}</span>
+
               <h3>{t(`process.steps.${key}.title`)}</h3>
               <p>{t(`process.steps.${key}.text`)}</p>
             </li>

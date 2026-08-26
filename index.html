@@ -108,8 +108,193 @@
 
       gtag("config", "G-3MC7WMBBX0");
     </script>
+
+    <!-- ===========================================================
+         Precarga — inline a propósito.
+         El blanco que pinta el navegador antes de que llegue el CSS
+         del bundle dura ~520 ms con red lenta. Un componente React no
+         puede taparlo: para cuando monta, el flash ya ocurrió. Por eso
+         esto vive acá, sin depender de ningún archivo externo.
+         =========================================================== -->
+    <style>
+      #precarga {
+        --p: 0;
+        --ancho: clamp(210px, 26vw, 330px);
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        background: #080012;
+        font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+        opacity: 1;
+        transition: opacity 0.6s cubic-bezier(0.22, 0.7, 0.24, 1);
+      }
+
+      #precarga .marca {
+        margin: 0;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.66em;
+        text-indent: 0.66em;
+        color: #efecff;
+      }
+
+      #precarga .sub {
+        margin: 8px 0 34px;
+        font-size: 0.58rem;
+        font-weight: 400;
+        letter-spacing: 0.46em;
+        text-indent: 0.46em;
+        color: #67608c;
+      }
+
+      /* La barra: riel tenue y relleno escalado por --p. Escala con transform
+         en vez de animar width para no relayoutear en cada cuadro. */
+      #precarga .riel {
+        position: relative;
+        width: var(--ancho);
+        height: 2px;
+        border-radius: 2px;
+        background: rgba(167, 139, 250, 0.14);
+      }
+
+      #precarga .relleno {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #621ae2 0%, #7c3aed 55%, #9fd4f7 100%);
+        transform: scaleX(var(--p));
+        transform-origin: left;
+        box-shadow: 0 0 10px rgba(124, 58, 237, 0.85);
+      }
+
+      /* Punta luminosa: viaja con el borde del relleno. */
+      #precarga .punta {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 5px;
+        height: 5px;
+        margin-left: -2.5px;
+        border-radius: 50%;
+        background: #cfeaff;
+        translate: calc(var(--p) * var(--ancho)) -50%;
+        box-shadow: 0 0 10px 2px rgba(159, 212, 247, 0.9);
+      }
+
+      #precarga .pie {
+        display: flex;
+        justify-content: space-between;
+        width: var(--ancho);
+        margin-top: 16px;
+        font-size: 0.56rem;
+        font-weight: 500;
+        letter-spacing: 0.24em;
+        color: #67608c;
+      }
+
+      #precarga .cifra { color: #a78bfa; font-variant-numeric: tabular-nums; }
+
+      #precarga.listo { opacity: 0; pointer-events: none; }
+
+      @media (prefers-reduced-motion: reduce) {
+        #precarga { transition: none; }
+      }
+    </style>
   </head>
   <body>
+    <div id="precarga" role="status" aria-live="polite" aria-label="Cargando Astravia Studio">
+      <p class="marca">ASTRAVIA</p>
+      <p class="sub">STUDIO</p>
+      <div class="riel">
+        <span class="relleno"></span>
+        <span class="punta"></span>
+      </div>
+      <div class="pie">
+        <span>PREPARANDO</span>
+        <span class="cifra">0%</span>
+      </div>
+    </div>
+
+    <script>
+      // Progreso real: nada de temporizadores fingidos. Tres señales, cada una
+      // con su peso, y un tope duro por si alguna nunca llega.
+      //
+      // Las señales son discretas: atada directo a ellas la barra saltaría
+      // 0 -> 30 -> 70 -> 100. Por eso el valor mostrado persigue al objetivo
+      // con suavizado y además tiene un techo por tiempo (MIN_MS), que es lo
+      // que la hace llenarse pareja en vez de a los tirones.
+      (function () {
+        var capa = document.getElementById("precarga");
+        if (!capa) return;
+
+        var MIN_MS = 2000;
+        var PESOS = { fuentes: 0.3, hero: 0.4, app: 0.3 };
+        var hecho = { fuentes: 0, hero: 0, app: 0 };
+        var cifra = capa.querySelector(".cifra");
+        var reloj = function () {
+          return (window.performance && performance.now) ? performance.now() : Date.now();
+        };
+        var t0 = reloj();
+        var mostrado = 0, cerrado = false, raf = 0;
+
+        function objetivo() {
+          return hecho.fuentes * PESOS.fuentes + hecho.hero * PESOS.hero + hecho.app * PESOS.app;
+        }
+
+        function cuadro() {
+          var techo = Math.min(1, (reloj() - t0) / MIN_MS);
+          var meta = Math.min(objetivo(), techo);
+          mostrado += (meta - mostrado) * 0.14;
+          if (meta - mostrado < 0.004) mostrado = meta;
+          capa.style.setProperty("--p", mostrado.toFixed(4));
+          if (cifra) cifra.textContent = Math.round(mostrado * 100) + "%";
+          if (mostrado >= 0.999 && objetivo() >= 0.999) { cerrar(); return; }
+          raf = requestAnimationFrame(cuadro);
+        }
+
+        function cerrar() {
+          if (cerrado) return;
+          cerrado = true;
+          if (raf) cancelAnimationFrame(raf);
+          capa.style.setProperty("--p", "1");
+          if (cifra) cifra.textContent = "100%";
+          // Deja ver la barra llena un instante antes de fundir.
+          setTimeout(function () {
+            capa.classList.add("listo");
+            setTimeout(function () { capa.remove(); }, 650);
+          }, 260);
+        }
+
+        // 1. Tipografía: sin esto el texto salta de fallback a Poppins a la vista.
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function () { hecho.fuentes = 1; });
+        } else { hecho.fuentes = 1; }
+
+        // 2. Primer fotograma del hero, que es lo primero que se ve al entrar.
+        var movil = window.matchMedia("(max-width: 860px)").matches;
+        var img = new Image();
+        img.onload = img.onerror = function () { hecho.hero = 1; };
+        img.src = movil ? "/hero/mobile.webp" : "/hero/w1280/frame-001.webp";
+
+        // 3. React montado: #root deja de estar vacío.
+        var raiz = document.getElementById("root");
+        if (raiz && raiz.children.length) { hecho.app = 1; }
+        else if (raiz) {
+          var obs = new MutationObserver(function () {
+            if (raiz.children.length) { obs.disconnect(); hecho.app = 1; }
+          });
+          obs.observe(raiz, { childList: true });
+        } else { hecho.app = 1; }
+
+        // Tope duro: la precarga nunca puede dejar a nadie encerrado.
+        setTimeout(cerrar, 6000);
+        cuadro();
+      })();
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
