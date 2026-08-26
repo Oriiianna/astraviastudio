@@ -112,7 +112,7 @@
     <style>
       #precarga {
         --p: 0;
-        --ancho: clamp(210px, 26vw, 330px);
+        --ancho: clamp(300px, 40vw, 560px);
         position: fixed;
         inset: 0;
         z-index: 9999;
@@ -127,7 +127,7 @@
 
       #precarga .marca {
         margin: 0;
-        font-size: 0.9rem;
+        font-size: clamp(1.15rem, 2.6vw, 1.9rem);
         font-weight: 600;
         letter-spacing: 0.66em;
         text-indent: 0.66em;
@@ -135,8 +135,8 @@
       }
 
       #precarga .sub {
-        margin: 8px 0 34px;
-        font-size: 0.58rem;
+        margin: 12px 0 48px;
+        font-size: clamp(0.68rem, 1.1vw, 0.86rem);
         font-weight: 400;
         letter-spacing: 0.46em;
         text-indent: 0.46em;
@@ -148,8 +148,8 @@
       #precarga .riel {
         position: relative;
         width: var(--ancho);
-        height: 2px;
-        border-radius: 2px;
+        height: 3px;
+        border-radius: 3px;
         background: rgba(167, 139, 250, 0.14);
       }
 
@@ -160,7 +160,7 @@
         background: linear-gradient(90deg, #621ae2 0%, #7c3aed 55%, #9fd4f7 100%);
         transform: scaleX(var(--p));
         transform-origin: left;
-        box-shadow: 0 0 10px rgba(124, 58, 237, 0.85);
+        box-shadow: 0 0 16px rgba(124, 58, 237, 0.85);
       }
 
       /* Punta luminosa: viaja con el borde del relleno. */
@@ -168,21 +168,21 @@
         position: absolute;
         top: 50%;
         left: 0;
-        width: 5px;
-        height: 5px;
-        margin-left: -2.5px;
+        width: 8px;
+        height: 8px;
+        margin-left: -4px;
         border-radius: 50%;
         background: #cfeaff;
         translate: calc(var(--p) * var(--ancho)) -50%;
-        box-shadow: 0 0 10px 2px rgba(159, 212, 247, 0.9);
+        box-shadow: 0 0 16px 3px rgba(159, 212, 247, 0.9);
       }
 
       #precarga .pie {
         display: flex;
         justify-content: space-between;
         width: var(--ancho);
-        margin-top: 16px;
-        font-size: 0.56rem;
+        margin-top: 22px;
+        font-size: clamp(0.64rem, 0.95vw, 0.78rem);
         font-weight: 500;
         letter-spacing: 0.24em;
         color: #67608c;
