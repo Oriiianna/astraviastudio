@@ -128,8 +128,6 @@ export default function Clients() {
                     ))}
                   </ul>
 
-                  <p className="project__description">{copy('description')}</p>
-
                   <a
                     className="btn btn--primary btn--rect project__cta"
                     href={proyecto.url}

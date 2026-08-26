@@ -119,11 +119,6 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} Astravia. {footerT("footer.rights")}
           </p>
-          <div className="footer__legal">
-            <a href="/privacy">{footerT("footer.links.privacy")}</a>
-            <span className="footer__legal-separator">|</span>
-            <a href="/terms">{footerT("footer.links.terms")}</a>
-          </div>
         </div>
       </div>
     </footer>
