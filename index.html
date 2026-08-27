@@ -51,9 +51,41 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- La hoja de Google Fonts bloqueaba el render 457 ms (medido: 187→411 ms
+         con el FCP justo detrás). No hace falta que bloquee: la precarga pinta
+         con su CSS inline y además espera document.fonts.ready antes de irse,
+         así que el cambio de tipografía ocurre detrás del telón.
+         media="print" hace que el navegador la baje sin bloquear; onload la
+         devuelve a "all". El <noscript> cubre el caso sin JS. -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" />
+    </noscript>
+
+    <!-- El primer fotograma del hero lo pedía el JS, así que no arrancaba hasta
+         los 550 ms (Lighthouse lo marca como "LCP request discovery"). Declarado
+         acá, el navegador lo descubre al parsear el head. Las dos variantes son
+         excluyentes por media: solo se baja la que corresponde al viewport. -->
+    <link
+      rel="preload"
+      as="image"
+      href="/hero/mobile.webp"
+      media="(max-width: 860px)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/hero/w1280/frame-001.webp"
+      media="(min-width: 861px)"
+      fetchpriority="high"
     />
 
     <!-- Datos estructurados: es lo que lee Google para armar el panel lateral
@@ -223,9 +255,9 @@
         var capa = document.getElementById("precarga");
         if (!capa) return;
 
-        var MIN_MS = 2000;
-        var PESOS = { fuentes: 0.3, hero: 0.4, app: 0.3 };
-        var hecho = { fuentes: 0, hero: 0, app: 0 };
+        var MIN_MS = 1000;
+        var PESOS = { fuentes: 0.25, hero: 0.3, estilos: 0.2, app: 0.25 };
+        var hecho = { fuentes: 0, hero: 0, estilos: 0, app: 0 };
         var cifra = capa.querySelector(".cifra");
         var reloj = function () {
           return (window.performance && performance.now) ? performance.now() : Date.now();
@@ -234,12 +266,24 @@
         var mostrado = 0, cerrado = false, raf = 0;
 
         function objetivo() {
-          return hecho.fuentes * PESOS.fuentes + hecho.hero * PESOS.hero + hecho.app * PESOS.app;
+          // La hoja del bundle se carga sin bloquear (ver cssNoBloqueante en
+          // vite.config.js) y avisa con esta bandera. El bucle ya corre por
+          // cuadro, asi que alcanza con mirarla aca: sin evento ni listener.
+          // En dev el plugin no corre y la hoja la inyecta Vite por JS, asi que
+          // se da por cumplida y la barra no se queda trabada.
+          if (!hecho.estilos && (window.__cssLista || !document.querySelector('link[rel=stylesheet][media=print]'))) {
+            hecho.estilos = 1;
+          }
+          return hecho.fuentes * PESOS.fuentes + hecho.hero * PESOS.hero +
+                 hecho.estilos * PESOS.estilos + hecho.app * PESOS.app;
         }
 
         function cuadro() {
           var techo = Math.min(1, (reloj() - t0) / MIN_MS);
           var meta = Math.min(objetivo(), techo);
+          // Con el piso en 1000 ms el techo por tiempo se completa antes, asi que
+          // los escalones de las senales quedan expuestos. Un factor mas bajo
+          // reparte cada salto entre mas cuadros y la barra vuelve a leerse pareja.
           mostrado += (meta - mostrado) * 0.14;
           if (meta - mostrado < 0.004) mostrado = meta;
           capa.style.setProperty("--p", mostrado.toFixed(4));
