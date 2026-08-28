@@ -1,7 +1,8 @@
 /* Contenedor principal fijo abajo a la derecha */
 .floating-container {
   position: fixed;
-  bottom: 80px;
+  /* Mismo margen abajo que a la derecha: el par queda apoyado en la esquina. */
+  bottom: 24px;
   right: 24px;
   display: flex;
   flex-direction: column;
@@ -47,10 +48,23 @@
   height: 38px !important;
 }
 
-/* 1. Volver Arriba (Estética oscura neutra) */
+/* 1. Volver Arriba (Estética oscura neutra)
+   Mas chico que el de WhatsApp: es una utilidad, no una via de contacto.
+   El icono baja en la misma proporcion (59% del diametro) para que la
+   flecha no quede desbalanceada dentro del circulo. */
 .back-to-top {
+  width: 48px;
+  height: 48px;
+  /* El contenedor esta anclado abajo, asi que este margen separa un poco mas
+     los dos botones subiendo solo este: el de WhatsApp no se mueve. */
+  margin-bottom: 8px;
   background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: #ffffff;
+}
+
+.back-to-top svg {
+  width: 28px !important;
+  height: 28px !important;
 }
 
 .back-to-top:hover {

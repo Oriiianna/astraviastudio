@@ -35,32 +35,57 @@
       content="Equipo de diseño y desarrollo web. Creamos sitios y aplicaciones a medida: rápidos, pensados para convertir visitas en consultas y listos para crecer."
     />
 
-    <!-- ⚠️ PENDIENTE: falta el dominio definitivo.
-         Estas cuatro etiquetas necesitan URL absoluta, así que quedan
-         comentadas: un canonical o un og:image apuntando al dominio
-         equivocado es peor que no tenerlos (Google indexa la URL que le
-         declares, y las redes cachean la miniatura del primer intento).
-
-         Cuando exista el dominio: descomentá el bloque, reemplazá DOMINIO,
-         y sumá la línea `Sitemap:` en public/robots.txt y la `url` del
-         JSON-LD de más abajo. Son los cinco lugares, no hay más. -->
-    <!--
-    <link rel="canonical" href="https://DOMINIO/" />
-    <meta property="og:url" content="https://DOMINIO/" />
-    <meta property="og:image" content="https://DOMINIO/brand/og-astravia.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:image" content="https://DOMINIO/brand/og-astravia.jpg" />
-    -->
+    <!-- Open Graph: la tarjeta que se ve al pegar el link en WhatsApp,
+         LinkedIn o Slack. Requiere URL absoluta; la imagen la genera
+         scripts/optimize-og.mjs → public/brand/og-astravia.jpg. -->
+    <link rel="canonical" href="https://astraviastudio.com.ar/" />
+    <meta property="og:url" content="https://astraviastudio.com.ar/" />
+    <meta property="og:image" content="https://astraviastudio.com.ar/brand/og-portada.png" />
+    <meta property="og:image:width" content="5296" />
+    <meta property="og:image:height" content="4752" />
+    <meta property="og:image:alt" content="Astravia Studio — Sitios y aplicaciones web a medida" />
+    <meta name="twitter:image" content="https://astraviastudio.com.ar/brand/og-portada.png" />
 
     <link rel="icon" type="image/png" href="/brand/favicon.png" />
     <link rel="apple-touch-icon" href="/brand/isotipo-astravia.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- La hoja de Google Fonts bloqueaba el render 457 ms (medido: 187→411 ms
+         con el FCP justo detrás). No hace falta que bloquee: la precarga pinta
+         con su CSS inline y además espera document.fonts.ready antes de irse,
+         así que el cambio de tipografía ocurre detrás del telón.
+         media="print" hace que el navegador la baje sin bloquear; onload la
+         devuelve a "all". El <noscript> cubre el caso sin JS. -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" />
+    </noscript>
+
+    <!-- El primer fotograma del hero lo pedía el JS, así que no arrancaba hasta
+         los 550 ms (Lighthouse lo marca como "LCP request discovery"). Declarado
+         acá, el navegador lo descubre al parsear el head. Las dos variantes son
+         excluyentes por media: solo se baja la que corresponde al viewport. -->
+    <link
+      rel="preload"
+      as="image"
+      href="/hero/mobile.webp"
+      media="(max-width: 860px)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/hero/w1280/frame-001.webp"
+      media="(min-width: 861px)"
+      fetchpriority="high"
     />
 
     <!-- Datos estructurados: es lo que lee Google para armar el panel lateral
@@ -71,9 +96,9 @@
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         "name": "Astravia Studio",
-        "url": "https://www.astraviastudio.com.ar",
-        "logo": "https://www.astraviastudio.com.ar/brand/isotipo-astravia.png",
-        "image": "https://www.astraviastudio.com.ar/brand/og-astravia.jpg",
+        "url": "https://astraviastudio.com.ar",
+        "logo": "https://astraviastudio.com.ar/brand/isotipo-astravia.png",
+        "image": "https://astraviastudio.com.ar/brand/og-astravia.jpg",
         "description": "Equipo de diseño y desarrollo de sitios y aplicaciones web a medida.",
         "email": "astraviastudio@gmail.com",
         "address": {
@@ -108,8 +133,205 @@
 
       gtag("config", "G-3MC7WMBBX0");
     </script>
+
+    <!-- ===========================================================
+         Precarga — inline a propósito.
+         El blanco que pinta el navegador antes de que llegue el CSS
+         del bundle dura ~520 ms con red lenta. Un componente React no
+         puede taparlo: para cuando monta, el flash ya ocurrió. Por eso
+         esto vive acá, sin depender de ningún archivo externo.
+         =========================================================== -->
+    <style>
+      #precarga {
+        --p: 0;
+        --ancho: clamp(300px, 40vw, 560px);
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        background: #080012;
+        font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+        opacity: 1;
+        transition: opacity 0.6s cubic-bezier(0.22, 0.7, 0.24, 1);
+      }
+
+      #precarga .marca {
+        margin: 0;
+        font-size: clamp(1.15rem, 2.6vw, 1.9rem);
+        font-weight: 600;
+        letter-spacing: 0.66em;
+        text-indent: 0.66em;
+        color: #efecff;
+      }
+
+      #precarga .sub {
+        margin: 12px 0 48px;
+        font-size: clamp(0.68rem, 1.1vw, 0.86rem);
+        font-weight: 400;
+        letter-spacing: 0.46em;
+        text-indent: 0.46em;
+        color: #67608c;
+      }
+
+      /* La barra: riel tenue y relleno escalado por --p. Escala con transform
+         en vez de animar width para no relayoutear en cada cuadro. */
+      #precarga .riel {
+        position: relative;
+        width: var(--ancho);
+        height: 3px;
+        border-radius: 3px;
+        background: rgba(167, 139, 250, 0.14);
+      }
+
+      #precarga .relleno {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #621ae2 0%, #7c3aed 55%, #9fd4f7 100%);
+        transform: scaleX(var(--p));
+        transform-origin: left;
+        box-shadow: 0 0 16px rgba(124, 58, 237, 0.85);
+      }
+
+      /* Punta luminosa: viaja con el borde del relleno. */
+      #precarga .punta {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        margin-left: -4px;
+        border-radius: 50%;
+        background: #cfeaff;
+        translate: calc(var(--p) * var(--ancho)) -50%;
+        box-shadow: 0 0 16px 3px rgba(159, 212, 247, 0.9);
+      }
+
+      #precarga .pie {
+        display: flex;
+        justify-content: space-between;
+        width: var(--ancho);
+        margin-top: 22px;
+        font-size: clamp(0.64rem, 0.95vw, 0.78rem);
+        font-weight: 500;
+        letter-spacing: 0.24em;
+        color: #67608c;
+      }
+
+      #precarga .cifra { color: #a78bfa; font-variant-numeric: tabular-nums; }
+
+      #precarga.listo { opacity: 0; pointer-events: none; }
+
+      @media (prefers-reduced-motion: reduce) {
+        #precarga { transition: none; }
+      }
+    </style>
   </head>
   <body>
+    <div id="precarga" role="status" aria-live="polite" aria-label="Cargando Astravia Studio">
+      <p class="marca">ASTRAVIA</p>
+      <p class="sub">STUDIO</p>
+      <div class="riel">
+        <span class="relleno"></span>
+        <span class="punta"></span>
+      </div>
+      <div class="pie">
+        <span>PREPARANDO</span>
+        <span class="cifra">0%</span>
+      </div>
+    </div>
+
+    <script>
+      // Progreso real: nada de temporizadores fingidos. Tres señales, cada una
+      // con su peso, y un tope duro por si alguna nunca llega.
+      //
+      // Las señales son discretas: atada directo a ellas la barra saltaría
+      // 0 -> 30 -> 70 -> 100. Por eso el valor mostrado persigue al objetivo
+      // con suavizado y además tiene un techo por tiempo (MIN_MS), que es lo
+      // que la hace llenarse pareja en vez de a los tirones.
+      (function () {
+        var capa = document.getElementById("precarga");
+        if (!capa) return;
+
+        var MIN_MS = 1000;
+        var PESOS = { fuentes: 0.25, hero: 0.3, estilos: 0.2, app: 0.25 };
+        var hecho = { fuentes: 0, hero: 0, estilos: 0, app: 0 };
+        var cifra = capa.querySelector(".cifra");
+        var reloj = function () {
+          return (window.performance && performance.now) ? performance.now() : Date.now();
+        };
+        var t0 = reloj();
+        var mostrado = 0, cerrado = false, raf = 0;
+
+        function objetivo() {
+          // La hoja del bundle se carga sin bloquear (ver cssNoBloqueante en
+          // vite.config.js) y avisa con esta bandera. El bucle ya corre por
+          // cuadro, asi que alcanza con mirarla aca: sin evento ni listener.
+          // En dev el plugin no corre y la hoja la inyecta Vite por JS, asi que
+          // se da por cumplida y la barra no se queda trabada.
+          if (!hecho.estilos && (window.__cssLista || !document.querySelector('link[rel=stylesheet][media=print]'))) {
+            hecho.estilos = 1;
+          }
+          return hecho.fuentes * PESOS.fuentes + hecho.hero * PESOS.hero +
+                 hecho.estilos * PESOS.estilos + hecho.app * PESOS.app;
+        }
+
+        function cuadro() {
+          var techo = Math.min(1, (reloj() - t0) / MIN_MS);
+          var meta = Math.min(objetivo(), techo);
+          // Con el piso en 1000 ms el techo por tiempo se completa antes, asi que
+          // los escalones de las senales quedan expuestos. Un factor mas bajo
+          // reparte cada salto entre mas cuadros y la barra vuelve a leerse pareja.
+          mostrado += (meta - mostrado) * 0.14;
+          if (meta - mostrado < 0.004) mostrado = meta;
+          capa.style.setProperty("--p", mostrado.toFixed(4));
+          if (cifra) cifra.textContent = Math.round(mostrado * 100) + "%";
+          if (mostrado >= 0.999 && objetivo() >= 0.999) { cerrar(); return; }
+          raf = requestAnimationFrame(cuadro);
+        }
+
+        function cerrar() {
+          if (cerrado) return;
+          cerrado = true;
+          if (raf) cancelAnimationFrame(raf);
+          capa.style.setProperty("--p", "1");
+          if (cifra) cifra.textContent = "100%";
+          // Deja ver la barra llena un instante antes de fundir.
+          setTimeout(function () {
+            capa.classList.add("listo");
+            setTimeout(function () { capa.remove(); }, 650);
+          }, 260);
+        }
+
+        // 1. Tipografía: sin esto el texto salta de fallback a Poppins a la vista.
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function () { hecho.fuentes = 1; });
+        } else { hecho.fuentes = 1; }
+
+        // 2. Primer fotograma del hero, que es lo primero que se ve al entrar.
+        var movil = window.matchMedia("(max-width: 860px)").matches;
+        var img = new Image();
+        img.onload = img.onerror = function () { hecho.hero = 1; };
+        img.src = movil ? "/hero/mobile.webp" : "/hero/w1280/frame-001.webp";
+
+        // 3. React montado: #root deja de estar vacío.
+        var raiz = document.getElementById("root");
+        if (raiz && raiz.children.length) { hecho.app = 1; }
+        else if (raiz) {
+          var obs = new MutationObserver(function () {
+            if (raiz.children.length) { obs.disconnect(); hecho.app = 1; }
+          });
+          obs.observe(raiz, { childList: true });
+        } else { hecho.app = 1; }
+
+        // Tope duro: la precarga nunca puede dejar a nadie encerrado.
+        setTimeout(cerrar, 6000);
+        cuadro();
+      })();
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

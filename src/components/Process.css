@@ -4,112 +4,178 @@
   z-index: 2;
 }
 
+/* --- Fases ---
+   Cuatro columnas separadas por hairlines en vez de por gap: la división es
+   estructural, no espacio vacío. El numeral es el ancla visual —antes lo era
+   un círculo de 58 px, el 19 % del ancho de su columna— y el icono queda como
+   marcador sobre el riel. */
 .process__steps {
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px;
+  --pad: clamp(20px, 2.2vw, 34px);
+  gap: 0;
+  margin-top: clamp(46px, 5vw, 76px);
   list-style: none;
 }
 
-/* Línea que conecta los pasos */
-.process__line {
+/* Riel: se dibuja de izquierda a derecha cuando la sección entra en cuadro.
+   Es la única pieza que anima al revelar, así que el gesto se lee. */
+.process__rail {
   position: absolute;
-  top: 29px;
-  left: 12%;
-  right: 12%;
+  top: 21px;
+  /* De centro del primer nodo a centro del ultimo: un proceso de cuatro pasos
+     termina en el cuarto, no en el borde del contenedor. */
+  left: 21px;
+  right: calc(25% - var(--pad) - 21px);
   height: 1px;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(167, 139, 250, 0.45) 0 7px,
-    transparent 7px 15px
-  );
+  background: rgba(167, 139, 250, 0.12);
+  overflow: hidden;
+}
+
+.process__rail i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #621ae2 0%, #7c3aed 45%, #9fd4f7 100%);
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.75);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.9s cubic-bezier(0.22, 0.7, 0.24, 1) 240ms;
+}
+
+.process__steps.is-visible .process__rail i {
+  transform: scaleX(1);
 }
 
 /* --- Paso --- */
 .step {
   position: relative;
-  text-align: center;
-  padding-inline: 8px;
+  isolation: isolate;
+  padding-inline: var(--pad);
 }
 
-.step__icon {
+.step:first-child {
+  padding-inline-start: 0;
+}
+
+
+/* Hairline divisoria: arranca debajo del riel para no cortarlo. */
+.step + .step::before {
+  content: '';
+  position: absolute;
+  inset: 52px auto 6px 0;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(167, 139, 250, 0.16) 20%,
+    rgba(167, 139, 250, 0.16) 76%,
+    transparent 100%
+  );
+}
+
+/* Numeral fantasma: el ancla de la columna. */
+.step__cifra {
+  position: absolute;
+  top: 26px;
+  right: var(--pad);
+  z-index: -1;
+  font-size: clamp(4rem, 6.6vw, 7rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  color: rgba(124, 58, 237, 0.14);
+  transition: color 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+
+.step:hover .step__cifra {
+  color: rgba(124, 58, 237, 0.28);
+  transform: translateY(-4px);
+}
+
+/* Nodo sobre el riel: marcador, ya no protagonista. */
+.step__nodo {
   position: relative;
   display: grid;
   place-items: center;
-  width: 58px;
-  height: 58px;
-  margin: 0 auto 22px;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 26px;
   border-radius: 50%;
   background: linear-gradient(160deg, #1b1449 0%, #0e0a30 100%);
-  border: 1px solid rgba(167, 139, 250, 0.35);
+  border: 1px solid rgba(167, 139, 250, 0.32);
   color: var(--violet-soft);
   transition: transform 0.45s var(--ease), border-color 0.45s var(--ease),
     box-shadow 0.45s var(--ease);
 }
 
-.step__icon svg {
-  width: 21px;
-  height: 21px;
+.step__nodo svg {
+  width: 18px;
+  height: 18px;
 }
 
-.step__ring {
-  position: absolute;
-  inset: -7px;
-  border-radius: 50%;
-  border: 1px solid rgba(167, 139, 250, 0.18);
-  opacity: 0;
-  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
-}
-
-.step:hover .step__icon {
-  transform: translateY(-5px);
+.step:hover .step__nodo {
+  transform: translateY(-4px);
   border-color: var(--violet-bright);
   box-shadow: 0 0 26px -4px rgba(139, 92, 246, 0.8);
 }
 
-.step:hover .step__ring {
-  opacity: 1;
-  transform: scale(1.12);
-}
-
-.step__n {
-  display: block;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--violet-bright);
-  margin-bottom: 10px;
-}
-
 .step h3 {
-  font-size: 1.05rem;
+  font-size: clamp(1rem, 1.25vw, 1.18rem);
   font-weight: 600;
+  letter-spacing: -0.015em;
   margin-bottom: 12px;
 }
 
 .step p {
-  font-size: 0.83rem;
+  font-size: 0.85rem;
   font-weight: 300;
-  line-height: 1.75;
+  line-height: 1.8;
   color: var(--text-muted);
-  max-width: 24ch;
-  margin-inline: auto;
+  max-width: 30ch;
 }
 
 /* --- Responsive --- */
 @media (max-width: 900px) {
   .process__steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 44px 20px;
+    gap: 46px clamp(20px, 4vw, 40px);
   }
-  .process__line {
+
+  /* Sin riel horizontal que recorrer, las divisorias tampoco tienen sentido:
+     el gap vuelve a hacer la separación. */
+  .process__rail,
+  .step + .step::before {
     display: none;
+  }
+
+  .step,
+  .step:first-child,
+  .step:last-child {
+    padding-inline: 0;
+  }
+
+  .step__cifra,
+  .step:last-child .step__cifra {
+    right: 0;
   }
 }
 
 @media (max-width: 520px) {
   .process__steps {
     grid-template-columns: 1fr;
+  }
+
+  .step p {
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* El riel es un gesto, no información: sin animación va directo a lleno. */
+  .process__rail i {
+    transform: scaleX(1);
+    transition: none;
   }
 }

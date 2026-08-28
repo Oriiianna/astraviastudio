@@ -90,33 +90,11 @@
 .footer__bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 20px;
   padding: 26px 0 30px;
   border-top: 1px solid var(--border);
   font-size: 0.76rem;
   color: var(--text-dim);
-}
-
-.footer__legal {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.footer__legal a {
-  font-size: 0.76rem;
-  color: var(--text-dim);
-  transition: color 0.3s var(--ease);
-}
-
-.footer__legal a:hover {
-  color: var(--violet-soft);
-}
-
-.footer__legal-separator {
-  color: var(--text-dim);
-  opacity: 0.5;
 }
 
 /* --- Responsive --- */

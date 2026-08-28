@@ -4,8 +4,8 @@ import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import Services from "./components/Services.jsx";
 import TechStack from "./components/TechStack.jsx";
-import Pricing from "./components/Pricing.jsx";
 import Process from "./components/Process.jsx";
+import Pricing from "./components/Pricing.jsx";
 import Clients from "./components/Clients.jsx";
 import CtaBanner from "./components/CtaBanner.jsx";
 import Contact from "./components/Contact.jsx";
@@ -84,9 +84,9 @@ function AppContent() {
       <main>
         <Hero />
         <Services />
+        <Process />
         <TechStack />
         <Pricing />
-        <Process />
         <Clients />
         <CtaBanner />
         <Contact />

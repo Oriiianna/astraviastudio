@@ -7,6 +7,14 @@ import "./Clients.css";
    Son tiras verticales de dos pantallas: la tarjeta las recorre al hover. */
 const PROYECTOS = [
   {
+    slug: "sendero",
+    i18nKey: "sendero",
+    url: "https://sendero-kappa.vercel.app/",
+    // El unico sin Tailwind: estila con CSS puro y tokens propios.
+    stack: ["React", "CSS puro", "Framer Motion"],
+    accent: "#7c3aed",
+  },
+  {
     slug: "serena",
     i18nKey: "serena",
     url: "https://astraviastudio-serena.vercel.app/",
@@ -22,6 +30,13 @@ const PROYECTOS = [
     accent: "#7c3aed",
   },
   {
+    slug: "sonrisa-elite",
+    i18nKey: "sonrisaelite",
+    url: "https://astraviastudio-sonrisaelite.vercel.app/",
+    stack: ["React", "Tailwind", "Framer Motion", "React Router"],
+    accent: "#7c3aed",
+  },
+  {
     slug: "altamira",
     i18nKey: "altamira",
     url: "https://astraviastudio-inmobiliaria.vercel.app/",
@@ -34,7 +49,7 @@ const PROYECTOS = [
     url: "https://astraviastudio-oscurocafe.vercel.app/",
     stack: ["React", "Tailwind", "Framer Motion", "React Router"],
     accent: "#7c3aed",
-  },
+  }
 ];
 
 export default function Clients() {
@@ -112,8 +127,6 @@ export default function Clients() {
                       <li key={tec}>{tec}</li>
                     ))}
                   </ul>
-
-                  <p className="project__description">{copy('description')}</p>
 
                   <a
                     className="btn btn--primary btn--rect project__cta"

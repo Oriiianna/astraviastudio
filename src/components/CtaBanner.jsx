@@ -34,10 +34,6 @@ export default function CtaBanner() {
           <div className="cta__glow" aria-hidden="true" />
           <div className="stars cta__stars" aria-hidden="true" />
 
-          <h2 className="cta__title">
-            {t('cta.title')} <span className="cta__accent">{t('cta.accent')}</span>
-          </h2>
-
           <div className="cta__body">
             <div className="cta__art">
               <div className="cta__art-glow" aria-hidden="true" />
@@ -51,6 +47,10 @@ export default function CtaBanner() {
             </div>
 
             <div className="cta__copy">
+              <h2 className="cta__title">
+                {t('cta.title')} <span className="cta__accent">{t('cta.accent')}</span>
+              </h2>
+
               <p>{t('cta.body')}</p>
               <a href="#contacto" className="btn btn--primary cta__btn">
                 {t('cta.button')} <IconArrowRight />
