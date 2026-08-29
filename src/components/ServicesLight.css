@@ -1,0 +1,195 @@
+/* ============================================================
+   ServicesLight — sección "Services" con acordeón (click para abrir
+   el párrafo) e imagen dinámica vinculada a cada servicio.
+   Sistema de diseño del proyecto: dark, glass, glow por tinte.
+   ============================================================ */
+
+.services-light__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(40px, 6vw, 84px);
+  align-items: center;
+}
+
+/* ---- Columna izquierda ---- */
+
+.services-light__title {
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+.services-light__desc {
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 46ch;
+  margin-bottom: 34px;
+}
+
+/* Thumbnail: contenedor con imagen dinámica (crossfade) */
+.services-light__thumb {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: linear-gradient(165deg, var(--bg-card-soft), var(--bg-card));
+  box-shadow: var(--shadow-card);
+}
+
+.services-light__thumb-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Etiqueta del servicio activo sobre la imagen */
+.services-light__thumb-tag {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2;
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: rgba(8, 6, 33, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--text-soft);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* ---- Columna derecha: acordeón ---- */
+
+.services-light__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-self: end;
+  width: 100%;
+  max-width: 560px;
+}
+
+.services-light__card {
+  border-radius: clamp(20px, 2.4vw, 34px);
+  background: linear-gradient(115deg, rgba(23, 19, 67, 0.6), rgba(17, 15, 51, 0.92));
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+.services-light__card:hover {
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  box-shadow: 0 24px 56px -28px color-mix(in srgb, var(--accent) 55%, transparent),
+    var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.services-light__card.is-open {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 26px 60px -28px color-mix(in srgb, var(--accent) 65%, transparent),
+    var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Trigger: fila clickeable de cada card */
+.services-light__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  padding: clamp(20px, 2vw, 26px) clamp(22px, 2.4vw, 32px);
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.services-light__name {
+  font-size: clamp(1.05rem, 1.63vw, 1.625rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.services-light__side {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+}
+
+.services-light__num {
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(
+    130deg,
+    var(--accent) 20%,
+    color-mix(in srgb, var(--accent) 40%, var(--ice)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.services-light__chevron-wrap {
+  display: inline-flex;
+}
+
+.services-light__chevron {
+  color: var(--text-dim);
+  transition: transform 0.35s var(--ease), color 0.3s var(--ease);
+}
+
+.services-light__card:hover .services-light__chevron,
+.services-light__card.is-open .services-light__chevron {
+  color: var(--accent);
+}
+
+.services-light__card.is-open .services-light__chevron {
+  transform: rotate(180deg);
+}
+
+/* Panel expansible del acordeón */
+.services-light__panel {
+  overflow: hidden;
+}
+
+.services-light__text {
+  padding: 0 clamp(22px, 2.4vw, 32px) clamp(20px, 2vw, 26px);
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--text-muted);
+  max-width: 52ch;
+  border-top: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  padding-top: clamp(16px, 1.6vw, 20px);
+  margin-top: 0;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .services-light__layout {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+}

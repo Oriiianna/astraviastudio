@@ -24,19 +24,19 @@
     "items": {
       "one": {
         "title": "Diseño UI/UX",
-        "text": "Diseñamos experiencias que guían al usuario y aumentan la conversión."
+        "text": "Diseñamos experiencias que guían al usuario y aumentan la conversión.Eliminamos la fricción en el recorrido de tu usuario. Estudiamos el comportamiento de tu audiencia para crear interfaces atractivas que facilitan las ventas y maximizan tu tasa de conversión."
       },
       "two": {
         "title": "Desarrollo Web",
-        "text": "Construimos con WordPress, Elementor, React, HTML, CSS, JS y más."
+        "text": "Desarrollamos sitios y aplicaciones web de alto rendimiento optimizados para posicionar en Google y convertir visitas en clientes recurrentes."
       },
       "three": {
         "title": "Optimización",
-        "text": "Velocidad, rendimiento y SEO para que tu web no pierda clientes."
+        "text": "Optimizamos la velocidad de carga, la estructura técnica y el SEO de tu sitio para dominar Google y maximizar tus ventas."
       },
       "four": {
         "title": "Mantenimiento",
-        "text": "Nos encargamos de todo para que tú solo te enfoques en crecer."
+        "text": "Nos encargamos de la seguridad, las copias de seguridad y el soporte técnico constante para que operes sin interrupciones y te enfoques solo en vender."
       }
     }
   },
@@ -248,5 +248,11 @@
   },
   "techStack": {
     "label": "Potenciado por tecnología real"
+  },
+  "tools": {
+    "pill": "TECNOLOGÍA",
+    "title": "Construimos soluciones digitales",
+    "text": "Creamos sitios y aplicaciones rápidas con la mejor tecnología para hacer crecer tu negocio sin limitaciones técnicas.",
+    "cta": "Iniciar proyecto"
   }
 }

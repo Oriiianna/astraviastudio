@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import Services from "./components/Services.jsx";
+// Temporal: sección Services en tema claro (framer-motion + lucide) para probar esta dirección de diseño
+import ServicesLight from "./components/ServicesLight.jsx";
 import TechStack from "./components/TechStack.jsx";
+import ToolsStack from "./components/ToolsStack.jsx";
 import Process from "./components/Process.jsx";
 import Pricing from "./components/Pricing.jsx";
 import Clients from "./components/Clients.jsx";
@@ -83,9 +86,12 @@ function AppContent() {
       <Navbar />
       <main>
         <Hero />
-        <Services />
+        {/* <Services /> */}
+        {/* TEMPORAL: prueba de la sección Services en tema claro (cliente). Quitar cuando no se necesite. */}
+        <ServicesLight />
         <Process />
-        <TechStack />
+        {/* <TechStack /> */}
+        <ToolsStack />
         <Pricing />
         <Clients />
         <CtaBanner />

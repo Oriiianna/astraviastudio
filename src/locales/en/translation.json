@@ -24,19 +24,19 @@
     "items": {
       "one": {
         "title": "UI/UX Design",
-        "text": "We design experiences that guide the user and increase conversion."
+        "text": "We eliminate friction in the user journey. We analyze your audience’s behavior to create engaging interfaces that drive sales and maximize your conversion rate."
       },
       "two": {
         "title": "Web Development",
-        "text": "We build with WordPress, Elementor, React, HTML, CSS, JS and more."
+        "text": "We build high-performance websites and web applications optimized to rank on Google and turn visitors into paying customers."
       },
       "three": {
         "title": "Optimization",
-        "text": "Speed, performance and SEO so your website does not lose customers."
+        "text": "We optimize your site's load speed, technical architecture, and SEO to rank higher on Google and maximize your conversions."
       },
       "four": {
         "title": "Maintenance",
-        "text": "We take care of everything so you can focus on growing."
+        "text": "We handle security, backups, and ongoing technical support so your site runs seamlessly while you focus entirely on growing your business."
       }
     }
   },
@@ -247,5 +247,11 @@
   },
   "techStack": {
     "label": "Powered by real technology"
+  },
+  "tools": {
+    "pill": "TECHNOLOGY",
+    "title": "Building digital solutions",
+    "text": "We build fast websites and apps with modern tech to scale your business without technical limits.",
+    "cta": "Let’s launch"
   }
 }
