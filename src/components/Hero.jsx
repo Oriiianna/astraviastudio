@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IconChevronUp } from './icons.jsx'
+import { IconChevronUp, IconZap, IconDashboard } from './icons.jsx'
 import useFrameSequence from '../hooks/useFrameSequence.js'
 // El manifiesto lo genera scripts/optimize-hero.mjs. Se importa en build time
 // (no cuesta un request) para que el conteo de frames nunca quede desfasado.
@@ -84,15 +84,9 @@ export default function Hero() {
               <span className="hero__line" style={{ '--i': 0 }}>
                 {t('hero.titleLine1')}
               </span>
-              {/* <span className="hero__line" style={{ '--i': 1 }}>
-                {t('hero.titleLine2')}
-              </span> */}
               <span className="hero__line grad-text" style={{ '--i': 2 }}>
                 {t('hero.titleLine3')}
               </span>
-              {/* <span className="hero__line grad-text" style={{ '--i': 3 }}>
-                {t('hero.titleLine4')}
-              </span> */}
             </h1>
 
             <p className="hero__lead" style={{ '--i': 4 }}>
@@ -100,11 +94,11 @@ export default function Hero() {
             </p>
 
             <div className="hero__actions" style={{ '--i': 5 }}>
-              <a href="#contacto" className="btn btn--primary btn--rect">
-                {t('hero.primaryCta')}
+              <a href="#contacto" className="btn btn--primary">
+                {t('hero.primaryCta')} <IconZap />
               </a>
-              <a href="#proceso" className="btn btn--ghost btn--rect">
-                {t('hero.secondaryCta')}
+              <a href="#proceso" className="btn btn--ghost">
+                {t('hero.secondaryCta')} <IconDashboard />
               </a>
             </div>
           </div>

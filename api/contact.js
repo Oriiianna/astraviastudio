@@ -9,7 +9,7 @@ const SEND_URL = 'https://send.api.mailtrap.io/api/send'
 const sandboxUrl = (inboxId) => `https://sandbox.api.mailtrap.io/api/send/${inboxId}`
 
 // Tope por campo: evita que alguien nos mande un mail de 10 MB.
-const LIMITES = { nombre: 120, telefono: 40, email: 200, mensaje: 4000 }
+const LIMITES = { nombre: 120, telefono: 40, email: 200, mensaje: 4000, servicio: 40 }
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 export default async function handler(req, res) {
@@ -41,6 +41,8 @@ export default async function handler(req, res) {
   const telefono = limpiar(body.telefono, LIMITES.telefono)
   const email = limpiar(body.email, LIMITES.email)
   const mensaje = limpiar(body.mensaje, LIMITES.mensaje)
+  const servicio = limpiar(body.servicio, LIMITES.servicio)
+  const lang = typeof body.lang === 'string' ? body.lang.slice(0, 2) : ''
 
   if (!nombre || !email || !mensaje) {
     return json(res, 400, { ok: false, error: 'Faltan campos obligatorios.' })
@@ -61,8 +63,8 @@ export default async function handler(req, res) {
     // Respondemos desde el cliente de mail directo a quien consultó.
     reply_to: { email, name: nombre },
     subject: `Nueva consulta de ${nombre}`,
-    text: textoPlano({ nombre, telefono, email, mensaje }),
-    html: html({ nombre, telefono, email, mensaje }),
+    text: textoPlano({ nombre, telefono, email, mensaje, servicio, lang }),
+    html: html({ nombre, telefono, email, mensaje, servicio, lang }),
     category: 'contacto-web',
   }
 
@@ -123,18 +125,20 @@ function escapar(texto) {
     .replace(/"/g, '&quot;')
 }
 
-function textoPlano({ nombre, telefono, email, mensaje }) {
+function textoPlano({ nombre, telefono, email, mensaje, servicio, lang }) {
   return [
     `Nombre:   ${nombre}`,
     `Email:    ${email}`,
     `Teléfono: ${telefono || '—'}`,
+    `Servicio: ${servicio || '—'}`,
+    `Idioma:   ${lang || '—'}`,
     '',
     'Mensaje:',
     mensaje,
   ].join('\n')
 }
 
-function html({ nombre, telefono, email, mensaje }) {
+function html({ nombre, telefono, email, mensaje, servicio, lang }) {
   return `<!doctype html>
 <html lang="es">
   <body style="margin:0;background:#0b0b16;padding:32px 16px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;">
@@ -151,6 +155,8 @@ function html({ nombre, telefono, email, mensaje }) {
             <tr><td style="padding:6px 0;color:#8b8bc4;width:90px;">Nombre</td><td style="padding:6px 0;">${escapar(nombre)}</td></tr>
             <tr><td style="padding:6px 0;color:#8b8bc4;">Email</td><td style="padding:6px 0;"><a href="mailto:${escapar(email)}" style="color:#9db9ff;">${escapar(email)}</a></td></tr>
             <tr><td style="padding:6px 0;color:#8b8bc4;">Teléfono</td><td style="padding:6px 0;">${escapar(telefono) || '—'}</td></tr>
+            <tr><td style="padding:6px 0;color:#8b8bc4;">Servicio</td><td style="padding:6px 0;">${escapar(servicio) || '—'}</td></tr>
+            <tr><td style="padding:6px 0;color:#8b8bc4;">Idioma</td><td style="padding:6px 0;">${escapar(lang) || '—'}</td></tr>
           </table>
         </td>
       </tr>

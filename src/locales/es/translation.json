@@ -4,17 +4,17 @@
     "process": "Proceso",
     "work": "Proyectos",
     "contact": "Contacto",
-    "cta": "Quiero despegar",
+    "cta": "Iniciar proyecto",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
     "languageLabel": "Cambiar idioma a inglés"
   },
   "hero": {
     "titleLine1": "Despega tu negocio al",
-    "titleLine2": "antes de contactarte.",
     "titleLine3": " universo digital",
-    "titleLine4": "Esto es una prueba?",
     "lead": "En Astravia combinamos diseño, tecnología y estrategia para crear webs que comunican, posicionan y generan resultados reales.",
     "primaryCta": "Quiero una web que venda",
-    "secondaryCta": "Ver cómo trabajamos",
+    "secondaryCta": "Nuestro proceso",
     "hint": "Desliza"
   },
   "services": {
@@ -38,6 +38,19 @@
         "title": "Mantenimiento",
         "text": "Nos encargamos de la seguridad, las copias de seguridad y el soporte técnico constante para que operes sin interrupciones y te enfoques solo en vender."
       }
+    }
+  },
+  "servicesLight": {
+    "kicker": "Por qué elegirnos",
+    "title": "Tu éxito es",
+    "titleHighlight": "nuestra misión",
+    "description": "Una combinación de diseño, tecnología y estrategia para crear la web que tu negocio necesita: rápida, clara y pensada para convertir.",
+    "alt": "Equipo de Astravia colaborando alrededor de una mesa con laptops y anotaciones",
+    "link": "Conocer más",
+    "cta": {
+      "text": "Sumate a Astravia y llevá tu marca",
+      "highlight": "al siguiente nivel.",
+      "button": "Hablemos de estrategia"
     }
   },
   "process": {
@@ -67,7 +80,7 @@
     "title": "Tu web puede ser tu mejor",
     "accent": "vendedor.",
     "body": "Deja de perder clientes por una web lenta o confusa y empieza a convertir visitas en oportunidades.",
-    "button": "Empezar mi proyecto"
+    "button": "Iniciar proyecto"
   },
   "footer": {
     "columns": {
@@ -112,13 +125,20 @@
     "submit": "Enviar Mensaje",
     "sending": "Enviando…",
     "success": "¡Gracias! Te respondemos dentro de las próximas 24 horas.",
-    "error": "No pudimos enviar el mensaje. Probá de nuevo o escribinos a hola@astravia.digital."
+    "error": "No pudimos enviar el mensaje. Probá de nuevo o escribinos a hola@astravia.digital.",
+    "errorService": "Por favor seleccioná un servicio.",
+    "service": "Servicio requerido",
+    "placeholderService": "Seleccioná un servicio",
+    "serviceLanding": "Landing Page",
+    "serviceCorporativo": "Clásica",
+    "serviceEcommerce": "E-Commerce",
+    "serviceOtro": "Otro"
   },
   "clients": {
     "kicker": "Portfolio",
     "title": "Proyectos Destacados",
     "description": "Piezas donde probamos ideas de interfaz y rendimiento a fondo. No son maquetas: están publicadas y se pueden recorrer.",
-    "cta": "Ver cómo trabajamos",
+    "cta": "Nuestro proceso",
     "viewSite": "Ver Proyecto",
     "openInNewTab": "Abrir {{title}} en una pestaña nueva",
     "projects": {

@@ -118,17 +118,17 @@
 }
 
 .cta__btn {
-  padding: 15px 34px;
+  padding: 14px 30px;
 }
 
 .cta__btn svg {
-  width: 17px;
-  height: 17px;
-  transition: transform 0.35s var(--ease);
+  width: 16px;
+  height: 16px;
+  transition: transform 1.5s var(--ease-out);
 }
 
 .cta__btn:hover svg {
-  transform: translateX(4px);
+  transform: translateX(5px);
 }
 
 @media (max-width: 860px) {

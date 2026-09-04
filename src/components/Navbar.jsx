@@ -84,9 +84,11 @@ export default function Navbar() {
         </nav>
 
         <div className="nav__actions">
-          <div className="nav__langSwitch" role="group" aria-label={t('nav.languageLabel')}>
+          <div className="nav__langSwitch" role="group" aria-label={t('nav.languageLabel')} data-lang={i18n.language.startsWith('en') ? 'en' : 'es'}>
+            <span className="nav__langThumb" aria-hidden="true" />
             <button
               type="button"
+              aria-pressed={!i18n.language.startsWith('en')}
               className={`nav__langOption ${i18n.language.startsWith('en') ? '' : 'is-active'}`}
               onClick={() => i18n.changeLanguage('es')}
             >
@@ -94,6 +96,7 @@ export default function Navbar() {
             </button>
             <button
               type="button"
+              aria-pressed={i18n.language.startsWith('en')}
               className={`nav__langOption ${i18n.language.startsWith('en') ? 'is-active' : ''}`}
               onClick={() => i18n.changeLanguage('en')}
             >
@@ -108,7 +111,7 @@ export default function Navbar() {
         <button
           className="nav__burger"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+          aria-label={open ? t('nav.closeMenu') : t('nav.openMenu')}
           aria-expanded={open}
         >
           {open ? <IconClose /> : <IconMenu />}

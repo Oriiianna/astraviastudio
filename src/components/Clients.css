@@ -229,6 +229,12 @@
 .project__cta.btn svg {
   width: 16px;
   height: 16px;
+  transition: transform 1.5s var(--ease-out);
+}
+
+/* Deslize sutil hacia la derecha */
+.project__cta.btn:hover svg {
+  transform: translateX(5px);
 }
 
 /* Responsive */

@@ -409,6 +409,20 @@ h4 {
   transform: translateX(120%);
 }
 
+/* Cohete de los CTA: despegue en diagonal sutil
+   El cohete ya viene inclinado hacia arriba-derecha, así que la
+   diagonal es su dirección natural: avanza 2px y sube 4px,
+   con un crecido sutil (1.04). Se siente fluido y orgánico. */
+.btn--primary svg {
+   transition: transform  ​0.45s var(--ease-out);
+}
+
+.btn--primary:hover svg {
+   transform: translate(2px, -4px) scale(1.04);
+}
+
+
+
 .btn--ghost {
   background: rgba(167, 139, 250, 0.035);
   border: 1px solid var(--border-strong);

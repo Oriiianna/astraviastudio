@@ -1,195 +1,361 @@
-/* ============================================================
-   ServicesLight — sección "Services" con acordeón (click para abrir
-   el párrafo) e imagen dinámica vinculada a cada servicio.
-   Sistema de diseño del proyecto: dark, glass, glow por tinte.
-   ============================================================ */
+/* =========================================================
+   ServicesLight
+   Sección de servicios con tarjetas + columna de intro.
+   Usa los tokens del sistema (global.css) y los efectos
+   compartidos: data-reveal, data-spotlight, gradient-border.
+   ========================================================= */
 
-.services-light__layout {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: clamp(40px, 6vw, 84px);
-  align-items: center;
-}
-
-/* ---- Columna izquierda ---- */
-
-.services-light__title {
-  font-size: clamp(2rem, 4.2vw, 3rem);
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.025em;
-  color: var(--text);
-  margin-bottom: 18px;
-}
-
-.services-light__desc {
-  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
-  font-weight: 300;
-  line-height: 1.75;
-  color: var(--text-muted);
-  max-width: 46ch;
-  margin-bottom: 34px;
-}
-
-/* Thumbnail: contenedor con imagen dinámica (crossfade) */
-.services-light__thumb {
+/* Sin fondo propio: lo pinta el suelo liso de body::before */
+.services-light .container {
   position: relative;
-  aspect-ratio: 16 / 10;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: linear-gradient(165deg, var(--bg-card-soft), var(--bg-card));
-  box-shadow: var(--shadow-card);
+  z-index: 2;
 }
 
-.services-light__thumb-img {
+.services-light__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 3vw, 56px);
+}
+
+/* Hairline vertical entre columnas: la misma separación estructural
+   que usa Process, dibujada en el centro del grid. */
+.services-light__grid::before {
+  content: "";
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Etiqueta del servicio activo sobre la imagen */
-.services-light__thumb-tag {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  z-index: 2;
-  padding: 6px 13px;
-  border-radius: 999px;
-  border: 1px solid var(--border-strong);
-  background: rgba(8, 6, 33, 0.72);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: var(--text-soft);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  left: calc(50% - 0.5px);
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(167, 139, 250, 0.16) 20%,
+    rgba(167, 139, 250, 0.16) 76%,
+    transparent 100%
+  );
   pointer-events: none;
 }
 
-/* ---- Columna derecha: acordeón ---- */
+/* -------------------------
+   LEFT: SERVICE CARDS
+   ------------------------- */
 
-.services-light__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.services-light__cards {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  justify-self: end;
-  width: 100%;
-  max-width: 560px;
+  gap: clamp(14px, 1.6vw, 20px);
+  min-width: 0;
 }
 
 .services-light__card {
-  border-radius: clamp(20px, 2.4vw, 34px);
-  background: linear-gradient(115deg, rgba(23, 19, 67, 0.6), rgba(17, 15, 51, 0.92));
+  position: relative;
+  isolation: isolate;
+  min-height: 168px;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: clamp(18px, 2vw, 28px);
+  align-items: start;
+  padding: clamp(26px, 2.6vw, 36px) clamp(22px, 2.2vw, 30px) clamp(26px, 2.6vw, 34px) clamp(16px, 1.8vw, 22px);
+  border-radius: var(--radius);
+  background: linear-gradient(165deg, rgba(28, 24, 62, 0.9) 0%, rgba(13, 11, 38, 0.95) 100%);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.5s var(--ease), border-color 0.5s var(--ease),
+    box-shadow 0.5s var(--ease);
 }
 
 .services-light__card:hover {
-  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
-  box-shadow: 0 24px 56px -28px color-mix(in srgb, var(--accent) 55%, transparent),
-    var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transform: translateY(-8px);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 34px 66px -32px color-mix(in srgb, var(--accent) 70%, transparent);
 }
 
-.services-light__card.is-open {
-  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
-  box-shadow: 0 26px 60px -28px color-mix(in srgb, var(--accent) 65%, transparent),
-    var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+.services-light__card-icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: linear-gradient(150deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #1a1240));
+  color: #fff;
+  box-shadow: 0 12px 28px -10px color-mix(in srgb, var(--accent) 90%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  transition: transform 0.5s var(--ease);
 }
 
-/* Trigger: fila clickeable de cada card */
-.services-light__trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  width: 100%;
-  padding: clamp(20px, 2vw, 26px) clamp(22px, 2.4vw, 32px);
-  border: none;
-  background: transparent;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  text-align: left;
-  -webkit-tap-highlight-color: transparent;
+.services-light__card-icon svg {
+  width: 23px;
+  height: 23px;
 }
 
-.services-light__name {
-  font-size: clamp(1.05rem, 1.63vw, 1.625rem);
+.services-light__card:hover .services-light__card-icon {
+  transform: scale(1.09) rotate(-8deg);
+}
+
+.services-light__card-content {
+  min-width: 0;
+}
+
+.services-light__card h3 {
+  margin: 0 0 12px;
+  font-size: clamp(1.1rem, 1.4vw, 1.28rem);
   font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
-.services-light__side {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  flex: none;
-}
-
-.services-light__num {
-  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
-  font-weight: 800;
-  letter-spacing: 0.03em;
-  font-variant-numeric: tabular-nums;
-  background: linear-gradient(
-    130deg,
-    var(--accent) 20%,
-    color-mix(in srgb, var(--accent) 40%, var(--ice)) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.services-light__chevron-wrap {
-  display: inline-flex;
-}
-
-.services-light__chevron {
-  color: var(--text-dim);
-  transition: transform 0.35s var(--ease), color 0.3s var(--ease);
-}
-
-.services-light__card:hover .services-light__chevron,
-.services-light__card.is-open .services-light__chevron {
-  color: var(--accent);
-}
-
-.services-light__card.is-open .services-light__chevron {
-  transform: rotate(180deg);
-}
-
-/* Panel expansible del acordeón */
-.services-light__panel {
-  overflow: hidden;
-}
-
-.services-light__text {
-  padding: 0 clamp(22px, 2.4vw, 32px) clamp(20px, 2vw, 26px);
-  font-size: 0.88rem;
+.services-light__card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1rem;
   font-weight: 300;
   line-height: 1.72;
-  color: var(--text-muted);
-  max-width: 52ch;
-  border-top: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
-  padding-top: clamp(16px, 1.6vw, 20px);
-  margin-top: 0;
 }
 
-/* ---- Responsive ---- */
+.services-light__card-link {
+  width: fit-content;
+  margin-top: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--violet-soft);
+  text-decoration: none;
+  font-size: 0.80rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: color 0.3s var(--ease), gap 0.3s var(--ease);
+}
+
+.services-light__card-link:hover {
+  color: #00E5C8;
+  gap: 12px;
+}
+
+.services-light__card-link svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* -------------------------
+   RIGHT: INTRO
+   ------------------------- */
+
+.services-light__intro {
+  min-width: 0;
+  padding: clamp(10px, 1.6vw, 18px) 0 0;
+}
+
+.services-light__intro h2 {
+  margin: 0;
+  max-width: 12ch;
+  font-size: clamp(2.4rem, 4.6vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.services-light__description {
+  margin: 20px 0 34px;
+  color: var(--text-soft);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* --- Imagen + CTA en modo máscara ---
+   La imagen conserva su radio completo y se "muerde" solo en la esquina
+   inferior derecha: la caja queda pegada al borde derecho y sobre/abajo de
+   ella la imagen ya no aparece, porque una capa del mismo color del fondo
+   (::before) forma el hueco redondeado que la recorta visualmente.
+   Imagen (z1) → muesca de fondo (z2) → CTA (z3): como una sola pieza. */
+.services-light__visual {
+  position: relative;
+  /* Dimensiones y separación del CTA. */
+  --cta-w: min(340px, 86%);
+  --cta-h: 230px;
+  --cta-gap: 18px;
+  /* Hueco que se abre en la imagen: caja + aire a izquierda y abajo. */
+  --hole-w: calc(var(--cta-w) + var(--cta-gap));
+  --hole-h: calc(var(--cta-h) + var(--cta-gap));
+}
+
+.services-light__visual > img {
+  display: block;
+  width: 100%;
+  height: clamp(340px, 30vw, 460px);
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-lg);
+  filter: saturate(0.9) brightness(0.92);
+}
+
+/* Borde violeta alrededor de la imagen, siguiendo su radio completo. */
+.services-light__visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--violet-soft) 22%, transparent);
+}
+
+/* Muesca: capa del color del fondo que "abre" el hueco en la esquina.
+   TL redondeado (a juego con el radio del CTA) y BR redondeado (a juego
+   con el radio de la imagen), así el recorte se lee suave por todos lados. */
+.services-light__visual::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: var(--hole-w);
+  height: var(--hole-h);
+  border-radius: var(--radius) 0 var(--radius-lg) 0;
+  background: var(--bg-void);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--violet-soft) 14%, transparent);
+  pointer-events: none;
+}
+
+/* El CTA reposa dentro de la muesca, pegado a los bordes derecho e inferior
+   de la imagen (aprovecha el espacio) y con un aire de --cta-gap hacia
+   arriba e izquierda: así queda separado de la imagen sin ocupar de más. */
+.services-light__cta {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  width: var(--cta-w);
+  height: var(--cta-h);
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(130% 100% at 88% 0%, rgba(124, 58, 237, 0.4) 0%, transparent 58%),
+    radial-gradient(120% 140% at 30% 120%, rgba(159, 212, 247, 0.12) 0%, transparent 60%),
+    linear-gradient(165deg, rgba(28, 24, 62, 0.97) 0%, rgba(13, 11, 38, 0.99) 100%);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 26px 54px -22px rgba(2, 1, 8, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 40px -18px rgba(124, 58, 237, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.services-light__cta strong {
+  flex: 1;
+  font-size: clamp(1.3rem, 1.8vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+/* La palabra destacada hereda el gradiente de marca (.grad-text) y le
+   sumamos un glow sutil para que sea lo primero que se lea. */
+
+.services-light__cta .btn {
+  padding: 14px 30px;
+  font-size: 0.92rem;
+}
+
+.services-light__cta .btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 1.5s var(--ease-out);
+}
+
+.services-light__cta .btn:hover svg {
+  transform: translateX(5px);
+}
+
+/* -------------------------
+   RESPONSIVE
+   ------------------------- */
+
 @media (max-width: 900px) {
-  .services-light__layout {
+  .services-light__grid {
     grid-template-columns: 1fr;
-    gap: 44px;
+    gap: 34px;
+  }
+
+  .services-light__cards {
+    gap: 28px;
+  }
+
+  .services-light__grid::before {
+    display: none;
+  }
+
+  .services-light__intro {
+    order: -1;
+  }
+
+  .services-light__description {
+    max-width: 58ch;
+  }
+
+  .services-light__visual > img {
+    height: 380px;
+  }
+}
+
+@media (max-width: 560px) {
+  .services-light__card {
+    min-height: auto;
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 16px;
+    padding: 20px 18px;
+  }
+
+  .services-light__card-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+  }
+
+  .services-light__card-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .services-light__card h3 {
+    font-size: 1.05rem;
+  }
+
+  .services-light__card p {
+    font-size: 0.82rem;
+  }
+
+  .services-light__intro h2 {
+    font-size: 2.15rem;
+  }
+
+  .services-light__visual {
+    --cta-w: min(264px, 88%);
+    --cta-h: 190px;
+    --cta-gap: 12px;
+  }
+
+  .services-light__visual > img {
+    height: 360px;
+  }
+
+  .services-light__cta {
+    padding: 16px 15px;
+    gap: 10px;
+  }
+
+  .services-light__cta strong {
+    font-size: 1.2rem;
+  }
+
+  .services-light__cta .btn {
+    padding: 11px 18px;
+    font-size: 0.92rem;
   }
 }

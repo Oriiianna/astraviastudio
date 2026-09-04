@@ -5,16 +5,16 @@
     "work": "Projects",
     "contact": "Contact",
     "cta": "Let’s launch",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
     "languageLabel": "Switch language to Spanish"
   },
   "hero": {
     "titleLine1": "Launch Your Business into the",
-    "titleLine2": "before contacting you.",
     "titleLine3": " Digital Universe",
-    "titleLine4": "they really need to see?",
     "lead": "At Astravia we combine design, technology and strategy to create websites that communicate, position and generate real results.",
     "primaryCta": "I want a website that sells",
-    "secondaryCta": "See how we work",
+    "secondaryCta": "Our Process",
     "hint": "Scroll"
   },
   "services": {
@@ -24,20 +24,33 @@
     "items": {
       "one": {
         "title": "UI/UX Design",
-        "text": "We eliminate friction in the user journey. We analyze your audience’s behavior to create engaging interfaces that drive sales and maximize your conversion rate."
+        "text": "We design frictionless experiences that convert. By analyzing your audience's behavior, we streamline the user journey and maximize your sales conversions."
       },
       "two": {
         "title": "Web Development",
-        "text": "We build high-performance websites and web applications optimized to rank on Google and turn visitors into paying customers."
+        "text": "High-performance websites and web applications engineered to rank on Google and convert visitors into recurring clients."
       },
       "three": {
         "title": "Optimization",
-        "text": "We optimize your site's load speed, technical architecture, and SEO to rank higher on Google and maximize your conversions."
+        "text": "Technical SEO, speed optimization, and robust architecture engineered to dominate Google search and boost sales."
       },
       "four": {
         "title": "Maintenance",
         "text": "We handle security, backups, and ongoing technical support so your site runs seamlessly while you focus entirely on growing your business."
       }
+    }
+  },
+  "servicesLight": {
+    "kicker": "Why choose us",
+    "title": "Your success is",
+    "titleHighlight": "our mission",
+    "description": "A blend of design, technology, and strategy crafted to deliver the website your business needs: fast, clear, and built to convert.",
+    "alt": "Astravia team working around a table with laptops and notes",
+    "link": "Learn more",
+    "cta": {
+      "text": "Join Astravia and take your brand",
+      "highlight": "to the next level.",
+      "button": "Let's talk strategy"
     }
   },
   "process": {
@@ -67,7 +80,7 @@
     "title": "Your website can be your best",
     "accent": "salesperson.",
     "body": "Stop losing customers due to a slow or confusing website and start turning visits into opportunities.",
-    "button": "Start my project"
+    "button": "Let’s launch"
   },
   "footer": {
     "columns": {
@@ -112,13 +125,20 @@
     "submit": "Send message",
     "sending": "Sending…",
     "success": "Thanks! We will reply within the next 24 hours.",
-    "error": "We could not send the message. Please try again or write to hola@astravia.digital."
+    "error": "We could not send the message. Please try again or write to hola@astravia.digital.",
+    "errorService": "Please select a service.",
+    "service": "Required service",
+    "placeholderService": "Select a service",
+    "serviceLanding": "Landing Page",
+    "serviceCorporativo": "Business",
+    "serviceEcommerce": "E-Commerce",
+    "serviceOtro": "Other"
   },
   "clients": {
     "kicker": "Portfolio",
     "title": "Featured Projects",
     "description": "Pieces where we test UI and performance ideas in depth. They are not mockups: they are published and can be explored.",
-    "cta": "See how we work",
+    "cta": "Our Process",
     "viewSite": "View Project",
     "openInNewTab": "Open {{title}} in a new tab",
     "projects": {
@@ -201,7 +221,7 @@
         ]
       },
       "clasica": {
-        "name": "Classic",
+        "name": "Business",
         "price": {
           "currency": "ARS",
           "amount": "400",
@@ -240,9 +260,21 @@
       }
     },
     "proof": {
-      "pagespeed": { "value": "98", "unit": "/100", "label": "Average PageSpeed" },
-      "projects": { "value": "+50", "unit": "", "label": "Projects delivered" },
-      "uptime": { "value": "99.9", "unit": "%", "label": "Guaranteed uptime" }
+      "pagespeed": {
+        "value": "98",
+        "unit": "/100",
+        "label": "Average PageSpeed"
+      },
+      "projects": {
+        "value": "+50",
+        "unit": "",
+        "label": "Projects delivered"
+      },
+      "uptime": {
+        "value": "99.9",
+        "unit": "%",
+        "label": "Guaranteed uptime"
+      }
     }
   },
   "techStack": {

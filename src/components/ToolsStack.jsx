@@ -6,6 +6,7 @@ import {
   LogoJavascript,
   LogoReact,
   LogoTailwind,
+  IconRocket,
 } from './icons.jsx'
 import './ToolsStack.css'
 
@@ -49,8 +50,8 @@ export default function ToolsStack() {
 
         <p className="tools-description">{t('tools.text')}</p>
 
-        <a href="#contacto" className="tools-cta">
-          {t('tools.cta')}
+        <a href="#contacto" className="tools-cta btn btn--primary">
+          {t('tools.cta')} <IconRocket className="tools-cta-icon" />
         </a>
       </div>
 
