@@ -551,7 +551,7 @@ textarea:focus-visible {
   transform: translateY(26px);
   transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
   transition-delay: var(--delay, 0ms);
-  will-change: opacity, transform;
+  /* will-change eliminado: consumía memoria innecesariamente en todos los elementos */
 }
 
 [data-reveal].is-visible {

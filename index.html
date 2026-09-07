@@ -80,13 +80,8 @@
       media="(max-width: 860px)"
       fetchpriority="high"
     />
-    <link
-      rel="preload"
-      as="image"
-      href="/hero/w1280/frame-001.webp"
-      media="(min-width: 861px)"
-      fetchpriority="high"
-    />
+    <!-- Precarga del video ELIMINADA: tener preload aquí Y en el componente Hero -->
+    <!-- hace que el navegador cargue el video dos veces y se trabe. -->
 
     <!-- Datos estructurados: es lo que lee Google para armar el panel lateral
          y entender de qué se trata el negocio. Cuando haya dominio, agregar
@@ -310,11 +305,23 @@
           document.fonts.ready.then(function () { hecho.fuentes = 1; });
         } else { hecho.fuentes = 1; }
 
-        // 2. Primer fotograma del hero, que es lo primero que se ve al entrar.
+        // 2. Video del hero listo para reproducir (desktop) o imagen (móvil).
+        // NOTA: Ya no creamos un segundo elemento de video aquí para evitar
+        // cargar el archivo dos veces simultáneamente (causa trabas).
         var movil = window.matchMedia("(max-width: 860px)").matches;
-        var img = new Image();
-        img.onload = img.onerror = function () { hecho.hero = 1; };
-        img.src = movil ? "/hero/mobile.webp" : "/hero/w1280/frame-001.webp";
+        if (movil) {
+          var img = new Image();
+          img.onload = img.onerror = function () { hecho.hero = 1; };
+          img.src = "/hero/mobile.webp";
+        } else {
+          // Usamos un fetch HEAD para verificar que el video está disponible
+          // sin cargar el archivo completo (evita duplicar la carga)
+          fetch("/hero/hero-loop.mp4", { method: "HEAD", mode: "no-cors" })
+            .then(function () { hecho.hero = 1; })
+            .catch(function () { hecho.hero = 1; }); // no traba el loader si falla
+          // Timeout de respaldo por si fetch tarda
+          setTimeout(function () { hecho.hero = 1; }, 2000);
+        }
 
         // 3. React montado: #root deja de estar vacío.
         var raiz = document.getElementById("root");

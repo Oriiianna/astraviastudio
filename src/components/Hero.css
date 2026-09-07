@@ -1,20 +1,16 @@
 /* ============================================================
-   Hero con secuencia de frames atada al scroll.
-   La sección es alta; adentro hay un "stage" sticky de 100svh
-   donde el canvas dibuja el frame que corresponde al scroll.
-   --scrub controla cuánto scroll dura la animación.
+   Hero con video en loop en desktop, imagen fija en móvil.
+   El video ocupa el stage sticky como un background.
    ============================================================ */
 
 .hero {
-  --scrub: 200vh;
+  --scrub: 0px;
   position: relative;
-  height: calc(100svh + var(--scrub));
+  height: 100svh;
   background: var(--bg-void);
 }
 
 .hero__stage {
-  --p: 0; /* progreso 0→1, lo escribe Hero.jsx */
-  --copy: 1; /* opacidad del texto, lo escribe Hero.jsx */
   position: sticky;
   top: 0;
   height: 100svh;
@@ -23,16 +19,18 @@
   align-items: center;
 }
 
-.hero__canvas {
+.hero__video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: 50% 50%;
   background: var(--bg-void);
 }
 
-/* Fondo fijo de móvil: ocupa el mismo lugar que el canvas. */
+/* Fondo fijo de móvil: ocupa el mismo lugar que el video. */
 .hero__still {
   position: absolute;
   inset: 0;
@@ -42,22 +40,12 @@
   object-position: 50% 42%;
 }
 
-/* Degradado lateral para que el texto tenga contraste sobre el render.
-   Se afloja al final para que la última escena se vea limpia. */
-.hero__scrim {
+/* Overlay negro semitransparente sobre el video para dar contraste al texto */
+.hero__overlay {
   position: absolute;
   inset: 0;
+  background: rgba(0, 0, 0, 0.6);
   pointer-events: none;
-  /* Se mantiene mientras hay texto y se libera cuando ya no hay nada que leer */
-  opacity: calc(1 - var(--p) * 0.85);
-  background: linear-gradient(
-      95deg,
-      rgba(5, 4, 10, 0.94) 0%,
-      rgba(7, 5, 16, 0.82) 34%,
-      rgba(8, 5, 20, 0.35) 62%,
-      rgba(8, 5, 20, 0.12) 100%
-    ),
-    linear-gradient(180deg, rgba(5, 4, 10, 0.7) 0%, transparent 26%);
 }
 
 /* Viñeta: cierra los bordes del render, no se mueve */
@@ -68,46 +56,15 @@
   background: radial-gradient(120% 90% at 50% 45%, transparent 42%, rgba(8, 0, 18, 0.72) 100%);
 }
 
-/* Costura hacia la sección siguiente.
-   La caída va dibujada a su altura máxima y se escala desde abajo según --p:
-   mientras se lee el hero apenas se insinúa, y se abre entera justo cuando el
-   stage sticky se suelta y Servicios entra en cuadro, así el corte llega ya
-   disuelto. Dos motivos para escalar en vez de mover las paradas del
-   degradado: animar stops repinta la capa entera en cada frame de scroll, que
-   acá comparte cuadro con el canvas, y el sesgo cuadrático de --t mantiene la
-   caída fuera del render hasta el último tramo en vez de oscurecerlo a mitad
-   de la animación. Las paradas intermedias evitan el borde duro que deja un
-   degradado de dos paradas contra un fondo casi del mismo tono. */
-.hero__seam {
-  --t: calc(var(--p, 0) * (0.35 + 0.65 * var(--p, 0)));
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 42svh;
-  pointer-events: none;
-  transform-origin: bottom;
-  transform: scaleY(calc(0.42 + var(--t) * 0.58));
-  will-change: transform;
-  background: linear-gradient(
-    0deg,
-    #080012 0%,
-    rgba(8, 0, 18, 0.88) 30%,
-    rgba(8, 0, 18, 0.44) 62%,
-    rgba(8, 0, 18, 0) 100%
-  );
-}
-
 .hero__inner {
   position: relative;
   z-index: 2;
   width: 100%;
 }
 
-/* --- Texto: parallax y fundido según el progreso --- */
+/* --- Texto: visible siempre --- */
 .hero__copy {
   max-width: min(52vw, 780px);
-  opacity: var(--copy);
-  transform: translateY(calc(var(--p) * -70px));
-  will-change: opacity, transform;
 }
 
 .hero__title {
@@ -140,9 +97,10 @@
 }
 
 .hero__actions .btn--ghost {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: rgba(10, 7, 20, 0.45);
+  /* backdrop-filter reducido para mejorar rendimiento */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background: rgba(10, 7, 20, 0.65);
 }
 
 /* --- Entrada escalonada al cargar --- */
@@ -165,26 +123,9 @@
   }
 }
 
-/* --- Indicador de scroll --- */
+/* --- Indicador de scroll (oculto: no hay scroll en el video hero) --- */
 .hero__hint {
-  position: absolute;
-  left: 50%;
-  bottom: 34px;
-  z-index: 3;
-  translate: -50% 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  pointer-events: none;
-  /* Desaparece apenas arranca el scrub */
-  opacity: calc(1 - var(--p) * 14);
-  transition: opacity 0.3s linear;
+  display: none;
 }
 
 .hero__hint-arrow {
@@ -206,71 +147,23 @@
   }
 }
 
-/* --- Barra de precarga --- */
-.hero__loader {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 4;
-  height: 2px;
-  width: 100%;
-  pointer-events: none;
-  transition: opacity 0.6s var(--ease);
-}
-
-.hero__loader::after {
-  content: '';
-  display: block;
-  height: 100%;
-  width: 100%;
-  background: var(--grad-brand);
-  transform: scaleX(var(--loaded, 0));
-  transform-origin: left;
-  transition: transform 0.4s var(--ease);
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.8);
-}
-
-.hero__loader.is-done {
-  opacity: 0;
-}
-
 /* --- Responsive --- */
 @media (max-width: 860px) {
-  /* Sin secuencia no hay nada que scrubear: la seccion vuelve a medir una
-     pantalla y el stage sticky deja de tener sobrante que recorrer. */
+  /* Sin video la sección vuelve a medir una pantalla. */
   .hero {
-    --scrub: 0px;
     height: 100svh;
   }
 
-  /* --p se queda en 0 porque nadie lo escribe: el texto va fijo y opaco, y
-     la costura queda abierta, igual que en prefers-reduced-motion. */
   .hero__copy {
     max-width: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .hero__seam {
-    transform: scaleY(0.8);
-    will-change: auto;
-  }
-
-  .hero__hint {
-    display: none;
   }
 
   .hero__title {
     font-size: clamp(1.85rem, 7vw, 2.4rem);
   }
 
-  .hero__scrim {
-    background: linear-gradient(
-        180deg,
-        rgba(5, 4, 10, 0.85) 0%,
-        rgba(6, 4, 14, 0.6) 45%,
-        rgba(6, 4, 14, 0.88) 100%
-      );
+  .hero__overlay {
+    background: rgba(0, 0, 0, 0.6);
   }
 
   .hero__actions .btn {
@@ -300,26 +193,13 @@
   transform: translateX(5px);
 }
 
-/* --- Sin animación: se muestra el último frame, sin scrub --- */
+/* --- Sin animación: se muestra el video pausado o la imagen fija --- */
 @media (prefers-reduced-motion: reduce) {
   .hero {
-    --scrub: 0px;
     height: 100svh;
   }
 
-  .hero__copy {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Sin scrub --p se queda en 0: la caída va fija y ya abierta, porque acá
-     Servicios entra apenas termina el primer viewport */
-  .hero__seam {
-    transform: scaleY(0.8);
-    will-change: auto;
-  }
-
-  .hero__hint {
-    display: none;
+  .hero__video {
+    autoplay: none;
   }
 }
