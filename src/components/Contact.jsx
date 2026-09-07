@@ -261,8 +261,6 @@ export default function Contact() {
           data-reveal
           style={{ "--delay": "140ms" }}
         >
-          <div className="contact__glow" aria-hidden="true" />
-
           <div className="contact__row">
             <label className="field">
               <span>{t("contact.name")}</span>

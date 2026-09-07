@@ -1,6 +1,14 @@
 import { useTranslation } from "react-i18next";
-import { IconArrowRight } from "./icons.jsx";
+import { IconArrowRight, LogoReact, LogoTailwind, LogoCss3, LogoFramer, LogoReactRouter } from "./icons.jsx";
 import "./Clients.css";
+
+const TECH_ICONS = {
+  "React": LogoReact,
+  "Tailwind": LogoTailwind,
+  "Framer Motion": LogoFramer,
+  "React Router": LogoReactRouter,
+  "CSS puro": LogoCss3,
+};
 
 /* Capturas reales de los sitios, generadas por scripts/capture-proyectos.mjs
   y optimizadas por scripts/optimize-proyectos.mjs → public/proyectos/.
@@ -118,15 +126,19 @@ export default function Clients() {
                   <div className="project__header">
                     <div className="project__header-left">
                       <span className="project__tag">{copy('tag')}</span>
-                      <h3>{copy('title')}</h3>
+                      <ul className="project__stack">
+                        {proyecto.stack.map((tec) => {
+                          const Icono = TECH_ICONS[tec];
+                          return (
+                            <li key={tec} data-tooltip={tec}>
+                              {Icono && <Icono />}
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </div>
+                    <h3>{copy('title')}</h3>
                   </div>
-
-                  <ul className="project__stack">
-                    {proyecto.stack.map((tec) => (
-                      <li key={tec}>{tec}</li>
-                    ))}
-                  </ul>
 
                   <a
                     className="btn btn--primary btn--rect project__cta"

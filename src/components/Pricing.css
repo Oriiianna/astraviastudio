@@ -1,4 +1,8 @@
-/* Sin fondo propio: lo pinta el suelo liso de body::before */
+.pricing {
+  background-color: #05050A;
+  border-bottom: 1px solid #231340;
+}
+
 .pricing .container {
   position: relative;
   z-index: 2;
@@ -7,7 +11,7 @@
 .pricing__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 1.8vw, 28px);
+  gap: clamp(24px, 2.5vw, 40px);
   align-items: stretch;
 }
 
@@ -19,30 +23,19 @@
   flex-direction: column;
   padding: clamp(28px, 2.4vw, 40px) clamp(22px, 2vw, 32px) clamp(28px, 2.4vw, 36px);
   border-radius: var(--radius-lg);
-  background: linear-gradient(165deg, rgba(28, 24, 62, 0.9) 0%, rgba(13, 11, 38, 0.95) 100%);
+  background: rgba(13, 11, 38, 0.6);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-card);
-  transition: transform 0.5s var(--ease), border-color 0.5s var(--ease),
-    box-shadow 0.5s var(--ease);
+  transition: border-color 0.3s ease;
 }
 
 .plan:hover {
-  transform: translateY(-8px);
-  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-  box-shadow: 0 34px 66px -32px color-mix(in srgb, var(--accent) 70%, transparent);
-}
-
-/* La destacada deja el borde de gradiente siempre encendido.
-   Va con doble clase a propósito: así le gana en especificidad a
-   .gradient-border::after de global.css sin depender del orden en que
-   Vite inyecte las hojas de estilo. */
-.plan.plan--featured::after {
-  opacity: 1;
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
 .plan--featured {
-  border-color: transparent;
-  box-shadow: 0 30px 70px -34px rgba(124, 58, 237, 0.75);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* Absoluto y no en el flujo: así los tres nombres de plan quedan a la
@@ -60,11 +53,10 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: nowrap;
-  box-shadow: 0 0 14px rgba(0, 229, 200, 0.4);
 }
 
 .plan__name {
-  font-size: clamp(1.4rem, 1.2vw, 1.22rem);
+  font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--text);
@@ -75,9 +67,42 @@
   padding-right: 104px;
 }
 
+/* --- Precio --- */
+.plan__price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 16px 0 24px;
+  color: var(--text);
+}
+
+.plan__price-currency {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.plan__price-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.plan__price-amountSmall {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.plan__price-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
 /* --- Features ---
-   La hairline superior va como background y no como border para poder
-   usar el degradado --grad-hair que ya define el sistema. */
+   La hairline superior va como background y no como border.
+ */
 .plan__features {
   display: grid;
   gap: 13px;
@@ -94,7 +119,7 @@
   display: flex;
   align-items: flex-start;
   gap: 11px;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 300;
   line-height: 1.62;
   color: var(--text-soft);
@@ -106,7 +131,6 @@
   margin-top: 3px;
   flex-shrink: 0;
   color: var(--violet-soft);
-  filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.5));
 }
 
 /* El auto empuja el botón al fondo: las tres tarjetas terminan parejas

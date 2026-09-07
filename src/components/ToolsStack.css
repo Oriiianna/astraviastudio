@@ -13,6 +13,8 @@
   justify-content: center;
   /* Proporción de la referencia: sección baja y panorámica */
   min-height: clamp(560px, 46vw, 760px);
+  background-color: #05050A;
+  border-bottom: 1px solid #231340;
   padding: clamp(60px, 5vw, 90px) 0;
   overflow: hidden;
 }
@@ -116,7 +118,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: tools-float 6s ease-in-out infinite;
+  /* animation: tools-float 6s ease-in-out infinite; */ /* DESACTIVADA: consume recursos y afecta el video */
 }
 
 .tools-card svg {

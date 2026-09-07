@@ -122,6 +122,49 @@ body {
 }
 
 /* ============================================================
+   Cursor
+   Sin caret de edición sobre el texto: el I-beam solo aparece
+   en campos de entrada reales. Lo interactivo, con la mano.
+   ============================================================ */
+
+/* 1) Por defecto en TODO el sitio: flecha normal, nunca I-beam */
+* {
+  cursor: default;
+}
+
+/* 2) Elementos interactivos: vuelve la mano */
+a,
+button,
+[role="button"],
+[role="link"],
+summary,
+select,
+label[for],
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"],
+input[type="color"],
+input[type="file"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
+
+/* 3) Solo los campos donde se escribe: vuelve el I-beam */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="password"],
+input[type="number"],
+textarea,
+[contenteditable="true"] {
+  cursor: text;
+}
+
+
+/* ============================================================
    Fondo — dos capas fijas sobre un suelo plano
    ::before  → suelo liso en --bg-void
    ::after   → constelación de puntos + grano UV
@@ -181,7 +224,7 @@ body::after {
                    auto, auto, auto, auto, auto, auto, auto, auto, auto, auto,
                    auto, auto, auto, auto, auto, auto,
                    200px 200px;
-  animation: starDrift 90s linear infinite alternate;
+  /* animation: starDrift 90s linear infinite alternate; */ /* DESACTIVADA: causa problemas de rendimiento con el video */
 }
 
 @keyframes starDrift {
@@ -288,10 +331,7 @@ h4 {
 }
 
 .grad-text {
-  background: var(--grad-brand);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #ffffff;
 }
 
 .section-head {
@@ -337,7 +377,7 @@ h4 {
   border-radius: 50%;
   background: var(--ice);
   box-shadow: 0 0 10px var(--ice);
-  animation: kickerPulse 2.4s ease-in-out infinite;
+  /* animation: kickerPulse 2.4s ease-in-out infinite; */ /* DESACTIVADA: consume recursos innecesariamente */
 }
 
 @keyframes kickerPulse {
@@ -379,34 +419,14 @@ h4 {
 }
 
 .btn--primary {
-  background: var(--grad-violet);
+  background: #7145D6;
   color: #fff;
-  box-shadow: var(--shadow-violet);
-}
-
-/* Barrido de luz al pasar el mouse */
-.btn--primary::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-    110deg,
-    transparent 22%,
-    rgba(255, 255, 255, 0.28) 48%,
-    transparent 72%
-  );
-  transform: translateX(-120%);
-  transition: transform 0.75s var(--ease-out);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
 .btn--primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 22px 48px -12px rgba(124, 58, 237, 0.9);
-}
-
-.btn--primary:hover::after {
-  transform: translateX(120%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* Cohete de los CTA: despegue en diagonal sutil
@@ -530,7 +550,7 @@ textarea:focus-visible {
     radial-gradient(1.2px 1.2px at 83% 68%, rgba(167, 139, 250, 0.45), transparent),
     radial-gradient(1.4px 1.4px at 91% 22%, rgba(255, 255, 255, 0.3), transparent),
     radial-gradient(1.1px 1.1px at 8% 85%, rgba(255, 255, 255, 0.26), transparent);
-  animation: twinkle 7s ease-in-out infinite alternate;
+  /* animation: twinkle 7s ease-in-out infinite alternate; */ /* DESACTIVADA: consume recursos innecesariamente */
 }
 
 @keyframes twinkle {

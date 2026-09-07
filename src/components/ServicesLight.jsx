@@ -4,7 +4,6 @@ import {
   IconBrowserCode,
   IconSpeedometer,
   IconArrowRight,
-  IconRocket,
 } from "./icons.jsx";
 import "./ServicesLight.css";
 import servicesImg from "../recursos/services-img.webp";
@@ -77,20 +76,6 @@ export default function ServicesLight() {
                 loading="lazy"
                 decoding="async"
               />
-
-              <div className="services-light__cta">
-                <strong>
-                  {t("servicesLight.cta.text")}{" "}
-                  <span className="grad-text services-light__cta-highlight">
-                    {t("servicesLight.cta.highlight")}
-                  </span>
-                </strong>
-
-                <a href="#contacto" className="btn btn--primary">
-                  {t("servicesLight.cta.button")}
-                  <IconRocket />
-                </a>
-              </div>
             </div>
           </div>
         </div>

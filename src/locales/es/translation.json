@@ -46,12 +46,7 @@
     "titleHighlight": "nuestra misión",
     "description": "Una combinación de diseño, tecnología y estrategia para crear la web que tu negocio necesita: rápida, clara y pensada para convertir.",
     "alt": "Equipo de Astravia colaborando alrededor de una mesa con laptops y anotaciones",
-    "link": "Conocer más",
-    "cta": {
-      "text": "Sumate a Astravia y llevá tu marca",
-      "highlight": "al siguiente nivel.",
-      "button": "Hablemos de estrategia"
-    }
+    "link": "Conocer más"
   },
   "process": {
     "kicker": "Cómo trabajamos",
@@ -200,7 +195,7 @@
     "titleHighlight": "etapa de tu negocio.",
     "description": "Tres formas de empezar, todas con pago único y sin abonos mensuales. Elegí la que va con tu proyecto hoy: podés escalar después sin rehacer nada.",
     "featuredBadge": "Más elegido",
-    "cta": "Quiero este plan",
+    "cta": "Cotizar proyecto",
     "ctaAriaLabel": "Consultar por el plan {{plan}} por WhatsApp",
     "whatsappMessage": "¡Hola! Me interesa el plan {{plan}} y quiero coordinar una consulta.",
     "plans": {
