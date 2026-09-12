@@ -46,6 +46,8 @@
 .floating-btn svg {
   width: 38px !important;
   height: 38px !important;
+  position: relative;
+  z-index: 1;
 }
 
 /* 1. Volver Arriba (Estética oscura neutra)
@@ -98,8 +100,8 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background-color: #25d366;
-  z-index: -1;
+  background-color: rgba(37, 211, 102, 0.35);
+  z-index: 0;
   animation: antennaWave 2.5s ease-out infinite;
 }
 
@@ -110,13 +112,10 @@
 @keyframes antennaWave {
   0% {
     transform: scale(1);
-    opacity: 0.4;
-  }
-  30% {
-    opacity: 0.2;
+    opacity: 0.6;
   }
   100% {
-    transform: scale(1.6);
+    transform: scale(1.8);
     opacity: 0;
   }
 }

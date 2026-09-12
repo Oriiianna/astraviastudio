@@ -4,17 +4,17 @@
     "process": "Proceso",
     "work": "Proyectos",
     "contact": "Contacto",
-    "cta": "Quiero despegar",
+    "cta": "Iniciar proyecto",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
     "languageLabel": "Cambiar idioma a inglés"
   },
   "hero": {
     "titleLine1": "Despega tu negocio al",
-    "titleLine2": "antes de contactarte.",
     "titleLine3": " universo digital",
-    "titleLine4": "Esto es una prueba?",
     "lead": "En Astravia combinamos diseño, tecnología y estrategia para crear webs que comunican, posicionan y generan resultados reales.",
-    "primaryCta": "Quiero una web que venda",
-    "secondaryCta": "Ver cómo trabajamos",
+    "primaryCta": "Servicios",
+    "secondaryCta": "Proyectos",
     "hint": "Desliza"
   },
   "services": {
@@ -24,21 +24,29 @@
     "items": {
       "one": {
         "title": "Diseño UI/UX",
-        "text": "Diseñamos experiencias que guían al usuario y aumentan la conversión."
+        "text": "Diseñamos experiencias que guían al usuario y aumentan la conversión. Eliminamos la fricción en el recorrido de tu usuario. Estudiamos el comportamiento de tu audiencia para crear interfaces atractivas que facilitan las ventas y maximizan tu tasa de conversión."
       },
       "two": {
         "title": "Desarrollo Web",
-        "text": "Construimos con WordPress, Elementor, React, HTML, CSS, JS y más."
+        "text": "Desarrollamos sitios y aplicaciones web de alto rendimiento optimizados para posicionar en Google y convertir visitas en clientes recurrentes."
       },
       "three": {
         "title": "Optimización",
-        "text": "Velocidad, rendimiento y SEO para que tu web no pierda clientes."
+        "text": "Optimizamos la velocidad de carga, la estructura técnica y el SEO de tu sitio para dominar Google y maximizar tus ventas."
       },
       "four": {
         "title": "Mantenimiento",
-        "text": "Nos encargamos de todo para que tú solo te enfoques en crecer."
+        "text": "Nos encargamos de la seguridad, las copias de seguridad y el soporte técnico constante para que operes sin interrupciones y te enfoques solo en vender."
       }
     }
+  },
+  "servicesLight": {
+    "kicker": "Por qué elegirnos",
+    "title": "Tu éxito es",
+    "titleHighlight": "nuestra misión",
+    "description": "Una combinación de diseño, tecnología y estrategia para crear la web que tu negocio necesita: rápida, clara y pensada para convertir.",
+    "alt": "Equipo de Astravia colaborando alrededor de una mesa con laptops y anotaciones",
+    "link": "Conocer más"
   },
   "process": {
     "kicker": "Cómo trabajamos",
@@ -67,7 +75,7 @@
     "title": "Tu web puede ser tu mejor",
     "accent": "vendedor.",
     "body": "Deja de perder clientes por una web lenta o confusa y empieza a convertir visitas en oportunidades.",
-    "button": "Empezar mi proyecto"
+    "button": "Iniciar proyecto"
   },
   "footer": {
     "columns": {
@@ -94,6 +102,21 @@
     "rights": "Todos los derechos reservados.",
     "made": "Hecho con 💜 para el universo digital"
   },
+  "cookies": {
+    "title": "Usamos cookies.",
+    "text": "Solo para analítica (Google Analytics) y entender cómo se usa el sitio. Podés aceptar o rechazar cuando quieras — más detalles en nuestra Política de Privacidad.",
+    "accept": "Aceptar",
+    "reject": "Rechazar"
+  },
+  "privacy": {
+    "intro": "En Astravia Studio nos tomamos en serio la privacidad de quienes nos visitan y contactan. Esta página explica qué información recopilamos y cómo la usamos.",
+    "dataTitle": "Qué datos recopilamos",
+    "dataText": "El único dato que pedimos activamente es el que completás en el formulario de contacto: nombre, email, teléfono (opcional), el servicio que te interesa y tu mensaje. Esa información se envía por correo a studioastravia@gmail.com a través de Mailtrap, nuestro proveedor de envío de emails, y se usa exclusivamente para responder tu consulta.",
+    "cookiesTitle": "Cookies y analítica",
+    "cookiesText": "Usamos Google Analytics para entender cómo se usa el sitio (qué páginas se visitan, desde qué tipo de dispositivo, etc.), de forma agregada y sin identificarte personalmente. Este análisis solo se activa si aceptás el aviso de cookies que aparece en tu primera visita; podés rechazarlo ahí mismo, o cambiar tu elección más adelante borrando los datos del sitio desde la configuración de tu navegador. Para más información sobre cómo Google procesa estos datos, podés consultar la política de privacidad de Google en policies.google.com/privacy.",
+    "contactTitle": "Consultas sobre privacidad",
+    "contactText": "Si tenés alguna pregunta sobre esta política o sobre tus datos, podés escribirnos a studioastravia@gmail.com."
+  },
   "contact": {
     "kicker": "Contacto",
     "title": "Hablemos de tu",
@@ -112,13 +135,20 @@
     "submit": "Enviar Mensaje",
     "sending": "Enviando…",
     "success": "¡Gracias! Te respondemos dentro de las próximas 24 horas.",
-    "error": "No pudimos enviar el mensaje. Probá de nuevo o escribinos a hola@astravia.digital."
+    "error": "No pudimos enviar el mensaje. Probá de nuevo o escribinos a hola@astravia.digital.",
+    "errorService": "Por favor seleccioná un servicio.",
+    "service": "Servicio requerido",
+    "placeholderService": "Seleccioná un servicio",
+    "serviceLanding": "Landing Page",
+    "serviceCorporativo": "Corporativa",
+    "serviceEcommerce": "E-Commerce",
+    "serviceOtro": "Otro"
   },
   "clients": {
     "kicker": "Portfolio",
     "title": "Proyectos Destacados",
     "description": "Piezas donde probamos ideas de interfaz y rendimiento a fondo. No son maquetas: están publicadas y se pueden recorrer.",
-    "cta": "Ver cómo trabajamos",
+    "cta": "Nuestro proceso",
     "viewSite": "Ver Proyecto",
     "openInNewTab": "Abrir {{title}} en una pestaña nueva",
     "projects": {
@@ -180,7 +210,7 @@
     "titleHighlight": "etapa de tu negocio.",
     "description": "Tres formas de empezar, todas con pago único y sin abonos mensuales. Elegí la que va con tu proyecto hoy: podés escalar después sin rehacer nada.",
     "featuredBadge": "Más elegido",
-    "cta": "Quiero este plan",
+    "cta": "Cotizar proyecto",
     "ctaAriaLabel": "Consultar por el plan {{plan}} por WhatsApp",
     "whatsappMessage": "¡Hola! Me interesa el plan {{plan}} y quiero coordinar una consulta.",
     "plans": {
@@ -202,7 +232,7 @@
         ]
       },
       "clasica": {
-        "name": "Clásica",
+        "name": "Corporativa",
         "price": {
           "currency": "Pesos",
           "amount": "400",
@@ -227,16 +257,12 @@
           "note": "pago único"
         },
         "features": [
-          "Catálogo y páginas de producto",
-          "Categorías, filtros y variantes",
-          "Carrito y proceso de compra",
-          "Medios de pago compatibles",
-          "Gestión de productos y stock",
-          "Información y opciones de envío",
-          "Diseño personalizado y responsive",
-          "WhatsApp y formularios",
-          "SEO + Analytics",
-          "Carga inicial de productos"
+          "Catálogo y Productos",
+          "Proceso de Compra",
+          "Envíos y Logística",
+          "Diseño y Adaptabilidad",
+          "SEO y Analítica",
+          "Carga Inicial"
         ]
       }
     },
@@ -248,5 +274,11 @@
   },
   "techStack": {
     "label": "Potenciado por tecnología real"
+  },
+  "tools": {
+    "pill": "TECNOLOGÍA",
+    "title": "Construimos soluciones digitales",
+    "text": "Creamos sitios y aplicaciones rápidas con la mejor tecnología para hacer crecer tu negocio sin limitaciones técnicas.",
+    "cta": "Iniciar proyecto"
   }
 }

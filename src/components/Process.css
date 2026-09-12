@@ -1,4 +1,8 @@
-/* Sin fondo propio: lo pinta el suelo liso de body::before */
+.process {
+  background-color: #05050A;
+  border-bottom: 1px solid #231340;
+}
+
 .process .container {
   position: relative;
   z-index: 2;
@@ -84,13 +88,13 @@
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.055em;
-  color: rgba(124, 58, 237, 0.14);
+  color: #7145D6;
   transition: color 0.5s var(--ease), transform 0.5s var(--ease);
 }
 
 
 .step:hover .step__cifra {
-  color: rgba(124, 58, 237, 0.28);
+  color: #7145D6;
   transform: translateY(-4px);
 }
 
@@ -122,6 +126,7 @@
 }
 
 .step h3 {
+  font-family: var(--font-display);
   font-size: clamp(1rem, 1.25vw, 1.18rem);
   font-weight: 600;
   letter-spacing: -0.015em;

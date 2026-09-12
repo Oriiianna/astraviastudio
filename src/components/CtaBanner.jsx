@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IconArrowRight } from './icons.jsx'
 import useFrameSequence from '../hooks/useFrameSequence.js'
 import manifest from '../../public/astronauta/manifest.json'
 import './CtaBanner.css'
@@ -53,7 +52,7 @@ export default function CtaBanner() {
 
               <p>{t('cta.body')}</p>
               <a href="#contacto" className="btn btn--primary cta__btn">
-                {t('cta.button')} <IconArrowRight />
+                {t('cta.button')}
               </a>
             </div>
           </div>

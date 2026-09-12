@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import Services from "./components/Services.jsx";
+// Temporal: sección Services en tema claro (framer-motion + lucide) para probar esta dirección de diseño
+import ServicesLight from "./components/ServicesLight.jsx";
 import TechStack from "./components/TechStack.jsx";
+import ToolsStack from "./components/ToolsStack.jsx";
 import Process from "./components/Process.jsx";
 import Pricing from "./components/Pricing.jsx";
 import Clients from "./components/Clients.jsx";
@@ -15,6 +18,8 @@ import Terms from "./pages/Terms.jsx";
 // Sustituido por FloatingActions.jsx, que incluye el botón de BackToTop y el de WhatsApp
 // import BackToTop from "./components/BackToTop.jsx";
 import FloatingActions from "./components/FloatingActions.jsx";
+import CookieConsent from "./components/CookieConsent.jsx";
+import { getConsent, loadAnalytics } from "./utils/analytics.js";
 
 function ScrollToHash() {
   const location = useLocation();
@@ -83,9 +88,12 @@ function AppContent() {
       <Navbar />
       <main>
         <Hero />
-        <Services />
+        {/* <Services /> */}
+        {/* TEMPORAL: prueba de la sección Services en tema claro (cliente). Quitar cuando no se necesite. */}
+        <ServicesLight />
         <Process />
-        <TechStack />
+        {/* <TechStack /> */}
+        <ToolsStack />
         <Pricing />
         <Clients />
         <CtaBanner />
@@ -99,9 +107,17 @@ function AppContent() {
 }
 
 export default function App() {
+  // Visita que ya había aceptado antes: cargar GA sin volver a mostrar el
+  // banner. Si es "denied" o todavía no hay elección, no se toca nada acá.
+  useEffect(() => {
+    if (getConsent() === "granted") loadAnalytics();
+  }, []);
+
   return (
     <Router>
       <ScrollToHash />
+      {/* Desactivado hasta producción: sacar el comentario para volver a mostrarlo. */}
+      {/* <CookieConsent /> */}
       <Routes>
         <Route path="/" element={<AppContent />} />
         <Route path="/privacy" element={<Privacy />} />

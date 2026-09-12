@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { IconRocket, IconMenu, IconClose } from './icons.jsx'
+import { IconMenu, IconClose } from './icons.jsx'
+import { scrollToHash, scrollToTop } from '../utils/scroll'
 import './Navbar.css'
 
 export default function Navbar() {
@@ -16,12 +17,9 @@ export default function Navbar() {
     if (isHomePage) {
       e.preventDefault()
       if (hash === '#inicio' || hash === '/') {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        scrollToTop()
       } else {
-        const element = document.querySelector(hash)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
+        scrollToHash(hash)
       }
     }
     setOpen(false)
@@ -30,7 +28,7 @@ export default function Navbar() {
   const handleLogoClick = (e) => {
     if (isHomePage) {
       e.preventDefault()
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      scrollToTop()
     }
     setOpen(false)
   }
@@ -68,7 +66,7 @@ export default function Navbar() {
             alt="Astravia"
             width="635"
             height="160"
-            fetchpriority="high"
+            fetchPriority="high"
           />
         </Link>
 
@@ -79,14 +77,16 @@ export default function Navbar() {
             </a>
           ))}
           <a href={getHref('#contacto')} className="btn btn--primary nav__cta nav__cta--mobile" onClick={(e) => handleNavigation(e, '#contacto')}>
-            {t('nav.cta')} <IconRocket className="nav__cta-icon" />
+            {t('nav.cta')}
           </a>
         </nav>
 
         <div className="nav__actions">
-          <div className="nav__langSwitch" role="group" aria-label={t('nav.languageLabel')}>
+          <div className="nav__langSwitch" role="group" aria-label={t('nav.languageLabel')} data-lang={i18n.language.startsWith('en') ? 'en' : 'es'}>
+            <span className="nav__langThumb" aria-hidden="true" />
             <button
               type="button"
+              aria-pressed={!i18n.language.startsWith('en')}
               className={`nav__langOption ${i18n.language.startsWith('en') ? '' : 'is-active'}`}
               onClick={() => i18n.changeLanguage('es')}
             >
@@ -94,6 +94,7 @@ export default function Navbar() {
             </button>
             <button
               type="button"
+              aria-pressed={i18n.language.startsWith('en')}
               className={`nav__langOption ${i18n.language.startsWith('en') ? 'is-active' : ''}`}
               onClick={() => i18n.changeLanguage('en')}
             >
@@ -101,14 +102,14 @@ export default function Navbar() {
             </button>
           </div>
           <a href="#contacto" className="btn btn--primary nav__cta" onClick={(e) => handleNavigation(e, '#contacto')}>
-            {t('nav.cta')} <IconRocket className="nav__cta-icon" />
+            {t('nav.cta')}
           </a>
         </div>
 
         <button
           className="nav__burger"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+          aria-label={open ? t('nav.closeMenu') : t('nav.openMenu')}
           aria-expanded={open}
         >
           {open ? <IconClose /> : <IconMenu />}

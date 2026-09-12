@@ -22,6 +22,23 @@
   color: var(--text);
 }
 
+.page-content {
+  max-width: 72ch;
+}
+
+.page-content p {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.page-content h2 {
+  font-size: 1.25rem;
+  margin: 40px 0 14px;
+  color: var(--text);
+}
+
 :root {
   /* --- Fondos: escala índigo, del casi negro al panel --- */
   --bg-void: #080012;
@@ -86,6 +103,10 @@
   /* --- Curvas --- */
   --ease: cubic-bezier(0.22, 0.7, 0.24, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- Tipografía --- */
+  --font-display: 'Space Grotesk', ui-sans-serif, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, sans-serif;
 }
 
 /* ============================================================
@@ -110,7 +131,7 @@ html {
 }
 
 body {
-  font-family: 'Poppins', ui-sans-serif, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg-void);
   color: var(--text);
   position: relative;
@@ -120,6 +141,56 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
+
+/* ============================================================
+   Cursor
+   Sin caret de edición sobre el texto: el I-beam solo aparece
+   en campos de entrada reales. Lo interactivo, con la mano.
+   ============================================================ */
+
+/* 1) Por defecto en TODO el sitio: flecha normal, nunca I-beam */
+* {
+  cursor: default;
+}
+
+/* 2) Elementos interactivos: vuelve la mano.
+   El * de arriba pisa el cursor de CUALQUIER hijo (una img adentro de
+   un <a>, por ejemplo), así que hay que bajarlo explícitamente a los
+   descendientes o el logo queda con flecha en vez de mano. */
+a,
+a *,
+button,
+button *,
+[role="button"],
+[role="button"] *,
+[role="link"],
+[role="link"] *,
+summary,
+select,
+label[for],
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"],
+input[type="color"],
+input[type="file"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
+
+/* 3) Solo los campos donde se escribe: vuelve el I-beam */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="password"],
+input[type="number"],
+textarea,
+[contenteditable="true"] {
+  cursor: text;
+}
+
 
 /* ============================================================
    Fondo — dos capas fijas sobre un suelo plano
@@ -181,7 +252,7 @@ body::after {
                    auto, auto, auto, auto, auto, auto, auto, auto, auto, auto,
                    auto, auto, auto, auto, auto, auto,
                    200px 200px;
-  animation: starDrift 90s linear infinite alternate;
+  /* animation: starDrift 90s linear infinite alternate; */ /* DESACTIVADA: causa problemas de rendimiento con el video */
 }
 
 @keyframes starDrift {
@@ -221,6 +292,7 @@ h1,
 h2,
 h3,
 h4 {
+  font-family: var(--font-display);
   line-height: 1.12;
   letter-spacing: -0.028em;
   font-weight: 700;
@@ -288,10 +360,7 @@ h4 {
 }
 
 .grad-text {
-  background: var(--grad-brand);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #ffffff;
 }
 
 .section-head {
@@ -314,6 +383,7 @@ h4 {
 
 /* Etiqueta de sección (kicker) */
 .kicker {
+  font-family: var(--font-display);
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -337,7 +407,7 @@ h4 {
   border-radius: 50%;
   background: var(--ice);
   box-shadow: 0 0 10px var(--ice);
-  animation: kickerPulse 2.4s ease-in-out infinite;
+  /* animation: kickerPulse 2.4s ease-in-out infinite; */ /* DESACTIVADA: consume recursos innecesariamente */
 }
 
 @keyframes kickerPulse {
@@ -379,35 +449,16 @@ h4 {
 }
 
 .btn--primary {
-  background: var(--grad-violet);
+  background: #7145D6;
   color: #fff;
-  box-shadow: var(--shadow-violet);
-}
-
-/* Barrido de luz al pasar el mouse */
-.btn--primary::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-    110deg,
-    transparent 22%,
-    rgba(255, 255, 255, 0.28) 48%,
-    transparent 72%
-  );
-  transform: translateX(-120%);
-  transition: transform 0.75s var(--ease-out);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
 .btn--primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 22px 48px -12px rgba(124, 58, 237, 0.9);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-.btn--primary:hover::after {
-  transform: translateX(120%);
-}
 
 .btn--ghost {
   background: rgba(167, 139, 250, 0.035);
@@ -516,7 +567,7 @@ textarea:focus-visible {
     radial-gradient(1.2px 1.2px at 83% 68%, rgba(167, 139, 250, 0.45), transparent),
     radial-gradient(1.4px 1.4px at 91% 22%, rgba(255, 255, 255, 0.3), transparent),
     radial-gradient(1.1px 1.1px at 8% 85%, rgba(255, 255, 255, 0.26), transparent);
-  animation: twinkle 7s ease-in-out infinite alternate;
+  /* animation: twinkle 7s ease-in-out infinite alternate; */ /* DESACTIVADA: consume recursos innecesariamente */
 }
 
 @keyframes twinkle {
@@ -537,7 +588,7 @@ textarea:focus-visible {
   transform: translateY(26px);
   transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
   transition-delay: var(--delay, 0ms);
-  will-change: opacity, transform;
+  /* will-change eliminado: consumía memoria innecesariamente en todos los elementos */
 }
 
 [data-reveal].is-visible {

@@ -53,6 +53,21 @@ export default function useFrameSequence({
     let rafId = 0
     let cancelled = false
 
+    // Cache de valores para evitar reflows forzados en cada frame
+    let cachedScrollHeight = 0
+    let cachedOffsetTop = 0
+    let lastCacheTime = 0
+    const CACHE_INTERVAL = 100 // ms
+
+    const updateCache = () => {
+      const now = performance.now()
+      if (now - lastCacheTime > CACHE_INTERVAL) {
+        cachedScrollHeight = document.documentElement.scrollHeight
+        cachedOffsetTop = section.offsetTop
+        lastCacheTime = now
+      }
+    }
+
     /* ---------- Dibujo ---------- */
 
     const resize = () => {
@@ -95,10 +110,13 @@ export default function useFrameSequence({
     const getProgress = () => {
       if (reduced) return 1
 
+      // Actualizar cache de valores para evitar reflows
+      updateCache()
+
       if (mode === 'page') {
         const vh = window.innerHeight
-        const start = Math.max(0, section.offsetTop - vh)
-        const end = document.documentElement.scrollHeight - vh
+        const start = Math.max(0, cachedOffsetTop - vh)
+        const end = cachedScrollHeight - vh
         if (end <= start) return 0
         return Math.min(1, Math.max(0, (window.scrollY - start) / (end - start)))
       }
@@ -114,7 +132,7 @@ export default function useFrameSequence({
 
       const scrub = section.offsetHeight - window.innerHeight
       if (scrub <= 0) return 1
-      return Math.min(1, Math.max(0, (window.scrollY - section.offsetTop) / scrub))
+      return Math.min(1, Math.max(0, (window.scrollY - cachedOffsetTop) / scrub))
     }
 
     const render = () => {
@@ -182,16 +200,32 @@ export default function useFrameSequence({
       schedule()
     }
 
+    // Throttle del scroll: evita ejecutar schedule demasiadas veces por segundo
+    let lastScrollTime = 0
+    const SCROLL_THROTTLE = 16 // ~60fps máximo
+
+    const throttledSchedule = () => {
+      const now = performance.now()
+      if (now - lastScrollTime >= SCROLL_THROTTLE) {
+        lastScrollTime = now
+        schedule()
+      } else {
+        // Si estamos dentro del throttle, igualmente programamos un RAF
+        // para no perder el último evento de scroll
+        schedule()
+      }
+    }
+
     resize()
     preload()
 
-    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('scroll', throttledSchedule, { passive: true })
     window.addEventListener('resize', onResize)
 
     return () => {
       cancelled = true
       if (rafId) cancelAnimationFrame(rafId)
-      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('scroll', throttledSchedule)
       window.removeEventListener('resize', onResize)
     }
     // El resto de las opciones son estáticas durante la vida del componente
