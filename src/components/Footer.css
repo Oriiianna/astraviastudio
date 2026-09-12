@@ -62,7 +62,7 @@
 
 .footer__col a:hover,
 .footer__col a[class*="link"]:hover {
-  color: var(--violet-soft);
+  color: #00E5C8;
 }
 
 .footer__col li {

@@ -42,9 +42,10 @@ export default function Pricing() {
                 data-reveal
                 data-spotlight
               >
-                {featured && <span className="plan__badge">{t('pricing.featuredBadge')}</span>}
-
-                <h3 className="plan__name">{name}</h3>
+                <div className="plan__head">
+                  <h3 className="plan__name">{name}</h3>
+                  {featured && <span className="plan__badge">{t('pricing.featuredBadge')}</span>}
+                </div>
 
                 <ul className="plan__features">
                   {features.map((feature) => (
@@ -56,7 +57,7 @@ export default function Pricing() {
                 </ul>
 
                 <a
-                  className="btn btn--primary plan__cta"
+                  className={`btn ${featured ? 'btn--primary' : 'btn--ghost'} plan__cta`}
                   href={waHref}
                   target="_blank"
                   rel="noopener noreferrer"

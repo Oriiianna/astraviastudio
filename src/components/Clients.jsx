@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { IconArrowRight, LogoReact, LogoTailwind, LogoCss3, LogoFramer, LogoReactRouter } from "./icons.jsx";
+import { LogoReact, LogoTailwind, LogoCss3, LogoFramer, LogoReactRouter } from "./icons.jsx";
 import "./Clients.css";
 
 const TECH_ICONS = {
@@ -146,7 +146,7 @@ export default function Clients() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {t('clients.viewSite')} <IconArrowRight />
+                    {t('clients.viewSite')}
                   </a>
                 </div>
               </article>

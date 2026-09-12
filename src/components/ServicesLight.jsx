@@ -3,7 +3,6 @@ import {
   IconArtboard,
   IconBrowserCode,
   IconSpeedometer,
-  IconArrowRight,
 } from "./icons.jsx";
 import "./ServicesLight.css";
 import servicesImg from "../recursos/services-img.webp";
@@ -44,7 +43,6 @@ export default function ServicesLight() {
 
                   <a href="#contacto" className="services-light__card-link">
                     {t("servicesLight.link")}
-                    <IconArrowRight />
                   </a>
                 </div>
               </article>

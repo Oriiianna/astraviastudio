@@ -5,16 +5,34 @@
   height: var(--nav-h);
   display: flex;
   align-items: center;
-  transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease),
-    border-color 0.4s var(--ease);
+  transition: border-color 0.4s var(--ease);
   border-bottom: 1px solid transparent;
 }
 
-.nav--scrolled {
+/* El fondo/blur del nav scrolleado va en un pseudo-elemento y no directo en
+   .nav: backdrop-filter en .nav convertiría a .nav en "containing block" de
+   sus hijos position:fixed (mismo efecto que transform), y el menú mobile
+   (.nav__links, fixed a pantalla completa) quedaría posicionado contra los
+   80px del header en vez de contra el viewport. */
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(6, 5, 26, 0.85);
   /* backdrop-filter reducido para mejorar rendimiento con el video */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+  pointer-events: none;
+}
+
+.nav--scrolled::before {
+  opacity: 1;
+}
+
+.nav--scrolled {
   border-bottom-color: var(--border);
 }
 
@@ -91,6 +109,7 @@
 }
 
 .nav__langOption {
+  font-family: var(--font-display);
   position: relative;
   z-index: 1;
   width: calc(50% - 0px);
@@ -158,16 +177,6 @@
 .nav__cta {
   padding: 13px 24px;
   font-size: 0.85rem;
-}
-
-.nav__cta.btn--primary svg {
-  width: 16px;
-  height: 16px;
-  transition: transform 1.5s var(--ease-out);
-}
-
-.nav__cta.btn--primary:hover svg {
-  transform: translateX(5px);
 }
 
 .nav__links .nav__cta--mobile {

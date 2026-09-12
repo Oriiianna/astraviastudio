@@ -19,7 +19,13 @@
   overflow: hidden;
 }
 
-/* ---- Contenido central ---- */
+/* ---- Contenido central ----
+   Es un contenedor flex de bloque: aunque el texto se vea centrado y
+   angosto, su caja real ocupa casi todo el ancho disponible. Con
+   pointer-events auto (el default) esa caja "tapa" el click/hover de
+   los íconos decorativos que quedan por debajo en cualquier punto
+   donde se solapan, aunque ahí no haya nada pintado. Se desactiva acá
+   y se reactiva solo en el botón, que es lo único interactivo adentro. */
 .tools-content {
   position: relative;
   z-index: 2;
@@ -28,6 +34,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  pointer-events: none;
 }
 
 .tools-badge {
@@ -51,8 +58,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--ember);
-  box-shadow: 0 0 12px rgba(242, 166, 90, 0.8);
+  background: var(--ice);
+  box-shadow: 0 0 10px var(--ice);
 }
 
 /* Titular gigante, forzado a dos líneas como en la referencia */
@@ -77,25 +84,21 @@
 .tools-cta {
   padding: 14px 30px;
   font-size: 0.98rem;
+  pointer-events: auto;
 }
 
-.tools-cta.btn--primary svg {
-  width: 16px;
-  height: 16px;
-  transition: transform 1.5s var(--ease-out);
-}
-
-.tools-cta.btn--primary:hover svg {
-  transform: translateX(5px);
-}
-
-/* ---- Columnas decorativas de tarjetas ---- */
+/* ---- Columnas decorativas de tarjetas ----
+   z-index por encima de .tools-content: son contextos de apilamiento
+   separados, así que si esto quedara por debajo, el z-index:30 del
+   tooltip (::after de .tools-card) nunca podría ganarle al botón del
+   contenido central aunque el número sea más alto — un z-index solo
+   compite dentro de su propio contexto. */
 .tools-decoration {
   position: absolute;
   top: 0;
   bottom: 0;
   width: clamp(300px, 28vw, 430px);
-  z-index: 1;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -118,7 +121,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* animation: tools-float 6s ease-in-out infinite; */ /* DESACTIVADA: consume recursos y afecta el video */
+  animation: tools-float 6s ease-in-out infinite;
 }
 
 .tools-card svg {
@@ -329,36 +332,44 @@
   }
 
   /* 1) Superiores: mismas altura que el badge, hacia las esquinas
-        (centro vertical alineado con el centro del badge) */
+        (centro vertical alineado con el centro del badge).
+        top empieza en 60px y no menos: el tooltip aparece arriba del
+        ícono y la sección tiene overflow:hidden, así que más cerca del
+        borde se corta y queda invisible. */
   .tools-decoration--left .tools-card--top {
-    top: 48px;
-    left: 14px;
+    top: 60px;
+    left: 20px;
     --rot: -16deg;
   }
 
   .tools-decoration--right .tools-card--top {
-    top: 58px;
-    right: 18px;
+    top: 66px;
+    right: 44px;
     --rot: 9deg;
   }
 
-  /* 2) Fila media: pegada a los bordes, entre descripción y CTA */
+  /* 2) Fila media: pegada a los bordes, entre descripción y CTA.
+     Más adentro que el resto: son las que tienen el tooltip más largo
+     ("WordPress", "JavaScript") y desde el borde se cortaba contra el
+     borde de la pantalla. */
   .tools-decoration--left .tools-card--mid {
     top: 60%;
-    left: 8px;
+    left: 48px;
     --rot: -10deg;
   }
 
   .tools-decoration--right .tools-card--mid {
     top: 64%;
-    right: 8px;
+    right: 48px;
     --rot: 8deg;
   }
 
-  /* 3) Fila cercana: junto al botón, por fuera de sus extremos */
+  /* 3) Fila cercana: junto al botón, por fuera de sus extremos.
+     En px y no en % (que a este ancho quedaba muy cerca del borde):
+     así el tooltip más largo del grupo (WooCommerce) entra completo. */
   .tools-decoration--left .tools-card--bottom {
     top: 74%;
-    left: 8%;
+    left: 52px;
     --rot: -12deg;
   }
 
@@ -366,7 +377,7 @@
     width: 48px;
     height: 48px;
     top: 77%;
-    right: 8%;
+    right: 56px;
     --rot: -6deg;
   }
 
@@ -386,8 +397,11 @@
   }
 }
 
-/* Pantallas muy angostas: achico las píldoras y las acerco al borde
-   para que nunca rocen el contenido central */
+/* Pantallas muy angostas: solo achico las píldoras. El texto del tooltip
+   no encoge junto con la pantalla, así que acá NO se acercan más al
+   borde (al revés: a este ancho el margen para el tooltip importa más,
+   no menos) — quedan con el mismo left/right en px que ya definió la
+   media query de 900px. */
 @media (max-width: 380px) {
   .tools-card--lg {
     width: 52px;
@@ -406,28 +420,10 @@
 
   .tools-decoration--left .tools-card--top {
     top: 50px;
-    left: 10px;
   }
 
   .tools-decoration--right .tools-card--top {
     top: 60px;
-    right: 12px;
-  }
-
-  .tools-decoration--left .tools-card--mid {
-    left: 5px;
-  }
-
-  .tools-decoration--right .tools-card--mid {
-    right: 5px;
-  }
-
-  .tools-decoration--left .tools-card--bottom {
-    left: 6%;
-  }
-
-  .tools-decoration--right .tools-card--bottom {
-    right: 6%;
   }
 }
 

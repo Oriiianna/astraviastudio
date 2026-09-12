@@ -13,8 +13,8 @@
     "titleLine1": "Launch Your Business into the",
     "titleLine3": " Digital Universe",
     "lead": "At Astravia we combine design, technology and strategy to create websites that communicate, position and generate real results.",
-    "primaryCta": "I want a website that sells",
-    "secondaryCta": "Our Process",
+    "primaryCta": "Our Services",
+    "secondaryCta": "Portfolio",
     "hint": "Scroll"
   },
   "services": {
@@ -101,6 +101,21 @@
     },
     "rights": "All rights reserved.",
     "made": "Made with 💜 for the digital universe"
+  },
+  "cookies": {
+    "title": "We use cookies.",
+    "text": "Only for analytics (Google Analytics) and understanding how the site is used. You can accept or reject at any time — more details in our Privacy Policy.",
+    "accept": "Accept",
+    "reject": "Reject"
+  },
+  "privacy": {
+    "intro": "At Astravia Studio we take the privacy of our visitors and contacts seriously. This page explains what information we collect and how we use it.",
+    "dataTitle": "What data we collect",
+    "dataText": "The only data we actively ask for is what you fill in on the contact form: name, email, phone (optional), the service you're interested in, and your message. That information is emailed to studioastravia@gmail.com through Mailtrap, our email delivery provider, and is used exclusively to respond to your inquiry.",
+    "cookiesTitle": "Cookies & analytics",
+    "cookiesText": "We use Google Analytics to understand how the site is used (which pages are visited, from what type of device, etc.), in aggregate and without personally identifying you. This tracking only activates if you accept the cookie notice shown on your first visit; you can reject it right there, or change your choice later by clearing this site's data from your browser settings. For more on how Google processes this data, see Google's privacy policy at policies.google.com/privacy.",
+    "contactTitle": "Privacy questions",
+    "contactText": "If you have any questions about this policy or your data, you can reach us at studioastravia@gmail.com."
   },
   "contact": {
     "kicker": "Contact",
@@ -241,16 +256,12 @@
           "note": "one-time payment"
         },
         "features": [
-          "Product catalog & product pages",
-          "Categories, filters & product variants",
-          "Shopping cart & checkout",
-          "Supported payment methods",
-          "Product & inventory management",
-          "Shipping information & options",
-          "Custom, responsive design",
-          "WhatsApp integration & contact forms",
-          "SEO optimization + Analytics",
-          "Initial product upload"
+          "Catalog & Products",
+          "Checkout Process",
+          "Shipping & Logistics",
+          "Design & Responsiveness",
+          "SEO & Analytics",
+          "Initial Setup"
         ]
       }
     },

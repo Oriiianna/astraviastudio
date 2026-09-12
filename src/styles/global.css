@@ -22,6 +22,23 @@
   color: var(--text);
 }
 
+.page-content {
+  max-width: 72ch;
+}
+
+.page-content p {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.page-content h2 {
+  font-size: 1.25rem;
+  margin: 40px 0 14px;
+  color: var(--text);
+}
+
 :root {
   /* --- Fondos: escala índigo, del casi negro al panel --- */
   --bg-void: #080012;
@@ -86,6 +103,10 @@
   /* --- Curvas --- */
   --ease: cubic-bezier(0.22, 0.7, 0.24, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- Tipografía --- */
+  --font-display: 'Space Grotesk', ui-sans-serif, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, sans-serif;
 }
 
 /* ============================================================
@@ -110,7 +131,7 @@ html {
 }
 
 body {
-  font-family: 'Poppins', ui-sans-serif, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg-void);
   color: var(--text);
   position: relative;
@@ -132,11 +153,18 @@ body {
   cursor: default;
 }
 
-/* 2) Elementos interactivos: vuelve la mano */
+/* 2) Elementos interactivos: vuelve la mano.
+   El * de arriba pisa el cursor de CUALQUIER hijo (una img adentro de
+   un <a>, por ejemplo), así que hay que bajarlo explícitamente a los
+   descendientes o el logo queda con flecha en vez de mano. */
 a,
+a *,
 button,
+button *,
 [role="button"],
+[role="button"] *,
 [role="link"],
+[role="link"] *,
 summary,
 select,
 label[for],
@@ -264,6 +292,7 @@ h1,
 h2,
 h3,
 h4 {
+  font-family: var(--font-display);
   line-height: 1.12;
   letter-spacing: -0.028em;
   font-weight: 700;
@@ -354,6 +383,7 @@ h4 {
 
 /* Etiqueta de sección (kicker) */
 .kicker {
+  font-family: var(--font-display);
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -428,19 +458,6 @@ h4 {
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
-
-/* Cohete de los CTA: despegue en diagonal sutil
-   El cohete ya viene inclinado hacia arriba-derecha, así que la
-   diagonal es su dirección natural: avanza 2px y sube 4px,
-   con un crecido sutil (1.04). Se siente fluido y orgánico. */
-.btn--primary svg {
-   transition: transform  ​0.45s var(--ease-out);
-}
-
-.btn--primary:hover svg {
-   transform: translate(2px, -4px) scale(1.04);
-}
-
 
 
 .btn--ghost {

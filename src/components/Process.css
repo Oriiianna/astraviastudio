@@ -126,6 +126,7 @@
 }
 
 .step h3 {
+  font-family: var(--font-display);
   font-size: clamp(1rem, 1.25vw, 1.18rem);
   font-weight: 600;
   letter-spacing: -0.015em;

@@ -35,7 +35,8 @@
 .clients__lista {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(10px, 3vw, 22px);
+  column-gap: clamp(10px, 3vw, 22px);
+  row-gap: clamp(28px, 4vw, 48px);
 }
 
 .project {
@@ -62,6 +63,16 @@
 .project:hover {
   border-color: color-mix(in srgb, var(--violet-bright) 30%, transparent);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Luz del mouse (spotlight) más sutil que la global: radio más acotado
+   y menor intensidad de color, para no recargar la card de proyecto. */
+.project[data-spotlight]::before {
+  background: radial-gradient(
+    180px circle at var(--mx) var(--my),
+    color-mix(in srgb, var(--accent, var(--violet-bright)) 14%, transparent) 0%,
+    transparent 60%
+  );
 }
 
 /* --- Imagen del proyecto --- */
@@ -207,6 +218,7 @@
 }
 
 .project__header h3 {
+  font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 600;
   color: var(--text);
@@ -214,37 +226,41 @@
   margin: 0;
 }
 
-.project__cta {
+/* "Ver proyecto": mismo tratamiento de text-link que las cards de
+   servicio (services-light__card-link): texto violeta, sin fondo sólido,
+   subrayado que aparece al hover y color celeste en hover. */
+.project__cta.btn,
+.project__cta.btn--primary {
   align-self: flex-end;
   margin-top: auto;
-}
-
-/* Ajustes específicos para el botón en la tarjeta */
-.project__cta.btn {
-  padding: 14px 28px;
-  font-size: 0.9rem;
-  gap: 8px;
   width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  color: var(--violet-soft);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: border-color 0.3s ease, color 0.3s ease;
 }
 
-.project__cta.btn svg {
-  width: 16px;
-  height: 16px;
-  transition: transform 1.5s var(--ease-out);
+.project__cta:hover {
+  border-bottom-color: var(--violet-soft);
 }
 
-/* Deslize sutil hacia la derecha */
-.project__cta.btn:hover svg {
-  transform: translateX(5px);
+.project__cta:hover {
+  color: #00E5C8;
+  transform: none;
+  box-shadow: none;
+  background: transparent;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .project__cta.btn {
-    width: 100%;
-    justify-content: center;
-  }
-}
 
 .project__stack {
   display: flex;

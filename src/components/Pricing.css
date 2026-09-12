@@ -19,6 +19,7 @@
 .plan {
   position: relative;
   isolation: isolate;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   padding: clamp(28px, 2.4vw, 40px) clamp(22px, 2vw, 32px) clamp(28px, 2.4vw, 36px);
@@ -26,24 +27,78 @@
   background: rgba(13, 11, 38, 0.6);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-card);
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
 .plan:hover {
   border-color: color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
+/* Más grande que las otras dos, no solo levantada: sobresale
+   arriba, abajo y a los costados, como en la referencia. */
 .plan--featured {
-  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, rgba(13, 11, 38, 0.6)) 0%, rgba(13, 11, 38, 0.6) 45%);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  box-shadow: 0 8px 32px -8px color-mix(in srgb, var(--accent) 35%, transparent), 0 8px 24px rgba(0, 0, 0, 0.4);
+  margin-block: -28px;
+  margin-inline: -10px;
+  padding-top: calc(clamp(28px, 2.4vw, 40px) + 28px);
+  padding-bottom: calc(clamp(28px, 2.4vw, 36px) + 28px);
+  z-index: 2;
 }
 
-/* Absoluto y no en el flujo: así los tres nombres de plan quedan a la
-   misma altura aunque solo una tarjeta tenga badge. */
-.plan__badge {
+/* Resplandor de marca detrás del encabezado, solo en el plan destacado. */
+.plan--featured::before {
+  content: '';
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: -60%;
+  left: 50%;
+  translate: -50% 0;
+  width: 260px;
+  height: 220px;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 55%, transparent), transparent);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Debajo de 3 columnas la tarjeta destacada ya no tiene dos vecinas
+   simétricas a los costados: el agrandado deja de tener sentido y
+   puede pisar la fila de al lado, así que vuelve al tamaño normal. */
+@media (max-width: 1100px) {
+  .plan--featured {
+    margin-block: 0;
+    margin-inline: 0;
+    padding-top: clamp(28px, 2.4vw, 40px);
+    padding-bottom: clamp(28px, 2.4vw, 36px);
+  }
+}
+
+/* Nombre y badge en la misma fila: así siempre quedan alineados,
+   sea cual sea el padding de la tarjeta. */
+.plan__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* La tarjeta destacada tiene 28px extra de padding arriba (para verse
+   más grande): sin esto el nombre queda pegado abajo de ese hueco en
+   vez de centrado en él. */
+.plan--featured .plan__head {
+  margin-top: -14px;
+}
+
+@media (max-width: 1100px) {
+  .plan--featured .plan__head {
+    margin-top: 0;
+  }
+}
+
+.plan__badge {
+  font-family: var(--font-display);
+  flex-shrink: 0;
   padding: 5px 12px;
   border-radius: 999px;
   background: #00E5C8;
@@ -56,15 +111,11 @@
 }
 
 .plan__name {
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--text);
-}
-
-/* Reserva el ancho del badge para que no se le encime al nombre. */
-.plan--featured .plan__name {
-  padding-right: 104px;
 }
 
 /* --- Precio --- */
@@ -83,6 +134,7 @@
 }
 
 .plan__price-amount {
+  font-family: var(--font-display);
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1;
@@ -137,8 +189,7 @@
    aunque una tenga 6 features y las otras 5. */
 .plan__cta {
   margin-top: auto;
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline: auto;
   width: fit-content;
 }
 
@@ -153,18 +204,6 @@
   .pricing__grid {
     grid-template-columns: 1fr;
     gap: 68px;
-  }
-
-  /* Apiladas ya no hay nada con qué alinear, así que el badge vuelve al
-     flujo y el nombre recupera su ancho completo. */
-  .plan__badge {
-    position: static;
-    align-self: flex-start;
-    margin-bottom: 14px;
-  }
-
-  .plan--featured .plan__name {
-    padding-right: 0;
   }
 
   .plan {
