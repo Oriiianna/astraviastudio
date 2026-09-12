@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { IconMail, IconPhone, IconPin } from "./icons.jsx";
+import { scrollToTop } from "../utils/scroll";
 import "./Footer.css";
 
 export default function Footer() {
@@ -14,7 +15,7 @@ export default function Footer() {
   const handleLogoClick = (e) => {
     if (isHomePage) {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollToTop();
     }
   };
 

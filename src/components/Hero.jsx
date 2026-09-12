@@ -1,82 +1,43 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IconChevronUp, IconZap, IconDashboard } from './icons.jsx'
-import useFrameSequence from '../hooks/useFrameSequence.js'
-// El manifiesto lo genera scripts/optimize-hero.mjs. Se importa en build time
-// (no cuesta un request) para que el conteo de frames nunca quede desfasado.
-import manifest from '../../public/hero/manifest.json'
+import { IconChevronUp } from './icons.jsx'
 import './Hero.css'
-
-const frameUrl = (set, i) => `/hero/${set}/frame-${String(i + 1).padStart(3, '0')}.webp`
-const clamp = (v, min, max) => Math.min(max, Math.max(min, v))
-
-// Mismo corte que usa el CSS y que el set chico de la secuencia: por debajo
-// de este ancho el hero no scrubea, muestra una sola imagen fija.
-const MOVIL = '(max-width: 860px)'
 
 export default function Hero() {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
   const stageRef = useRef(null)
-  const canvasRef = useRef(null)
+  const videoRef = useRef(null)
 
-  // En movil la secuencia no se precarga: son 86 peticiones y 1,5 MB para un
-  // efecto que ahi no se usa. Se sirve una sola imagen en su lugar.
-  const [esMovil, setEsMovil] = useState(() =>
-    typeof window === 'undefined' ? false : window.matchMedia(MOVIL).matches
-  )
-
+  // Velocidad de reproducción del video
+  // NOTA: Se usa 1.0 (velocidad normal) para evitar trabas.
+  // Velocidades menores a 1.0 pueden causar problemas en algunos navegadores
+  // si no pueden mantener la tasa de frames a esa velocidad.
   useEffect(() => {
-    const mq = window.matchMedia(MOVIL)
-    const alCambiar = (e) => setEsMovil(e.matches)
-    mq.addEventListener('change', alCambiar)
-    return () => mq.removeEventListener('change', alCambiar)
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 1.0
+    }
   }, [])
-
-  // El texto se va antes de que la escena se ponga densa: a mitad de camino
-  // ya no compite con el render y se evita el estado "medio transparente".
-  const handleProgress = useCallback((p) => {
-    const stage = stageRef.current
-    if (!stage) return
-    stage.style.setProperty('--p', p.toFixed(4))
-    stage.style.setProperty('--copy', clamp((0.55 - p) / 0.2, 0, 1).toFixed(4))
-  }, [])
-
-  const loaded = useFrameSequence({
-    canvasRef,
-    sectionRef,
-    frames: manifest.frames,
-    frameUrl,
-    sets: { query: '(max-width: 860px)', small: 'w720', large: 'w1280' },
-    fit: 'cover',
-    mode: 'sticky',
-    onProgress: handleProgress,
-    enabled: !esMovil,
-  })
 
   return (
     <section className="hero" id="inicio" ref={sectionRef}>
       <div className="hero__stage" ref={stageRef}>
-        {esMovil ? (
-          <img
-            className="hero__still"
-            src="/hero/mobile.jpg"
-            alt=""
-            aria-hidden="true"
-            fetchpriority="high"
-            decoding="async"
-            width="1920"
-            height="1080"
-          />
-        ) : (
-          <canvas className="hero__canvas" ref={canvasRef} aria-hidden="true" />
-        )}
+        <video
+          ref={videoRef}
+          className="hero__video"
+          src="/hero/hero-loop.mp4"
+          muted
+          loop
+          playsInline
+          autoPlay
+          preload="auto"
+          aria-hidden="true"
+          poster="/hero/w1280/frame-001.webp"
+        />
 
-        {/* Oscurecido para que el texto se lea sobre el render */}
-        <div className="hero__scrim" aria-hidden="true" />
+        {/* Overlay negro semitransparente para dar contraste al texto */}
+        <div className="hero__overlay" aria-hidden="true" />
         <div className="hero__vignette" aria-hidden="true" />
-        {/* Caída hacia Servicios: se abre con el scroll, ver Hero.css */}
-        <div className="hero__seam" aria-hidden="true" />
 
         <div className="container container--full hero__inner">
           <div className="hero__copy">
@@ -94,11 +55,11 @@ export default function Hero() {
             </p>
 
             <div className="hero__actions" style={{ '--i': 5 }}>
-              <a href="#contacto" className="btn btn--primary">
-                {t('hero.primaryCta')} <IconZap />
+              <a href="#servicios" className="btn btn--primary">
+                {t('hero.primaryCta')}
               </a>
-              <a href="#proceso" className="btn btn--ghost">
-                {t('hero.secondaryCta')} <IconDashboard />
+              <a href="#clientes" className="btn btn--ghost">
+                {t('hero.secondaryCta')}
               </a>
             </div>
           </div>
@@ -108,15 +69,6 @@ export default function Hero() {
           <span>{t('hero.hint')}</span>
           <IconChevronUp className="hero__hint-arrow" />
         </div>
-
-        {/* Barra fina de precarga: desaparece cuando terminó */}
-        {!esMovil && (
-          <div
-            className={`hero__loader ${loaded >= 1 ? 'is-done' : ''}`}
-            style={{ '--loaded': loaded }}
-            aria-hidden="true"
-          />
-        )}
       </div>
     </section>
   )

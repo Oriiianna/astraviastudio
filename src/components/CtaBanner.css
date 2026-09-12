@@ -1,6 +1,6 @@
 .cta-section {
   position: relative;
-  padding: clamp(70px, 8vw, 110px) 0 40px;
+  padding: clamp(70px, 8vw, 110px) 0;
 }
 
 .cta {
@@ -43,6 +43,7 @@
 }
 
 .cta__title {
+  font-family: var(--font-display);
   font-size: clamp(1.5rem, 2.9vw, 2.25rem);
   font-weight: 700;
   line-height: 1.16;
@@ -54,10 +55,7 @@
 /* Único acento cálido del sitio: contrasta contra todo el índigo
    y hace que esta palabra sea lo primero que se lee. */
 .cta__accent {
-  background: linear-gradient(92deg, #f2a65a 0%, #f7c98b 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #ffffff;
 }
 
 .cta__body {
@@ -84,7 +82,7 @@
   border-radius: 50%;
   background: radial-gradient(circle, rgba(167, 139, 250, 0.34) 0%, transparent 68%);
   filter: blur(30px);
-  animation: ctaGlowPulse 7s ease-in-out infinite;
+  /* animation: ctaGlowPulse 7s ease-in-out infinite; */ /* DESACTIVADA: consume recursos y afecta el video */
 }
 
 @keyframes ctaGlowPulse {
@@ -121,16 +119,6 @@
   padding: 14px 30px;
 }
 
-.cta__btn svg {
-  width: 16px;
-  height: 16px;
-  transition: transform 1.5s var(--ease-out);
-}
-
-.cta__btn:hover svg {
-  transform: translateX(5px);
-}
-
 @media (max-width: 860px) {
   .cta__body {
     grid-template-columns: 1fr;
@@ -144,5 +132,13 @@
   .cta__title,
   .cta__copy p {
     max-width: none;
+  }
+
+  /* .btn es inline-flex: para que margin auto lo centre necesita ser
+     un bloque, igual que los otros CTA del sitio en mobile. */
+  .cta__btn {
+    display: flex;
+    width: fit-content;
+    margin-inline: auto;
   }
 }

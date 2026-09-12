@@ -58,15 +58,15 @@
          así que el cambio de tipografía ocurre detrás del telón.
          media="print" hace que el navegador la baje sin bloquear; onload la
          devuelve a "all". El <noscript> cubre el caso sin JS. -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@700&amp;display=swap" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@700&amp;display=swap"
       media="print"
       onload="this.media='all'"
     />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@700&amp;display=swap" />
     </noscript>
 
     <!-- El primer fotograma del hero lo pedía el JS, así que no arrancaba hasta
@@ -80,13 +80,8 @@
       media="(max-width: 860px)"
       fetchpriority="high"
     />
-    <link
-      rel="preload"
-      as="image"
-      href="/hero/w1280/frame-001.webp"
-      media="(min-width: 861px)"
-      fetchpriority="high"
-    />
+    <!-- Precarga del video ELIMINADA: tener preload aquí Y en el componente Hero -->
+    <!-- hace que el navegador cargue el video dos veces y se trabe. -->
 
     <!-- Datos estructurados: es lo que lee Google para armar el panel lateral
          y entender de qué se trata el negocio. Cuando haya dominio, agregar
@@ -119,20 +114,9 @@
         ]
       }
     </script>
-    <!-- Google tag (gtag.js) para medir metricas -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-3MC7WMBBX0"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-3MC7WMBBX0");
-    </script>
+    <!-- Google Analytics ya NO se carga acá: src/utils/analytics.js lo inyecta
+         dinámicamente sólo si hay consentimiento de cookies (ver
+         src/components/CookieConsent.jsx). -->
 
     <!-- ===========================================================
          Precarga — inline a propósito.
@@ -152,7 +136,7 @@
         place-content: center;
         justify-items: center;
         background: #080012;
-        font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+        font-family: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
         opacity: 1;
         transition: opacity 0.6s cubic-bezier(0.22, 0.7, 0.24, 1);
       }
@@ -305,16 +289,28 @@
           }, 260);
         }
 
-        // 1. Tipografía: sin esto el texto salta de fallback a Poppins a la vista.
+        // 1. Tipografía: sin esto el texto salta de fallback a Inter a la vista.
         if (document.fonts && document.fonts.ready) {
           document.fonts.ready.then(function () { hecho.fuentes = 1; });
         } else { hecho.fuentes = 1; }
 
-        // 2. Primer fotograma del hero, que es lo primero que se ve al entrar.
+        // 2. Video del hero listo para reproducir (desktop) o imagen (móvil).
+        // NOTA: Ya no creamos un segundo elemento de video aquí para evitar
+        // cargar el archivo dos veces simultáneamente (causa trabas).
         var movil = window.matchMedia("(max-width: 860px)").matches;
-        var img = new Image();
-        img.onload = img.onerror = function () { hecho.hero = 1; };
-        img.src = movil ? "/hero/mobile.webp" : "/hero/w1280/frame-001.webp";
+        if (movil) {
+          var img = new Image();
+          img.onload = img.onerror = function () { hecho.hero = 1; };
+          img.src = "/hero/mobile.webp";
+        } else {
+          // Usamos un fetch HEAD para verificar que el video está disponible
+          // sin cargar el archivo completo (evita duplicar la carga)
+          fetch("/hero/hero-loop.mp4", { method: "HEAD", mode: "no-cors" })
+            .then(function () { hecho.hero = 1; })
+            .catch(function () { hecho.hero = 1; }); // no traba el loader si falla
+          // Timeout de respaldo por si fetch tarda
+          setTimeout(function () { hecho.hero = 1; }, 2000);
+        }
 
         // 3. React montado: #root deja de estar vacío.
         var raiz = document.getElementById("root");

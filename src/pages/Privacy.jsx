@@ -36,10 +36,31 @@ export default function Privacy() {
     <>
       <Navbar />
       <main className="page-container">
-        <div className="container">
+        <div className="container page-content">
           <h1 data-reveal>{t("footer.links.privacy")}</h1>
           <p data-reveal style={{ "--delay": "90ms" }}>
-            {/* Contenido de la política de privacidad */}
+            {t("privacy.intro")}
+          </p>
+
+          <h2 data-reveal style={{ "--delay": "140ms" }}>
+            {t("privacy.dataTitle")}
+          </h2>
+          <p data-reveal style={{ "--delay": "170ms" }}>
+            {t("privacy.dataText")}
+          </p>
+
+          <h2 data-reveal style={{ "--delay": "200ms" }}>
+            {t("privacy.cookiesTitle")}
+          </h2>
+          <p data-reveal style={{ "--delay": "230ms" }}>
+            {t("privacy.cookiesText")}
+          </p>
+
+          <h2 data-reveal style={{ "--delay": "260ms" }}>
+            {t("privacy.contactTitle")}
+          </h2>
+          <p data-reveal style={{ "--delay": "290ms" }}>
+            {t("privacy.contactText")}
           </p>
         </div>
       </main>

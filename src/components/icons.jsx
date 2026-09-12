@@ -49,6 +49,8 @@ import {
   SiReact,
   SiTailwindcss,
   SiWhatsapp,
+  SiFramer,
+  SiReactrouter,
 } from 'react-icons/si'
 
 /* ---- Iconos de servicios: uno por card, ligados a lo que dice el texto ---- */
@@ -104,6 +106,8 @@ export const LogoCss3 = SiCss
 export const LogoJavascript = SiJavascript
 export const LogoReact = SiReact
 export const LogoTailwind = SiTailwindcss
+export const LogoFramer = SiFramer
+export const LogoReactRouter = SiReactrouter
 
 export const IconSend = LuSendHorizontal
 

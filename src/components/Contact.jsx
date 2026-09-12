@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { IconMail, IconPhone, IconPin, IconCheckCircle, IconChevronDown, IconSend } from "./icons.jsx";
+import { IconMail, IconPhone, IconPin, IconCheckCircle, IconChevronDown } from "./icons.jsx";
 import "./Contact.css";
 
 const EMPTY = { nombre: "", telefono: "", email: "", mensaje: "", servicio: "", website: "" };
@@ -261,8 +261,6 @@ export default function Contact() {
           data-reveal
           style={{ "--delay": "140ms" }}
         >
-          <div className="contact__glow" aria-hidden="true" />
-
           <div className="contact__row">
             <label className="field">
               <span>{t("contact.name")}</span>
@@ -340,7 +338,6 @@ export default function Contact() {
             disabled={status === "sending"}
           >
             {status === "sending" ? t("contact.sending") : t("contact.submit")}
-            <IconSend />
           </button>
 
           <p

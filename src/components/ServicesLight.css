@@ -5,7 +5,11 @@
    compartidos: data-reveal, data-spotlight, gradient-border.
    ========================================================= */
 
-/* Sin fondo propio: lo pinta el suelo liso de body::before */
+.services-light {
+  background-color: #05050A;
+  border-bottom: 1px solid #231340;
+}
+
 .services-light .container {
   position: relative;
   z-index: 2;
@@ -47,49 +51,53 @@
   min-width: 0;
 }
 
+.services-light__cards {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2vw, 32px);
+  min-width: 0;
+}
+
 .services-light__card {
   position: relative;
   isolation: isolate;
   min-height: 168px;
   display: grid;
-  grid-template-columns: 54px minmax(0, 1fr);
-  gap: clamp(18px, 2vw, 28px);
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: clamp(16px, 2vw, 24px);
   align-items: start;
-  padding: clamp(26px, 2.6vw, 36px) clamp(22px, 2.2vw, 30px) clamp(26px, 2.6vw, 34px) clamp(16px, 1.8vw, 22px);
+  padding: clamp(24px, 2.6vw, 34px) clamp(20px, 2.2vw, 28px) clamp(24px, 2.6vw, 32px) clamp(16px, 1.8vw, 22px);
   border-radius: var(--radius);
-  background: linear-gradient(165deg, rgba(28, 24, 62, 0.9) 0%, rgba(13, 11, 38, 0.95) 100%);
+  background: rgba(13, 11, 38, 0.6);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-card);
-  transition: transform 0.5s var(--ease), border-color 0.5s var(--ease),
-    box-shadow 0.5s var(--ease);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .services-light__card:hover {
-  transform: translateY(-8px);
-  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-  box-shadow: 0 34px 66px -32px color-mix(in srgb, var(--accent) 70%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .services-light__card-icon {
   display: grid;
   place-items: center;
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-  background: linear-gradient(150deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #1a1240));
-  color: #fff;
-  box-shadow: 0 12px 28px -10px color-mix(in srgb, var(--accent) 90%, transparent),
-    inset 0 1px 0 rgba(255, 255, 255, 0.28);
-  transition: transform 0.5s var(--ease);
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--accent);
+  transition: transform 0.3s ease;
 }
 
 .services-light__card-icon svg {
-  width: 23px;
-  height: 23px;
+  width: 22px;
+  height: 22px;
 }
 
 .services-light__card:hover .services-light__card-icon {
-  transform: scale(1.09) rotate(-8deg);
+  transform: scale(1.05);
 }
 
 .services-light__card-content {
@@ -97,8 +105,8 @@
 }
 
 .services-light__card h3 {
-  margin: 0 0 12px;
-  font-size: clamp(1.1rem, 1.4vw, 1.28rem);
+  margin: 0 0 10px;
+  font-size: 1.125rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -107,23 +115,29 @@
 .services-light__card p {
   margin: 0;
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 300;
-  line-height: 1.72;
+  line-height: 1.7;
 }
 
 .services-light__card-link {
   width: fit-content;
-  margin-top: 22px;
+  margin-top: 18px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   color: var(--violet-soft);
   text-decoration: none;
-  font-size: 0.80rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 500;
   letter-spacing: 0.02em;
-  transition: color 0.3s var(--ease), gap 0.3s var(--ease);
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.services-light__card-link:hover {
+  border-bottom-color: var(--violet-soft);
 }
 
 .services-light__card-link:hover {
@@ -161,21 +175,11 @@
   line-height: 1.75;
 }
 
-/* --- Imagen + CTA en modo máscara ---
-   La imagen conserva su radio completo y se "muerde" solo en la esquina
-   inferior derecha: la caja queda pegada al borde derecho y sobre/abajo de
-   ella la imagen ya no aparece, porque una capa del mismo color del fondo
-   (::before) forma el hueco redondeado que la recorta visualmente.
-   Imagen (z1) → muesca de fondo (z2) → CTA (z3): como una sola pieza. */
+/* --- Imagen ---
+   La imagen ocupa todo el ancho y alto del visual, con su radio y borde
+   violeta completos. */
 .services-light__visual {
   position: relative;
-  /* Dimensiones y separación del CTA. */
-  --cta-w: min(340px, 86%);
-  --cta-h: 230px;
-  --cta-gap: 18px;
-  /* Hueco que se abre en la imagen: caja + aire a izquierda y abajo. */
-  --hole-w: calc(var(--cta-w) + var(--cta-gap));
-  --hole-h: calc(var(--cta-h) + var(--cta-gap));
 }
 
 .services-light__visual > img {
@@ -197,80 +201,6 @@
   border-radius: var(--radius-lg);
   pointer-events: none;
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--violet-soft) 22%, transparent);
-}
-
-/* Muesca: capa del color del fondo que "abre" el hueco en la esquina.
-   TL redondeado (a juego con el radio del CTA) y BR redondeado (a juego
-   con el radio de la imagen), así el recorte se lee suave por todos lados. */
-.services-light__visual::before {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  width: var(--hole-w);
-  height: var(--hole-h);
-  border-radius: var(--radius) 0 var(--radius-lg) 0;
-  background: var(--bg-void);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--violet-soft) 14%, transparent);
-  pointer-events: none;
-}
-
-/* El CTA reposa dentro de la muesca, pegado a los bordes derecho e inferior
-   de la imagen (aprovecha el espacio) y con un aire de --cta-gap hacia
-   arriba e izquierda: así queda separado de la imagen sin ocupar de más. */
-.services-light__cta {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: 3;
-  width: var(--cta-w);
-  height: var(--cta-h);
-  padding: 24px 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 14px;
-  border-radius: var(--radius);
-  background:
-    radial-gradient(130% 100% at 88% 0%, rgba(124, 58, 237, 0.4) 0%, transparent 58%),
-    radial-gradient(120% 140% at 30% 120%, rgba(159, 212, 247, 0.12) 0%, transparent 60%),
-    linear-gradient(165deg, rgba(28, 24, 62, 0.97) 0%, rgba(13, 11, 38, 0.99) 100%);
-  border: 1px solid var(--border-strong);
-  box-shadow: 0 26px 54px -22px rgba(2, 1, 8, 0.85),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 0 40px -18px rgba(124, 58, 237, 0.55);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.services-light__cta strong {
-  flex: 1;
-  font-size: clamp(1.3rem, 1.8vw, 1.65rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.03em;
-  color: var(--text);
-  text-wrap: balance;
-}
-
-/* La palabra destacada hereda el gradiente de marca (.grad-text) y le
-   sumamos un glow sutil para que sea lo primero que se lea. */
-
-.services-light__cta .btn {
-  padding: 14px 30px;
-  font-size: 0.92rem;
-}
-
-.services-light__cta .btn svg {
-  width: 16px;
-  height: 16px;
-  transition: transform 1.5s var(--ease-out);
-}
-
-.services-light__cta .btn:hover svg {
-  transform: translateX(5px);
 }
 
 /* -------------------------
@@ -307,55 +237,37 @@
 @media (max-width: 560px) {
   .services-light__card {
     min-height: auto;
-    grid-template-columns: 46px minmax(0, 1fr);
-    gap: 16px;
-    padding: 20px 18px;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 14px;
+    padding: 18px 16px;
   }
 
   .services-light__card-icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
   }
 
   .services-light__card-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .services-light__card h3 {
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 
   .services-light__card p {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
   }
 
   .services-light__intro h2 {
     font-size: 2.15rem;
   }
 
-  .services-light__visual {
-    --cta-w: min(264px, 88%);
-    --cta-h: 190px;
-    --cta-gap: 12px;
-  }
-
   .services-light__visual > img {
     height: 360px;
   }
-
-  .services-light__cta {
-    padding: 16px 15px;
-    gap: 10px;
-  }
-
-  .services-light__cta strong {
-    font-size: 1.2rem;
-  }
-
-  .services-light__cta .btn {
-    padding: 11px 18px;
-    font-size: 0.92rem;
-  }
 }
+
+

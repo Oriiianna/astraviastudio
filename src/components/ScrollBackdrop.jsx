@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import useFrameSequence from '../hooks/useFrameSequence.js'
-import manifest from '../../public/fondo/manifest.json'
+// import manifest from '../../public/fondo/manifest.json' // DESACTIVADO: carpeta no existe
+const DEFAULT_MANIFEST = { frames: 66 }
 import './ScrollBackdrop.css'
 
 const frameUrl = (set, i) => `/fondo/${set}/frame-${String(i + 1).padStart(3, '0')}.webp`
@@ -36,7 +37,7 @@ export default function ScrollBackdrop({ startSelector = '#servicios' }) {
   useFrameSequence({
     canvasRef,
     sectionRef: startRef,
-    frames: manifest.frames,
+    frames: DEFAULT_MANIFEST.frames,
     frameUrl,
     sets: { query: '(max-width: 860px)', small: 'w760', large: 'w1280' },
     fit: 'cover',

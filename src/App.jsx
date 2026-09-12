@@ -18,6 +18,8 @@ import Terms from "./pages/Terms.jsx";
 // Sustituido por FloatingActions.jsx, que incluye el botón de BackToTop y el de WhatsApp
 // import BackToTop from "./components/BackToTop.jsx";
 import FloatingActions from "./components/FloatingActions.jsx";
+import CookieConsent from "./components/CookieConsent.jsx";
+import { getConsent, loadAnalytics } from "./utils/analytics.js";
 
 function ScrollToHash() {
   const location = useLocation();
@@ -105,9 +107,17 @@ function AppContent() {
 }
 
 export default function App() {
+  // Visita que ya había aceptado antes: cargar GA sin volver a mostrar el
+  // banner. Si es "denied" o todavía no hay elección, no se toca nada acá.
+  useEffect(() => {
+    if (getConsent() === "granted") loadAnalytics();
+  }, []);
+
   return (
     <Router>
       <ScrollToHash />
+      {/* Desactivado hasta producción: sacar el comentario para volver a mostrarlo. */}
+      {/* <CookieConsent /> */}
       <Routes>
         <Route path="/" element={<AppContent />} />
         <Route path="/privacy" element={<Privacy />} />
