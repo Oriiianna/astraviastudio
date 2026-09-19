@@ -208,6 +208,13 @@ En producción la función la sirve Vercel; en desarrollo la monta un plugin de
 Vite sobre el mismo origen, así que `npm run dev` alcanza (no hace falta
 `vercel dev`).
 
+Cuando el aviso a Astravia sale bien, la función manda además un **correo de
+confirmación al cliente** ("recibimos tu consulta, nos comunicaremos con vos"),
+en español o inglés según el idioma del sitio (`lang`). Sale del mismo
+remitente y las respuestas del cliente van a `MAILTRAP_TO_EMAIL`. Es
+best-effort: si falla, el cliente igual ve éxito y queda el evento
+`confirmacion_fallo` en los logs de la función.
+
 ### Variables de entorno
 
 Copiá `.env.example` a `.env` y cargá los mismos valores en
@@ -227,7 +234,8 @@ bundle del cliente.
 Todavía no hay dominio propio verificado, así que el remitente sale del dominio
 demo de la cuenta (`formulario@demomailtrap.co`). **El demo sólo entrega a la
 casilla dueña de la cuenta**, que justamente es `studioastravia@gmail.com`, así
-que funciona. Cuando se verifique `astravia.digital` en Mailtrap (Sending
+que el aviso funciona. **Pero la confirmación al cliente no se entrega a
+clientes reales** (falla y queda en logs) hasta verificar un dominio. Cuando se verifique `astravia.digital` en Mailtrap (Sending
 Domains → cargar los CNAME/TXT en el DNS), cambiá `MAILTRAP_FROM_EMAIL` a
 `formulario@astravia.digital`: recién ahí se puede escribir a cualquier destino
 y el mail deja de salir con un remitente ajeno a la marca.
@@ -238,8 +246,10 @@ envíos quedan en el Sandbox de Mailtrap.
 ### Anti-spam
 
 El form tiene un honeypot (`website`, oculto por CSS). Si viene completo, el
-endpoint responde `200` y descarta el mensaje en silencio. No hay rate limiting:
-si empieza a entrar basura, ese es el próximo paso.
+endpoint responde `200` y descarta el mensaje en silencio. Además hay un rate
+limit en memoria por IP (5 intentos cada 15 minutos, `api/contact.js`). Vive por
+instancia serverless, no es distribuido: si empieza a entrar basura de verdad,
+el próximo paso sería moverlo a un KV (p. ej. Vercel KV / Upstash).
 
 ## Pendientes conocidos
 
