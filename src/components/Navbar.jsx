@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { IconMenu, IconClose } from './icons.jsx'
 import { scrollToHash, scrollToTop } from '../utils/scroll'
+import { idiomaActual, rutaConIdioma, rutaSinIdioma } from '../utils/idioma'
 import './Navbar.css'
 
 export default function Navbar() {
   const { t, i18n } = useTranslation()
   const location = useLocation()
+  const navigate = useNavigate()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [active, setActive] = useState('')
 
-  const isHomePage = location.pathname === '/'
+  const lng = idiomaActual(i18n)
+  const isHomePage = rutaSinIdioma(location.pathname) === '/'
 
   const handleNavigation = (e, hash) => {
     if (isHomePage) {
@@ -21,6 +25,10 @@ export default function Navbar() {
       } else {
         scrollToHash(hash)
       }
+    } else {
+      // Fuera del home: navegar dentro de la SPA (ScrollToHash hace el scroll)
+      e.preventDefault()
+      navigate(`${rutaConIdioma(lng)}${hash}`)
     }
     setOpen(false)
   }
@@ -33,11 +41,22 @@ export default function Navbar() {
     setOpen(false)
   }
 
-  const getHref = (hash) => isHomePage ? hash : `/${hash}`
+  const getHref = (hash) => isHomePage ? hash : `${rutaConIdioma(lng)}${hash}`
+
+  // El idioma es parte de la URL: se cambia yendo a la misma página en el otro idioma.
+  const cambiarIdioma = (nuevo) => {
+    if (nuevo === lng) return
+    navigate({
+      pathname: rutaConIdioma(nuevo, rutaSinIdioma(location.pathname)),
+      hash: window.location.hash,
+    })
+    setOpen(false)
+  }
 
   const LINKS = [
     { label: t('nav.services'), hash: '#servicios' },
     { label: t('nav.process'), hash: '#proceso' },
+    { label: t('nav.pricing'), hash: '#planes' },
     { label: t('nav.work'), hash: '#clientes' },
     { label: t('nav.contact'), hash: '#contacto' },
   ]
@@ -48,6 +67,34 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  // Resalta el enlace de la sección que cruza la franja central de la pantalla.
+  useEffect(() => {
+    if (!isHomePage || !('IntersectionObserver' in window)) return
+    const secciones = ['#servicios', '#proceso', '#planes', '#clientes', '#contacto']
+      .map((hash) => document.querySelector(hash))
+      .filter(Boolean)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`)
+        })
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    )
+    secciones.forEach((el) => observer.observe(el))
+
+    // En el hero (arriba del todo) no hay sección activa.
+    const onScroll = () => {
+      if (window.scrollY < 120) setActive('')
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [isHomePage])
 
   // Bloquea el scroll del body con el menú móvil abierto
   useEffect(() => {
@@ -60,7 +107,7 @@ export default function Navbar() {
   return (
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="container container--full nav__inner">
-        <Link className="nav__logo" to="/" onClick={handleLogoClick}>
+        <Link className="nav__logo" to={rutaConIdioma(lng)} onClick={handleLogoClick}>
           <img
             src="/brand/astravia-logo-oficial.svg"
             alt="Astravia"
@@ -70,9 +117,15 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className={`nav__links ${open ? 'is-open' : ''}`} aria-label="Navegación principal">
+        <nav className={`nav__links ${open ? 'is-open' : ''}`} aria-label={t('nav.mainLabel')}>
           {LINKS.map((link) => (
-            <a key={link.hash} href={getHref(link.hash)} onClick={(e) => handleNavigation(e, link.hash)}>
+            <a
+              key={link.hash}
+              href={getHref(link.hash)}
+              onClick={(e) => handleNavigation(e, link.hash)}
+              className={isHomePage && active === link.hash ? 'is-active' : undefined}
+              aria-current={isHomePage && active === link.hash ? 'true' : undefined}
+            >
               {link.label}
             </a>
           ))}
@@ -88,7 +141,7 @@ export default function Navbar() {
               type="button"
               aria-pressed={!i18n.language.startsWith('en')}
               className={`nav__langOption ${i18n.language.startsWith('en') ? '' : 'is-active'}`}
-              onClick={() => i18n.changeLanguage('es')}
+              onClick={() => cambiarIdioma('es')}
             >
               ES
             </button>
@@ -96,7 +149,7 @@ export default function Navbar() {
               type="button"
               aria-pressed={i18n.language.startsWith('en')}
               className={`nav__langOption ${i18n.language.startsWith('en') ? 'is-active' : ''}`}
-              onClick={() => i18n.changeLanguage('en')}
+              onClick={() => cambiarIdioma('en')}
             >
               EN
             </button>

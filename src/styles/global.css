@@ -10,33 +10,112 @@
    Cambiá estas variables y cambia el sitio entero.
    ============================================================ */
 
-/* --- Páginas individuales (Privacy, Terms, etc.) --- */
+/* --- Páginas legales (Privacy, Terms): misma caja y tipografía que el resto --- */
 .page-container {
-  padding: clamp(80px, 10vw, 120px) 0;
-  min-height: calc(100vh - 400px);
+  position: relative;
+  padding: calc(var(--nav-h) + clamp(2.5rem, 6vw, 5rem)) 0 clamp(4rem, 8vw, 7rem);
+  min-height: calc(100vh - 25rem);
+  background-color: #05050A;
+}
+
+/* Línea de luz arriba, como en las demás secciones */
+.page-container::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--grad-hair);
+  opacity: 0.55;
+}
+
+/* La caja: fondo liso y glass solo en el borde (igual que contacto y proyectos) */
+.page-container .page-content {
+  --glow: 128, 85, 255;
+  position: relative;
+  width: min(100% - 2 * var(--gutter), 56rem);
+  max-width: none;
+  margin-inline: auto;
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(168, 125, 255, 0.26);
+  background: #0b091e;
+  box-shadow:
+    0 1.125rem 2.25rem rgba(0, 0, 0, 0.35),
+    0 0 1.375rem rgba(var(--glow), 0.08);
+}
+
+.page-container .page-content::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, transparent 8%, rgba(255, 255, 255, 0.22) 50%, transparent 92%) top / 100% 1px no-repeat,
+    radial-gradient(circle at 0 0, rgba(190, 160, 255, 0.2), transparent 3.5rem),
+    radial-gradient(circle at 100% 0, rgba(190, 160, 255, 0.14), transparent 3rem);
+  pointer-events: none;
 }
 
 .page-container h1 {
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  margin-bottom: 24px;
-  color: var(--text);
-}
-
-.page-content {
-  max-width: 72ch;
+  font-size: clamp(2rem, 4.2vw, 2.85rem);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  color: #fff;
+  background-image: var(--grad-hair);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% 1px;
 }
 
 .page-content p {
+  margin-bottom: 1.25rem;
   color: var(--text-soft);
-  font-size: 0.95rem;
-  line-height: 1.75;
-  margin-bottom: 20px;
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.page-content ul {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  color: var(--text-soft);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+.page-content li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.page-content li::before {
+  content: '';
+  position: absolute;
+  left: 0.2rem;
+  top: 0.6em;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--violet-soft);
 }
 
 .page-content h2 {
-  font-size: 1.25rem;
-  margin: 40px 0 14px;
-  color: var(--text);
+  margin: 2.25rem 0 0.75rem;
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  line-height: 1.2;
+  color: #fff;
+}
+
+.page-content p a {
+  color: var(--violet-soft);
+  font-weight: 600;
+  transition: color 0.3s var(--ease);
+}
+
+.page-content p a:hover {
+  color: var(--violet-pale);
 }
 
 :root {
@@ -75,7 +154,7 @@
   --text: #efecff;
   --text-soft: #c2bce6;
   --text-muted: #928bba;
-  --text-dim: #67608c;
+  --text-dim: #7d76a6;
 
   /* --- Superficies --- */
   --border: rgba(167, 139, 250, 0.1);
@@ -93,6 +172,18 @@
   --shadow-card: 0 24px 60px -30px rgba(2, 1, 8, 0.95);
 
   /* --- Layout: ancho completo con gutter fluido --- */
+  /* --- Escala tipográfica del texto corrido (los títulos llevan la suya) ---
+     lead: bajada del hero · body: párrafos y descripciones de tarjeta
+     ui: enlaces, botones, formularios, menús · small: letra chica
+     label: etiquetas en mayúsculas (kickers, tags, badges)
+     input: campos de formulario (16 px evita el zoom automático en iOS) */
+  --fs-lead: 1.1875rem;
+  --fs-body: 1.0625rem;
+  --fs-ui: 0.9375rem;
+  --fs-small: 0.8125rem;
+  --fs-label: 0.75rem;
+  --fs-input: 1rem;
+
   --gutter: clamp(20px, 4.5vw, 76px);
   --container: 1600px;
   --container-full: 1920px;
@@ -104,8 +195,17 @@
   --ease: cubic-bezier(0.22, 0.7, 0.24, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
+  /* --- Movimiento: duraciones y distancias compartidas ---
+     dur-1 foco/toggles · dur-2 hover · dur-3 entrada al hacer scroll.
+     stagger: pausa entre hermanos que entran juntos (la pone useReveal). */
+  --dur-1: 0.2s;
+  --dur-2: 0.35s;
+  --dur-3: 0.8s;
+  --reveal-y: 1.625rem;
+  --stagger: 90ms;
+
   /* --- Tipografía --- */
-  --font-display: 'Space Grotesk', ui-sans-serif, sans-serif;
+  --font-display: 'Nunito', ui-sans-serif, sans-serif;
   --font-body: 'Inter', ui-sans-serif, sans-serif;
 }
 
@@ -376,9 +476,10 @@ h4 {
 }
 
 .section-head p {
-  color: var(--text-muted);
-  font-size: 1rem;
-  font-weight: 300;
+  color: var(--text-soft);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 /* Etiqueta de sección (kicker) */
@@ -392,7 +493,7 @@ h4 {
   border-radius: 999px;
   border: 1px solid var(--border-strong);
   background: rgba(139, 92, 246, 0.07);
-  font-size: 0.66rem;
+  font-size: var(--fs-label);
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -408,6 +509,27 @@ h4 {
   background: var(--ice);
   box-shadow: 0 0 10px var(--ice);
   /* animation: kickerPulse 2.4s ease-in-out infinite; */ /* DESACTIVADA: consume recursos innecesariamente */
+}
+
+/* El punto turquesa se enciende una sola vez cuando el kicker entra en pantalla
+   (fill-mode backwards: espera en escala 0 durante el delay). Sin bucle. */
+.kicker[data-reveal].is-visible::before {
+  animation: kickerIgnite 0.7s var(--ease-out) calc(var(--delay, 0ms) + 0.25s) backwards;
+}
+
+@keyframes kickerIgnite {
+  from {
+    transform: scale(0);
+    box-shadow: 0 0 0 var(--ice);
+  }
+  60% {
+    transform: scale(1.6);
+    box-shadow: 0 0 1.25rem var(--ice);
+  }
+  to {
+    transform: scale(1);
+    box-shadow: 0 0 0.625rem var(--ice);
+  }
 }
 
 @keyframes kickerPulse {
@@ -433,7 +555,7 @@ h4 {
   gap: 10px;
   padding: 14px 30px;
   border-radius: 999px;
-  font-size: 0.93rem;
+  font-size: var(--fs-ui);
   font-weight: 600;
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -444,21 +566,84 @@ h4 {
     background 0.4s var(--ease), border-color 0.4s var(--ease);
 }
 
-.btn--rect {
-  border-radius: 12px;
-}
-
 .btn--primary {
   background: #7145D6;
+  /* Borde transparente: mismo alto que el botón fantasma, que sí lo lleva. */
+  border: 1px solid transparent;
   color: #fff;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
 .btn--primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.4), 0 0 1.5rem rgba(113, 69, 214, 0.55);
 }
 
+/* Destello: dos olas de luz suave (sin bordes duros) cruzan el botón de
+   izquierda a derecha, una detrás de la otra, una sola vez por hover. Van con
+   z-index -1 dentro del contexto aislado del botón: quedan sobre el fondo y
+   bajo el texto. */
+.btn--primary::before,
+.btn--primary::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-150%) skewX(-22deg);
+  filter: blur(0.5rem);
+}
+
+/* Ola principal: más corta y brillante */
+.btn--primary::before {
+  width: 45%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.28) 45%,
+    rgba(255, 255, 255, 0.5) 60%,
+    transparent 100%
+  );
+}
+
+/* Ola que la sigue: más ancha y tenue, con un leve tinte lila */
+.btn--primary::after {
+  width: 70%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 188, 251, 0.3) 55%,
+    transparent 100%
+  );
+}
+
+.btn--primary:hover::before,
+.btn--primary:focus-visible::before {
+  animation: btn-sheen 0.9s cubic-bezier(0.25, 0.6, 0.3, 1) forwards;
+}
+
+.btn--primary:hover::after,
+.btn--primary:focus-visible::after {
+  animation: btn-sheen 1.1s cubic-bezier(0.25, 0.6, 0.3, 1) 0.14s forwards;
+}
+
+@keyframes btn-sheen {
+  0% {
+    opacity: 0;
+    transform: translateX(-150%) skewX(-22deg);
+  }
+  20%,
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(300%) skewX(-22deg);
+  }
+}
 
 .btn--ghost {
   background: rgba(167, 139, 250, 0.035);
@@ -469,7 +654,78 @@ h4 {
 .btn--ghost:hover {
   transform: translateY(-3px);
   background: rgba(167, 139, 250, 0.1);
-  border-color: rgba(167, 139, 250, 0.55);
+  border-color: rgba(167, 139, 250, 0.32);
+  box-shadow: 0 0 1rem rgba(113, 69, 214, 0.16);
+}
+
+/* Borde animado: un arco de luz violeta → turquesa recorre el contorno del
+   botón mientras el mouse está encima. Es un conic-gradient que rota (--btn-angle
+   es una propiedad registrada para poder animarlo) recortado a un anillo con
+   máscara, así solo se ve en el borde y el interior del botón no cambia. */
+@property --btn-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.btn--ghost::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: conic-gradient(
+    from var(--btn-angle),
+    transparent 0deg,
+    rgba(113, 69, 214, 0.55) 55deg,
+    rgba(201, 188, 251, 0.75) 100deg,
+    rgba(0, 229, 200, 0.7) 135deg,
+    transparent 175deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  transition: opacity 0.35s var(--ease);
+}
+
+.btn--ghost:hover::before,
+.btn--ghost:focus-visible::before {
+  opacity: 1;
+  animation: btn-border-spin 3.6s linear infinite;
+}
+
+@keyframes btn-border-spin {
+  to {
+    --btn-angle: 360deg;
+  }
+}
+
+/* Salto al contenido: invisible hasta que recibe foco con el teclado. */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10001;
+  padding: 0.625rem 1rem;
+  border-radius: 0.625rem;
+  background: var(--violet-bright);
+  color: #fff;
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  transform: translateY(-200%);
+  transition: transform 0.2s var(--ease);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+main:focus {
+  outline: none;
 }
 
 .btn:focus-visible,
@@ -501,10 +757,12 @@ textarea:focus-visible {
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.45s var(--ease);
+  /* Luz del mouse: tenue a propósito. Con más intensidad compite con el texto
+     y cansa la lectura. */
   background: radial-gradient(
-    340px circle at var(--mx) var(--my),
-    color-mix(in srgb, var(--accent, var(--violet-bright)) 26%, transparent) 0%,
-    transparent 62%
+    22rem circle at var(--mx) var(--my),
+    color-mix(in srgb, var(--accent, var(--violet-bright)) 9%, transparent) 0%,
+    transparent 60%
   );
   pointer-events: none;
 }
@@ -541,6 +799,37 @@ textarea:focus-visible {
 
 .gradient-border:hover::after {
   opacity: 1;
+}
+
+/* --- Tarjeta de cristal violeta (Servicios, Proceso, Planes, Formulario...) ---
+   Un solo lugar para el lenguaje visual de las tarjetas. Va dentro de :where()
+   para tener especificidad 0: cada componente puede ajustar lo suyo (el plan
+   destacado, la sombra del modal) sin pelear con ella.
+   --glow es el color del resplandor (r, g, b). El hover solo intensifica borde
+   y brillo: la tarjeta nunca se desplaza. .glass-card--static la deja quieta
+   (formulario, modal). */
+:where(.glass-card) {
+  --glow: 128, 85, 255;
+  position: relative;
+  isolation: isolate;
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(var(--glow), 0.16) 0%, transparent 60%),
+    linear-gradient(160deg, rgba(21, 16, 51, 0.92) 0%, rgba(11, 9, 30, 0.92) 100%);
+  border: 1px solid rgba(168, 125, 255, 0.26);
+  box-shadow:
+    0 1.125rem 2.25rem rgba(0, 0, 0, 0.35),
+    0 0 1.5rem rgba(var(--glow), 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: border-color var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+}
+
+:where(.glass-card:not(.glass-card--static)):hover {
+  border-color: rgba(190, 155, 255, 0.55);
+  box-shadow:
+    0 1.375rem 2.75rem rgba(0, 0, 0, 0.45),
+    0 0 2rem rgba(var(--glow), 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 /* --- Grano --- */
@@ -585,10 +874,22 @@ textarea:focus-visible {
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
-  transition-delay: var(--delay, 0ms);
+  transform: translateY(var(--reveal-y));
+  transition:
+    opacity var(--dur-3) var(--ease-out) var(--delay, 0ms),
+    transform var(--dur-3) var(--ease-out) var(--delay, 0ms);
   /* will-change eliminado: consumía memoria innecesariamente en todos los elementos */
+}
+
+/* Tarjetas: el delay solo va en la entrada. El hover (borde y brillo) conserva su
+   transición y responde al instante. Va con data-spotlight para ganarle en
+   especificidad a las reglas por clase de cada tarjeta (.project, .plan...). */
+[data-reveal][data-spotlight] {
+  transition:
+    opacity var(--dur-3) var(--ease-out) var(--delay, 0ms),
+    transform var(--dur-3) var(--ease-out) var(--delay, 0ms),
+    border-color var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease);
 }
 
 [data-reveal].is-visible {
@@ -608,8 +909,10 @@ textarea:focus-visible {
   mask-repeat: no-repeat;
   -webkit-mask-size: 0% 100%;
   mask-size: 0% 100%;
-  transition: opacity 0.5s var(--ease-out), -webkit-mask-size 1.1s var(--ease-out),
-    mask-size 1.1s var(--ease-out);
+  transition:
+    opacity 0.5s var(--ease-out) var(--delay, 0ms),
+    -webkit-mask-size 1.1s var(--ease-out) var(--delay, 0ms),
+    mask-size 1.1s var(--ease-out) var(--delay, 0ms);
 }
 
 [data-reveal='wipe'].is-visible {
@@ -618,6 +921,15 @@ textarea:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .btn--ghost:hover::before,
+  .btn--ghost:focus-visible::before,
+  .btn--primary:hover::before,
+  .btn--primary:hover::after,
+  .btn--primary:focus-visible::before,
+  .btn--primary:focus-visible::after {
+    animation: none;
+  }
+
   html {
     scroll-behavior: auto;
   }
@@ -627,6 +939,16 @@ textarea:focus-visible {
     transform: none !important;
     clip-path: none !important;
     transition: none !important;
+  }
+
+  /* El barrido arranca con la máscara en 0%: sin esto el título quedaría invisible. */
+  [data-reveal='wipe'] {
+    -webkit-mask-size: 100% 100% !important;
+    mask-size: 100% 100% !important;
+  }
+
+  .kicker[data-reveal].is-visible::before {
+    animation: none;
   }
 
   *,

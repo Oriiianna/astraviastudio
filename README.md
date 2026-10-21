@@ -231,14 +231,11 @@ bundle del cliente.
 
 ### Estado del dominio
 
-Todavía no hay dominio propio verificado, así que el remitente sale del dominio
-demo de la cuenta (`formulario@demomailtrap.co`). **El demo sólo entrega a la
-casilla dueña de la cuenta**, que justamente es `studioastravia@gmail.com`, así
-que el aviso funciona. **Pero la confirmación al cliente no se entrega a
-clientes reales** (falla y queda en logs) hasta verificar un dominio. Cuando se verifique `astravia.digital` en Mailtrap (Sending
-Domains → cargar los CNAME/TXT en el DNS), cambiá `MAILTRAP_FROM_EMAIL` a
-`formulario@astravia.digital`: recién ahí se puede escribir a cualquier destino
-y el mail deja de salir con un remitente ajeno a la marca.
+El dominio `astraviastudio.com.ar` está verificado en Mailtrap, así que el
+remitente es `hello@astraviastudio.com.ar` (`MAILTRAP_FROM_EMAIL`) y se puede
+escribir a cualquier destino. El aviso llega a `studioastravia@gmail.com`, que
+es el correo de contacto oficial en todo el sitio, y el "responder a" lleva el
+correo de quien completó el formulario.
 
 Para probar sin tocar el correo real, cargá `MAILTRAP_INBOX_ID=4831206` y los
 envíos quedan en el Sandbox de Mailtrap.

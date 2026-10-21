@@ -16,6 +16,7 @@ import {
   LuSquareCode,
   LuGauge,
   LuShieldCheck,
+  LuLifeBuoy,
   LuRocket,
   LuCircleCheck,
   LuChevronDown,
@@ -66,6 +67,7 @@ export const IconSpeedometer = LuGauge
 
 /** Mantenimiento: escudo con check (no existe "escudo+engranaje" en Lucide) */
 export const IconShieldGear = LuShieldCheck
+export const IconSupport = LuLifeBuoy
 
 export const IconRocket = LuRocket
 export const IconStar = LuStar

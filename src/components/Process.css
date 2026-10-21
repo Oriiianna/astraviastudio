@@ -8,179 +8,104 @@
   z-index: 2;
 }
 
+.process__head {
+  max-width: 52rem;
+}
+
+.process__head h2 {
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
 /* --- Fases ---
-   Cuatro columnas separadas por hairlines en vez de por gap: la división es
-   estructural, no espacio vacío. El numeral es el ancla visual —antes lo era
-   un círculo de 58 px, el 19 % del ancho de su columna— y el icono queda como
-   marcador sobre el riel. */
+   Cuatro tarjetas de cristal en fila. Entre cada par, un nodo sobre una línea
+   fina indica la secuencia (la numeración sí es un orden real). */
 .process__steps {
-  position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  --pad: clamp(20px, 2.2vw, 34px);
-  gap: 0;
-  margin-top: clamp(46px, 5vw, 76px);
+  gap: 1.75rem;
   list-style: none;
 }
 
-/* Riel: se dibuja de izquierda a derecha cuando la sección entra en cuadro.
-   Es la única pieza que anima al revelar, así que el gesto se lee. */
-.process__rail {
-  position: absolute;
-  top: 21px;
-  /* De centro del primer nodo a centro del ultimo: un proceso de cuatro pasos
-     termina en el cuarto, no en el borde del contenedor. */
-  left: 21px;
-  right: calc(25% - var(--pad) - 21px);
-  height: 1px;
-  background: rgba(167, 139, 250, 0.12);
-  overflow: hidden;
-}
-
-.process__rail i {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, #621ae2 0%, #7c3aed 45%, #9fd4f7 100%);
-  box-shadow: 0 0 12px rgba(124, 58, 237, 0.75);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1.9s cubic-bezier(0.22, 0.7, 0.24, 1) 240ms;
-}
-
-.process__steps.is-visible .process__rail i {
-  transform: scaleX(1);
-}
-
-/* --- Paso --- */
+/* El aspecto de cristal viene de .glass-card (global.css). */
 .step {
-  position: relative;
-  isolation: isolate;
-  padding-inline: var(--pad);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem 1.75rem;
 }
 
-.step:first-child {
-  padding-inline-start: 0;
-}
-
-
-/* Hairline divisoria: arranca debajo del riel para no cortarlo. */
-.step + .step::before {
+/* Conector entre tarjetas: línea + nodo luminoso en un solo pseudo-elemento
+   (el ::before queda libre para la luz del mouse, data-spotlight). Ocupa
+   justo el hueco entre dos tarjetas y el nodo queda centrado en él. */
+.step + .step::after {
   content: '';
   position: absolute;
-  inset: 52px auto 6px 0;
-  width: 1px;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(167, 139, 250, 0.16) 20%,
-    rgba(167, 139, 250, 0.16) 76%,
-    transparent 100%
-  );
+  top: 8.5rem;
+  right: 100%;
+  width: 1.75rem;
+  height: 0.75rem;
+  margin-top: -0.375rem;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at center, #7c3aed 0 0.25rem, #c9bcfb 0.3rem 0.375rem, transparent 0.4rem),
+    linear-gradient(rgba(167, 139, 250, 0.4), rgba(167, 139, 250, 0.4)) center / 100% 1px no-repeat;
+  filter: drop-shadow(0 0 0.4rem rgba(124, 58, 237, 0.9));
 }
 
-/* Numeral fantasma: el ancla de la columna. */
-.step__cifra {
-  position: absolute;
-  top: 26px;
-  right: var(--pad);
-  z-index: -1;
-  font-size: clamp(4rem, 6.6vw, 7rem);
-  font-weight: 800;
+.step__num {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.055em;
-  color: #7145D6;
-  transition: color 0.5s var(--ease), transform 0.5s var(--ease);
+  letter-spacing: -0.02em;
+  color: #8b5cf6;
 }
 
-
-.step:hover .step__cifra {
-  color: #7145D6;
-  transform: translateY(-4px);
-}
-
-/* Nodo sobre el riel: marcador, ya no protagonista. */
-.step__nodo {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  margin-bottom: 26px;
-  border-radius: 50%;
-  background: linear-gradient(160deg, #1b1449 0%, #0e0a30 100%);
-  border: 1px solid rgba(167, 139, 250, 0.32);
-  color: var(--violet-soft);
-  transition: transform 0.45s var(--ease), border-color 0.45s var(--ease),
-    box-shadow 0.45s var(--ease);
-}
-
-.step__nodo svg {
-  width: 18px;
-  height: 18px;
-}
-
-.step:hover .step__nodo {
-  transform: translateY(-4px);
-  border-color: var(--violet-bright);
-  box-shadow: 0 0 26px -4px rgba(139, 92, 246, 0.8);
+/* Las ilustraciones vienen sobre negro: "screen" lo funde con la tarjeta. */
+.step__img {
+  display: block;
+  width: 100%;
+  height: 11rem;
+  margin: 0.25rem 0 1.25rem;
+  object-fit: contain;
+  mix-blend-mode: screen;
 }
 
 .step h3 {
   font-family: var(--font-display);
-  font-size: clamp(1rem, 1.25vw, 1.18rem);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  margin-bottom: 12px;
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 0.625rem;
 }
 
 .step p {
-  font-size: 0.85rem;
-  font-weight: 300;
-  line-height: 1.8;
-  color: var(--text-muted);
-  max-width: 30ch;
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-soft);
 }
 
 /* --- Responsive --- */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .process__steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 46px clamp(20px, 4vw, 40px);
   }
 
-  /* Sin riel horizontal que recorrer, las divisorias tampoco tienen sentido:
-     el gap vuelve a hacer la separación. */
-  .process__rail,
-  .step + .step::before {
+  /* Sin fila única, los conectores no tienen sentido */
+  .step + .step::after {
     display: none;
-  }
-
-  .step,
-  .step:first-child,
-  .step:last-child {
-    padding-inline: 0;
-  }
-
-  .step__cifra,
-  .step:last-child .step__cifra {
-    right: 0;
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 560px) {
   .process__steps {
     grid-template-columns: 1fr;
   }
 
-  .step p {
-    max-width: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  /* El riel es un gesto, no información: sin animación va directo a lleno. */
-  .process__rail i {
-    transform: scaleX(1);
-    transition: none;
+  .step__img {
+    height: 10rem;
   }
 }

@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { IconMail, IconPhone, IconPin, IconCheckCircle, IconChevronDown } from "./icons.jsx";
+import Turnstile from "./Turnstile.jsx";
 import "./Contact.css";
 
 const EMPTY = { nombre: "", telefono: "", email: "", mensaje: "", servicio: "", website: "" };
@@ -14,6 +15,67 @@ const SERVICIOS = [
   { value: "ecommerce", accent: "#7ec4ef", i18nKey: "serviceEcommerce" },
   { value: "otro", accent: "#f2a65a", i18nKey: "serviceOtro" },
 ];
+
+// Modal de agradecimiento tras el envío. Lleva el foco al botón, se cierra con
+// Escape, clic en el fondo o el botón, y bloquea el scroll mientras está abierto.
+function ModalGracias({ onClose }) {
+  const { t } = useTranslation();
+  const closeRef = useRef(null);
+
+  useEffect(() => {
+    const previo = document.activeElement;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "Tab") {
+        // Único elemento enfocable: mantener el foco dentro del modal.
+        e.preventDefault();
+        closeRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = overflow;
+      previo?.focus?.();
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="thanks-modal"
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div
+        className="thanks-modal__card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="thanks-title"
+        aria-describedby="thanks-text"
+      >
+        <IconCheckCircle className="thanks-modal__icon" aria-hidden="true" />
+        <h3 id="thanks-title" className="thanks-modal__title">
+          {t("contact.thanksTitle")}
+        </h3>
+        <p id="thanks-text" className="thanks-modal__text">
+          {t("contact.thanksText")}
+        </p>
+        <button
+          ref={closeRef}
+          type="button"
+          className="btn btn--primary"
+          onClick={onClose}
+        >
+          {t("contact.thanksClose")}
+        </button>
+      </div>
+    </div>
+  );
+}
 
 // Dropdown accesible tipo listbox. Reemplaza al <select> nativo porque la
 // lista desplegada de un select no se puede estilar cruzando navegadores:
@@ -147,6 +209,11 @@ export default function Contact() {
   // idle | sending | ok | error
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
+  const closeThanks = useCallback(() => setStatus("idle"), []);
+  // Token de Turnstile: vale para un solo envío, así que tras cada intento que
+  // llega al servidor se descarta y se pide otro.
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const [captchaReset, setCaptchaReset] = useState(0);
 
   const update = (field) => (e) => {
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
@@ -165,6 +232,14 @@ export default function Contact() {
       return;
     }
 
+    // La verificación corre sola en segundo plano; si aún no terminó, se pide
+    // esperar un instante en vez de mandar la consulta sin ella.
+    if (!captchaToken) {
+      setError(t("contact.errorCaptchaWait"));
+      setStatus("error");
+      return;
+    }
+
     setStatus("sending");
     setError("");
 
@@ -174,13 +249,14 @@ export default function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
+          turnstileToken: captchaToken,
           lang: i18n.language.slice(0, 2),
         }),
       });
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok || !data.ok) {
-        setError(data.error || t("contact.error"));
+        setError(data.code === "captcha" ? t("contact.errorCaptchaFailed") : data.error || t("contact.error"));
         setStatus("error");
         return;
       }
@@ -190,6 +266,9 @@ export default function Contact() {
     } catch {
       setError(t("contact.error"));
       setStatus("error");
+    } finally {
+      setCaptchaToken(null);
+      setCaptchaReset((n) => n + 1);
     }
   };
 
@@ -200,11 +279,11 @@ export default function Contact() {
           <span className="kicker" data-reveal>
             {t("contact.kicker")}
           </span>
-          <h2 data-reveal>
+          <h2 data-reveal="wipe" style={{ "--delay": "90ms" }}>
             {t("contact.title")} <span className="grad-text">{t("contact.accent")}</span>
           </h2>
 
-          <p data-reveal style={{ "--delay": "90ms" }}>
+          <p data-reveal style={{ "--delay": "180ms" }}>
             {t("contact.description")}
           </p>
           <a
@@ -223,7 +302,7 @@ export default function Contact() {
           </a>
           <a
             className="contact__channel"
-            href="https://wa.me/5491168717233?text=%C2%A1Hola!%20Me%20interesa%20conocer%20m%C3%A1s%20sobre%20los%20servicios%20de%20Astravia%20Studio%20y%20recibir%20asesoramiento%20para%20mi%20proyecto%20web."
+            href={`https://wa.me/5491168717233?text=${encodeURIComponent(t("floating.whatsappMessage"))}`}
             target="_blank"
             rel="noopener noreferrer"
             data-reveal
@@ -332,6 +411,8 @@ export default function Contact() {
             onChange={update("website")}
           />
 
+          <Turnstile onToken={setCaptchaToken} resetSignal={captchaReset} />
+
           <button
             type="submit"
             className="btn btn--primary btn--rect"
@@ -345,10 +426,12 @@ export default function Contact() {
             role="status"
             aria-live="polite"
           >
-            {status === "ok" ? t("contact.success") : status === "error" ? error : ""}
+            {status === "error" ? error : ""}
           </p>
         </form>
       </div>
+
+      {status === "ok" && <ModalGracias onClose={closeThanks} />}
     </section>
   );
 }

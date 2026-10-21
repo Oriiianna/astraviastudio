@@ -2,7 +2,8 @@ import { useTranslation } from "react-i18next";
 import {
   IconArtboard,
   IconBrowserCode,
-  IconSpeedometer,
+  IconSupport,
+  IconArrowRight,
 } from "./icons.jsx";
 import "./ServicesLight.css";
 import servicesImg from "../recursos/services-img.webp";
@@ -10,7 +11,7 @@ import servicesImg from "../recursos/services-img.webp";
 const SERVICES = [
   { Icon: IconArtboard, accent: "#7c3aed", key: "one" },
   { Icon: IconBrowserCode, accent: "#9b6cf5", key: "two" },
-  { Icon: IconSpeedometer, accent: "#8b9cf7", key: "three" },
+  { Icon: IconSupport, accent: "#8b9cf7", key: "three" },
 ];
 
 export default function ServicesLight() {
@@ -27,12 +28,16 @@ export default function ServicesLight() {
           <div className="services-light__cards">
             {SERVICES.map(({ Icon, accent, key }, i) => (
               <article
-                className="services-light__card gradient-border"
+                className="services-light__card glass-card gradient-border"
                 style={{ "--accent": accent, "--delay": `${i * 110}ms` }}
                 data-reveal
                 data-spotlight
                 key={key}
               >
+                <span className="services-light__card-num" aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
                 <div className="services-light__card-icon">
                   <Icon />
                 </div>
@@ -43,6 +48,7 @@ export default function ServicesLight() {
 
                   <a href="#contacto" className="services-light__card-link">
                     {t("servicesLight.link")}
+                    <IconArrowRight aria-hidden="true" />
                   </a>
                 </div>
               </article>
@@ -51,9 +57,9 @@ export default function ServicesLight() {
 
           {/* Right column: intro + visual */}
           <div className="services-light__intro">
-            <span className="kicker">{t("servicesLight.kicker")}</span>
+            <span className="kicker" data-reveal>{t("servicesLight.kicker")}</span>
 
-            <h2>
+            <h2 data-reveal="wipe" style={{ "--delay": "90ms" }}>
               {t("servicesLight.title")}
               <br />
               <span className="grad-text">
@@ -61,16 +67,24 @@ export default function ServicesLight() {
               </span>
             </h2>
 
-            <p className="services-light__description">
+            <p
+              className="services-light__description"
+              data-reveal
+              style={{ "--delay": "180ms" }}
+            >
               {t("servicesLight.description")}
             </p>
 
-            <div className="services-light__visual">
+            <div
+              className="services-light__visual"
+              data-reveal
+              style={{ "--delay": "270ms" }}
+            >
               <img
                 src={servicesImg}
                 alt={t("servicesLight.alt")}
-                width="1920"
-                height="1280"
+                width="1536"
+                height="1024"
                 loading="lazy"
                 decoding="async"
               />
