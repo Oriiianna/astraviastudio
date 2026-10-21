@@ -119,7 +119,7 @@
   color: var(--text-soft);
   padding: 8px 12px;
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: var(--fs-label);
   font-weight: 600;
   letter-spacing: 0.08em;
   cursor: pointer;
@@ -144,7 +144,7 @@
 
 .nav__links > a {
   position: relative;
-  font-size: 0.9rem;
+  font-size: var(--fs-ui);
   font-weight: 400;
   color: var(--text-soft);
   padding: 4px 0;
@@ -164,19 +164,22 @@
   transition: transform 0.4s var(--ease);
 }
 
-.nav__links > a:hover {
+.nav__links > a:hover,
+.nav__links > a.is-active {
   color: #fff;
 }
 
-.nav__links > a:hover::after {
+.nav__links > a:hover::after,
+.nav__links > a.is-active::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-/* --- CTA --- */
+/* --- CTA ---
+   Más compacto que el .btn estándar: en la barra tiene que medir lo mismo que
+   el selector de idioma (45 px), no competir con él. */
 .nav__cta {
-  padding: 13px 24px;
-  font-size: 0.85rem;
+  padding: 0.6rem 1.5rem;
 }
 
 .nav__links .nav__cta--mobile {
@@ -249,7 +252,6 @@
   .nav__links .nav__cta--mobile {
     display: inline-flex;
     margin-top: 14px;
-    font-size: 0.95rem;
-    padding: 14px 30px;
+    padding: 0.875rem 1.875rem;
   }
 }

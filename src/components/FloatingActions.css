@@ -60,7 +60,8 @@
   /* El contenedor esta anclado abajo, asi que este margen separa un poco mas
      los dos botones subiendo solo este: el de WhatsApp no se mueve. */
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: var(--grad-violet);
+  border: 1px solid rgba(167, 139, 250, 0.4);
   color: #ffffff;
 }
 
@@ -71,7 +72,7 @@
 
 .back-to-top:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px -10px rgba(59, 130, 246, 0.7);
+  box-shadow: 0 12px 28px -10px rgba(124, 58, 237, 0.7);
 }
 
 .back-to-top:active {

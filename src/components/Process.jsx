@@ -1,28 +1,15 @@
 import { useTranslation } from 'react-i18next'
-import { IconBulb, IconPalette, IconCode, IconRocket } from './icons.jsx'
 import './Process.css'
+import img1 from '../recursos/proceso-1.webp'
+import img2 from '../recursos/proceso-2.webp'
+import img3 from '../recursos/proceso-3.webp'
+import img4 from '../recursos/proceso-4.webp'
 
 const STEPS = [
-  {
-    n: '01',
-    icon: IconBulb,
-    key: 'one',
-  },
-  {
-    n: '02',
-    icon: IconPalette,
-    key: 'two',
-  },
-  {
-    n: '03',
-    icon: IconCode,
-    key: 'three',
-  },
-  {
-    n: '04',
-    icon: IconRocket,
-    key: 'four',
-  },
+  { n: '01', img: img1, key: 'one' },
+  { n: '02', img: img2, key: 'two' },
+  { n: '03', img: img3, key: 'three' },
+  { n: '04', img: img4, key: 'four' },
 ]
 
 export default function Process() {
@@ -31,26 +18,30 @@ export default function Process() {
   return (
     <section className="process section grain" id="proceso">
       <div className="container container--full">
-        <header className="section-head" data-reveal>
-          <span className="kicker">{t('process.kicker')}</span>
-          <h2>{t('process.title')}</h2>
-          <p>{t('process.description')}</p>
+        <header className="section-head process__head">
+          <span className="kicker" data-reveal>{t('process.kicker')}</span>
+          <h2 data-reveal="wipe" style={{ '--delay': '90ms' }}>
+            {t('process.title')}
+            <br />
+            {t('process.accent')}
+          </h2>
+          <p data-reveal style={{ '--delay': '180ms' }}>{t('process.description')}</p>
         </header>
 
-        <ol className="process__steps" data-reveal>
-          {/* El riel se dibuja de punta a punta cuando la seccion entra en cuadro. */}
-          <span className="process__rail" aria-hidden="true">
-            <i />
-          </span>
+        <ol className="process__steps">
+          {STEPS.map(({ n, img, key }, i) => (
+            <li className="step glass-card" key={n} data-reveal data-spotlight style={{ '--delay': `${i * 110}ms` }}>
+              <span className="step__num" aria-hidden="true">{n}</span>
 
-          {STEPS.map(({ n, icon: Icon, key }, i) => (
-            <li className="step" key={n} data-reveal style={{ '--delay': `${i * 130}ms` }}>
-              {/* El orden lo lleva el <ol>: el numeral es decorativo. */}
-              <span className="step__cifra" aria-hidden="true">{n}</span>
-
-              <span className="step__nodo">
-                <Icon />
-              </span>
+              <img
+                className="step__img"
+                src={img}
+                alt={t(`process.steps.${key}.alt`)}
+                width="640"
+                height="400"
+                loading="lazy"
+                decoding="async"
+              />
 
               <h3>{t(`process.steps.${key}.title`)}</h3>
               <p>{t(`process.steps.${key}.text`)}</p>

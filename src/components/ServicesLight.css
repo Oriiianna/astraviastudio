@@ -22,24 +22,6 @@
   gap: clamp(24px, 3vw, 56px);
 }
 
-/* Hairline vertical entre columnas: la misma separación estructural
-   que usa Process, dibujada en el centro del grid. */
-.services-light__grid::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  left: calc(50% - 0.5px);
-  width: 1px;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(167, 139, 250, 0.16) 20%,
-    rgba(167, 139, 250, 0.16) 76%,
-    transparent 100%
-  );
-  pointer-events: none;
-}
-
 /* -------------------------
    LEFT: SERVICE CARDS
    ------------------------- */
@@ -47,57 +29,60 @@
 .services-light__cards {
   display: flex;
   flex-direction: column;
-  gap: clamp(14px, 1.6vw, 20px);
+  gap: 1.25rem;
   min-width: 0;
 }
 
-.services-light__cards {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(20px, 2vw, 32px);
-  min-width: 0;
-}
-
+/* El aspecto de cristal viene de .glass-card (global.css). Las tres tarjetas
+   se reparten el alto de la columna para que la sección quede pareja con la
+   imagen de la derecha. */
 .services-light__card {
-  position: relative;
-  isolation: isolate;
-  min-height: 168px;
+  overflow: hidden;
+  flex: 1;
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
-  gap: clamp(16px, 2vw, 24px);
-  align-items: start;
-  padding: clamp(24px, 2.6vw, 34px) clamp(20px, 2.2vw, 28px) clamp(24px, 2.6vw, 32px) clamp(16px, 1.8vw, 22px);
-  border-radius: var(--radius);
-  background: rgba(13, 11, 38, 0.6);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-card);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.75rem 2rem;
 }
 
-.services-light__card:hover {
-  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+/* Número grande y tenue detrás del texto */
+.services-light__card-num {
+  position: absolute;
+  top: -0.5rem;
+  right: 1.25rem;
+  z-index: -1;
+  font-family: var(--font-display);
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: rgba(168, 125, 255, 0.1);
+  pointer-events: none;
 }
 
 .services-light__card-icon {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-  color: var(--accent);
-  transition: transform 0.3s ease;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(145deg, rgba(var(--glow), 0.42), rgba(var(--glow), 0.12));
+  border: 1px solid rgba(190, 160, 255, 0.4);
+  box-shadow: 0 0 1.5rem rgba(var(--glow), 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: #fff;
+  transition: box-shadow var(--dur-2) var(--ease), transform var(--dur-2) var(--ease);
 }
 
 .services-light__card-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 2rem;
+  height: 2rem;
 }
 
-.services-light__card:hover .services-light__card-icon {
-  transform: scale(1.05);
+.services-light__card:hover .services-light__card-icon,
+.services-light__card:focus-within .services-light__card-icon {
+  box-shadow: 0 0 2.25rem rgba(var(--glow), 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transform: scale(1.06);
 }
 
 .services-light__card-content {
@@ -105,49 +90,45 @@
 }
 
 .services-light__card h3 {
-  margin: 0 0 10px;
-  font-size: 1.125rem;
-  font-weight: 600;
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
+  color: #fff;
 }
 
 .services-light__card p {
   margin: 0;
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  font-weight: 300;
-  line-height: 1.7;
+  color: var(--text-soft);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 .services-light__card-link {
   width: fit-content;
-  margin-top: 18px;
+  margin-top: 1rem;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: var(--violet-soft);
+  gap: 0.5rem;
+  color: var(--violet-pale);
   text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 6px 0;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s ease, color 0.3s ease;
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: color var(--dur-2) var(--ease), gap var(--dur-2) var(--ease);
 }
 
-.services-light__card-link:hover {
-  border-bottom-color: var(--violet-soft);
-}
-
-.services-light__card-link:hover {
-  color: #00E5C8;
-  gap: 12px;
+.services-light__card-link:hover,
+.services-light__card-link:focus-visible {
+  color: #00e5c8;
+  gap: 0.75rem;
 }
 
 .services-light__card-link svg {
-  width: 15px;
-  height: 15px;
+  width: 1rem;
+  height: 1rem;
 }
 
 /* -------------------------
@@ -168,11 +149,11 @@
 }
 
 .services-light__description {
-  margin: 20px 0 34px;
+  margin: 1.25rem 0 2.125rem;
   color: var(--text-soft);
-  font-size: 1rem;
-  font-weight: 300;
-  line-height: 1.75;
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 /* --- Imagen ---
@@ -214,11 +195,7 @@
   }
 
   .services-light__cards {
-    gap: 28px;
-  }
-
-  .services-light__grid::before {
-    display: none;
+    gap: 1.25rem;
   }
 
   .services-light__intro {
@@ -236,29 +213,28 @@
 
 @media (max-width: 560px) {
   .services-light__card {
-    min-height: auto;
-    grid-template-columns: 42px minmax(0, 1fr);
-    gap: 14px;
-    padding: 18px 16px;
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.25rem 1.125rem;
   }
 
   .services-light__card-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1rem;
   }
 
   .services-light__card-icon svg {
-    width: 18px;
-    height: 18px;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   .services-light__card h3 {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
 
-  .services-light__card p {
-    font-size: 0.8rem;
+  .services-light__card-num {
+    font-size: 4.5rem;
   }
 
   .services-light__intro h2 {
@@ -270,4 +246,9 @@
   }
 }
 
-
+@media (prefers-reduced-motion: reduce) {
+  .services-light__card:hover .services-light__card-icon,
+  .services-light__card:focus-within .services-light__card-icon {
+    transform: none;
+  }
+}

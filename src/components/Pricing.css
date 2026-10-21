@@ -23,15 +23,6 @@
   display: flex;
   flex-direction: column;
   padding: clamp(28px, 2.4vw, 40px) clamp(22px, 2vw, 32px) clamp(28px, 2.4vw, 36px);
-  border-radius: var(--radius-lg);
-  background: rgba(13, 11, 38, 0.6);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-card);
-  transition: border-color 0.3s ease, transform 0.3s ease;
-}
-
-.plan:hover {
-  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
 /* Más grande que las otras dos, no solo levantada: sobresale
@@ -40,11 +31,17 @@
   background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, rgba(13, 11, 38, 0.6)) 0%, rgba(13, 11, 38, 0.6) 45%);
   border-color: color-mix(in srgb, var(--accent) 45%, transparent);
   box-shadow: 0 8px 32px -8px color-mix(in srgb, var(--accent) 35%, transparent), 0 8px 24px rgba(0, 0, 0, 0.4);
+  --glow: 155, 108, 245;
   margin-block: -28px;
   margin-inline: -10px;
   padding-top: calc(clamp(28px, 2.4vw, 40px) + 28px);
   padding-bottom: calc(clamp(28px, 2.4vw, 36px) + 28px);
   z-index: 2;
+}
+
+.plan--featured:hover {
+  border-color: color-mix(in srgb, var(--accent) 75%, white);
+  box-shadow: 0 12px 40px -8px color-mix(in srgb, var(--accent) 55%, transparent), 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 /* Resplandor de marca detrás del encabezado, solo en el plan destacado. */
@@ -103,7 +100,7 @@
   border-radius: 999px;
   background: #00E5C8;
   color: #0a0830;
-  font-size: 0.6rem;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -112,44 +109,11 @@
 
 .plan__name {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--text);
-}
-
-/* --- Precio --- */
-.plan__price {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-  margin: 16px 0 24px;
-  color: var(--text);
-}
-
-.plan__price-currency {
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--text-muted);
-}
-
-.plan__price-amount {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.plan__price-amountSmall {
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.plan__price-note {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-top: 4px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #fff;
 }
 
 /* --- Features ---
@@ -171,16 +135,16 @@
   display: flex;
   align-items: flex-start;
   gap: 11px;
-  font-size: 0.875rem;
-  font-weight: 300;
-  line-height: 1.62;
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
   color: var(--text-soft);
 }
 
 .plan__features svg {
   width: 17px;
   height: 17px;
-  margin-top: 3px;
+  margin-top: 0.3rem;
   flex-shrink: 0;
   color: var(--violet-soft);
 }
@@ -208,12 +172,5 @@
 
   .plan {
     padding: 32px 24px;
-  }
-}
-
-@media (max-width: 560px) {
-  .pricing__proof {
-    grid-template-columns: 1fr;
-    gap: 24px;
   }
 }

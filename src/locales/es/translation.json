@@ -2,19 +2,63 @@
   "nav": {
     "services": "Servicios",
     "process": "Proceso",
+    "pricing": "Planes",
     "work": "Proyectos",
     "contact": "Contacto",
     "cta": "Iniciar proyecto",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
-    "languageLabel": "Cambiar idioma a inglés"
+    "languageLabel": "Cambiar idioma a inglés",
+    "skip": "Saltar al contenido",
+    "mainLabel": "Navegación principal"
+  },
+  "floating": {
+    "backToTop": "Volver arriba",
+    "whatsapp": "Contactar por WhatsApp",
+    "whatsappMessage": "¡Hola! Me interesa conocer más sobre los servicios de Astravia Studio y recibir asesoramiento para mi proyecto web."
+  },
+  "faq": {
+    "kicker": "Preguntas frecuentes",
+    "title": "Lo que casi todos",
+    "titleHighlight": "nos preguntan.",
+    "description": "Respuestas claras antes de escribirnos. Si te queda alguna duda, consúltanos sin compromiso.",
+    "items": [
+      {
+        "q": "¿Cómo es la forma de pago?",
+        "a": "Es un pago único, sin abonos mensuales. Salvo que el contrato diga otra cosa, se abona el 50% de anticipo para comenzar y el 50% restante dentro de los 10 días corridos de finalizado el proyecto."
+      },
+      {
+        "q": "¿Cuánto tarda en estar lista mi web?",
+        "a": "Depende del plan y del contenido que tengas preparado. El plazo exacto queda fijado en el contrato antes de empezar."
+      },
+      {
+        "q": "¿Qué incluye cada plan y qué no?",
+        "a": "Cada tarjeta detalla lo que incluye el plan. Cualquier trabajo fuera de ese alcance se cotiza por separado."
+      },
+      {
+        "q": "¿Cuántas revisiones puedo pedir?",
+        "a": "Las revisiones y los entregables se acuerdan en el contrato de cada proyecto, para que ambas partes sepan qué esperar."
+      },
+      {
+        "q": "¿Qué necesito tener listo para empezar?",
+        "a": "Si ya tienes logo, textos o fotos, nos sirven de punto de partida. Si no, lo conversamos en la primera consulta."
+      },
+      {
+        "q": "¿Cuándo recibo los accesos y los archivos?",
+        "a": "Las credenciales y los archivos se entregan una vez abonado el 100% del proyecto."
+      },
+      {
+        "q": "¿La consulta tiene algún costo?",
+        "a": "No. Analizamos tu situación actual y te proponemos una solución a medida, sin compromiso."
+      }
+    ]
   },
   "hero": {
     "titleLine1": "Despega tu negocio al",
     "titleLine3": " universo digital",
     "lead": "En Astravia combinamos diseño, tecnología y estrategia para crear webs que comunican, posicionan y generan resultados reales.",
-    "primaryCta": "Servicios",
-    "secondaryCta": "Proyectos",
+    "primaryCta": "Cuéntanos tu proyecto",
+    "secondaryCta": "Ver proyectos",
     "hint": "Desliza"
   },
   "services": {
@@ -23,51 +67,52 @@
     "description": "Soluciones integrales diseñadas para posicionar tu marca y escalar tu negocio digital.",
     "items": {
       "one": {
-        "title": "Diseño UI/UX",
-        "text": "Diseñamos experiencias que guían al usuario y aumentan la conversión. Eliminamos la fricción en el recorrido de tu usuario. Estudiamos el comportamiento de tu audiencia para crear interfaces atractivas que facilitan las ventas y maximizan tu tasa de conversión."
+        "title": "Diseño que convence",
+        "text": "Una web con tu identidad, clara y pensada para que te escriban."
       },
       "two": {
-        "title": "Desarrollo Web",
-        "text": "Desarrollamos sitios y aplicaciones web de alto rendimiento optimizados para posicionar en Google y convertir visitas en clientes recurrentes."
+        "title": "Desarrollo rápido",
+        "text": "Carga rápido en el celular y se ve bien en todas partes."
       },
       "three": {
-        "title": "Optimización",
-        "text": "Optimizamos la velocidad de carga, la estructura técnica y el SEO de tu sitio para dominar Google y maximizar tus ventas."
-      },
-      "four": {
-        "title": "Mantenimiento",
-        "text": "Nos encargamos de la seguridad, las copias de seguridad y el soporte técnico constante para que operes sin interrupciones y te enfoques solo en vender."
+        "title": "Te acompañamos después",
+        "text": "Cambios, soporte y mantenimiento cuando lo necesites."
       }
     }
   },
   "servicesLight": {
-    "kicker": "Por qué elegirnos",
+    "kicker": "Qué hacemos",
     "title": "Tu éxito es",
     "titleHighlight": "nuestra misión",
-    "description": "Una combinación de diseño, tecnología y estrategia para crear la web que tu negocio necesita: rápida, clara y pensada para convertir.",
-    "alt": "Equipo de Astravia colaborando alrededor de una mesa con laptops y anotaciones",
+    "description": "Creamos la web que tu negocio necesita, rápida, clara y pensada para que te escriban.",
+    "alt": "Astronauta sonriente programando en su escritorio con una laptop y un monitor con código",
     "link": "Conocer más"
   },
   "process": {
     "kicker": "Cómo trabajamos",
-    "title": "Un proceso transparente",
-    "description": "Sin sorpresas. Cada fase está diseñada para mantener el proyecto en tiempo y forma.",
+    "title": "Así llevamos tu proyecto",
+    "accent": "de idea a lanzamiento",
+    "description": "Un proceso claro, ágil y pensado para avanzar con orden, velocidad y resultados.",
     "steps": {
       "one": {
-        "title": "Estrategia",
-        "text": "Definimos objetivos, analizamos la competencia y trazamos el plan de acción."
+        "title": "Descubrimiento",
+        "text": "Definimos objetivos, entendemos tu negocio y trazamos la mejor estrategia.",
+        "alt": "Lista de verificación, gráficos y una diana que representan los objetivos del proyecto"
       },
       "two": {
         "title": "Diseño",
-        "text": "Creamos prototipos visuales enfocados en la experiencia del usuario."
+        "text": "Creamos wireframes y una interfaz visual clara, moderna y alineada a tu marca.",
+        "alt": "Maquetas de una página web en escritorio y móvil"
       },
       "three": {
         "title": "Desarrollo",
-        "text": "Escribimos código limpio, rápido y optimizado para buscadores."
+        "text": "Convertimos el diseño en una web rápida, sólida y optimizada.",
+        "alt": "Editor de código y medidor de velocidad"
       },
       "four": {
         "title": "Lanzamiento",
-        "text": "Pruebas exhaustivas, publicación y monitoreo de resultados."
+        "text": "Publicamos, ajustamos detalles y medimos resultados para seguir creciendo.",
+        "alt": "Gráfico de crecimiento y un cohete de lanzamiento"
       }
     }
   },
@@ -84,38 +129,48 @@
     },
     "contact": "Contacto",
     "description": "Agencia digital especializada en desarrollo web estratégico. Transformamos visiones en despegues digitales.",
+    "legal": "Legal",
     "links": {
-      "services": "Desarrollo WordPress",
-      "elementor": "Diseño con Elementor",
-      "uiux": "Diseño UI/UX",
-      "wpo": "Optimización WPO",
-      "maintenance": "Mantenimiento Web",
-      "about": "Sobre nosotros",
+      "design": "Diseño",
+      "development": "Desarrollo",
+      "support": "Acompañamiento",
       "process": "Proceso",
-      "clients": "Clientes",
-      "blog": "Blog",
+      "plans": "Planes",
+      "projects": "Proyectos",
       "contact": "Contacto",
       "privacy": "Privacidad",
-      "terms": "Términos",
-      "cookies": "Cookies"
+      "terms": "Términos"
     },
     "rights": "Todos los derechos reservados.",
     "made": "Hecho con 💜 para el universo digital"
   },
-  "cookies": {
-    "title": "Usamos cookies.",
-    "text": "Solo para analítica (Google Analytics) y entender cómo se usa el sitio. Podés aceptar o rechazar cuando quieras — más detalles en nuestra Política de Privacidad.",
-    "accept": "Aceptar",
-    "reject": "Rechazar"
+  "terms": {
+    "intro": "Cada proyecto de Astravia Studio se rige por el contrato firmado con el cliente. Estos términos lo complementan y, ante cualquier diferencia, prevalece lo establecido en el contrato.",
+    "contractTitle": "1. Contrato",
+    "contractText": "El alcance, los plazos, los entregables, las revisiones y las condiciones de cancelación de cada proyecto son los que fija el contrato. Todo trabajo fuera de ese alcance se cotiza por separado.",
+    "paymentTitle": "2. Forma de pago",
+    "paymentText": "Salvo que el contrato indique otra cosa, los proyectos se abonan en dos partes:",
+    "paymentAdvance": "50% de anticipo para comenzar el trabajo.",
+    "paymentBalance": "50% restante dentro de los 10 días corridos de finalizado el proyecto.",
+    "deliveryTitle": "3. Entrega de accesos y archivos",
+    "deliveryText": "Las credenciales de acceso, los archivos y demás entregables se entregan una vez abonado el 100% del proyecto. Si el saldo no se cancela dentro de los 10 días corridos de finalizado el proyecto, Astravia Studio retendrá esa entrega hasta que se complete el pago.",
+    "cancelTitle": "4. Cancelación",
+    "cancelText": "Las cancelaciones se rigen por lo pactado en el contrato. Quien contrate como consumidor a distancia puede, además, ejercer el derecho de arrepentimiento dentro de los 10 días corridos desde la contratación (art. 34, Ley 24.240).",
+    "lawTitle": "5. Ley aplicable y contacto",
+    "lawText": "Estos términos se rigen por las leyes de la República Argentina. Consultas:"
   },
   "privacy": {
     "intro": "En Astravia Studio nos tomamos en serio la privacidad de quienes nos visitan y contactan. Esta página explica qué información recopilamos y cómo la usamos.",
     "dataTitle": "Qué datos recopilamos",
-    "dataText": "El único dato que pedimos activamente es el que completás en el formulario de contacto: nombre, email, teléfono (opcional), el servicio que te interesa y tu mensaje. Esa información se envía por correo a studioastravia@gmail.com a través de Mailtrap, nuestro proveedor de envío de emails, y se usa exclusivamente para responder tu consulta.",
-    "cookiesTitle": "Cookies y analítica",
-    "cookiesText": "Usamos Google Analytics para entender cómo se usa el sitio (qué páginas se visitan, desde qué tipo de dispositivo, etc.), de forma agregada y sin identificarte personalmente. Este análisis solo se activa si aceptás el aviso de cookies que aparece en tu primera visita; podés rechazarlo ahí mismo, o cambiar tu elección más adelante borrando los datos del sitio desde la configuración de tu navegador. Para más información sobre cómo Google procesa estos datos, podés consultar la política de privacidad de Google en policies.google.com/privacy.",
+    "dataText": "El único dato que pedimos activamente es el que completas en el formulario de contacto: nombre, email, teléfono (opcional), el servicio que te interesa y tu mensaje. Esa información se envía por correo a studioastravia@gmail.com a través de Mailtrap, nuestro proveedor de envío de emails, y se usa exclusivamente para responder tu consulta.",
+    "cookiesTitle": "Analítica",
+    "cookiesMore": "Más información en",
+    "cookiesText": "Usamos Cloudflare Web Analytics para entender cómo se usa el sitio (qué páginas se visitan, desde qué país, con qué tipo de dispositivo, etc.), de forma agregada. No usa cookies ni almacena datos en tu dispositivo, y no te identifica personalmente, por eso no mostramos un aviso de cookies.",
+    "antispamTitle": "Protección contra bots",
+    "antispamText": "El formulario usa Cloudflare Turnstile para comprobar que quien escribe es una persona y no un programa automático. Para ello Cloudflare analiza señales técnicas de tu navegador al cargar el formulario. Astravia Studio no recibe ni guarda esa información.",
+    "antispamMore": "Más información en",
     "contactTitle": "Consultas sobre privacidad",
-    "contactText": "Si tenés alguna pregunta sobre esta política o sobre tus datos, podés escribirnos a studioastravia@gmail.com."
+    "contactText": "Si tienes alguna pregunta sobre esta política o sobre tus datos, puedes escribirnos a studioastravia@gmail.com."
   },
   "contact": {
     "kicker": "Contacto",
@@ -135,10 +190,15 @@
     "submit": "Enviar Mensaje",
     "sending": "Enviando…",
     "success": "¡Gracias! Te respondemos dentro de las próximas 24 horas.",
-    "error": "No pudimos enviar el mensaje. Probá de nuevo o escribinos a hola@astravia.digital.",
-    "errorService": "Por favor seleccioná un servicio.",
+    "thanksTitle": "¡Gracias por escribirnos!",
+    "thanksText": "Recibimos tu mensaje. Nos comunicaremos contigo lo más pronto posible.",
+    "thanksClose": "Entendido",
+    "error": "No pudimos enviar el mensaje. Prueba de nuevo o escríbenos a studioastravia@gmail.com.",
+    "errorService": "Por favor selecciona un servicio.",
+    "errorCaptchaWait": "Estamos verificando que eres una persona. Espera un instante e inténtalo de nuevo.",
+    "errorCaptchaFailed": "No pudimos verificar que eres una persona. Recarga la página e inténtalo de nuevo, o escríbenos por WhatsApp.",
     "service": "Servicio requerido",
-    "placeholderService": "Seleccioná un servicio",
+    "placeholderService": "Selecciona un servicio",
     "serviceLanding": "Landing Page",
     "serviceCorporativo": "Corporativa",
     "serviceEcommerce": "E-Commerce",
@@ -147,60 +207,65 @@
   "clients": {
     "kicker": "Portfolio",
     "title": "Proyectos Destacados",
-    "description": "Piezas donde probamos ideas de interfaz y rendimiento a fondo. No son maquetas: están publicadas y se pueden recorrer.",
-    "cta": "Nuestro proceso",
+    "description": "Proyectos reales y publicados, donde probamos ideas de interfaz y rendimiento.",
+    "cta": "Hablemos de tu proyecto",
     "viewSite": "Ver Proyecto",
     "openInNewTab": "Abrir {{title}} en una pestaña nueva",
     "projects": {
       "sendero": {
         "title": "Sendero · Bicicletas de Travesía",
-        "tag": "Pieza propia",
+        "category": "Sitio web",
+        "blurb": "Taller de cuadros a medida contado con voz de bitácora y comparador de modelos.",
         "domain": "Sendero · Bicicletas de Travesía",
         "description": "Un taller de cuadros a medida contado con voz de bitácora. Los tres modelos se comparan sin salir de la página, y el proceso se explica con un plano técnico acotado en vez de fotos de catálogo. Es el único de la serie sin Tailwind: la tipografía y el color viven en un sistema de tokens propio.",
-        "alt": "Home del sitio de Sendero: hero con la frase «Hasta donde se acaba el mapa» y, debajo, la sección del taller con el plano técnico del cuadro"
+        "alt": "Home de Sendero: hero «Hasta donde se acaba el mapa» y sección del taller con el plano del cuadro"
       },
       "serena": {
         "title": "Serena · Estudio de Yoga",
-        "tag": "Pieza propia",
+        "category": "Servicios",
+        "blurb": "Estudio de yoga con grilla semanal filtrable por día y reserva directa.",
         "domain": "Serena · Estudio de Yoga",
         "description": "Un estudio de yoga donde todo empuja hacia la reserva. La grilla semanal se filtra por día sin recargar la página, y cada clase muestra profesor, nivel y duración antes de que la persona decida. Tiene modo claro y oscuro, que es lo que pide un sitio que se consulta tanto a las siete de la mañana como de noche.",
-        "alt": "Home del sitio de Serena: hero con la frase «Encuentra el equilibrio entre cuerpo y mente» y, debajo, la grilla de horarios filtrable por día"
+        "alt": "Home de Serena: hero sobre equilibrio entre cuerpo y mente y grilla de horarios por día"
       },
       "nordica": {
         "title": "Nórdica · Estudio de Arquitectura",
-        "tag": "Pieza propia",
+        "category": "Sitio web",
+        "blurb": "Estudio de arquitectura contado como una editorial impresa.",
         "domain": "Nórdica · Estudio de Arquitectura",
         "description": "Un estudio de arquitectura contado como una editorial impresa. La galería de obras se recorre con el scroll: cada proyecto entra en pantalla completa y cede el lugar al siguiente. Cierra con un muestrario de materiales, y todo vive en una sola página donde la tipografía lleva el peso del relato.",
-        "alt": "Home del sitio de Nórdica: hero con la frase «Espacios que cambian la forma de habitar» y, debajo, la sección de materialidad con su mosaico de cinco materiales"
+        "alt": "Home de Nórdica: hero «Espacios que cambian la forma de habitar» y mosaico de materiales"
       },
       "altamira": {
         "title": "Altamira · Bienes Raíces",
-        "tag": "Pieza propia",
+        "category": "Sitio web",
+        "blurb": "Inmobiliaria de autor con filtros que viven en la URL y se comparten.",
         "domain": "Altamira · Bienes Raíces",
         "description": "Una inmobiliaria de autor, resuelta como SPA. Los filtros del catálogo viven en la URL, así que una búsqueda se comparte y sobrevive al refresh. Detrás de todo corre una secuencia de video atada al scroll, sin frenar la carga.",
-        "alt": "Home del sitio de Altamira Bienes Raíces: hero con buscador de propiedades y grilla de destacadas"
+        "alt": "Home de Altamira Bienes Raíces: buscador de propiedades y destacadas"
       },
       "oscuroCafe": {
         "title": "Oscuro Café · Cafetería de Especialidad",
-        "tag": "Pieza propia",
+        "category": "E-commerce",
+        "blurb": "Cafetería de especialidad con una narrativa visual cálida y sofisticada.",
         "domain": "Oscuro Café · Cafetería de Especialidad",
-        "description": "Una landing premium para una cafetería de especialidad, diseñada para transmitir calidez y sotisticación. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada taza de café, mientras se destacan los productos y servicios ofrecidos.",
-        "alt": "Home del sitio de Oscuro Café: hero con imagen del café y grilla de productos destacados"
+        "description": "Una landing premium para una cafetería de especialidad, diseñada para transmitir calidez y sofisticación. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada taza de café, mientras se destacan los productos y servicios ofrecidos.",
+        "alt": "Home de Oscuro Café: hero con café y productos destacados"
       }
       ,
       "senderoKappa": {
         "title": "Sendero Kappa · Equipamiento Outdoor",
-        "tag": "Pieza propia",
-        "domain": "Sendero Kappa · ",
+        "domain": "Sendero Kappa · Equipamiento Outdoor",
         "description": "Marca de equipamiento outdoor, diseñada para transmitir aventura y calidad. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada producto, mientras se destacan las características y servicios ofrecidos.",
-        "alt": "Home del sitio de Sendero Kappa: hero con imagen de equipamiento outdoor y grilla de productos destacados"
+        "alt": "Home de Sendero Kappa: equipamiento outdoor y productos destacados"
       },
       "sonrisaelite": {
         "title": "Sonrisa Elite · Consultorio Odontológico",
-        "tag": "Pieza propia",
+        "category": "Servicios",
+        "blurb": "Clínica dental con tratamientos claros, equipo médico y turnos en un clic.",
         "domain": "Sonrisa Elite · Consultorio Odontológico",
         "description": "Sitio web para una clínica dental moderna que ofrece odontología general, estética e implantes con tecnología avanzada y atención personalizada. Incluye catálogo de tratamientos, equipo médico, testimonios y resultados de antes y después.",
-        "alt": "Página principal de la clínica dental: sección hero con especialista atendiendo a un paciente, grilla de tratamientos odontológicos y testimonios de pacientes"
+        "alt": "Home de la clínica dental: especialista con un paciente, tratamientos y testimonios"
       }
     }
   },
@@ -208,7 +273,7 @@
     "kicker": "Planes",
     "title": "Un plan para cada",
     "titleHighlight": "etapa de tu negocio.",
-    "description": "Tres formas de empezar, todas con pago único y sin abonos mensuales. Elegí la que va con tu proyecto hoy: podés escalar después sin rehacer nada.",
+    "description": "Tres planes con pago único y sin abonos, para empezar hoy y crecer sin rehacer nada.",
     "featuredBadge": "Más elegido",
     "cta": "Cotizar proyecto",
     "ctaAriaLabel": "Consultar por el plan {{plan}} por WhatsApp",
@@ -216,12 +281,6 @@
     "plans": {
       "landing": {
         "name": "Landing Page",
-        "price": {
-          "currency": "Pesos",
-          "amount": "330",
-          "amountSmall": "000",
-          "note": "pago único"
-        },
         "features": [
           "Diseño adaptado a la identidad de tu negocio",
           "Una página estructurada estratégicamente",
@@ -233,12 +292,6 @@
       },
       "clasica": {
         "name": "Corporativa",
-        "price": {
-          "currency": "Pesos",
-          "amount": "400",
-          "amountSmall": "000",
-          "note": "pago único"
-        },
         "features": [
           "Hasta 5 páginas personalizadas",
           "Diseño adaptado a la identidad de tu negocio",
@@ -250,12 +303,6 @@
       },
       "ecommerce": {
         "name": "E-Commerce",
-        "price": {
-          "currency": "Pesos",
-          "amount": "450",
-          "amountSmall": "000",
-          "note": "pago único"
-        },
         "features": [
           "Catálogo y Productos",
           "Proceso de Compra",
@@ -265,20 +312,9 @@
           "Carga Inicial"
         ]
       }
-    },
-    "proof": {
-      "pagespeed": { "value": "98", "unit": "/100", "label": "PageSpeed promedio" },
-      "projects": { "value": "+50", "unit": "", "label": "Proyectos entregados" },
-      "uptime": { "value": "99.9", "unit": "%", "label": "Uptime garantizado" }
     }
   },
   "techStack": {
     "label": "Potenciado por tecnología real"
-  },
-  "tools": {
-    "pill": "TECNOLOGÍA",
-    "title": "Construimos soluciones digitales",
-    "text": "Creamos sitios y aplicaciones rápidas con la mejor tecnología para hacer crecer tu negocio sin limitaciones técnicas.",
-    "cta": "Iniciar proyecto"
   }
 }

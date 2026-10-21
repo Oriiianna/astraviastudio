@@ -17,6 +17,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Astravia Studio" />
     <meta property="og:locale" content="es_AR" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta
       property="og:title"
       content="Astravia Studio — Sitios y aplicaciones web a medida"
@@ -39,14 +40,23 @@
          LinkedIn o Slack. Requiere URL absoluta; la imagen la genera
          scripts/optimize-og.mjs → public/brand/og-astravia.jpg. -->
     <link rel="canonical" href="https://astraviastudio.com.ar/" />
+    <link rel="alternate" hreflang="es" href="https://astraviastudio.com.ar/es" />
+    <link rel="alternate" hreflang="en" href="https://astraviastudio.com.ar/en" />
+    <link rel="alternate" hreflang="x-default" href="https://astraviastudio.com.ar/" />
     <meta property="og:url" content="https://astraviastudio.com.ar/" />
-    <meta property="og:image" content="https://astraviastudio.com.ar/brand/og-portada.png" />
-    <meta property="og:image:width" content="5296" />
-    <meta property="og:image:height" content="4752" />
+    <meta property="og:image" content="https://astraviastudio.com.ar/brand/og-astravia.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Astravia Studio — Sitios y aplicaciones web a medida" />
-    <meta name="twitter:image" content="https://astraviastudio.com.ar/brand/og-portada.png" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta name="twitter:image" content="https://astraviastudio.com.ar/brand/og-astravia.jpg" />
 
-    <link rel="icon" type="image/png" href="/brand/favicon.png" />
+    <!-- Favicon: cuadrado y en múltiplos de 48 px, como pide Google para mostrarlo
+         en los resultados. Los genera scripts/optimize-og.mjs (casco sobre el
+         degradado: el casco blanco transparente se perdía sobre fondo claro). -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/brand/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/brand/favicon-192.png" />
     <link rel="apple-touch-icon" href="/brand/isotipo-astravia.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,15 +68,15 @@
          así que el cambio de tipografía ocurre detrás del telón.
          media="print" hace que el navegador la baje sin bloquear; onload la
          devuelve a "all". El <noscript> cubre el caso sin JS. -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@700&amp;display=swap" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Nunito:wght@600;700;800&amp;display=swap" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Nunito:wght@600;700;800&amp;display=swap"
       media="print"
       onload="this.media='all'"
     />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@700&amp;display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Nunito:wght@600;700;800&amp;display=swap" />
     </noscript>
 
     <!-- El primer fotograma del hero lo pedía el JS, así que no arrancaba hasta
@@ -95,13 +105,13 @@
         "logo": "https://astraviastudio.com.ar/brand/isotipo-astravia.png",
         "image": "https://astraviastudio.com.ar/brand/og-astravia.jpg",
         "description": "Equipo de diseño y desarrollo de sitios y aplicaciones web a medida.",
-        "email": "astraviastudio@gmail.com",
+        "email": "studioastravia@gmail.com",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Buenos Aires",
           "addressCountry": "AR"
         },
-        "areaServed": "Global",
+        "areaServed": ["Argentina", "Worldwide (remote)"],
         "availableLanguage": ["es", "en"],
         "knowsAbout": [
           "Diseño UI/UX",
@@ -114,9 +124,8 @@
         ]
       }
     </script>
-    <!-- Google Analytics ya NO se carga acá: src/utils/analytics.js lo inyecta
-         dinámicamente sólo si hay consentimiento de cookies (ver
-         src/components/CookieConsent.jsx). -->
+    <!-- Cloudflare Web Analytics no se carga acá: src/utils/analytics.js lo
+         inyecta dinámicamente (sin cookies, sin banner de consentimiento). -->
 
     <!-- ===========================================================
          Precarga — inline a propósito.
@@ -136,7 +145,7 @@
         place-content: center;
         justify-items: center;
         background: #080012;
-        font-family: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+        font-family: "Nunito", "Inter", ui-sans-serif, system-ui, sans-serif;
         opacity: 1;
         transition: opacity 0.6s cubic-bezier(0.22, 0.7, 0.24, 1);
       }
@@ -239,7 +248,12 @@
         var capa = document.getElementById("precarga");
         if (!capa) return;
 
+        // Primera visita de la sesión: 1 s de barra. Después, apenas lo justo.
         var MIN_MS = 1000;
+        try {
+          if (sessionStorage.getItem("astravia-visto")) MIN_MS = 250;
+          sessionStorage.setItem("astravia-visto", "1");
+        } catch (e) {}
         var PESOS = { fuentes: 0.25, hero: 0.3, estilos: 0.2, app: 0.25 };
         var hecho = { fuentes: 0, hero: 0, estilos: 0, app: 0 };
         var cifra = capa.querySelector(".cifra");
@@ -328,6 +342,14 @@
       })();
     </script>
 
+    <noscript>
+      <style>#precarga { display: none; }</style>
+      <main style="font-family: sans-serif; max-width: 40rem; margin: 3rem auto; padding: 0 1rem; color: #efecff">
+        <h1>Astravia Studio</h1>
+        <p>Diseño y desarrollo de sitios y aplicaciones web a medida. Web design and development: custom websites and apps.</p>
+        <p><a href="/es" style="color: #a78bfa">Español</a> · <a href="/en" style="color: #a78bfa">English</a> · <a href="mailto:studioastravia@gmail.com" style="color: #a78bfa">studioastravia@gmail.com</a></p>
+      </main>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

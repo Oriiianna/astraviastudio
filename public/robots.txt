@@ -1,5 +1,6 @@
 # Astravia Studio
-# Una landing de una sola página: no hay nada que esconderle a los buscadores.
+# Sitio bilingüe (/es y /en): no hay nada que esconderle a los buscadores.
+# El sitemap lo genera el build (vite.config.js, plugin seoPorRuta).
 
 User-agent: *
 Allow: /

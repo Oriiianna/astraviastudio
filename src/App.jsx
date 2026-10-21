@@ -1,25 +1,33 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
-import Services from "./components/Services.jsx";
-// Temporal: sección Services en tema claro (framer-motion + lucide) para probar esta dirección de diseño
 import ServicesLight from "./components/ServicesLight.jsx";
-import TechStack from "./components/TechStack.jsx";
-import ToolsStack from "./components/ToolsStack.jsx";
 import Process from "./components/Process.jsx";
 import Pricing from "./components/Pricing.jsx";
+// Ocultas por ahora (los archivos siguen en components/). Para volver a
+// mostrarlas: descomentar estos imports y las dos líneas dentro de <main>.
+// import Faq from "./components/Faq.jsx";
+// import CtaBanner from "./components/CtaBanner.jsx";
 import Clients from "./components/Clients.jsx";
-import CtaBanner from "./components/CtaBanner.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
 import Privacy from "./pages/Privacy.jsx";
 import Terms from "./pages/Terms.jsx";
-// Sustituido por FloatingActions.jsx, que incluye el botón de BackToTop y el de WhatsApp
-// import BackToTop from "./components/BackToTop.jsx";
 import FloatingActions from "./components/FloatingActions.jsx";
-import CookieConsent from "./components/CookieConsent.jsx";
-import { getConsent, loadAnalytics } from "./utils/analytics.js";
+import { loadAnalytics } from "./utils/analytics.js";
+import { useReveal } from "./hooks/useReveal.js";
+import { idiomaPreferido, rutaConIdioma, rutaSinIdioma } from "./utils/idioma.js";
+import { IDIOMAS, aplicarMeta, paginaDeRuta } from "./seo.js";
 
 function ScrollToHash() {
   const location = useLocation();
@@ -40,30 +48,9 @@ function ScrollToHash() {
 }
 
 function AppContent() {
-  // Observer único que revela los elementos [data-reveal] al entrar en viewport.
-  useEffect(() => {
-    const targets = document.querySelectorAll("[data-reveal]");
+  const { t } = useTranslation();
 
-    if (!("IntersectionObserver" in window)) {
-      targets.forEach((el) => el.classList.add("is-visible"));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
-    );
-
-    targets.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  useReveal();
 
   // Spotlight que sigue al cursor dentro de cada [data-spotlight].
   // El listener va por elemento: solo dispara mientras el mouse está encima.
@@ -85,43 +72,73 @@ function AppContent() {
 
   return (
     <>
+      <a className="skip-link" href="#main">
+        {t("nav.skip")}
+      </a>
       <Navbar />
-      <main>
+      <main id="main" tabIndex={-1}>
         <Hero />
-        {/* <Services /> */}
-        {/* TEMPORAL: prueba de la sección Services en tema claro (cliente). Quitar cuando no se necesite. */}
         <ServicesLight />
         <Process />
-        {/* <TechStack /> */}
-        <ToolsStack />
         <Pricing />
+        {/* <Faq /> */}
+        {/* <CtaBanner /> */}
         <Clients />
-        <CtaBanner />
         <Contact />
       </main>
       <Footer />
-      {/* <BackToTop /> */}
       <FloatingActions />
     </>
   );
 }
 
-export default function App() {
-  // Visita que ya había aceptado antes: cargar GA sin volver a mostrar el
-  // banner. Si es "denied" o todavía no hay elección, no se toca nada acá.
+// Layout de /:lng/*. El idioma sale de la URL; si no es es/en, no es una ruta nuestra.
+// Además deja el <head> (título, canonical, hreflang…) igual al que escribió el build.
+function IdiomaDeRuta() {
+  const { lng } = useParams();
+  const { pathname } = useLocation();
+  const { i18n } = useTranslation();
+  const valido = IDIOMAS.includes(lng);
+
   useEffect(() => {
-    if (getConsent() === "granted") loadAnalytics();
+    if (valido) i18n.changeLanguage(lng);
+  }, [valido, lng, i18n]);
+
+  useEffect(() => {
+    if (valido) aplicarMeta(lng, paginaDeRuta(rutaSinIdioma(pathname)));
+  }, [valido, lng, pathname]);
+
+  if (!valido) return <RedirigirAIdioma />;
+  return <Outlet />;
+}
+
+// "/" y las rutas sin prefijo (/privacy, /terms, cualquier otra) caen acá:
+// se manda a la versión en el idioma preferido, conservando ruta y #hash.
+function RedirigirAIdioma() {
+  const { i18n } = useTranslation();
+  const { pathname, search, hash } = useLocation();
+  const ruta = ["/privacy", "/terms"].includes(pathname) ? pathname : "/";
+  return (
+    <Navigate to={{ pathname: rutaConIdioma(idiomaPreferido(i18n), ruta), search, hash }} replace />
+  );
+}
+
+export default function App() {
+  // Cloudflare Web Analytics no usa cookies, así que carga siempre.
+  useEffect(() => {
+    loadAnalytics();
   }, []);
 
   return (
     <Router>
       <ScrollToHash />
-      {/* Desactivado hasta producción: sacar el comentario para volver a mostrarlo. */}
-      {/* <CookieConsent /> */}
       <Routes>
-        <Route path="/" element={<AppContent />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/terms" element={<Terms />} />
+        <Route path="/:lng" element={<IdiomaDeRuta />}>
+          <Route index element={<AppContent />} />
+          <Route path="privacy" element={<Privacy />} />
+          <Route path="terms" element={<Terms />} />
+        </Route>
+        <Route path="*" element={<RedirigirAIdioma />} />
       </Routes>
     </Router>
   );

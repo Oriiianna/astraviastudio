@@ -40,11 +40,18 @@
   object-position: 50% 42%;
 }
 
-/* Overlay negro semitransparente sobre el video para dar contraste al texto */
+/* Velo sobre el video: muy oscuro a la izquierda, donde va el texto, y más
+   suave a la derecha para que el video respire. */
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: linear-gradient(
+    90deg,
+    rgba(6, 0, 14, 0.94) 0%,
+    rgba(6, 0, 14, 0.86) 38%,
+    rgba(6, 0, 14, 0.45) 70%,
+    rgba(6, 0, 14, 0.3) 100%
+  );
   pointer-events: none;
 }
 
@@ -64,24 +71,71 @@
 
 /* --- Texto: visible siempre --- */
 .hero__copy {
-  max-width: min(52vw, 780px);
+  max-width: min(75vw, 70rem);
 }
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(3rem, 5.6vw, 6rem);
   font-weight: 700;
   letter-spacing: -0.035em;
-  line-height: 1.16;
+  line-height: 1.05;
   text-shadow: none;
+}
+
+.hero__line {
+  display: block;
+  white-space: nowrap;
+}
+
+/* Revelado por palabras: cada una sube desde una máscara */
+.hero__word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.hero__word-in {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: wordUp 1s var(--ease) forwards;
+  animation-delay: calc(160ms + var(--w, 0) * 80ms);
+}
+
+@keyframes wordUp {
+  to {
+    transform: none;
+  }
+}
+
+/* Degradado de marca que se desplaza despacio */
+.hero__line--grad .hero__word-in {
+  background: linear-gradient(90deg, #ffffff 0%, var(--violet-soft) 35%, #00e5c8 70%, #ffffff 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation:
+    wordUp 1s var(--ease) forwards,
+    gradFlow 8s linear 1.4s infinite;
+  animation-delay: calc(160ms + var(--w, 0) * 80ms), 1.4s;
+}
+
+@keyframes gradFlow {
+  to {
+    background-position: -200% 0;
+  }
 }
 
 .hero__lead {
   margin-top: 26px;
   max-width: 45ch;
-  color: var(--text-soft);
-  font-size: 1.2rem;
-  font-weight: 300;
+  color: rgba(239, 236, 255, 0.9);
+  font-size: var(--fs-lead);
+  font-weight: 400;
   line-height: 1.75;
   text-shadow: 0 2px 18px rgba(3, 2, 8, 0.8);
 }
@@ -93,10 +147,6 @@
   margin-top: 38px;
 }
 
-.hero__actions .btn {
-  padding: 15px 30px;
-}
-
 .hero__actions .btn--ghost {
   /* backdrop-filter reducido para mejorar rendimiento */
   backdrop-filter: blur(4px);
@@ -105,7 +155,6 @@
 }
 
 /* --- Entrada escalonada al cargar --- */
-.hero__line,
 .hero__lead,
 .hero__actions {
   opacity: 0;
@@ -159,14 +208,18 @@
     max-width: none;
   }
 
+  .hero__line {
+    white-space: normal;
+  }
+
   .hero__title {
-    font-size: clamp(2.3rem, 9vw, 2.9rem);
+    font-size: clamp(2.6rem, 11vw, 3.4rem);
     line-height: 1.08;
   }
 
   .hero__lead {
     margin-top: 20px;
-    font-size: 1.05rem;
+    font-size: var(--fs-body);
     line-height: 1.6;
   }
 
@@ -207,4 +260,20 @@
   .hero__video {
     autoplay: none;
   }
+
+  .hero__word-in {
+    transform: none;
+    animation: none;
+  }
+
+  .hero__line--grad .hero__word-in {
+    animation: none;
+  }
+}
+
+/* Botón con flecha: el icono ya lleva el aire de su lado, así que se compacta
+   el espacio entre texto y flecha y el relleno derecho. */
+.hero__cta {
+  gap: 0.5rem;
+  padding-right: 1.5rem;
 }
