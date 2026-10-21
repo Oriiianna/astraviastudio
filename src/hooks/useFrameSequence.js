@@ -31,6 +31,7 @@ export default function useFrameSequence({
   onProgress,
   enabled = true,
   startDelay = 0,
+  lazyMargin = null,
 }) {
   const [loaded, setLoaded] = useState(0)
 
@@ -52,6 +53,7 @@ export default function useFrameSequence({
     let currentFrame = -1
     let rafId = 0
     let cancelled = false
+    let observer = null
 
     // Cache de valores para evitar reflows forzados en cada frame
     let cachedScrollHeight = 0
@@ -181,6 +183,24 @@ export default function useFrameSequence({
         if (cancelled) return
       }
 
+      // lazyMargin: no baja el resto de los frames hasta que la sección esté a
+      // esa distancia del viewport (ej. '1200px 0px'). Quien nunca llega hasta
+      // acá no se descarga la secuencia.
+      if (lazyMargin) {
+        await new Promise((resolve) => {
+          observer = new IntersectionObserver(
+            (entries) => {
+              if (!entries.some((e) => e.isIntersecting)) return
+              observer.disconnect()
+              resolve()
+            },
+            { rootMargin: lazyMargin },
+          )
+          observer.observe(section)
+        })
+        if (cancelled) return
+      }
+
       let next = 1
       let done = 1
       const worker = async () => {
@@ -224,6 +244,7 @@ export default function useFrameSequence({
 
     return () => {
       cancelled = true
+      observer?.disconnect()
       if (rafId) cancelAnimationFrame(rafId)
       window.removeEventListener('scroll', throttledSchedule)
       window.removeEventListener('resize', onResize)

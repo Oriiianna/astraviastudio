@@ -2,7 +2,6 @@
   padding: clamp(70px, 8vw, 100px) 0 clamp(80px, 9vw, 120px);
   background-color: #05050A;
   border-top: 1px solid #231340;
-  border-bottom: 1px solid #231340;
 }
 
 /* Sin fondo propio: lo pinta el suelo liso de body::before */
@@ -10,63 +9,91 @@
 .contact__inner {
   position: relative;
   z-index: 2;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
-  gap: clamp(20px, 2vw, 60px);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  /* La card es también el contenedor: se resta el gutter global para que sus
+     bordes alineen con las demás cards de la página. */
+  width: min(100% - 2 * var(--gutter), 72rem);
+  max-width: none;
+  margin-inline: auto;
+  padding: clamp(1.25rem, 2.2vw, 2rem);
+  --glow: 128, 85, 255;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(168, 125, 255, 0.26);
+  background: #0b091e;
+  box-shadow:
+    0 1.125rem 2.25rem rgba(0, 0, 0, 0.35),
+    0 0 1.375rem rgba(var(--glow), 0.08);
+}
+
+/* Glass solo en el borde: línea de luz arriba y destellos en las esquinas. */
+.contact__inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, transparent 8%, rgba(255, 255, 255, 0.22) 50%, transparent 92%) top / 100% 1px no-repeat,
+    radial-gradient(circle at 0 0, rgba(190, 160, 255, 0.2), transparent 3.5rem),
+    radial-gradient(circle at 100% 0, rgba(190, 160, 255, 0.14), transparent 3rem);
+  pointer-events: none;
 }
 
 /* --- Columna izquierda --- */
 .contact__copy {
   position: relative;
-  isolation: isolate;
   display: grid;
-  padding: clamp(22px, 2.4vw, 36px);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(
-    165deg,
-    rgba(26, 21, 62, 0.85) 0%,
-    rgba(10, 8, 32, 0.92) 100%
-  );
-  border: 1px solid var(--border);
-  box-shadow: 0 44px 90px -50px rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  align-content: start;
 }
 
 .contact__copy h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.9rem, 3.8vw, 2.5rem);
+  font-size: clamp(2rem, 4.2vw, 2.85rem);
   line-height: 1.16;
-  margin-bottom: 20px;
+  margin-bottom: 0.75rem;
   max-width: 14ch;
 }
 
 .contact__copy > p {
   max-width: 52ch;
-  color: var(--text-muted);
-  font-size: 0.94rem;
-  font-weight: 300;
-  line-height: 1.8;
+  color: var(--text-soft);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 .contact__channel {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 16px;
-  margin-top: 40px;
+  gap: 0.75rem;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 1.25rem;
   transition: transform 0.4s var(--ease);
 }
 
-.contact__channel:hover {
-  transform: translateX(4px);
+/* Solo con ratón: en táctil el hover se queda "pegado" y desalinea el canal */
+@media (hover: hover) {
+  .contact__channel:hover {
+    transform: translateX(4px);
+  }
+}
+
+.contact__channel span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .contact__channel-icon {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
   background: rgba(56, 189, 248, 0.1);
   border: 1px solid rgba(56, 189, 248, 0.25);
   color: var(--cyan);
@@ -80,13 +107,13 @@
 .contact__channel span:last-child {
   display: grid;
   gap: 4px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-weight: 300;
+  font-size: var(--fs-ui);
+  color: var(--text-soft);
+  font-weight: 400;
 }
 
 .contact__channel strong {
-  font-size: 0.88rem;
+  font-size: var(--fs-ui);
   font-weight: 600;
   color: var(--text);
 }
@@ -94,36 +121,41 @@
 /* --- Formulario --- */
 .contact__form {
   position: relative;
-  isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: clamp(22px, 2.4vw, 36px);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(
-    165deg,
-    rgba(26, 21, 62, 0.85) 0%,
-    rgba(10, 8, 32, 0.92) 100%
-  );
-  border: 1px solid var(--border);
-  box-shadow: 0 44px 90px -50px rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.875rem 1rem;
+  padding-left: clamp(1.5rem, 3vw, 2.5rem);
+  border-left: 1px solid var(--border);
 }
 
 .contact__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  display: contents;
+}
+
+.contact__form > .field,
+.contact__form > .btn,
+.contact__form > .contact__turnstile,
+.contact__form > .contact__feedback {
+  grid-column: 1 / -1;
+}
+
+/* Turnstile es invisible salvo que pida un reto; así no deja hueco. */
+.contact__turnstile {
+  min-width: 0;
+  line-height: 0;
+}
+
+.contact__turnstile:not(:has(iframe:not([style*="display: none"]))) {
+  margin-block: -0.4375rem;
 }
 
 .field {
   display: grid;
-  gap: 9px;
+  gap: 0.4rem;
 }
 
 .field > span {
-  font-size: 0.8rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   color: var(--text-soft);
 }
@@ -131,12 +163,12 @@
 .field input,
 .field textarea {
   width: 100%;
-  padding: 14px 17px;
+  padding: 0.75rem 1rem;
   border-radius: 10px;
   background: rgba(5, 4, 20, 0.85);
   border: 1px solid rgba(167, 139, 250, 0.1);
-  font-size: 0.88rem;
-  font-weight: 300;
+  font-size: var(--fs-input);
+  font-weight: 400;
   transition:
     border-color 0.35s var(--ease),
     box-shadow 0.35s var(--ease),
@@ -146,13 +178,13 @@
 
 .field textarea {
   resize: none;
-  min-height: 128px;
+  min-height: 5.5rem;
   line-height: 1.6;
 }
 
 .field input::placeholder,
 .field textarea::placeholder {
-  color: #4e4869;
+  color: var(--text-dim);
 }
 
 .field input:focus,
@@ -176,13 +208,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 13px 16px 13px 17px;
+  padding: 0.7rem 1rem;
   border-radius: 10px;
   background: rgba(5, 4, 20, 0.85);
   border: 1px solid rgba(167, 139, 250, 0.1);
   font-family: var(--font-body);
-  font-size: 0.88rem;
-  font-weight: 300;
+  font-size: var(--fs-input);
+  font-weight: 400;
   color: var(--text);
   cursor: pointer;
   text-align: left;
@@ -210,7 +242,7 @@
 }
 
 .contact__select-value.is-placeholder {
-  color: #4e4869;
+  color: var(--text-dim);
 }
 
 .contact__select-arrow {
@@ -272,7 +304,7 @@
   border-radius: 8px;
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: var(--fs-ui);
   font-weight: 400;
   cursor: pointer;
   text-align: left;
@@ -332,7 +364,7 @@
 
 .contact__feedback {
   min-height: 0;
-  font-size: 0.8rem;
+  font-size: var(--fs-small);
   color: var(--green);
   text-align: center;
 }
@@ -344,19 +376,110 @@
 /* --- Responsive --- */
 @media (max-width: 940px) {
   .contact__inner {
-    grid-template-columns: 1fr;
-    gap: 42px;
+    grid-template-columns: minmax(0, 1fr);
+    width: min(100% - 2 * var(--gutter), 44rem);
   }
-  .contact__copy h2 {
-    max-width: none;
+  .contact__form {
+    padding-left: 0;
+    padding-top: 1.5rem;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+  }
+}
+
+@media (max-width: 720px) {
+  .contact__form {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @media (max-width: 520px) {
-  .contact__row {
-    grid-template-columns: 1fr;
+  .contact__inner {
+    padding: 1.4rem;
   }
-  .contact__form {
-    padding: 22px;
+
+  .contact__form .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --- Modal de agradecimiento tras el envío --- */
+.thanks-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgba(8, 0, 18, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: thanks-fade 0.2s ease-out;
+}
+
+/* Misma caja que el formulario: fondo liso y glass solo en el borde. */
+.thanks-modal__card {
+  --glow: 128, 85, 255;
+  position: relative;
+  width: min(100%, 26.25rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 2.25rem 1.75rem 1.75rem;
+  text-align: center;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(168, 125, 255, 0.26);
+  background: #0b091e;
+  box-shadow:
+    0 1.5rem 5rem rgba(0, 0, 0, 0.5),
+    0 0 1.375rem rgba(var(--glow), 0.08);
+  animation: thanks-rise 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.thanks-modal__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, transparent 8%, rgba(255, 255, 255, 0.22) 50%, transparent 92%) top / 100% 1px no-repeat,
+    radial-gradient(circle at 0 0, rgba(190, 160, 255, 0.2), transparent 3.5rem),
+    radial-gradient(circle at 100% 0, rgba(190, 160, 255, 0.14), transparent 3rem);
+  pointer-events: none;
+}
+
+.thanks-modal__icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  color: var(--violet-soft);
+}
+
+.thanks-modal__title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.thanks-modal__text {
+  margin: 0 0 0.5rem;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--text-soft);
+}
+
+@keyframes thanks-fade {
+  from { opacity: 0; }
+}
+
+@keyframes thanks-rise {
+  from { opacity: 0; transform: translateY(0.875rem) scale(0.97); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thanks-modal,
+  .thanks-modal__card {
+    animation: none;
   }
 }

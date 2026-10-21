@@ -5,7 +5,7 @@ import './Pricing.css'
 // El mismo número que usa Contact.jsx.
 const WHATSAPP_NUMBER = '5491168717233'
 
-// Solo estructura: los textos y los precios viven en translation.json.
+// Solo estructura: los textos viven en translation.json. No se muestran precios.
 const PLANS = [
   { key: 'landing', accent: '#7c3aed', featured: false },
   { key: 'clasica', accent: '#9b6cf5', featured: true },
@@ -18,12 +18,12 @@ export default function Pricing() {
   return (
     <section className="pricing section grain" id="planes">
       <div className="container container--full">
-        <header className="section-head" data-reveal>
-          <span className="kicker">{t('pricing.kicker')}</span>
-          <h2>
+        <header className="section-head">
+          <span className="kicker" data-reveal>{t('pricing.kicker')}</span>
+          <h2 data-reveal="wipe" style={{ '--delay': '90ms' }}>
             {t('pricing.title')} <span className="grad-text">{t('pricing.titleHighlight')}</span>
           </h2>
-          <p>{t('pricing.description')}</p>
+          <p data-reveal style={{ '--delay': '180ms' }}>{t('pricing.description')}</p>
         </header>
 
         <div className="pricing__grid">
@@ -36,7 +36,7 @@ export default function Pricing() {
 
             return (
               <article
-                className={`plan gradient-border${featured ? ' plan--featured' : ''}`}
+                className={`plan glass-card gradient-border${featured ? ' plan--featured' : ''}`}
                 key={key}
                 style={{ '--accent': accent, '--delay': `${i * 110}ms` }}
                 data-reveal

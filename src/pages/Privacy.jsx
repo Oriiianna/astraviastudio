@@ -1,36 +1,13 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import FloatingActions from "../components/FloatingActions.jsx";
+import { useReveal } from "../hooks/useReveal.js";
 
 export default function Privacy() {
   const { t } = useTranslation();
 
-  // Observer único que revela los elementos [data-reveal] al entrar en viewport.
-  useEffect(() => {
-    const targets = document.querySelectorAll("[data-reveal]");
-
-    if (!("IntersectionObserver" in window)) {
-      targets.forEach((el) => el.classList.add("is-visible"));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
-    );
-
-    targets.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  useReveal();
 
   return (
     <>
@@ -54,12 +31,35 @@ export default function Privacy() {
           </h2>
           <p data-reveal style={{ "--delay": "230ms" }}>
             {t("privacy.cookiesText")}
+            {" "}{t("privacy.cookiesMore")}{" "}
+            <a
+              href="https://www.cloudflare.com/web-analytics/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              cloudflare.com/web-analytics
+            </a>.
           </p>
 
           <h2 data-reveal style={{ "--delay": "260ms" }}>
-            {t("privacy.contactTitle")}
+            {t("privacy.antispamTitle")}
           </h2>
           <p data-reveal style={{ "--delay": "290ms" }}>
+            {t("privacy.antispamText")}
+            {" "}{t("privacy.antispamMore")}{" "}
+            <a
+              href="https://www.cloudflare.com/products/turnstile/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              cloudflare.com/products/turnstile
+            </a>.
+          </p>
+
+          <h2 data-reveal style={{ "--delay": "320ms" }}>
+            {t("privacy.contactTitle")}
+          </h2>
+          <p data-reveal style={{ "--delay": "350ms" }}>
             {t("privacy.contactText")}
           </p>
         </div>

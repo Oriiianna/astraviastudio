@@ -4,19 +4,34 @@
 }
 
 .cta {
-  --pad-x: clamp(28px, 5vw, 66px);
+  --pad-x: clamp(1.75rem, 5vw, 4.125rem);
+  max-width: 70rem;
+  margin-inline: auto;
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(44px, 4.4vw, 62px) var(--pad-x);
-  border-radius: 26px;
-  background: var(--grad-cta);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 26rem;
+  padding: clamp(2.75rem, 4.4vw, 3.875rem) var(--pad-x);
+  border-radius: 1.625rem;
+  background: #0b0720 url('../recursos/cta-astronauta.webp') left center / cover no-repeat;
   border: 1px solid rgba(148, 163, 255, 0.16);
-  box-shadow: 0 50px 90px -50px rgba(0, 0, 0, 0.95);
+  box-shadow: 0 3.125rem 5.625rem -3.125rem rgba(0, 0, 0, 0.95);
 }
 
-/* Hairline superior: el mismo recurso que separa las secciones, acá cierra
-   el borde del panel contra el fondo plano. ::before ya lo usa el spotlight. */
+/* Velo a la derecha: el astronauta queda a la izquierda y el texto necesita
+   un fondo parejo para leerse. */
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(270deg, rgba(8, 5, 24, 0.8) 0%, rgba(8, 5, 24, 0.45) 40%, transparent 65%);
+}
+
+/* Hairline superior: el mismo recurso que separa las secciones. */
 .cta::after {
   content: '';
   position: absolute;
@@ -27,19 +42,8 @@
   pointer-events: none;
 }
 
-.cta__glow {
-  position: absolute;
-  inset: -40% -20% auto -20%;
-  height: 120%;
-  background: radial-gradient(circle at 30% 20%, rgba(74, 159, 224, 0.26) 0%, transparent 55%),
-    radial-gradient(circle at 78% 78%, rgba(124, 58, 237, 0.4) 0%, transparent 58%);
-  filter: blur(30px);
-  z-index: -1;
-}
-
-.cta__stars {
-  opacity: 0.45;
-  z-index: -1;
+.cta__copy {
+  width: min(100%, 28rem);
 }
 
 .cta__title {
@@ -48,7 +52,7 @@
   font-weight: 700;
   line-height: 1.16;
   letter-spacing: -0.03em;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   max-width: 19ch;
 }
 
@@ -58,87 +62,37 @@
   color: #ffffff;
 }
 
-.cta__body {
-  display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(24px, 3vw, 48px);
-}
-
-/* Contenida, con el padding del panel intacto. Se probó sangrándola fuera del
-   borde, pero el recorte quedaba entre 18 y 50px según el ancho: muy poco
-   para leerse como decisión y suficiente para parecer un error. */
-.cta__art {
-  position: relative;
-  display: grid;
-  place-items: center;
-}
-
-/* Halo detrás del astronauta */
-.cta__art-glow {
-  position: absolute;
-  width: 78%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(167, 139, 250, 0.34) 0%, transparent 68%);
-  filter: blur(30px);
-  /* animation: ctaGlowPulse 7s ease-in-out infinite; */ /* DESACTIVADA: consume recursos y afecta el video */
-}
-
-@keyframes ctaGlowPulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.14);
-    opacity: 1;
-  }
-}
-
-/* Canvas de la secuencia atada al scroll */
-.cta__canvas {
-  position: relative;
-  width: min(100%, 540px);
-  height: auto;
-  display: block;
-  filter: drop-shadow(0 26px 42px rgba(3, 2, 12, 0.6));
-}
-
 .cta__copy p {
   max-width: 46ch;
-  margin: 0 0 30px;
-  font-size: 1rem;
+  margin: 0 0 1.875rem;
+  font-size: var(--fs-body);
   font-weight: 400;
   line-height: 1.7;
   color: #e6e3f8;
 }
 
-.cta__btn {
-  padding: 14px 30px;
-}
-
 @media (max-width: 860px) {
-  .cta__body {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  /* Móvil: el texto arriba y el astronauta abajo, que es donde la imagen
+     lo deja libre. */
+  .cta {
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 34rem;
+    background-image: url('../recursos/cta-astronauta-sm.webp');
+    background-size: auto 62%;
+    background-position: left bottom;
   }
 
-  .cta__canvas {
-    width: min(86%, 360px);
+  .cta::before {
+    background: linear-gradient(180deg, #0b0720 0%, rgba(11, 7, 32, 0.7) 45%, transparent 75%);
+  }
+
+  .cta__copy {
+    width: 100%;
   }
 
   .cta__title,
   .cta__copy p {
     max-width: none;
-  }
-
-  /* .btn es inline-flex: para que margin auto lo centre necesita ser
-     un bloque, igual que los otros CTA del sitio en mobile. */
-  .cta__btn {
-    display: flex;
-    width: fit-content;
-    margin-inline: auto;
   }
 }

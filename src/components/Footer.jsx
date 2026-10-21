@@ -2,15 +2,17 @@ import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { IconMail, IconPhone, IconPin } from "./icons.jsx";
 import { scrollToTop } from "../utils/scroll";
+import { idiomaActual, rutaConIdioma, rutaSinIdioma } from "../utils/idioma";
 import "./Footer.css";
 
 export default function Footer() {
   const { t, i18n } = useTranslation();
   const location = useLocation();
-  const lang = i18n.resolvedLanguage?.startsWith("en") ? "en" : "es";
+  const lang = idiomaActual(i18n);
   const footerT = (key) => t(key, { lng: lang });
 
-  const isHomePage = location.pathname === '/';
+  const isHomePage = rutaSinIdioma(location.pathname) === '/';
+  const inicio = rutaConIdioma(lang);
 
   const handleLogoClick = (e) => {
     if (isHomePage) {
@@ -19,25 +21,23 @@ export default function Footer() {
     }
   };
 
+  // Cada enlace apunta a una sección real de la home (ver ids en App.jsx).
   const COLUMNS = [
     {
       title: footerT("footer.columns.services"),
       links: [
-        footerT("footer.links.services"),
-        footerT("footer.links.elementor"),
-        footerT("footer.links.uiux"),
-        footerT("footer.links.wpo"),
-        footerT("footer.links.maintenance"),
+        { label: footerT("footer.links.design"), to: `${inicio}#servicios` },
+        { label: footerT("footer.links.development"), to: `${inicio}#servicios` },
+        { label: footerT("footer.links.support"), to: `${inicio}#servicios` },
       ],
     },
     {
       title: footerT("footer.columns.agency"),
       links: [
-        footerT("footer.links.about"),
-        footerT("footer.links.process"),
-        footerT("footer.links.clients"),
-        footerT("footer.links.blog"),
-        footerT("footer.links.contact"),
+        { label: footerT("footer.links.process"), to: `${inicio}#proceso` },
+        { label: footerT("footer.links.plans"), to: `${inicio}#planes` },
+        { label: footerT("footer.links.projects"), to: `${inicio}#clientes` },
+        { label: footerT("footer.links.contact"), to: `${inicio}#contacto` },
       ],
     },
   ];
@@ -51,7 +51,7 @@ export default function Footer() {
     {
       icon: IconPhone,
       text: "+54 11 6871-7233",
-      href: "https://wa.me/5491168717233?text=%C2%A1Hola!%20Me%20interesa%20conocer%20m%C3%A1s%20sobre%20los%20servicios%20de%20Astravia%20Studio%20y%20recibir%20asesoramiento%20para%20mi%20proyecto%20web.",
+      href: `https://wa.me/5491168717233?text=${encodeURIComponent(footerT("floating.whatsappMessage"))}`,
       target: "_blank",},
     {
       icon: IconPin,
@@ -66,7 +66,7 @@ export default function Footer() {
       <div className="container container--full">
         <div className="footer__grid">
           <div className="footer__brand">
-            <Link className="footer__logo" to="/" onClick={handleLogoClick}>
+            <Link className="footer__logo" to={inicio} onClick={handleLogoClick}>
               <img
                 src="/brand/astravia-logo-oficial.svg"
                 alt="Astravia"
@@ -82,9 +82,9 @@ export default function Footer() {
             <nav className="footer__col" key={col.title} aria-label={col.title}>
               <h3>{col.title}</h3>
               <ul>
-                {col.links.map((link) => (
-                  <li key={link}>
-                    <Link to="/#contacto">{link}</Link>
+                {col.links.map(({ label, to }) => (
+                  <li key={label}>
+                    <Link to={to}>{label}</Link>
                   </li>
                 ))}
               </ul>
@@ -120,6 +120,10 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} Astravia. {footerT("footer.rights")}
           </p>
+          <nav className="footer__legal" aria-label={footerT("footer.legal")}>
+            <Link to={rutaConIdioma(lang, "/privacy")}>{footerT("footer.links.privacy")}</Link>
+            <Link to={rutaConIdioma(lang, "/terms")}>{footerT("footer.links.terms")}</Link>
+          </nav>
         </div>
       </div>
     </footer>
