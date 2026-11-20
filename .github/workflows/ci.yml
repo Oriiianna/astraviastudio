@@ -4,7 +4,7 @@ name: CI
 # checkpoint automáticos (Cline), correr esto en cada push sería ruido.
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [main, dev]
 
 jobs:
   build:

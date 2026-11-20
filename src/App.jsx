@@ -58,21 +58,21 @@ function AppContent() {
   useReveal();
 
   // Spotlight que sigue al cursor dentro de cada [data-spotlight].
-  // El listener va por elemento: solo dispara mientras el mouse está encima.
+  // Un solo listener delegado en el documento: así también funciona con las
+  // tarjetas que aparecen después (proyectos que llegan desde Supabase).
   useEffect(() => {
     if (window.matchMedia("(hover: none)").matches) return;
 
-    const cards = document.querySelectorAll("[data-spotlight]");
     const move = (e) => {
-      const el = e.currentTarget;
+      const el = e.target.closest?.("[data-spotlight]");
+      if (!el) return;
       const rect = el.getBoundingClientRect();
       el.style.setProperty("--mx", `${e.clientX - rect.left}px`);
       el.style.setProperty("--my", `${e.clientY - rect.top}px`);
     };
 
-    cards.forEach((el) => el.addEventListener("pointermove", move));
-    return () =>
-      cards.forEach((el) => el.removeEventListener("pointermove", move));
+    document.addEventListener("pointermove", move, { passive: true });
+    return () => document.removeEventListener("pointermove", move);
   }, []);
 
   return (
