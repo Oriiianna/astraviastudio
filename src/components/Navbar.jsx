@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { IconMenu, IconClose } from './icons.jsx'
@@ -13,6 +13,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('')
+  const burgerRef = useRef(null)
 
   const lng = idiomaActual(i18n)
   const isHomePage = rutaSinIdioma(location.pathname) === '/'
@@ -104,6 +105,18 @@ export default function Navbar() {
     }
   }, [open])
 
+  // Escape cierra el menú móvil y devuelve el foco al botón que lo abrió.
+  useEffect(() => {
+    if (!open) return
+    const alEscape = (e) => {
+      if (e.key !== 'Escape') return
+      setOpen(false)
+      burgerRef.current?.focus()
+    }
+    document.addEventListener('keydown', alEscape)
+    return () => document.removeEventListener('keydown', alEscape)
+  }, [open])
+
   return (
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="container container--full nav__inner">
@@ -111,8 +124,8 @@ export default function Navbar() {
           <img
             src="/brand/astravia-logo-oficial.svg"
             alt="Astravia"
-            width="635"
-            height="160"
+            width="900"
+            height="297"
             fetchPriority="high"
           />
         </Link>
@@ -160,6 +173,7 @@ export default function Navbar() {
         </div>
 
         <button
+          ref={burgerRef}
           className="nav__burger"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? t('nav.closeMenu') : t('nav.openMenu')}

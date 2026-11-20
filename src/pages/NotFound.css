@@ -1,0 +1,18 @@
+/* Página 404: usa la caja de .page-container y solo centra el contenido. */
+.notfound {
+  text-align: center;
+}
+
+/* Con .notfound delante para ganarle a ".page-content p" (texto corrido). */
+.notfound .notfound__code {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 14vw, 9rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.notfound .btn {
+  margin-top: 1.5rem;
+}

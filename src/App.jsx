@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -23,11 +23,16 @@ import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
 import Privacy from "./pages/Privacy.jsx";
 import Terms from "./pages/Terms.jsx";
+import NotFound from "./pages/NotFound.jsx";
 import FloatingActions from "./components/FloatingActions.jsx";
 import { loadAnalytics } from "./utils/analytics.js";
 import { useReveal } from "./hooks/useReveal.js";
 import { idiomaPreferido, rutaConIdioma, rutaSinIdioma } from "./utils/idioma.js";
 import { IDIOMAS, aplicarMeta, paginaDeRuta } from "./seo.js";
+import { RUTA_ADMIN } from "./lib/rutaAdmin.js";
+
+// El panel se carga aparte: el sitio público no descarga su código.
+const Admin = lazy(() => import("./admin/Admin.jsx"));
 
 function ScrollToHash() {
   const location = useLocation();
@@ -112,12 +117,14 @@ function IdiomaDeRuta() {
   return <Outlet />;
 }
 
-// "/" y las rutas sin prefijo (/privacy, /terms, cualquier otra) caen acá:
-// se manda a la versión en el idioma preferido, conservando ruta y #hash.
+// "/", "/privacy" y "/terms" sin prefijo caen acá: se manda a la versión en el
+// idioma preferido, conservando ruta y #hash. Cualquier otra ruta no existe:
+// se muestra la página 404 (con noindex) en vez de redirigir al inicio.
 function RedirigirAIdioma() {
   const { i18n } = useTranslation();
   const { pathname, search, hash } = useLocation();
-  const ruta = ["/privacy", "/terms"].includes(pathname) ? pathname : "/";
+  const ruta = pathname.replace(/\/+$/, "") || "/";
+  if (!["/", "/privacy", "/terms"].includes(ruta)) return <NotFound />;
   return (
     <Navigate to={{ pathname: rutaConIdioma(idiomaPreferido(i18n), ruta), search, hash }} replace />
   );
@@ -138,6 +145,14 @@ export default function App() {
           <Route path="privacy" element={<Privacy />} />
           <Route path="terms" element={<Terms />} />
         </Route>
+        <Route
+          path={RUTA_ADMIN}
+          element={
+            <Suspense fallback={null}>
+              <Admin />
+            </Suspense>
+          }
+        />
         <Route path="*" element={<RedirigirAIdioma />} />
       </Routes>
     </Router>

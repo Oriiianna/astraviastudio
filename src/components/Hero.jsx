@@ -1,14 +1,21 @@
-import { Fragment, useEffect, useRef } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IconChevronUp, IconArrowRight } from './icons.jsx'
+import { IconChevronUp, IconPause, IconPlay } from './icons.jsx'
 import './Hero.css'
 
-// Con "reducir movimiento" o ahorro de datos activos no se baja ni reproduce el
-// video: queda el póster (el primer fotograma).
+// Con "reducir movimiento", ahorro de datos o conexión 2G no se baja ni reproduce
+// el video (2 MB): queda el póster (el primer fotograma).
 const soloPoster =
   typeof window !== 'undefined' &&
   (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-    navigator.connection?.saveData === true)
+    navigator.connection?.saveData === true ||
+    ['slow-2g', '2g'].includes(navigator.connection?.effectiveType))
+
+// En pantallas chicas se usa una versión de 960 px (0.7 MB en vez de 2.1 MB).
+const videoSrc =
+  typeof window !== 'undefined' && window.matchMedia('(max-width: 860px)').matches
+    ? '/hero/hero-loop-sm.mp4'
+    : '/hero/hero-loop.mp4'
 
 // Cada palabra sube desde una máscara; `inicio` continúa el escalonado de la línea anterior.
 const palabras = (texto, inicio) =>
@@ -30,6 +37,21 @@ export default function Hero() {
   const sectionRef = useRef(null)
   const stageRef = useRef(null)
   const videoRef = useRef(null)
+  const [pausado, setPausado] = useState(false)
+
+  // Pausa/reanuda el video de fondo (WCAG 2.2.2: todo movimiento de más de 5 s
+  // necesita un control para detenerlo).
+  const alternarVideo = () => {
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) {
+      video.play().catch(() => {})
+      setPausado(false)
+    } else {
+      video.pause()
+      setPausado(true)
+    }
+  }
 
   // Velocidad de reproducción del video
   // NOTA: Se usa 1.0 (velocidad normal) para evitar trabas.
@@ -47,7 +69,7 @@ export default function Hero() {
         <video
           ref={videoRef}
           className="hero__video"
-          src={soloPoster ? undefined : '/hero/hero-loop.mp4'}
+          src={soloPoster ? undefined : videoSrc}
           muted
           loop
           playsInline
@@ -87,9 +109,8 @@ export default function Hero() {
             </p>
 
             <div className="hero__actions" style={{ '--i': 5 }}>
-              <a href="#contacto" className="btn btn--primary hero__cta">
+              <a href="#contacto" className="btn btn--primary">
                 {t('hero.primaryCta')}
-                <IconArrowRight aria-hidden="true" />
               </a>
               <a href="#clientes" className="btn btn--ghost">
                 {t('hero.secondaryCta')}
@@ -97,6 +118,17 @@ export default function Hero() {
             </div>
           </div>
         </div>
+
+        {!soloPoster && (
+          <button
+            type="button"
+            className="hero__motion"
+            onClick={alternarVideo}
+            aria-label={t(pausado ? 'hero.playVideo' : 'hero.pauseVideo')}
+          >
+            {pausado ? <IconPlay aria-hidden="true" /> : <IconPause aria-hidden="true" />}
+          </button>
+        )}
 
         <div className="hero__hint" aria-hidden="true">
           <span>{t('hero.hint')}</span>

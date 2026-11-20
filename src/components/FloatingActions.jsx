@@ -6,7 +6,7 @@ import { scrollToY } from "../utils/scroll";
 
 export default function FloatingActions() {
   const { t } = useTranslation();
-  const [showWhatsApp, setShowWhatsApp] = useState(true); // Visible desde el inicio
+  const showWhatsApp = true; // Visible desde el inicio
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   // Datos dinámicos limpios

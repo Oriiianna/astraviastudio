@@ -1,0 +1,1146 @@
+/* ============================================================
+   Panel de administración — Astravia
+   Todo en rem. Texto con los tokens --fs-* de global.css.
+   Espaciado en escala de 4 px (0.25rem): --sp-1 … --sp-16.
+   ============================================================ */
+
+.adm {
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --adm-target: 2.75rem; /* 44 px: tamaño mínimo táctil */
+  --adm-surface: var(--bg-card);
+  --adm-surface-2: var(--bg-card-soft);
+  --adm-danger: #ff8f8f;
+  --adm-ok: #7ee0b5;
+
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--fs-ui);
+  line-height: 1.5;
+  background: var(--bg-void); /* superficie lisa, como la pantalla de acceso */
+}
+
+.adm *,
+.adm *::before,
+.adm *::after {
+  cursor: inherit;
+}
+
+.adm button,
+.adm label[for],
+.adm select,
+.adm a,
+.adm input[type="color"],
+.adm input[type="file"] {
+  cursor: pointer;
+}
+
+.adm :disabled {
+  cursor: not-allowed;
+}
+
+.adm h1,
+.adm h2,
+.adm h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.adm h1 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); font-weight: 800; }
+.adm h2 { font-size: 1.125rem; font-weight: 700; }
+.adm h3 { font-size: 1.0625rem; font-weight: 700; }
+
+.adm code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+.adm__sub {
+  margin-top: var(--sp-1);
+  color: var(--text-muted);
+  font-size: var(--fs-ui);
+}
+
+.adm__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+/* ---- Barra superior ----
+   Es el nav del sitio (Navbar.css). Acá solo van los elementos propios del panel. */
+
+.adm__etiqueta {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 62rem;
+  background: rgba(124, 58, 237, 0.16);
+  color: var(--violet-pale);
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.adm__email {
+  display: none;
+  overflow: hidden;
+  max-width: 16rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+
+/* Mide lo mismo que el selector de idioma del sitio (como .nav__cta). */
+.adm__salir { padding: 0.6rem 1.5rem; }
+.adm__salir svg { width: 1.125rem; height: 1.125rem; }
+
+/* Mismo contenedor y gutter que las secciones del sitio; debajo del nav fijo. */
+.adm__main {
+  padding-top: calc(var(--nav-h) + var(--sp-8));
+  padding-bottom: var(--sp-16);
+}
+
+/* Ocupa todo el contenedor, como las secciones del sitio: el borde derecho
+   queda alineado con el botón Salir del nav. */
+.adm__contenido { width: 100%; }
+
+.adm__centro {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: calc(var(--nav-h) + var(--sp-6)) var(--gutter) var(--sp-8);
+}
+
+/* ---- Cabecera de página ---- */
+
+.adm__cab {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+}
+
+/* La barra de guardado fija (abajo) no debe tapar el campo que recibe el foco. */
+.adm__form :is(input, select, textarea, button, label, a) {
+  scroll-margin-bottom: 6.5rem;
+}
+
+.adm__nota {
+  margin-bottom: var(--sp-6);
+  color: var(--text-dim);
+  font-size: var(--fs-small);
+}
+
+/* ---- Botones ---- */
+
+.adm__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: var(--adm-target);
+  padding: 0 var(--sp-5);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: rgba(167, 139, 250, 0.035);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.adm__btn svg { width: 1.125rem; height: 1.125rem; flex: none; }
+
+.adm__btn:hover:not(:disabled) {
+  background: rgba(167, 139, 250, 0.14);
+  border-color: rgba(167, 139, 250, 0.4);
+}
+
+.adm__btn:active:not(:disabled) { transform: translateY(1px); }
+.adm__btn:disabled { opacity: 0.5; }
+
+/* Primario igual al .btn--primary del sitio */
+.adm__btn--primario {
+  border-color: transparent;
+  background: var(--violet-btn);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.adm__btn--primario:hover:not(:disabled) {
+  background: var(--violet-btn);
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.4), 0 0 1.5rem rgba(113, 69, 214, 0.55);
+}
+
+.adm__btn--chico {
+  padding: 0 var(--sp-4);
+  font-size: var(--fs-small);
+}
+
+.adm__btn--fantasma {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-soft);
+}
+
+.adm__btn--ancho { width: 100%; }
+
+/* Botón cuadrado con solo un icono (44 × 44) */
+.adm__icono {
+  display: inline-grid;
+  place-items: center;
+  width: var(--adm-target);
+  height: var(--adm-target);
+  flex: none;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-soft);
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.adm__icono svg { width: 1.25rem; height: 1.25rem; }
+.adm__icono:hover:not(:disabled) { background: rgba(167, 139, 250, 0.14); color: var(--text); }
+.adm__icono:disabled { opacity: 0.3; }
+.adm__icono--peligro:hover:not(:disabled) { background: rgba(255, 90, 90, 0.14); color: var(--adm-danger); }
+
+.adm__volver {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: var(--adm-target);
+  margin-bottom: var(--sp-2);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: var(--fs-ui);
+  font-weight: 600;
+}
+
+.adm__volver:hover { color: var(--text); }
+.adm__volver svg { width: 1.125rem; height: 1.125rem; }
+
+/* El aro de foco va pegado al control (sin hueco vacío); en enlaces de texto se separa un poco. */
+.adm :focus-visible {
+  outline: 2px solid var(--violet-soft);
+  outline-offset: 0;
+}
+
+.adm a:not(.adm__btn):not(.adm__icono):focus-visible {
+  outline-offset: 2px;
+}
+
+/* ---- Lista de proyectos ---- */
+
+.adm__lista {
+  display: grid;
+  gap: var(--sp-4);
+  list-style: none;
+}
+
+.adm__item {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: var(--sp-4);
+  align-items: center;
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--adm-surface);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.2s var(--ease);
+}
+
+.adm__item:hover { border-color: var(--border-strong); }
+
+.adm__mini {
+  width: 6rem;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 0.625rem;
+  border: 1px solid var(--border);
+  background: var(--bg-deep);
+}
+
+.adm__info {
+  display: grid;
+  gap: var(--sp-2);
+  justify-items: start;
+  min-width: 0;
+}
+
+.adm__info h2 { overflow-wrap: anywhere; }
+
+.adm__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+}
+
+.adm__chip {
+  padding: 0.125rem 0.625rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 62rem;
+  color: var(--violet-pale);
+  font-size: var(--fs-label);
+  font-weight: 600;
+}
+
+.adm__item-acciones {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--border);
+}
+
+.adm__orden { display: flex; gap: var(--sp-1); margin-right: auto; }
+
+.adm__item--esqueleto {
+  min-height: 8rem;
+  border-radius: 1rem;
+  background: linear-gradient(100deg, var(--adm-surface) 30%, var(--adm-surface-2) 50%, var(--adm-surface) 70%);
+  background-size: 200% 100%;
+  animation: adm-brillo 1.4s linear infinite;
+}
+
+.adm__vacio {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-12) var(--sp-4);
+  border: 1px dashed var(--border-strong);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.adm__chip--destacado {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  border-color: rgba(113, 69, 214, 0.6);
+  background: rgba(113, 69, 214, 0.22);
+  color: #fff;
+}
+
+.adm__chip--destacado svg { width: 0.75rem; height: 0.75rem; }
+
+.adm__interruptores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1) var(--sp-5);
+}
+
+.adm__campo--interruptor { justify-items: start; }
+
+/* ---- Diálogo de confirmación ----
+   Misma caja que el modal legal del sitio: fondo desenfocado, tarjeta #0b091e,
+   borde lila y línea de luz arriba. */
+
+.adm__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200; /* por encima del nav (100) */
+  display: grid;
+  place-items: center;
+  padding: var(--sp-6);
+  background: rgba(8, 0, 18, 0.72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  animation: adm-fundido 0.2s ease-out;
+}
+
+.adm__modal-tarjeta {
+  --glow: 128, 85, 255;
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-3);
+  width: min(100%, 27rem);
+  padding: var(--sp-8) var(--sp-6) var(--sp-6);
+  border: 1px solid rgba(168, 125, 255, 0.26);
+  border-radius: 1.25rem;
+  background: #0b091e;
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.5), 0 0 1.375rem rgba(var(--glow), 0.08);
+  text-align: center;
+  animation: adm-sube 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.adm__modal-tarjeta.is-peligro { --glow: 255, 110, 110; border-color: rgba(255, 143, 143, 0.3); }
+
+.adm__modal-tarjeta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, transparent 8%, rgba(255, 255, 255, 0.22) 50%, transparent 92%) top / 100% 1px no-repeat,
+    radial-gradient(circle at 0 0, rgba(190, 160, 255, 0.2), transparent 3.5rem),
+    radial-gradient(circle at 100% 0, rgba(190, 160, 255, 0.14), transparent 3rem);
+  pointer-events: none;
+}
+
+.adm__modal-icono {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: var(--sp-1);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.16);
+  color: var(--violet-pale);
+}
+
+.adm__modal-icono svg { width: 1.5rem; height: 1.5rem; }
+
+.is-peligro .adm__modal-icono {
+  border-color: rgba(255, 143, 143, 0.4);
+  background: rgba(255, 90, 90, 0.12);
+  color: var(--adm-danger);
+}
+
+.adm__modal-tarjeta h2 { font-size: 1.375rem; color: #fff; }
+
+.adm__modal-texto {
+  display: grid;
+  gap: var(--sp-3);
+  justify-items: center;
+  color: var(--text-soft);
+  font-size: var(--fs-ui);
+}
+
+.adm__modal-proyecto {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  padding: var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: rgba(167, 139, 250, 0.05);
+  text-align: left;
+}
+
+.adm__modal-proyecto img {
+  width: 4.5rem;
+  aspect-ratio: 16 / 10;
+  flex: none;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+}
+
+.adm__modal-proyecto div { display: grid; min-width: 0; }
+.adm__modal-proyecto strong { color: var(--text); font-size: var(--fs-ui); overflow-wrap: anywhere; }
+
+.adm__modal-aviso {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: 62rem;
+  background: rgba(113, 69, 214, 0.2);
+  color: var(--violet-pale);
+  font-size: var(--fs-small);
+}
+
+.adm__modal-aviso svg { width: 0.875rem; height: 0.875rem; flex: none; }
+
+.adm__modal-acciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+  width: 100%;
+  margin-top: var(--sp-3);
+}
+
+.adm__modal-acciones .adm__btn { padding: 0 var(--sp-4); }
+
+/* Botón de acción destructiva: rojo sólido con el mismo hover que el primario */
+.adm__btn--peligro {
+  border-color: transparent;
+  background: #d94a56;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.adm__btn--peligro:hover:not(:disabled) {
+  background: #e25a66;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.4), 0 0 1.5rem rgba(217, 74, 86, 0.5);
+}
+
+@keyframes adm-fundido { from { opacity: 0; } }
+@keyframes adm-sube {
+  from { opacity: 0; transform: translateY(0.875rem) scale(0.97); }
+}
+
+@media (max-width: 30rem) {
+  .adm__modal { padding: var(--sp-3); }
+  .adm__modal-acciones { grid-template-columns: 1fr; }
+  .adm__modal-acciones .adm__btn--peligro,
+  .adm__modal-acciones .adm__btn--primario { order: -1; }
+}
+
+/* ---- Paginador ---- */
+
+.adm__paginas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3) var(--sp-4);
+  margin-top: var(--sp-6);
+}
+
+.adm__paginas-info {
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+
+.adm__paginas-ctrl {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.adm__paginas-ctrl ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  list-style: none;
+}
+
+.adm__pag {
+  display: grid;
+  place-items: center;
+  min-width: var(--adm-target);
+  height: var(--adm-target);
+  padding: 0 var(--sp-2);
+  border: 1px solid transparent;
+  border-radius: 62rem;
+  background: transparent;
+  color: var(--text-soft);
+  font: inherit;
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.adm__pag:hover { background: rgba(167, 139, 250, 0.14); color: var(--text); }
+
+.adm__pag.is-actual {
+  background: var(--violet-btn);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* ---- Interruptor ---- */
+
+.adm__switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-height: var(--adm-target);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-soft);
+  font: inherit;
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.adm__switch-pista {
+  position: relative;
+  width: 2.5rem;
+  height: 1.5rem;
+  flex: none;
+  border-radius: 62rem;
+  background: rgba(167, 139, 250, 0.22);
+  transition: background 0.2s var(--ease);
+}
+
+.adm__switch-bola {
+  position: absolute;
+  top: 0.1875rem;
+  left: 0.1875rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: var(--text);
+  transition: transform 0.2s var(--ease);
+}
+
+.adm__switch.is-on { color: var(--text); }
+.adm__switch.is-on .adm__switch-pista { background: var(--violet-bright); }
+.adm__switch.is-on .adm__switch-bola { transform: translateX(1rem); }
+
+/* ---- Formulario ---- */
+
+.adm__form {
+  display: grid;
+  gap: var(--sp-6);
+  padding-bottom: 6rem; /* espacio para la barra de guardado fija */
+}
+
+.adm__tarjeta {
+  display: grid;
+  gap: var(--sp-5);
+  padding: var(--sp-5);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--adm-surface);
+}
+
+.adm__tarjeta-cab { display: grid; gap: var(--sp-1); }
+.adm__tarjeta-cab p { color: var(--text-muted); font-size: var(--fs-small); }
+
+.adm__fila,
+.adm__textos {
+  display: grid;
+  gap: var(--sp-5);
+}
+
+.adm__textos { gap: var(--sp-6); }
+
+.adm__campo,
+.adm__sube {
+  display: grid;
+  align-content: start;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+
+.adm__campo > label,
+.adm__lbl {
+  color: var(--text-soft);
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+
+.adm__req { color: var(--violet-soft); }
+
+.adm__campo small,
+.adm__sube small {
+  color: var(--text-dim);
+  font-size: var(--fs-label);
+  line-height: 1.45;
+}
+
+.adm input:not([type="checkbox"]):not([type="color"]):not([type="file"]),
+.adm select,
+.adm textarea {
+  width: 100%;
+  min-height: var(--adm-target);
+  padding: 0 var(--sp-4);
+  border: 1px solid rgba(167, 139, 250, 0.1);
+  border-radius: 0.625rem;
+  background: rgba(5, 4, 20, 0.85);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-input);
+  transition: border-color 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.35s var(--ease);
+}
+
+.adm textarea {
+  padding: var(--sp-3) var(--sp-4);
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.adm select { padding-right: var(--sp-8); }
+
+.adm input:hover:not(:disabled),
+.adm select:hover,
+.adm textarea:hover { border-color: rgba(167, 139, 250, 0.4); }
+
+.adm input:focus-visible,
+.adm select:focus-visible,
+.adm textarea:focus-visible {
+  outline: 2px solid var(--violet-soft);
+  outline-offset: 0; /* el aro pegado al borde: sin hueco vacío entre ambos */
+  background: rgba(10, 7, 22, 0.95);
+  border-color: var(--violet-soft);
+}
+
+.adm input:disabled { opacity: 0.55; }
+
+.adm__campo.tiene-error input,
+.adm__campo.tiene-error select,
+.adm__campo.tiene-error textarea,
+.adm__sube.tiene-error .adm__drop { border-color: var(--adm-danger); }
+
+.adm__campo-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  color: var(--adm-danger);
+  font-size: var(--fs-small);
+}
+
+.adm__campo-error svg { width: 1rem; height: 1rem; margin-top: 0.125rem; flex: none; }
+
+.adm__color {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.adm__color input[type="color"] {
+  width: 4rem;
+  height: var(--adm-target);
+  padding: 0.25rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 0.75rem;
+  background: var(--bg-deep);
+}
+
+.adm__clave { position: relative; }
+.adm__clave input { padding-right: 3.25rem; }
+.adm__clave .adm__icono { position: absolute; top: 0; right: 0; }
+
+/* ---- Subida de imagen ---- */
+
+.adm__drop {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px dashed var(--border-strong);
+  border-radius: 0.875rem;
+  background: var(--bg-deep);
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.adm__drop.has-img { border-style: solid; }
+.adm__drop.is-over { border-color: var(--violet-soft); background: rgba(124, 58, 237, 0.14); }
+
+.adm__drop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.adm__drop-vacio {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  color: var(--text-dim);
+  font-size: var(--fs-small);
+  text-align: center;
+}
+
+.adm__drop-vacio svg { width: 1.75rem; height: 1.75rem; }
+
+.adm__drop-cargando {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  background: rgba(8, 0, 18, 0.7);
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.adm__sube-acciones { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+
+/* El input de archivo queda fuera de la vista; su etiqueta hace de botón. */
+.adm__sr:focus-visible + .adm__sube-acciones label {
+  outline: 2px solid var(--violet-soft);
+  outline-offset: 0;
+}
+
+/* ---- Barra de guardado fija ---- */
+
+.adm__barra-guardar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 15;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3) var(--sp-4);
+  padding: var(--sp-3) max(var(--gutter), calc((100vw - var(--container-full)) / 2 + var(--gutter)));
+  padding-bottom: max(var(--sp-3), env(safe-area-inset-bottom));
+  border-top: 1px solid var(--border-strong);
+  background: rgba(8, 0, 18, 0.88);
+  -webkit-backdrop-filter: blur(0.75rem);
+  backdrop-filter: blur(0.75rem);
+}
+
+.adm__acciones { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+
+/* ---- Avisos ---- */
+
+.adm__error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid rgba(255, 143, 143, 0.4);
+  border-radius: 0.75rem;
+  background: rgba(255, 90, 90, 0.1);
+  color: #ffc2c2;
+  font-size: var(--fs-ui);
+}
+
+.adm__error[hidden] { display: none; }
+.adm__error .adm__btn { margin-left: auto; flex: none; }
+.adm__error svg { width: 1.125rem; height: 1.125rem; margin-top: 0.125rem; flex: none; }
+
+.adm__toasts {
+  position: fixed;
+  right: var(--sp-4);
+  bottom: 5.5rem;
+  left: var(--sp-4);
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.adm__toast {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  border: 1px solid rgba(126, 224, 181, 0.4);
+  border-radius: 62rem;
+  background: #10261f;
+  color: var(--adm-ok);
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  box-shadow: var(--shadow-card);
+  animation: adm-entra 0.3s var(--ease-out);
+}
+
+.adm__toast svg { width: 1.125rem; height: 1.125rem; }
+.adm__toast { pointer-events: auto; } /* el contenedor ignora el mouse; el aviso (con "Deshacer") no */
+.adm__toast .adm__btn { margin-left: var(--sp-2); flex: none; }
+.adm__toast.is-error { border-color: rgba(255, 143, 143, 0.4); background: #2b1216; color: var(--adm-danger); }
+
+/* ---- Login ---- */
+
+.adm__login {
+  display: grid;
+  gap: var(--sp-5);
+  width: min(100%, 25rem);
+  padding: var(--sp-8) var(--sp-6);
+  border: 1px solid var(--border-strong);
+  border-radius: 1.5rem;
+  background: var(--adm-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.adm__login h1 { font-size: 1.5rem; }
+
+/* ---- Animaciones ---- */
+
+.adm__giro { animation: adm-giro 0.8s linear infinite; }
+
+@keyframes adm-giro { to { transform: rotate(360deg); } }
+@keyframes adm-brillo { to { background-position: -200% 0; } }
+@keyframes adm-entra {
+  from { opacity: 0; transform: translateY(0.5rem); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .adm *,
+  .adm *::before,
+  .adm *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- Tablet / escritorio ---- */
+
+@media (min-width: 40rem) {
+  .adm__email { display: inline; }
+  .adm__fila { grid-template-columns: 1fr 1fr; }
+  .adm__tarjeta { padding: var(--sp-6); }
+  .adm__login { padding: var(--sp-10) var(--sp-8); }
+}
+
+@media (min-width: 48rem) {
+  .adm__item {
+    grid-template-columns: 9rem 1fr auto;
+    gap: var(--sp-5);
+    padding: var(--sp-5);
+  }
+  .adm__mini { width: 9rem; }
+  .adm__item-acciones {
+    grid-column: auto;
+    padding-top: 0;
+    border-top: 0;
+    justify-content: flex-end;
+  }
+  .adm__orden { margin-right: var(--sp-2); }
+  .adm__textos { grid-template-columns: 1fr 1fr; align-items: start; }
+  .adm__toasts { bottom: 6rem; }
+}
+
+
+/* ============================================================
+   Composición (dial de densidad alto: panel de gestión compacto)
+   ============================================================ */
+
+/* ---- Lista: columnas alineadas (miniatura · datos · estado · acciones) ---- */
+
+.adm__interruptores {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1) var(--sp-5);
+}
+
+@media (min-width: 48rem) {
+  .adm__item {
+    grid-template-columns: 9rem minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+  }
+  .adm__mini { grid-column: 1; grid-row: 1 / span 2; width: 9rem; }
+  .adm__info { grid-column: 2; grid-row: 1; align-self: end; }
+  .adm__interruptores { grid-column: 2; grid-row: 2; align-self: start; }
+  .adm__item-acciones { grid-column: 3; grid-row: 1 / span 2; }
+}
+
+@media (min-width: 72rem) {
+  .adm__item {
+    grid-template-columns: 9rem minmax(0, 1fr) 13rem auto;
+    grid-template-rows: auto;
+  }
+  .adm__mini { grid-row: 1; }
+  .adm__info { grid-row: 1; align-self: center; }
+  .adm__interruptores {
+    grid-column: 3;
+    grid-row: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: center;
+    gap: 0;
+    padding-left: var(--sp-5);
+    border-left: 1px solid var(--border);
+  }
+  .adm__item-acciones { grid-column: 4; grid-row: 1; }
+}
+
+/* ---- Formulario: contenido a la izquierda, publicación y capturas al costado ---- */
+
+.adm__cuerpo { display: grid; gap: var(--sp-6); }
+
+/* En pantallas chicas las dos columnas se aplanan y se ordenan por prioridad:
+   publicación, datos, capturas, textos (las capturas piden el identificador). */
+.adm__col { display: contents; }
+.adm__t--pub { order: 0; }
+.adm__t--datos { order: 1; }
+.adm__t--capt { order: 2; }
+.adm__t--textos { order: 3; }
+
+.adm__opcion {
+  display: grid;
+  gap: var(--sp-1);
+  justify-items: start;
+}
+
+.adm__opcion small { color: var(--text-dim); font-size: var(--fs-label); line-height: 1.45; }
+
+/* Español e inglés lado a lado solo cuando hay ancho de sobra */
+@media (min-width: 48rem) and (max-width: 63.999rem) {
+  .adm__textos { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 64rem) {
+  .adm__cuerpo {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    align-items: start;
+  }
+  .adm__col { display: grid; gap: var(--sp-6); min-width: 0; }
+  .adm__textos { grid-template-columns: 1fr; }
+  /* en la columna lateral las capturas van apiladas y más chicas */
+  .adm__t--capt .adm__fila { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 90rem) {
+  .adm__textos { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---- Barra de guardado: estado de los cambios ---- */
+
+.adm__dirty {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+
+.adm__dirty span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+.adm__dirty.is-sucio { color: #ffd9a0; }
+.adm__dirty.is-sucio span { background: var(--ember); box-shadow: 0 0 0.5rem var(--ember); }
+
+
+/* ============================================================
+   Pantallas de acceso: superficie lisa y una tarjeta opaca.
+   Es una herramienta de uso interno: el foco y los errores son lo más fuerte.
+   ============================================================ */
+
+.adm.adm__acceso {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: start center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* Arriba y no centrada: si aparece el error, solo baja lo que está debajo. */
+  padding: clamp(5rem, 16vh, 9rem) var(--sp-5) var(--sp-8);
+  background: var(--bg-void);
+}
+
+.adm__acceso-centro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); /* la columna nunca crece más que la pantalla (texto ampliado) */
+  place-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Tarjeta opaca, sin blur ni resplandor */
+.adm__login.adm__login--vidrio {
+  position: relative;
+  gap: var(--sp-6);
+  width: min(100%, 26rem);
+  max-width: 100%;
+  padding: 3.75rem var(--sp-6) var(--sp-8);
+  border: 1px solid var(--border-strong);
+  border-radius: 1rem;
+  background: var(--bg-card-soft);
+  box-shadow: 0 1.5rem 3rem -1rem rgba(0, 0, 0, 0.7);
+}
+
+/* Isotipo sobre el borde superior de la tarjeta, separado con un anillo del color de fondo */
+.adm__insignia {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: block;
+  width: 4.75rem;
+  height: 4.75rem;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  border-radius: 1.4rem;
+  box-shadow: 0 0 0 0.375rem var(--bg-void);
+}
+
+.adm__insignia img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.adm__login-cab {
+  display: grid;
+  gap: var(--sp-2);
+  text-align: center;
+}
+
+.adm__login-cab h1 { font-size: 1.5rem; overflow-wrap: anywhere; }
+.adm__login-cab .adm__sub { margin: 0 auto; max-width: 20rem; font-size: var(--fs-ui); }
+
+/* Campos más aireados y translúcidos dentro de la tarjeta */
+.adm .adm__login--vidrio input:not([type="checkbox"]):not([type="color"]):not([type="file"]) {
+  min-height: 3rem;
+  background: var(--bg-void);
+  border-color: rgba(167, 139, 250, 0.6); /* ~3:1 contra la tarjeta: el campo se distingue sin tocarlo */
+}
+
+.adm .adm__login--vidrio input:not([type="checkbox"]):not([type="color"]):not([type="file"]):focus-visible {
+  background: var(--bg-void);
+  border-color: var(--violet-soft);
+}
+
+.adm .adm__login--vidrio input[aria-invalid="true"]:not([type="checkbox"]):not([type="color"]):not([type="file"]) {
+  border-color: var(--adm-danger);
+}
+
+.adm__login--vidrio .adm__clave input { padding-right: 3.25rem; }
+.adm__login--vidrio .adm__clave .adm__icono { top: 0.125rem; right: 0.125rem; }
+
+.adm__login--vidrio .adm__btn--primario {
+  min-height: 3.125rem; /* el color lo hereda de .adm__btn--primario (mismo violeta que el sitio) */
+}
+
+.adm__volver-sitio {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: var(--adm-target);
+  margin-top: calc(var(--sp-2) * -1);
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  transition: color 0.2s var(--ease);
+}
+
+.adm__volver-sitio:hover { color: var(--text); }
+.adm__volver-sitio svg { width: 1rem; height: 1rem; }
+
+@media (max-width: 40rem) {
+  .adm.adm__acceso { padding-top: 4.5rem; }
+  .adm__login.adm__login--vidrio { padding: 3.5rem var(--sp-5) var(--sp-6); }
+}

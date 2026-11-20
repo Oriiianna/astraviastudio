@@ -1,6 +1,6 @@
 .faq {
-  background-color: #05050A;
-  border-bottom: 1px solid #231340;
+  background-color: var(--bg-page);
+  border-bottom: 1px solid var(--line-section);
 }
 
 .faq .container {

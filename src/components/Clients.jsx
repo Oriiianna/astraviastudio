@@ -1,59 +1,22 @@
 import { useTranslation } from "react-i18next";
+import { useProyectos } from "../hooks/useProyectos.js";
 import { IconArrowRight } from "./icons.jsx";
 import "./Clients.css";
 
-/* Capturas reales de los sitios, generadas por scripts/capture-proyectos.mjs
-  y optimizadas por scripts/optimize-proyectos.mjs → public/proyectos/.
-   La tarjeta muestra la primera pantalla de cada tira (16:9, alineada arriba). */
-const PROYECTOS = [
-  {
-    slug: "sendero",
-    i18nKey: "sendero",
-    url: "https://sendero-kappa.vercel.app/",
-    accent: "#7c3aed",
-  },
-  {
-    slug: "serena",
-    i18nKey: "serena",
-    url: "https://astraviastudio-serena.vercel.app/",
-    accent: "#7c3aed",
-  },
-  {
-    slug: "nordica",
-    // El slug nombra el archivo de la captura; la clave i18n es otra cosa.
-    i18nKey: "nordica",
-    url: "https://astraviastudio-nordica.vercel.app/",
-    accent: "#7c3aed",
-  },
-  {
-    slug: "sonrisa-elite",
-    i18nKey: "sonrisaelite",
-    url: "https://astraviastudio-sonrisaelite.vercel.app/",
-    accent: "#7c3aed",
-  },
-  {
-    slug: "altamira",
-    i18nKey: "altamira",
-    url: "https://astraviastudio-inmobiliaria.vercel.app/",
-    accent: "#7c3aed",
-  },
-  {
-    slug: "oscuro-cafe",
-    i18nKey: "oscuroCafe",
-    url: "https://astraviastudio-oscurocafe.vercel.app/",
-    accent: "#7c3aed",
-  }
-];
+/* Los proyectos se cargan desde el panel (/admin → Supabase). Si no hay
+   conexión se usa src/data/proyectos.json como respaldo. El orden de la
+   lista es el orden en pantalla. */
 
 export default function Clients() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const PROYECTOS = useProyectos({ soloDestacados: true });
+  const idioma = i18n.resolvedLanguage === "en" ? "en" : "es";
 
   return (
     <section className="clients section grain" id="clientes">
       <div className="container container--full">
         <header className="clients__head">
           <div>
-            <span className="kicker" data-reveal>{t('clients.kicker')}</span>
             <h2 data-reveal="wipe" style={{ "--delay": "90ms" }}>{t('clients.title')}</h2>
             <p data-reveal style={{ "--delay": "180ms" }}>{t('clients.description')}</p>
           </div>
@@ -70,13 +33,13 @@ export default function Clients() {
 
         <div className="clients__lista">
           {PROYECTOS.map((proyecto) => {
-            const copy = (campo) => t(`clients.projects.${proyecto.i18nKey}.${campo}`);
+            const copy = (campo) => proyecto[idioma]?.[campo] || proyecto.es?.[campo] || "";
 
             return (
               <article
                 className="project project--card"
                 key={proyecto.slug}
-                style={{ "--accent": proyecto.accent }}
+                style={{ "--accent": proyecto.accent || "#7c3aed" }}
                 data-reveal
                 data-spotlight
               >
@@ -85,14 +48,20 @@ export default function Clients() {
                   href={proyecto.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={t('clients.openInNewTab', { title: copy('title') })}
+                  aria-label={t('clients.openInNewTab', { label: t('clients.viewSite'), title: copy('title') })}
                 >
                   <img
                       className="project__shot"
-                      src={`/proyectos/${proyecto.slug}.webp`}
-                      srcSet={`/proyectos/${proyecto.slug}-sm.webp 720w, /proyectos/${proyecto.slug}.webp 1240w`}
+                      src={proyecto.imagen}
+                      srcSet={
+                        proyecto.imagenMovil
+                          ? `${proyecto.imagenMovil} 720w, ${proyecto.imagen} 1240w`
+                          : undefined
+                      }
                       sizes="(max-width: 940px) 92vw, 44vw"
                       alt={copy('alt')}
+                      width="1240"
+                      height="1550"
                       loading="lazy"
                       decoding="async"
                   />
@@ -106,7 +75,7 @@ export default function Clients() {
                       href={proyecto.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={t('clients.openInNewTab', { title: copy('title') })}
+                      aria-label={t('clients.openInNewTab', { label: t('clients.viewSite'), title: copy('title') })}
                     >
                       {t('clients.viewSite')}
                       <IconArrowRight aria-hidden="true" />

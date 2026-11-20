@@ -3,13 +3,16 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
+  "crons": [
+    { "path": "/api/ping", "schedule": "0 12 * * *" }
+  ],
   "redirects": [
     { "source": "/privacy", "destination": "/es/privacy", "permanent": true },
     { "source": "/terms", "destination": "/es/terms", "permanent": true }
   ],
   "rewrites": [
     {
-      "source": "/((?!api/|assets/|hero/|brand/|proyectos/)[^.]*)",
+      "source": "/panel-k7x2q",
       "destination": "/index.html"
     }
   ],
@@ -71,7 +74,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; media-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.supabase.co; connect-src 'self' https://*.supabase.co https://cloudflareinsights.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; media-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'"
         },
         {
           "key": "Strict-Transport-Security",

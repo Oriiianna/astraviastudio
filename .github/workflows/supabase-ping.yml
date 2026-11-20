@@ -1,0 +1,39 @@
+# Mantiene activo el proyecto de Supabase (plan free).
+#
+# Supabase pausa los proyectos free tras ~1 semana sin actividad en la base.
+# Este workflow hace una consulta real (select sobre `proyectos`) cada 2 días.
+# Es el respaldo del cron de Vercel (api/ping.js): si uno falla, el otro cubre.
+#
+# Si la consulta falla, el workflow queda en rojo y GitHub te manda un email.
+# Para probarlo a mano: pestaña Actions → "Supabase ping" → Run workflow.
+#
+# OJO: los workflows con `schedule` solo corren desde la rama por defecto (main).
+
+name: Supabase ping
+
+on:
+  schedule:
+    - cron: "17 9 */2 * *" # cada 2 días, 09:17 UTC (minuto raro: menos cola que :00)
+  workflow_dispatch: # permite lanzarlo a mano
+
+permissions: {} # no necesita acceso al repo
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    env:
+      # La URL y la publishable key son públicas (van en el JS del sitio);
+      # lo que se puede leer lo decide la RLS de la base, no esta clave.
+      SUPABASE_URL: https://xkambomhqdelfrsaalzn.supabase.co
+      SUPABASE_KEY: sb_publishable_dnyiAxwMgaBkRy-pHQFtIQ_r7mCjAsp
+    steps:
+      - name: Consulta a la base
+        run: |
+          curl --fail --silent --show-error \
+            --retry 3 --retry-delay 10 --retry-all-errors \
+            "$SUPABASE_URL/rest/v1/proyectos?select=slug&limit=1" \
+            -H "apikey: $SUPABASE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_KEY"
+          echo
+          echo "Ping OK: $(date -u +%FT%TZ)"
