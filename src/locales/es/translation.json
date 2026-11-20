@@ -18,7 +18,6 @@
     "whatsappMessage": "¡Hola! Me interesa conocer más sobre los servicios de Astravia Studio y recibir asesoramiento para mi proyecto web."
   },
   "faq": {
-    "kicker": "Preguntas frecuentes",
     "title": "Lo que casi todos",
     "titleHighlight": "nos preguntan.",
     "description": "Respuestas claras antes de escribirnos. Si te queda alguna duda, consúltanos sin compromiso.",
@@ -59,37 +58,39 @@
     "lead": "En Astravia combinamos diseño, tecnología y estrategia para crear webs que comunican, posicionan y generan resultados reales.",
     "primaryCta": "Cuéntanos tu proyecto",
     "secondaryCta": "Ver proyectos",
-    "hint": "Desliza"
+    "hint": "Desliza",
+    "pauseVideo": "Pausar video de fondo",
+    "playVideo": "Reproducir video de fondo"
   },
   "services": {
-    "kicker": "Qué hacemos",
     "title": "Nuestros servicios",
     "description": "Soluciones integrales diseñadas para posicionar tu marca y escalar tu negocio digital.",
     "items": {
       "one": {
         "title": "Diseño que convence",
-        "text": "Una web con tu identidad, clara y pensada para que te escriban."
+        "text": "Una web con tu identidad, clara y pensada para que te escriban.",
+        "detail": "Textos, colores y tipografía alineados a tu marca, con llamadas a la acción visibles."
       },
       "two": {
         "title": "Desarrollo rápido",
-        "text": "Carga rápido en el celular y se ve bien en todas partes."
+        "text": "Carga rápido en el celular y se ve bien en todas partes.",
+        "detail": "Imágenes optimizadas y pruebas en celular, tablet y escritorio antes de entregar."
       },
       "three": {
         "title": "Te acompañamos después",
-        "text": "Cambios, soporte y mantenimiento cuando lo necesites."
+        "text": "Cambios, soporte y mantenimiento cuando lo necesites.",
+        "detail": "Actualizaciones y cambios de contenido con plazos acordados."
       }
     }
   },
   "servicesLight": {
-    "kicker": "Qué hacemos",
     "title": "Tu éxito es",
     "titleHighlight": "nuestra misión",
     "description": "Creamos la web que tu negocio necesita, rápida, clara y pensada para que te escriban.",
     "alt": "Astronauta sonriente programando en su escritorio con una laptop y un monitor con código",
-    "link": "Conocer más"
+    "link": "Consultar"
   },
   "process": {
-    "kicker": "Cómo trabajamos",
     "title": "Así llevamos tu proyecto",
     "accent": "de idea a lanzamiento",
     "description": "Un proceso claro, ágil y pensado para avanzar con orden, velocidad y resultados.",
@@ -130,6 +131,10 @@
     "contact": "Contacto",
     "description": "Agencia digital especializada en desarrollo web estratégico. Transformamos visiones en despegues digitales.",
     "legal": "Legal",
+    "googleReviews": "Reseñas en Google",
+    "social": "Redes sociales",
+    "newTab": "se abre en una pestaña nueva",
+    "closeLegal": "Cerrar",
     "links": {
       "design": "Diseño",
       "development": "Desarrollo",
@@ -173,7 +178,6 @@
     "contactText": "Si tienes alguna pregunta sobre esta política o sobre tus datos, puedes escribirnos a studioastravia@gmail.com."
   },
   "contact": {
-    "kicker": "Contacto",
     "title": "Hablemos de tu",
     "accent": "próximo nivel",
     "description": "Cuéntanos sobre tu proyecto. Analizaremos tu situación actual y te propondremos una solución a medida sin compromiso.",
@@ -183,11 +187,12 @@
     "name": "Nombre",
     "phone": "Teléfono",
     "message": "Mensaje",
-    "placeholderName": "Nombre",
-    "placeholderPhone": "Teléfono",
-    "placeholderEmail": "Email",
-    "placeholderMessage": "Mensaje",
-    "submit": "Enviar Mensaje",
+    "optional": "opcional",
+    "placeholderName": "Tu nombre y apellido",
+    "placeholderPhone": "+54 11 1234-5678",
+    "placeholderEmail": "tucorreo@ejemplo.com",
+    "placeholderMessage": "Cuéntanos qué necesitas: tipo de sitio, objetivos y plazos",
+    "submit": "Enviar mensaje",
     "sending": "Enviando…",
     "success": "¡Gracias! Te respondemos dentro de las próximas 24 horas.",
     "thanksTitle": "¡Gracias por escribirnos!",
@@ -205,82 +210,25 @@
     "serviceOtro": "Otro"
   },
   "clients": {
-    "kicker": "Portfolio",
-    "title": "Proyectos Destacados",
+    "title": "Proyectos destacados",
     "description": "Proyectos reales y publicados, donde probamos ideas de interfaz y rendimiento.",
     "cta": "Hablemos de tu proyecto",
-    "viewSite": "Ver Proyecto",
-    "openInNewTab": "Abrir {{title}} en una pestaña nueva",
-    "projects": {
-      "sendero": {
-        "title": "Sendero · Bicicletas de Travesía",
-        "category": "Sitio web",
-        "blurb": "Taller de cuadros a medida contado con voz de bitácora y comparador de modelos.",
-        "domain": "Sendero · Bicicletas de Travesía",
-        "description": "Un taller de cuadros a medida contado con voz de bitácora. Los tres modelos se comparan sin salir de la página, y el proceso se explica con un plano técnico acotado en vez de fotos de catálogo. Es el único de la serie sin Tailwind: la tipografía y el color viven en un sistema de tokens propio.",
-        "alt": "Home de Sendero: hero «Hasta donde se acaba el mapa» y sección del taller con el plano del cuadro"
-      },
-      "serena": {
-        "title": "Serena · Estudio de Yoga",
-        "category": "Servicios",
-        "blurb": "Estudio de yoga con grilla semanal filtrable por día y reserva directa.",
-        "domain": "Serena · Estudio de Yoga",
-        "description": "Un estudio de yoga donde todo empuja hacia la reserva. La grilla semanal se filtra por día sin recargar la página, y cada clase muestra profesor, nivel y duración antes de que la persona decida. Tiene modo claro y oscuro, que es lo que pide un sitio que se consulta tanto a las siete de la mañana como de noche.",
-        "alt": "Home de Serena: hero sobre equilibrio entre cuerpo y mente y grilla de horarios por día"
-      },
-      "nordica": {
-        "title": "Nórdica · Estudio de Arquitectura",
-        "category": "Sitio web",
-        "blurb": "Estudio de arquitectura contado como una editorial impresa.",
-        "domain": "Nórdica · Estudio de Arquitectura",
-        "description": "Un estudio de arquitectura contado como una editorial impresa. La galería de obras se recorre con el scroll: cada proyecto entra en pantalla completa y cede el lugar al siguiente. Cierra con un muestrario de materiales, y todo vive en una sola página donde la tipografía lleva el peso del relato.",
-        "alt": "Home de Nórdica: hero «Espacios que cambian la forma de habitar» y mosaico de materiales"
-      },
-      "altamira": {
-        "title": "Altamira · Bienes Raíces",
-        "category": "Sitio web",
-        "blurb": "Inmobiliaria de autor con filtros que viven en la URL y se comparten.",
-        "domain": "Altamira · Bienes Raíces",
-        "description": "Una inmobiliaria de autor, resuelta como SPA. Los filtros del catálogo viven en la URL, así que una búsqueda se comparte y sobrevive al refresh. Detrás de todo corre una secuencia de video atada al scroll, sin frenar la carga.",
-        "alt": "Home de Altamira Bienes Raíces: buscador de propiedades y destacadas"
-      },
-      "oscuroCafe": {
-        "title": "Oscuro Café · Cafetería de Especialidad",
-        "category": "E-commerce",
-        "blurb": "Cafetería de especialidad con una narrativa visual cálida y sofisticada.",
-        "domain": "Oscuro Café · Cafetería de Especialidad",
-        "description": "Una landing premium para una cafetería de especialidad, diseñada para transmitir calidez y sofisticación. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada taza de café, mientras se destacan los productos y servicios ofrecidos.",
-        "alt": "Home de Oscuro Café: hero con café y productos destacados"
-      }
-      ,
-      "senderoKappa": {
-        "title": "Sendero Kappa · Equipamiento Outdoor",
-        "domain": "Sendero Kappa · Equipamiento Outdoor",
-        "description": "Marca de equipamiento outdoor, diseñada para transmitir aventura y calidad. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada producto, mientras se destacan las características y servicios ofrecidos.",
-        "alt": "Home de Sendero Kappa: equipamiento outdoor y productos destacados"
-      },
-      "sonrisaelite": {
-        "title": "Sonrisa Elite · Consultorio Odontológico",
-        "category": "Servicios",
-        "blurb": "Clínica dental con tratamientos claros, equipo médico y turnos en un clic.",
-        "domain": "Sonrisa Elite · Consultorio Odontológico",
-        "description": "Sitio web para una clínica dental moderna que ofrece odontología general, estética e implantes con tecnología avanzada y atención personalizada. Incluye catálogo de tratamientos, equipo médico, testimonios y resultados de antes y después.",
-        "alt": "Home de la clínica dental: especialista con un paciente, tratamientos y testimonios"
-      }
-    }
+    "viewSite": "Ver proyecto",
+    "openInNewTab": "{{label}}: {{title}} (se abre en una pestaña nueva)"
   },
   "pricing": {
-    "kicker": "Planes",
     "title": "Un plan para cada",
     "titleHighlight": "etapa de tu negocio.",
     "description": "Tres planes con pago único y sin abonos, para empezar hoy y crecer sin rehacer nada.",
     "featuredBadge": "Más elegido",
     "cta": "Cotizar proyecto",
-    "ctaAriaLabel": "Consultar por el plan {{plan}} por WhatsApp",
+    "ctaAriaLabel": "{{cta}}: plan {{plan}}, por WhatsApp (se abre en una pestaña nueva)",
     "whatsappMessage": "¡Hola! Me interesa el plan {{plan}} y quiero coordinar una consulta.",
     "plans": {
       "landing": {
         "name": "Landing Page",
+        "stage": "Despegue",
+        "tagline": "Ideal para lanzar tu idea",
         "features": [
           "Diseño adaptado a la identidad de tu negocio",
           "Una página estructurada estratégicamente",
@@ -292,6 +240,8 @@
       },
       "clasica": {
         "name": "Corporativa",
+        "stage": "Órbita",
+        "tagline": "Presencia completa para tu marca",
         "features": [
           "Hasta 5 páginas personalizadas",
           "Diseño adaptado a la identidad de tu negocio",
@@ -303,18 +253,23 @@
       },
       "ecommerce": {
         "name": "E-Commerce",
+        "stage": "Expansión",
+        "tagline": "Vende online todo el año",
         "features": [
-          "Catálogo y Productos",
-          "Proceso de Compra",
-          "Envíos y Logística",
-          "Diseño y Adaptabilidad",
-          "SEO y Analítica",
-          "Carga Inicial"
+          "Catálogo de productos con variantes, fotos y stock",
+          "Carrito y checkout simples, pensados para cerrar la venta",
+          "Cálculo de envíos y seguimiento de pedidos para tus clientes",
+          "Tienda diseñada para comprar cómodamente desde el celular",
+          "SEO para tus productos y métricas para saber qué se vende",
+          "Carga de tus primeros productos incluida en el proyecto"
         ]
       }
     }
   },
-  "techStack": {
-    "label": "Potenciado por tecnología real"
+  "notFound": {
+    "metaTitle": "Página no encontrada — Astravia Studio",
+    "title": "No encontramos esa página",
+    "text": "Puede que el enlace esté roto o que la página se haya movido.",
+    "back": "Volver al inicio"
   }
 }

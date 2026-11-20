@@ -1,0 +1,179 @@
+{
+  "proyectos": [
+    {
+      "slug": "sendero",
+      "url": "https://sendero-kappa.vercel.app/",
+      "accent": "#7c3aed",
+      "imagen": "/proyectos/sendero.webp",
+      "imagenMovil": "/proyectos/sendero-sm.webp",
+      "publicado": true,
+      "destacado": true,
+      "es": {
+        "title": "Sendero · Bicicletas de Travesía",
+        "category": "Sitio web",
+        "blurb": "Taller de cuadros a medida contado con voz de bitácora y comparador de modelos.",
+        "domain": "Sendero · Bicicletas de Travesía",
+        "description": "Un taller de cuadros a medida contado con voz de bitácora. Los tres modelos se comparan sin salir de la página, y el proceso se explica con un plano técnico acotado en vez de fotos de catálogo. Es el único de la serie sin Tailwind: la tipografía y el color viven en un sistema de tokens propio.",
+        "alt": "Home de Sendero: hero «Hasta donde se acaba el mapa» y sección del taller con el plano del cuadro"
+      },
+      "en": {
+        "title": "Sendero · Touring Bicycles",
+        "category": "Website",
+        "blurb": "Custom frame workshop told as a logbook, with a built-in model comparison.",
+        "domain": "Sendero · Touring Bicycles",
+        "description": "A custom frame workshop told in the voice of a field journal. The three models compare without leaving the page, and the process is explained with a dimensioned technical drawing instead of catalog photos. It is the only piece in the set without Tailwind: type and color live in a token system of its own.",
+        "alt": "Sendero home: hero “Hasta donde se acaba el mapa” and workshop section with the frame drawing"
+      }
+    },
+    {
+      "slug": "serena",
+      "url": "https://astraviastudio-serena.vercel.app/",
+      "accent": "#7c3aed",
+      "imagen": "/proyectos/serena.webp",
+      "imagenMovil": "/proyectos/serena-sm.webp",
+      "publicado": true,
+      "destacado": true,
+      "es": {
+        "title": "Serena · Estudio de Yoga",
+        "category": "Servicios",
+        "blurb": "Estudio de yoga con grilla semanal filtrable por día y reserva directa.",
+        "domain": "Serena · Estudio de Yoga",
+        "description": "Un estudio de yoga donde todo empuja hacia la reserva. La grilla semanal se filtra por día sin recargar la página, y cada clase muestra profesor, nivel y duración antes de que la persona decida. Tiene modo claro y oscuro, que es lo que pide un sitio que se consulta tanto a las siete de la mañana como de noche.",
+        "alt": "Home de Serena: hero sobre equilibrio entre cuerpo y mente y grilla de horarios por día"
+      },
+      "en": {
+        "title": "Serena · Yoga Studio",
+        "category": "Services",
+        "blurb": "Yoga studio with a weekly schedule filterable by day and direct booking.",
+        "domain": "Serena · Yoga Studio",
+        "description": "A yoga studio where everything pushes toward booking. The weekly grid filters by day without reloading the page, and every class shows teacher, level and duration before the visitor decides. It ships light and dark modes, which is what a site people check at seven in the morning and again late at night needs.",
+        "alt": "Serena home: hero about balancing body and mind and weekly schedule grid"
+      }
+    },
+    {
+      "slug": "nordica",
+      "url": "https://astraviastudio-nordica.vercel.app/",
+      "accent": "#7c3aed",
+      "imagen": "/proyectos/nordica.webp",
+      "imagenMovil": "/proyectos/nordica-sm.webp",
+      "publicado": true,
+      "destacado": true,
+      "es": {
+        "title": "Nórdica · Estudio de Arquitectura",
+        "category": "Sitio web",
+        "blurb": "Estudio de arquitectura contado como una editorial impresa.",
+        "domain": "Nórdica · Estudio de Arquitectura",
+        "description": "Un estudio de arquitectura contado como una editorial impresa. La galería de obras se recorre con el scroll: cada proyecto entra en pantalla completa y cede el lugar al siguiente. Cierra con un muestrario de materiales, y todo vive en una sola página donde la tipografía lleva el peso del relato.",
+        "alt": "Home de Nórdica: hero «Espacios que cambian la forma de habitar» y mosaico de materiales"
+      },
+      "en": {
+        "title": "Nórdica · Architecture Studio",
+        "category": "Website",
+        "blurb": "Architecture studio told like a printed editorial.",
+        "domain": "Nórdica · Architecture Studio",
+        "description": "An architecture studio told like a print editorial. The work gallery unfolds with the scroll: each project takes over the full screen and then hands it to the next. It closes with a materials showcase, and it all lives on a single page where typography carries the story.",
+        "alt": "Nórdica home: hero “Espacios que cambian la forma de habitar” and materials mosaic"
+      }
+    },
+    {
+      "slug": "sonrisa-elite",
+      "url": "https://astraviastudio-sonrisaelite.vercel.app/",
+      "accent": "#7c3aed",
+      "imagen": "/proyectos/sonrisa-elite.webp",
+      "imagenMovil": "/proyectos/sonrisa-elite-sm.webp",
+      "publicado": true,
+      "destacado": true,
+      "es": {
+        "title": "Sonrisa Elite · Consultorio Odontológico",
+        "category": "Servicios",
+        "blurb": "Clínica dental con tratamientos claros, equipo médico y turnos en un clic.",
+        "domain": "Sonrisa Elite · Consultorio Odontológico",
+        "description": "Sitio web para una clínica dental moderna que ofrece odontología general, estética e implantes con tecnología avanzada y atención personalizada. Incluye catálogo de tratamientos, equipo médico, testimonios y resultados de antes y después.",
+        "alt": "Home de la clínica dental: especialista con un paciente, tratamientos y testimonios"
+      },
+      "en": {
+        "title": "Sonrisa Élite · Modern Dental Clinic",
+        "category": "Services",
+        "blurb": "Dental clinic with clear treatments, medical team and one-click appointments.",
+        "domain": "Sonrisa Elite · Modern Dental Clinic",
+        "description": "Website for a modern dental clinic offering general, cosmetic, and implant dentistry with advanced technology and personalized care. Features treatments, medical team profile, patient reviews, and before-and-after results.",
+        "alt": "Dental clinic home: dentist with a patient, treatments and testimonials"
+      }
+    },
+    {
+      "slug": "altamira",
+      "url": "https://astraviastudio-inmobiliaria.vercel.app/",
+      "accent": "#7c3aed",
+      "imagen": "/proyectos/altamira.webp",
+      "imagenMovil": "/proyectos/altamira-sm.webp",
+      "publicado": true,
+      "destacado": true,
+      "es": {
+        "title": "Altamira · Bienes Raíces",
+        "category": "Sitio web",
+        "blurb": "Inmobiliaria de autor con filtros que viven en la URL y se comparten.",
+        "domain": "Altamira · Bienes Raíces",
+        "description": "Una inmobiliaria de autor, resuelta como SPA. Los filtros del catálogo viven en la URL, así que una búsqueda se comparte y sobrevive al refresh. Detrás de todo corre una secuencia de video atada al scroll, sin frenar la carga.",
+        "alt": "Home de Altamira Bienes Raíces: buscador de propiedades y destacadas"
+      },
+      "en": {
+        "title": "Altamira · Real Estate",
+        "category": "Website",
+        "blurb": "Signature real estate site with filters that live in the URL and can be shared.",
+        "domain": "Altamira · Real Estate",
+        "description": "An auteur real estate site built as an SPA. Catalog filters live in the URL, so a search is shareable and survives refresh. Behind it all runs a video sequence tied to scroll without slowing loading.",
+        "alt": "Altamira Real Estate home: property search and featured listings"
+      }
+    },
+    {
+      "slug": "oscuro-cafe",
+      "url": "https://astraviastudio-oscurocafe.vercel.app/",
+      "accent": "#7c3aed",
+      "imagen": "/proyectos/oscuro-cafe.webp",
+      "imagenMovil": "/proyectos/oscuro-cafe-sm.webp",
+      "publicado": true,
+      "destacado": true,
+      "es": {
+        "title": "Oscuro Café · Cafetería de Especialidad",
+        "category": "E-commerce",
+        "blurb": "Cafetería de especialidad con una narrativa visual cálida y sofisticada.",
+        "domain": "Oscuro Café · Cafetería de Especialidad",
+        "description": "Una landing premium para una cafetería de especialidad, diseñada para transmitir calidez y sofisticación. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada taza de café, mientras se destacan los productos y servicios ofrecidos.",
+        "alt": "Home de Oscuro Café: hero con café y productos destacados"
+      },
+      "en": {
+        "title": "Oscuro Café · Specialty Coffee",
+        "category": "E-commerce",
+        "blurb": "Specialty coffee shop with a warm, refined visual narrative.",
+        "domain": "Oscuro Café · Specialty Coffee",
+        "description": "A premium landing page for a specialty coffee shop designed to convey warmth and sophistication. The experience combines fluid animations and a visual narrative that invites you to discover the story behind each cup of coffee, while highlighting products and services.",
+        "alt": "Oscuro Café home: hero with coffee and featured products"
+      }
+    },
+    {
+      "slug": "sendero-kappa",
+      "url": "",
+      "accent": "#7c3aed",
+      "imagen": "/proyectos/sendero-kappa.webp",
+      "imagenMovil": "/proyectos/sendero-kappa-sm.webp",
+      "publicado": false,
+      "destacado": false,
+      "es": {
+        "title": "Sendero Kappa · Equipamiento Outdoor",
+        "category": "",
+        "blurb": "",
+        "domain": "Sendero Kappa · Equipamiento Outdoor",
+        "description": "Marca de equipamiento outdoor, diseñada para transmitir aventura y calidad. La experiencia combina animaciones fluidas y una narrativa visual que invita a descubrir la historia detrás de cada producto, mientras se destacan las características y servicios ofrecidos.",
+        "alt": "Home de Sendero Kappa: equipamiento outdoor y productos destacados"
+      },
+      "en": {
+        "title": "Sendero Kappa · Outdoor Gear",
+        "category": "",
+        "blurb": "",
+        "domain": "Sendero Kappa · Outdoor Gear",
+        "description": "A premium landing page for an outdoor gear brand designed to convey adventure and quality. The experience combines fluid animations and a visual narrative that invites you to discover the story behind each product, while highlighting features and services.",
+        "alt": "Sendero Kappa home: outdoor gear and featured products"
+      }
+    }
+  ]
+}

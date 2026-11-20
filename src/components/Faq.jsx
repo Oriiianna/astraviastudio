@@ -10,7 +10,6 @@ export default function Faq() {
     <section className="faq section grain" id="faq">
       <div className="container container--full">
         <header className="section-head" data-reveal>
-          <span className="kicker">{t('faq.kicker')}</span>
           <h2>
             {t('faq.title')} <span className="grad-text">{t('faq.titleHighlight')}</span>
           </h2>

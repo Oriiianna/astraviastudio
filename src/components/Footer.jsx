@@ -1,6 +1,8 @@
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
-import { IconMail, IconPhone, IconPin } from "./icons.jsx";
+import { IconMail, IconPhone, IconPin, IconFacebook, IconInstagram, IconStar } from "./icons.jsx";
+import LegalModal from "./LegalModal.jsx";
 import { scrollToTop } from "../utils/scroll";
 import { idiomaActual, rutaConIdioma, rutaSinIdioma } from "../utils/idioma";
 import "./Footer.css";
@@ -9,6 +11,8 @@ export default function Footer() {
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const lang = idiomaActual(i18n);
+  const [legal, setLegal] = useState(null); // "privacy" | "terms" | null
+  const cerrarLegal = useCallback(() => setLegal(null), []);
   const footerT = (key) => t(key, { lng: lang });
 
   const isHomePage = rutaSinIdioma(location.pathname) === '/';
@@ -42,6 +46,12 @@ export default function Footer() {
     },
   ];
 
+  const SOCIAL = [
+    { name: "Facebook", icon: IconFacebook, href: "https://www.facebook.com/astraviawebstudio" },
+    { name: "Instagram", icon: IconInstagram, href: "https://www.instagram.com/astraviastudio/" },
+    { name: footerT("footer.googleReviews"), icon: IconStar, href: "https://share.google/ZVha6YyoqWtoTO3tm" },
+  ];
+
   const CONTACT_INFO = [
     {
       icon: IconMail,
@@ -70,12 +80,21 @@ export default function Footer() {
               <img
                 src="/brand/astravia-logo-oficial.svg"
                 alt="Astravia"
-                width="635"
-                height="160"
+                width="900"
+                height="297"
                 loading="lazy"
               />
             </Link>
             <p>{footerT("footer.description")}</p>
+            <ul className="footer__social" aria-label={footerT("footer.social")}>
+              {SOCIAL.map(({ name, icon: Icon, href }) => (
+                <li key={name}>
+                  <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${name} (${footerT("footer.newTab")})`}>
+                    <Icon aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {COLUMNS.map((col) => (
@@ -95,7 +114,7 @@ export default function Footer() {
             <h3>{footerT("footer.contact")}</h3>
             <ul className="footer__contact">
               {CONTACT_INFO.map(({ icon: Icon, text, href, target }) => (
-                <li key={text}>
+                <li key={text} data-icon-hover>
                   <Icon />
                   {href ? (
                     <a
@@ -121,11 +140,29 @@ export default function Footer() {
             © {new Date().getFullYear()} Astravia. {footerT("footer.rights")}
           </p>
           <nav className="footer__legal" aria-label={footerT("footer.legal")}>
-            <Link to={rutaConIdioma(lang, "/privacy")}>{footerT("footer.links.privacy")}</Link>
-            <Link to={rutaConIdioma(lang, "/terms")}>{footerT("footer.links.terms")}</Link>
+            {/* Abren el modal; el href real queda para clic medio / nueva pestaña. */}
+            <Link
+              to={rutaConIdioma(lang, "/privacy")}
+              onClick={(e) => {
+                e.preventDefault();
+                setLegal("privacy");
+              }}
+            >
+              {footerT("footer.links.privacy")}
+            </Link>
+            <Link
+              to={rutaConIdioma(lang, "/terms")}
+              onClick={(e) => {
+                e.preventDefault();
+                setLegal("terms");
+              }}
+            >
+              {footerT("footer.links.terms")}
+            </Link>
           </nav>
         </div>
       </div>
+      {legal && <LegalModal tipo={legal} onClose={cerrarLegal} />}
     </footer>
   );
 }

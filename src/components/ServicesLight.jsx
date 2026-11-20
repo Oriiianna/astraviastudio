@@ -24,43 +24,11 @@ export default function ServicesLight() {
     >
       <div className="container container--full">
         <div className="services-light__grid">
-          {/* Left column: service cards */}
-          <div className="services-light__cards">
-            {SERVICES.map(({ Icon, accent, key }, i) => (
-              <article
-                className="services-light__card glass-card gradient-border"
-                style={{ "--accent": accent, "--delay": `${i * 110}ms` }}
-                data-reveal
-                data-spotlight
-                key={key}
-              >
-                <span className="services-light__card-num" aria-hidden="true">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-
-                <div className="services-light__card-icon">
-                  <Icon />
-                </div>
-
-                <div className="services-light__card-content">
-                  <h3>{t(`services.items.${key}.title`)}</h3>
-                  <p>{t(`services.items.${key}.text`)}</p>
-
-                  <a href="#contacto" className="services-light__card-link">
-                    {t("servicesLight.link")}
-                    <IconArrowRight aria-hidden="true" />
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          {/* Right column: intro + visual */}
+          {/* El intro va primero en el HTML para que el h2 preceda a los h3 de las
+              tarjetas; el CSS lo muestra a la derecha en desktop. */}
           <div className="services-light__intro">
-            <span className="kicker" data-reveal>{t("servicesLight.kicker")}</span>
-
             <h2 data-reveal="wipe" style={{ "--delay": "90ms" }}>
-              {t("servicesLight.title")}
+              {t("servicesLight.title")}{" "}
               <br />
               <span className="grad-text">
                 {t("servicesLight.titleHighlight")}
@@ -89,6 +57,34 @@ export default function ServicesLight() {
                 decoding="async"
               />
             </div>
+          </div>
+
+          {/* Service cards */}
+          <div className="services-light__cards">
+            {SERVICES.map(({ Icon, accent, key }, i) => (
+              <article
+                className="services-light__card"
+                style={{ "--accent": accent, "--delay": `${i * 110}ms` }}
+                data-reveal
+                data-icon-hover
+                key={key}
+              >
+                <div className="services-light__card-icon">
+                  <Icon alEntrar />
+                </div>
+
+                <div className="services-light__card-content">
+                  <h3>{t(`services.items.${key}.title`)}</h3>
+                  <p>{t(`services.items.${key}.text`)}</p>
+                  <p className="services-light__detail">{t(`services.items.${key}.detail`)}</p>
+
+                  <a href="#contacto" className="services-light__card-link">
+                    {t("servicesLight.link")}
+                    <IconArrowRight aria-hidden="true" />
+                  </a>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>
