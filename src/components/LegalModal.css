@@ -1,0 +1,135 @@
+/* Modal de Privacidad / Términos. Misma caja que el modal de gracias y el
+   formulario: fondo liso y glass solo en el borde. */
+.legal-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgba(8, 0, 18, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: legal-fade 0.2s ease-out;
+}
+
+.legal-modal__card {
+  --glow: 128, 85, 255;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 46rem);
+  max-height: min(85vh, 50rem);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(168, 125, 255, 0.26);
+  background: var(--bg-box);
+  box-shadow:
+    0 1.5rem 5rem rgba(0, 0, 0, 0.5),
+    0 0 1.375rem rgba(var(--glow), 0.08);
+  animation: legal-rise 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Línea de luz arriba y brillos en las esquinas (decorativo, no atrapa clics) */
+.legal-modal__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, transparent 8%, rgba(255, 255, 255, 0.22) 50%, transparent 92%) top / 100% 1px no-repeat,
+    radial-gradient(circle at 0 0, rgba(190, 160, 255, 0.2), transparent 3.5rem),
+    radial-gradient(circle at 100% 0, rgba(190, 160, 255, 0.14), transparent 3rem);
+  pointer-events: none;
+}
+
+.legal-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.legal-modal__head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.legal-modal__close {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: rgba(167, 139, 250, 0.06);
+  color: var(--text);
+  font-size: 1.25rem;
+  transition: background var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+}
+
+.legal-modal__close:hover {
+  background: rgba(167, 139, 250, 0.16);
+  border-color: rgba(190, 155, 255, 0.55);
+}
+
+.legal-modal__close:focus-visible,
+.legal-modal__body a:focus-visible {
+  outline: 2px solid var(--ice);
+  outline-offset: 3px;
+}
+
+/* El texto reutiliza .page-content (global.css); acá solo el scroll interno. */
+.legal-modal__body {
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.25rem 1.5rem 1.75rem;
+}
+
+.legal-modal__body > :first-child {
+  margin-top: 0;
+}
+
+.legal-modal__body > :last-child {
+  margin-bottom: 0;
+}
+
+@keyframes legal-fade {
+  from { opacity: 0; }
+}
+
+@keyframes legal-rise {
+  from { opacity: 0; transform: translateY(0.875rem) scale(0.97); }
+}
+
+@media (max-width: 40rem) {
+  .legal-modal {
+    padding: 0.75rem;
+  }
+
+  .legal-modal__card {
+    max-height: 92vh;
+  }
+
+  .legal-modal__head,
+  .legal-modal__body {
+    padding-inline: 1.125rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .legal-modal,
+  .legal-modal__card {
+    animation: none;
+  }
+}

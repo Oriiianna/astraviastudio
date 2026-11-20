@@ -16,7 +16,7 @@
   min-height: 26rem;
   padding: clamp(2.75rem, 4.4vw, 3.875rem) var(--pad-x);
   border-radius: 1.625rem;
-  background: #0b0720 url('../recursos/cta-astronauta.webp') left center / cover no-repeat;
+  background: var(--bg-banner) url('../recursos/cta-astronauta.webp') left center / cover no-repeat;
   border: 1px solid rgba(148, 163, 255, 0.16);
   box-shadow: 0 3.125rem 5.625rem -3.125rem rgba(0, 0, 0, 0.95);
 }
@@ -84,7 +84,7 @@
   }
 
   .cta::before {
-    background: linear-gradient(180deg, #0b0720 0%, rgba(11, 7, 32, 0.7) 45%, transparent 75%);
+    background: linear-gradient(180deg, var(--bg-banner) 0%, rgba(11, 7, 32, 0.7) 45%, transparent 75%);
   }
 
   .cta__copy {

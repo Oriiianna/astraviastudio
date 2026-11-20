@@ -276,9 +276,6 @@ export default function Contact() {
     <section className="contact section grain" id="contacto">
       <div className="container container--full contact__inner">
         <div className="contact__copy">
-          <span className="kicker" data-reveal>
-            {t("contact.kicker")}
-          </span>
           <h2 data-reveal="wipe" style={{ "--delay": "90ms" }}>
             {t("contact.title")} <span className="grad-text">{t("contact.accent")}</span>
           </h2>
@@ -342,10 +339,11 @@ export default function Contact() {
         >
           <div className="contact__row">
             <label className="field">
-              <span>{t("contact.name")}</span>
+              <span>{t("contact.name")} <i className="field__req" aria-hidden="true">*</i></span>
               <input
                 type="text"
                 name="nombre"
+                autoComplete="name"
                 placeholder={t("contact.placeholderName")}
                 value={form.nombre}
                 onChange={update("nombre")}
@@ -354,24 +352,26 @@ export default function Contact() {
             </label>
 
             <label className="field">
-              <span>{t("contact.phone")}</span>
+              <span>{t("contact.phone")} <em className="field__opt">({t("contact.optional")})</em></span>
               <input
                 type="tel"
                 name="telefono"
+                autoComplete="tel"
                 placeholder={t("contact.placeholderPhone")}
                 value={form.telefono}
                 onChange={update("telefono")}
                 pattern="[\+]?[0-9\s\-\(\)]{7,}"
-                title={i18n.language.startsWith("es") ? "Ingresá un número de teléfono válido" : "Enter a valid phone number"}
+                title={i18n.language.startsWith("es") ? "Ingresa un número de teléfono válido" : "Enter a valid phone number"}
               />
             </label>
           </div>
 
           <label className="field">
-            <span>{t("contact.email")}</span>
+            <span>{t("contact.email")} <i className="field__req" aria-hidden="true">*</i></span>
             <input
               type="email"
               name="email"
+              autoComplete="email"
               placeholder={t("contact.placeholderEmail")}
               value={form.email}
               onChange={update("email")}
@@ -388,7 +388,7 @@ export default function Contact() {
           </label>
 
           <label className="field">
-            <span>{t("contact.message")}</span>
+            <span>{t("contact.message")} <i className="field__req" aria-hidden="true">*</i></span>
             <textarea
               name="mensaje"
               rows="5"

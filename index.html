@@ -113,6 +113,10 @@
         },
         "areaServed": ["Argentina", "Worldwide (remote)"],
         "availableLanguage": ["es", "en"],
+        "sameAs": [
+          "https://www.facebook.com/astraviawebstudio",
+          "https://www.instagram.com/astraviastudio/"
+        ],
         "knowsAbout": [
           "Diseño UI/UX",
           "Desarrollo web",
@@ -165,7 +169,7 @@
         font-weight: 400;
         letter-spacing: 0.46em;
         text-indent: 0.46em;
-        color: #67608c;
+        color: #928bba;
       }
 
       /* La barra: riel tenue y relleno escalado por --p. Escala con transform
@@ -247,6 +251,9 @@
       (function () {
         var capa = document.getElementById("precarga");
         if (!capa) return;
+        // El panel no es el sitio: sin telón de carga. Misma ruta que RUTA_ADMIN
+        // en src/lib/rutaAdmin.js (si la cambias allá, cámbiala acá también).
+        if (/^\/panel-k7x2q(\/|$)/.test(location.pathname)) { capa.remove(); return; }
 
         // Primera visita de la sesión: 1 s de barra. Después, apenas lo justo.
         var MIN_MS = 1000;

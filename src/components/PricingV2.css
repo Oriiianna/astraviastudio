@@ -1,0 +1,246 @@
+/* Tarjetas de plan con medallón (variante). Todo en rem. */
+
+.plans2 {
+  margin-top: 2rem; /* el medallón sobresale por arriba de la tarjeta */
+  position: relative;
+  z-index: 2;
+}
+
+.plans2__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  align-items: stretch;
+  max-width: 96rem; /* en pantallas enormes las tarjetas no pasan de ~480 px; en las demás ocupan el contenedor */
+  margin-inline: auto;
+  padding-top: 3.5rem; /* mitad del medallón que sobresale */
+}
+
+/* --- Tarjeta --- */
+.plan2 {
+  --glow: 128, 85, 255;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 4.25rem 0 2rem;
+  border-radius: 2rem;
+  border: 1px solid var(--border-strong);
+  background: linear-gradient(180deg, var(--bg-card-soft) 0%, var(--bg-panel) 100%);
+  box-shadow: var(--shadow-card);
+}
+
+.plan2--featured {
+  margin-block: -1.75rem;
+  padding-top: 5.25rem;
+  padding-bottom: 3.25rem;
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: linear-gradient(180deg, #1b1a5c 0%, var(--bg-card-soft) 45%, var(--bg-panel) 100%);
+  box-shadow: var(--shadow-card);
+  z-index: 2;
+}
+
+/* --- Medallón flotante --- */
+.plan2__medal {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  color: var(--accent);
+  background:
+    radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent 75%),
+    var(--bg-void);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow:
+    0 0 0 0.5rem var(--bg-void),
+    0 0.75rem 1.5rem -0.5rem rgba(0, 0, 0, 0.7);
+}
+
+.plan2--featured .plan2__medal {
+  width: 6.75rem;
+  height: 6.75rem;
+}
+
+.plan2__medal svg {
+  width: 2.25rem;
+  height: 2.25rem;
+  stroke-width: 1.75;
+}
+
+.plan2--featured .plan2__medal svg {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+/* Aro que gira: un arco de luz con estela (::before) y la cabeza brillante
+   que lo encabeza (::after). Ambos giran juntos alrededor del icono. */
+.plan2__medal::before,
+.plan2__medal::after {
+  content: '';
+  position: absolute;
+  inset: -1px; /* encima del borde fijo del medallón */
+  border-radius: 50%;
+  pointer-events: none;
+  animation: plan2-orbita 6s linear infinite;
+  animation-delay: calc(var(--i, 0) * -2s); /* cada tarjeta arranca en otro punto */
+}
+
+.plan2__medal::before {
+  background: conic-gradient(from 0deg, transparent 0turn, var(--accent) 1turn);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 0.1875rem), #000 calc(100% - 0.1875rem));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 0.1875rem), #000 calc(100% - 0.1875rem));
+}
+
+.plan2__medal::after {
+  background: radial-gradient(circle at 50% 0.09375rem, #fff 0 0.1875rem, transparent 0.25rem);
+  filter: drop-shadow(0 0 0.5rem var(--accent)) drop-shadow(0 0 0.25rem var(--accent));
+}
+
+/* Solo gira el aro de la tarjeta destacada; los otros dos quedan quietos
+   (tres aros girando a la vez es demasiado movimiento en una pantalla). */
+.plan2:not(.plan2--featured) .plan2__medal::before,
+.plan2:not(.plan2--featured) .plan2__medal::after {
+  animation: none;
+}
+
+@keyframes plan2-orbita {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* --- Encabezado --- */
+.plan2__head {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 0 1.75rem 1.75rem;
+  text-align: center;
+  background-image: var(--grad-hair);
+  background-repeat: no-repeat;
+  background-size: calc(100% - 3.5rem) 1px;
+  background-position: bottom center;
+}
+
+.plan2--featured .plan2__head {
+  padding-bottom: 2.25rem;
+}
+
+.plan2__pill {
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.plan2__name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 2.7vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.plan2--featured .plan2__name {
+  font-size: clamp(2.25rem, 3.1vw, 3.25rem);
+  color: var(--accent);
+}
+
+.plan2__tagline {
+  font-size: var(--fs-lead);
+  line-height: 1.4;
+  color: var(--text);
+}
+
+/* --- Funciones --- */
+.plan2__features {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.5rem 1.75rem 1.75rem;
+}
+
+.plan2__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  font-size: var(--fs-ui);
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+
+.plan2__check {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.5rem;
+  background: rgba(139, 156, 247, 0.07);
+  border: 1px solid var(--border);
+  color: var(--violet-soft);
+}
+
+.plan2__check svg {
+  width: 0.9375rem;
+  height: 0.9375rem;
+}
+
+/* --- Botón ---
+   Usa .btn de global.css (mismo tamaño y espaciado que el resto de la web);
+   acá solo se centra y se empuja al fondo, igual que .plan__cta. */
+.plan2__cta {
+  margin-top: auto;
+  margin-inline: auto;
+  width: fit-content;
+}
+
+.plan2__note {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: var(--fs-small);
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.plan2__note::before,
+.plan2__note::after {
+  content: '—';
+  margin-inline: 0.5rem;
+  opacity: 0.6;
+}
+
+/* --- Responsive --- */
+/* Por debajo de 1280 px tres columnas dejarían tarjetas de menos de ~365 px (largas y apretadas):
+   se apilan, con un ancho cómodo para que las funciones entren en una línea. */
+@media (max-width: 1280px) {
+  .plans2__grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 36rem;
+    margin-inline: auto;
+    row-gap: 5.5rem;
+  }
+
+  .plan2--featured {
+    margin-block: 0;
+    padding-top: 4.75rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Sin movimiento: el arco queda quieto arriba. */
+  .plan2__medal::before,
+  .plan2__medal::after {
+    animation: none;
+  }
+}

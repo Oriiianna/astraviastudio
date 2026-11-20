@@ -18,7 +18,6 @@
     "whatsappMessage": "Hi! I’d like to learn more about Astravia Studio’s services and get advice for my web project."
   },
   "faq": {
-    "kicker": "FAQ",
     "title": "What almost everyone",
     "titleHighlight": "asks us.",
     "description": "Clear answers before you get in touch. If something is still unclear, ask us with no commitment.",
@@ -59,37 +58,39 @@
     "lead": "At Astravia we combine design, technology and strategy to create websites that communicate, position and generate real results.",
     "primaryCta": "Tell us about your project",
     "secondaryCta": "View projects",
-    "hint": "Scroll"
+    "hint": "Scroll",
+    "pauseVideo": "Pause background video",
+    "playVideo": "Play background video"
   },
   "services": {
-    "kicker": "What we do",
     "title": "Our services",
     "description": "Integrated solutions designed to position your brand and scale your digital business.",
     "items": {
       "one": {
         "title": "Design that convinces",
-        "text": "A website with your identity, clear and built so people get in touch."
+        "text": "A website with your identity, clear and built so people get in touch.",
+        "detail": "Copy, colors and typography aligned with your brand, with clear calls to action."
       },
       "two": {
         "title": "Fast development",
-        "text": "It loads quickly on mobile and looks great everywhere."
+        "text": "It loads quickly on mobile and looks great everywhere.",
+        "detail": "Optimized images and testing on phone, tablet and desktop before delivery."
       },
       "three": {
         "title": "We stay with you",
-        "text": "Changes, support and maintenance whenever you need them."
+        "text": "Changes, support and maintenance whenever you need them.",
+        "detail": "Updates and content changes with agreed turnaround times."
       }
     }
   },
   "servicesLight": {
-    "kicker": "What we do",
     "title": "Your success is",
     "titleHighlight": "our mission",
     "description": "We build the website your business needs, fast, clear and made to get you messages.",
     "alt": "Smiling astronaut coding at a desk with a laptop and a monitor showing code",
-    "link": "Learn more"
+    "link": "Ask about it"
   },
   "process": {
-    "kicker": "How we work",
     "title": "How we take your project",
     "accent": "from idea to launch",
     "description": "A clear, agile process built to move forward with order, speed and results.",
@@ -130,6 +131,10 @@
     "contact": "Contact",
     "description": "Strategic digital agency specialized in web development. We turn visions into digital takeoffs.",
     "legal": "Legal",
+    "googleReviews": "Google reviews",
+    "social": "Social media",
+    "newTab": "opens in a new tab",
+    "closeLegal": "Close",
     "links": {
       "design": "Design",
       "development": "Development",
@@ -173,7 +178,6 @@
     "contactText": "If you have any questions about this policy or your data, you can reach us at studioastravia@gmail.com."
   },
   "contact": {
-    "kicker": "Contact",
     "title": "Let’s talk about your",
     "accent": "next level",
     "description": "Tell us about your project. We will analyze your current situation and propose a tailored solution with no commitment.",
@@ -183,10 +187,11 @@
     "name": "Name",
     "phone": "Phone",
     "message": "Message",
-    "placeholderName": "Name",
-    "placeholderPhone": "Phone",
-    "placeholderEmail": "Email",
-    "placeholderMessage": "Message",
+    "optional": "optional",
+    "placeholderName": "Your full name",
+    "placeholderPhone": "+1 555 123 4567",
+    "placeholderEmail": "you@example.com",
+    "placeholderMessage": "Tell us what you need: type of site, goals and timeline",
     "submit": "Send message",
     "sending": "Sending…",
     "success": "Thanks! We will reply within the next 24 hours.",
@@ -205,81 +210,25 @@
     "serviceOtro": "Other"
   },
   "clients": {
-    "kicker": "Portfolio",
-    "title": "Featured Projects",
+    "title": "Featured projects",
     "description": "Real, published projects where we test interface and performance ideas.",
     "cta": "Let’s talk about your project",
-    "viewSite": "View Project",
-    "openInNewTab": "Open {{title}} in a new tab",
-    "projects": {
-      "sendero": {
-        "title": "Sendero · Touring Bicycles",
-        "category": "Website",
-        "blurb": "Custom frame workshop told as a logbook, with a built-in model comparison.",
-        "domain": "Sendero · Touring Bicycles",
-        "description": "A custom frame workshop told in the voice of a field journal. The three models compare without leaving the page, and the process is explained with a dimensioned technical drawing instead of catalog photos. It is the only piece in the set without Tailwind: type and color live in a token system of its own.",
-        "alt": "Sendero home: hero “Hasta donde se acaba el mapa” and workshop section with the frame drawing"
-      },
-      "serena": {
-        "title": "Serena · Yoga Studio",
-        "category": "Services",
-        "blurb": "Yoga studio with a weekly schedule filterable by day and direct booking.",
-        "domain": "Serena · Yoga Studio",
-        "description": "A yoga studio where everything pushes toward booking. The weekly grid filters by day without reloading the page, and every class shows teacher, level and duration before the visitor decides. It ships light and dark modes, which is what a site people check at seven in the morning and again late at night needs.",
-        "alt": "Serena home: hero about balancing body and mind and weekly schedule grid"
-      },
-      "nordica": {
-        "title": "Nórdica · Architecture Studio",
-        "category": "Website",
-        "blurb": "Architecture studio told like a printed editorial.",
-        "domain": "Nórdica · Architecture Studio",
-        "description": "An architecture studio told like a print editorial. The work gallery unfolds with the scroll: each project takes over the full screen and then hands it to the next. It closes with a materials showcase, and it all lives on a single page where typography carries the story.",
-        "alt": "Nórdica home: hero “Espacios que cambian la forma de habitar” and materials mosaic"
-      },
-      "altamira": {
-        "title": "Altamira · Real Estate",
-        "category": "Website",
-        "blurb": "Signature real estate site with filters that live in the URL and can be shared.",
-        "domain": "Altamira · Real Estate",
-        "description": "An auteur real estate site built as an SPA. Catalog filters live in the URL, so a search is shareable and survives refresh. Behind it all runs a video sequence tied to scroll without slowing loading.",
-        "alt": "Altamira Real Estate home: property search and featured listings"
-      },
-      "oscuroCafe": {
-        "title": "Oscuro Café · Specialty Coffee",
-        "category": "E-commerce",
-        "blurb": "Specialty coffee shop with a warm, refined visual narrative.",
-        "domain": "Oscuro Café · Specialty Coffee",
-        "description": "A premium landing page for a specialty coffee shop designed to convey warmth and sophistication. The experience combines fluid animations and a visual narrative that invites you to discover the story behind each cup of coffee, while highlighting products and services.",
-        "alt": "Oscuro Café home: hero with coffee and featured products"
-      },
-      "senderoKappa": {
-        "title": "Sendero Kappa · Outdoor Gear",
-        "domain": "Sendero Kappa · Outdoor Gear",
-        "description": "A premium landing page for an outdoor gear brand designed to convey adventure and quality. The experience combines fluid animations and a visual narrative that invites you to discover the story behind each product, while highlighting features and services.",
-        "alt": "Sendero Kappa home: outdoor gear and featured products"
-      },
-      "sonrisaelite": {
-        "title": "Sonrisa Élite · Modern Dental Clinic",
-        "category": "Services",
-        "blurb": "Dental clinic with clear treatments, medical team and one-click appointments.",
-        "domain": "Sonrisa Elite · Modern Dental Clinic",
-        "description": "Website for a modern dental clinic offering general, cosmetic, and implant dentistry with advanced technology and personalized care. Features treatments, medical team profile, patient reviews, and before-and-after results.",
-        "alt": "Dental clinic home: dentist with a patient, treatments and testimonials"
-      }
-    }
+    "viewSite": "View project",
+    "openInNewTab": "{{label}}: {{title}} (opens in a new tab)"
   },
   "pricing": {
-    "kicker": "Plans",
     "title": "A plan for every",
     "titleHighlight": "stage of your business.",
     "description": "Three plans with one-time payment and no monthly fees, to start today and grow without rebuilding.",
     "featuredBadge": "Most chosen",
     "cta": "Quote project",
-    "ctaAriaLabel": "Ask about the {{plan}} plan on WhatsApp",
+    "ctaAriaLabel": "{{cta}}: {{plan}} plan, via WhatsApp (opens in a new tab)",
     "whatsappMessage": "Hi! I'm interested in the {{plan}} plan and I'd like to schedule a consultation.",
     "plans": {
       "landing": {
         "name": "Landing Page",
+        "stage": "Liftoff",
+        "tagline": "Ideal for launching your idea",
         "features": [
           "A design tailored to your brand identity",
           "Strategically structured page",
@@ -291,6 +240,8 @@
       },
       "clasica": {
         "name": "Business",
+        "stage": "Orbit",
+        "tagline": "A complete presence for your brand",
         "features": [
           "Up to 5 custom-designed pages",
           "A design tailored to your brand identity",
@@ -302,18 +253,23 @@
       },
       "ecommerce": {
         "name": "E-Commerce",
+        "stage": "Expansion",
+        "tagline": "Sell online all year round",
         "features": [
-          "Catalog & Products",
-          "Checkout Process",
-          "Shipping & Logistics",
-          "Design & Responsiveness",
-          "SEO & Analytics",
-          "Initial Setup"
+          "Product catalog with variants, photos and stock",
+          "Simple cart and checkout, built to close the sale",
+          "Shipping calculation and order tracking for your customers",
+          "Store designed for comfortable shopping on mobile",
+          "SEO for your products and metrics to see what sells",
+          "Upload of your first products included in the project"
         ]
       }
     }
   },
-  "techStack": {
-    "label": "Powered by real technology"
+  "notFound": {
+    "metaTitle": "Page not found — Astravia Studio",
+    "title": "We couldn’t find that page",
+    "text": "The link may be broken or the page may have moved.",
+    "back": "Back to home"
   }
 }

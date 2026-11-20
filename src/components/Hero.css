@@ -48,8 +48,8 @@
   background: linear-gradient(
     90deg,
     rgba(6, 0, 14, 0.94) 0%,
-    rgba(6, 0, 14, 0.86) 38%,
-    rgba(6, 0, 14, 0.45) 70%,
+    rgba(6, 0, 14, 0.86) 46%,
+    rgba(6, 0, 14, 0.55) 72%,
     rgba(6, 0, 14, 0.3) 100%
   );
   pointer-events: none;
@@ -110,24 +110,11 @@
   }
 }
 
-/* Degradado de marca que se desplaza despacio */
+/* Énfasis con color sólido de marca (sin degradado de texto). */
 .hero__line--grad .hero__word-in {
-  background: linear-gradient(90deg, #ffffff 0%, var(--violet-soft) 35%, #00e5c8 70%, #ffffff 100%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation:
-    wordUp 1s var(--ease) forwards,
-    gradFlow 8s linear 1.4s infinite;
-  animation-delay: calc(160ms + var(--w, 0) * 80ms), 1.4s;
-}
-
-@keyframes gradFlow {
-  to {
-    background-position: -200% 0;
-  }
+  color: var(--violet-soft);
+  animation: wordUp 1s var(--ease) forwards;
+  animation-delay: calc(160ms + var(--w, 0) * 80ms);
 }
 
 .hero__lead {
@@ -173,16 +160,51 @@
   }
 }
 
+/* --- Pausar/reanudar el video de fondo --- */
+.hero__motion {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 1.5rem;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: rgba(10, 7, 20, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #fff;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    border-color var(--dur-1) var(--ease);
+}
+
+.hero__motion:hover {
+  background: rgba(10, 7, 20, 0.85);
+  border-color: var(--violet-soft);
+}
+
+.hero__motion svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
 /* --- Indicador de scroll (oculto: no hay scroll en el video hero) --- */
 .hero__hint {
   display: none;
 }
 
 .hero__hint-arrow {
-  width: 16px;
-  height: 16px;
   rotate: 180deg;
   animation: hintBob 1.8s var(--ease) infinite;
+}
+
+.hero__hint-arrow svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 @keyframes hintBob {
@@ -227,29 +249,20 @@
     background: rgba(0, 0, 0, 0.6);
   }
 
+  /* Botones apilados del mismo ancho (el del más largo), sin cambiar su tamaño base. */
   .hero__actions {
+    display: grid;
+    width: fit-content;
     gap: 12px;
     margin-top: 32px;
   }
+
+  .hero__actions .btn {
+    justify-content: center;
+  }
 }
 
-/* --- Animación de iconos en botones del Hero --- */
-
-.hero__actions .btn--primary svg {
-  transition: transform 1.5s var(--ease-out);
-}
-
-.hero__actions .btn--primary:hover svg {
-  transform: translateX(5px);
-}
-
-.hero__actions .btn--ghost svg {
-  transition: transform 1.5s var(--ease-out);
-}
-
-.hero__actions .btn--ghost:hover svg {
-  transform: translateX(5px);
-}
+/* La flecha de los botones del hero se anima sola (AnimateIcons) al pasar el mouse. */
 
 /* --- Sin animación: se muestra el video pausado o la imagen fija --- */
 @media (prefers-reduced-motion: reduce) {
@@ -269,11 +282,4 @@
   .hero__line--grad .hero__word-in {
     animation: none;
   }
-}
-
-/* Botón con flecha: el icono ya lleva el aire de su lado, así que se compacta
-   el espacio entre texto y flecha y el relleno derecho. */
-.hero__cta {
-  gap: 0.5rem;
-  padding-right: 1.5rem;
 }

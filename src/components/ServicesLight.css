@@ -6,8 +6,8 @@
    ========================================================= */
 
 .services-light {
-  background-color: #05050A;
-  border-bottom: 1px solid #231340;
+  background-color: var(--bg-page);
+  border-bottom: 1px solid var(--line-section);
 }
 
 .services-light .container {
@@ -22,56 +22,53 @@
   gap: clamp(24px, 3vw, 56px);
 }
 
-/* -------------------------
-   LEFT: SERVICE CARDS
-   ------------------------- */
+/* En el HTML el intro (con el h2) va primero, para que la jerarquía de títulos
+   sea h2 → h3. Acá se acomodan la lista a la izquierda y el intro a la derecha. */
+.services-light__cards {
+  grid-column: 1;
+  grid-row: 1;
+}
 
+.services-light__intro {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/* Panel único de servicios */
 .services-light__cards {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
   min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 1rem;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
 }
 
-/* El aspecto de cristal viene de .glass-card (global.css). Las tres tarjetas
-   se reparten el alto de la columna para que la sección quede pareja con la
-   imagen de la derecha. */
+/* Un solo panel con tres filas separadas por una línea fina (sin tarjetas repetidas).
+   Las filas se reparten el alto de la columna para quedar parejas con la imagen. */
 .services-light__card {
-  overflow: hidden;
   flex: 1;
   display: grid;
-  grid-template-columns: 4.5rem minmax(0, 1fr);
+  grid-template-columns: 2.5rem minmax(0, 1fr);
   gap: 1.5rem;
-  align-items: center;
-  padding: 1.75rem 2rem;
+  align-items: start;
+  align-content: center; /* la fila se estira al alto de la imagen: el contenido queda centrado */
+  padding: 2rem 2.25rem;
 }
 
-/* Número grande y tenue detrás del texto */
-.services-light__card-num {
-  position: absolute;
-  top: -0.5rem;
-  right: 1.25rem;
-  z-index: -1;
-  font-family: var(--font-display);
-  font-size: 6rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: rgba(168, 125, 255, 0.1);
-  pointer-events: none;
+.services-light__card + .services-light__card {
+  border-top: 1px solid var(--border);
 }
 
 .services-light__card-icon {
   display: grid;
   place-items: center;
-  width: 4.5rem;
-  height: 4.5rem;
-  border-radius: 1.25rem;
-  background: linear-gradient(145deg, rgba(var(--glow), 0.42), rgba(var(--glow), 0.12));
-  border: 1px solid rgba(190, 160, 255, 0.4);
-  box-shadow: 0 0 1.5rem rgba(var(--glow), 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  color: #fff;
-  transition: box-shadow var(--dur-2) var(--ease), transform var(--dur-2) var(--ease);
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--violet-soft);
+  transition: color var(--dur-2) var(--ease);
 }
 
 .services-light__card-icon svg {
@@ -81,8 +78,7 @@
 
 .services-light__card:hover .services-light__card-icon,
 .services-light__card:focus-within .services-light__card-icon {
-  box-shadow: 0 0 2.25rem rgba(var(--glow), 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.22);
-  transform: scale(1.06);
+  color: var(--teal);
 }
 
 .services-light__card-content {
@@ -106,6 +102,14 @@
   line-height: 1.6;
 }
 
+/* Segunda línea: el detalle concreto de lo que incluye, más tenue que la frase principal. */
+.services-light__card p.services-light__detail {
+  margin-top: 0.625rem;
+  color: var(--text-muted);
+  font-size: var(--fs-ui);
+  line-height: 1.55;
+}
+
 .services-light__card-link {
   width: fit-content;
   margin-top: 1rem;
@@ -120,9 +124,20 @@
   transition: color var(--dur-2) var(--ease), gap var(--dur-2) var(--ease);
 }
 
+/* Área de toque de 44 px de alto sin cambiar el aspecto. */
+.services-light__card-link {
+  position: relative;
+}
+
+.services-light__card-link::after {
+  content: '';
+  position: absolute;
+  inset: -0.625rem -0.5rem;
+}
+
 .services-light__card-link:hover,
 .services-light__card-link:focus-visible {
-  color: #00e5c8;
+  color: var(--teal);
   gap: 0.75rem;
 }
 
@@ -194,12 +209,11 @@
     gap: 34px;
   }
 
-  .services-light__cards {
-    gap: 1.25rem;
-  }
-
+  /* Una columna: el orden del HTML (intro, luego tarjetas) ya es el correcto. */
+  .services-light__cards,
   .services-light__intro {
-    order: -1;
+    grid-column: auto;
+    grid-row: auto;
   }
 
   .services-light__description {
@@ -213,15 +227,14 @@
 
 @media (max-width: 560px) {
   .services-light__card {
-    grid-template-columns: 3.5rem minmax(0, 1fr);
+    grid-template-columns: 2rem minmax(0, 1fr);
     gap: 1rem;
-    padding: 1.25rem 1.125rem;
+    padding: 1.5rem 1.25rem;
   }
 
   .services-light__card-icon {
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 1rem;
+    width: 2rem;
+    height: 2rem;
   }
 
   .services-light__card-icon svg {
@@ -233,10 +246,6 @@
     font-size: 1.25rem;
   }
 
-  .services-light__card-num {
-    font-size: 4.5rem;
-  }
-
   .services-light__intro h2 {
     font-size: 2.15rem;
   }
@@ -246,9 +255,3 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .services-light__card:hover .services-light__card-icon,
-  .services-light__card:focus-within .services-light__card-icon {
-    transform: none;
-  }
-}

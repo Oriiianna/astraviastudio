@@ -3,7 +3,9 @@
     "allow": [
       "PowerShell(node --version)",
       "PowerShell(npm --version)",
-      "Bash(npx --yes playwright --version)"
+      "Bash(npx --yes playwright --version)",
+      "mcp__supabase__apply_migration",
+      "mcp__supabase__execute_sql"
     ]
   }
 }

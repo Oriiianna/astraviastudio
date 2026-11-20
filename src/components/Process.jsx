@@ -19,9 +19,8 @@ export default function Process() {
     <section className="process section grain" id="proceso">
       <div className="container container--full">
         <header className="section-head process__head">
-          <span className="kicker" data-reveal>{t('process.kicker')}</span>
           <h2 data-reveal="wipe" style={{ '--delay': '90ms' }}>
-            {t('process.title')}
+            {t('process.title')}{' '}
             <br />
             {t('process.accent')}
           </h2>

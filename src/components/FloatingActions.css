@@ -60,7 +60,7 @@
   /* El contenedor esta anclado abajo, asi que este margen separa un poco mas
      los dos botones subiendo solo este: el de WhatsApp no se mueve. */
   margin-bottom: 8px;
-  background: var(--grad-violet);
+  background: var(--violet-btn);
   border: 1px solid rgba(167, 139, 250, 0.4);
   color: #ffffff;
 }
@@ -72,11 +72,11 @@
 
 .back-to-top:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px -10px rgba(124, 58, 237, 0.7);
+  box-shadow: 0 12px 28px -10px rgba(113, 69, 214, 0.7);
 }
 
 .back-to-top:active {
-  background: linear-gradient(135deg, #00E5C8 0%, #00c9a9 100%);
+  background: linear-gradient(135deg, var(--teal) 0%, #00c9a9 100%);
   transform: translateY(-2px);
   box-shadow: 0 8px 20px -8px rgba(0, 229, 200, 0.6);
 }
@@ -103,7 +103,8 @@
   border-radius: 50%;
   background-color: rgba(37, 211, 102, 0.35);
   z-index: 0;
-  animation: antennaWave 2.5s ease-out infinite;
+  /* Pulsa unas pocas veces para llamar la atención y se queda quieto (no es infinito). */
+  animation: antennaWave 2.5s ease-out 4 forwards;
 }
 
 .whatsapp-pulse::after {
@@ -118,5 +119,35 @@
   100% {
     transform: scale(1.8);
     opacity: 0;
+  }
+}
+
+/* Móvil: más compactos para que no tapen el contenido (WhatsApp 56 px, subir 44 px). */
+@media (max-width: 700px) {
+  .floating-container {
+    bottom: 1rem;
+    right: 1rem;
+    gap: 0.5rem;
+  }
+
+  .floating-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .floating-btn svg {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+
+  .back-to-top {
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-bottom: 0;
+  }
+
+  .back-to-top svg {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
   }
 }

@@ -2,7 +2,7 @@
   position: relative;
   overflow: hidden;
   padding: clamp(58px, 6vw, 84px) 0 0;
-  background: #05050A;
+  background: var(--bg-page);
 }
 
 /* Línea de luz de arriba, la misma que separa el resto de secciones */
@@ -47,6 +47,41 @@
   font-weight: 300;
   line-height: 1.8;
   color: var(--text-muted);
+}
+
+/* --- Redes sociales --- */
+.footer__social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.footer__social a {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: rgba(167, 139, 250, 0.05);
+  color: var(--violet-soft);
+  font-size: 1.125rem;
+  transition: color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease),
+    background var(--dur-2) var(--ease);
+}
+
+.footer__social a:hover,
+.footer__social a:focus-visible {
+  color: #fff;
+  border-color: rgba(190, 155, 255, 0.55);
+  background: rgba(167, 139, 250, 0.16);
+}
+
+.footer__social a:focus-visible {
+  outline: 2px solid var(--ice);
+  outline-offset: 3px;
 }
 
 /* --- Columnas --- */
@@ -142,4 +177,18 @@
 .footer__legal a:hover,
 .footer__legal a:focus-visible {
   color: var(--text-soft);
+}
+
+/* Pantallas táctiles: enlaces del pie con 44 px de alto. */
+@media (pointer: coarse) {
+  .footer__col ul {
+    gap: 0;
+  }
+
+  .footer__col a,
+  .footer__legal a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
 }

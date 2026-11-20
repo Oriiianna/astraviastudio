@@ -118,6 +118,14 @@ function seoPorRuta() {
         }
       }
 
+      // 404.html: Vercel la sirve con estado 404 para cualquier ruta que no exista.
+      // Es la misma SPA (que dibuja su pagina "no encontrada"), con noindex y sin canonical.
+      const noEncontrada = base
+        .replace(/<title>[^<]*<\/title>/, '<title>Página no encontrada — Astravia Studio</title>')
+        .replace(/<meta name="robots" content="[^"]*" \/>/, '<meta name="robots" content="noindex, follow" />')
+        .replace(/<link rel="(canonical|alternate)"[^>]*\/>\s*/g, '')
+      writeFileSync(join(outDir, '404.html'), noEncontrada)
+
       const hoy = new Date().toISOString().slice(0, 10)
       const urls = IDIOMAS.flatMap((lng) =>
         Object.keys(PAGINAS).map((pagina) => {
